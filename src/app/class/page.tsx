@@ -2,14 +2,10 @@
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassCard from '@/features/classCard/ClassCard';
 
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
-
 export default function Class() {
   return (
     <>
-      <div className={`flex flex-col mx-40 my-28 ${inter.className}`}>
+      <div className={`flex flex-col mx-40 my-28`}>
         <div>
           <ClassCard></ClassCard>
         </div>
