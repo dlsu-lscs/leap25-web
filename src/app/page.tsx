@@ -7,8 +7,8 @@ export default function Home() {
   return (
     <>
       <CustomCarousel
-        itemsToShow={Array.from({ length: 10 })}
-        row={1}
+        itemsToShow={Array.from({ length: 6 })}
+        row2={true}
       ></CustomCarousel>
       hello this is the first step of the leap web
     </>
