@@ -1,6 +1,6 @@
 "use client";
 
-import { CustomCarousel } from "@/components/ui/customCarousel";
+import { CustomCarousel } from "@/components/ui/LeapCarousel";
 import Image from "next/image";
 
 export default function Home() {
