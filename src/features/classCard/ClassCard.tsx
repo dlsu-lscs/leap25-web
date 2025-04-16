@@ -1,5 +1,7 @@
 import Button from "@/components/ui/Button";
+import { Separator } from "@/components/ui/separator";
 import HostName from "./HostName";
+import ClassDetails from "./ClassDetails";
 
 export default function ClassCard() {
   return (
@@ -18,12 +20,17 @@ export default function ClassCard() {
             R&Deploy Your Own Bot Workshop
           </h1>
           <div className="flex items-center">
-            <p className="font-bold mx-3">Hosted By</p>
-
+            <p className="font-medium mr-3">Hosted By</p>
             <div className="space-x-2.5 flex">
               <HostName></HostName>
               <HostName></HostName>
             </div>
+          </div>
+          <Separator className="bg-black drop-shadow-md my-4"></Separator>
+          <div className="flex space-x-4">
+            <ClassDetails details="Wednesday, June 26, 2025"></ClassDetails>
+            <ClassDetails details="1:00 PM - 3:30 PM"></ClassDetails>
+            <ClassDetails details="Online (Zoom)"></ClassDetails>
           </div>
         </div>
       </div>
