@@ -14,7 +14,7 @@ export default function ClassCard() {
       <div className="flex space-x-5">
         <div>
           <img
-            className="h-[500px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
+            className="h-[550px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
             src={imgLink || null}
           />
         </div>

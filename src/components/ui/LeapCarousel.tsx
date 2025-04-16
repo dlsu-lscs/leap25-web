@@ -1,5 +1,5 @@
-'use client'
-import { useState } from 'react'
+'use client';
+import { useState } from 'react';
 
 import {
   Carousel,
@@ -7,12 +7,12 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from '@/components/ui/carousel'
+} from '@/components/ui/carousel';
 
 interface CustomCarouselProps {
-  row2: boolean
+  row2: boolean;
   // Add more props as needed, for example:
-  itemsToShow: any[]
+  itemsToShow: any[];
 }
 
 /**
@@ -22,16 +22,16 @@ interface CustomCarouselProps {
  * @returns
  */
 export function LeapCarousel({ row2, itemsToShow }: CustomCarouselProps) {
-  const [isHovering, setIsHovering] = useState(false)
-  let carouselItems = []
-  let carouselItemsRow2 = []
+  const [isHovering, setIsHovering] = useState(false);
+  let carouselItems = [];
+  let carouselItemsRow2 = [];
   if (itemsToShow.length > 6 && row2) {
-    const midpoint = Math.ceil(itemsToShow.length / 2)
+    const midpoint = Math.ceil(itemsToShow.length / 2);
 
-    carouselItems = itemsToShow.slice(0, midpoint)
-    carouselItemsRow2 = itemsToShow.slice(midpoint)
+    carouselItems = itemsToShow.slice(0, midpoint);
+    carouselItemsRow2 = itemsToShow.slice(midpoint);
   } else {
-    carouselItems = itemsToShow
+    carouselItems = itemsToShow;
   }
 
   return (
@@ -99,5 +99,5 @@ export function LeapCarousel({ row2, itemsToShow }: CustomCarouselProps) {
         </Carousel>
       )}
     </>
-  )
+  );
 }
