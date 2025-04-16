@@ -1,12 +1,12 @@
-import Button from "@/components/ui/Button";
-import { Separator } from "@/components/ui/separator";
-import HostName from "./HostName";
-import ClassDetails from "./ClassDetails";
-import ClassDescription from "./ClassDescription";
+import Button from '@/components/ui/Button'
+import { Separator } from '@/components/ui/separator'
+import HostName from './HostName'
+import ClassDetails from './ClassDetails'
+import ClassDescription from './ClassDescription'
 
 export default function ClassCard() {
   const imgLink =
-    "https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F";
+    'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F'
 
   return (
     <>
@@ -19,9 +19,9 @@ export default function ClassCard() {
         </div>
         <div>
           <div className="space-x-3 text-sm font-medium">
-            <Button text="S1137"></Button>
-            <Button text="Sub-Theme"></Button>
-            <Button text="Tag Here"></Button>
+            <Button>S1137</Button>
+            <Button>Sub-Theme</Button>
+            <Button>Tag Here</Button>
           </div>
           <h1 className="text-4xl font-bold my-4 w-[80vh]">
             R&Deploy Your Own Bot Workshop
@@ -29,25 +29,29 @@ export default function ClassCard() {
           <div className="flex items-center">
             <p className="font-medium mr-3">Hosted By</p>
             <div className="space-x-2.5 flex">
-              <HostName></HostName>
-              <HostName></HostName>
+              <HostName>La Salle Computer Society</HostName>
+              <HostName>College of Computer Studies</HostName>
             </div>
           </div>
           <Separator className="bg-black drop-shadow-md my-4"></Separator>
           <div className="flex space-x-4">
-            <ClassDetails details="Wednesday, June 26, 2025"></ClassDetails>
-            <ClassDetails details="1:00 PM - 3:30 PM"></ClassDetails>
-            <ClassDetails details="Online (Zoom)"></ClassDetails>
+            <ClassDetails>Wednesday, June 26, 2025</ClassDetails>
+            <ClassDetails>1:00 PM - 3:30 PM</ClassDetails>
+            <ClassDetails>Online (Zoom)</ClassDetails>
           </div>
           <div className="my-4 w-[70vh]">
-            <ClassDescription></ClassDescription>
+            <ClassDescription>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi
+              est delectus doloribus cum ipsum? Deserunt officiis autem aperiam
+              quia dolor, magni quos dolore ducimus non eum eaque, beatae natus
+              blanditiis.
+            </ClassDescription>
           </div>
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
-              <Button
-                text="Join Now - Free"
-                className="bg-[#ADADAD] px-4 py-2 font-medium"
-              ></Button>
+              <Button className="bg-[#ADADAD] px-4 py-2 font-medium">
+                Join Now - Free
+              </Button>
               <p className="text-shadow-lg">Only {22} slots left!</p>
             </div>
             <div className="flex items-center space-x-4.5">
@@ -84,5 +88,5 @@ export default function ClassCard() {
         </div>
       </div>
     </>
-  );
+  )
 }
