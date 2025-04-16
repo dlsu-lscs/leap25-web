@@ -5,7 +5,7 @@ interface ButtonProps {
   className?: string
 }
 
-export default function Button({ children, className }: ButtonProps) {
+export default function LeapTag({ children, className }: ButtonProps) {
   return (
     <>
       <button

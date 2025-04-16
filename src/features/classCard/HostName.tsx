@@ -4,7 +4,7 @@ import { nameInitials } from '@/lib/helpers'
 
 interface HostProps {
   children?: ReactNode
-  src: string
+  src?: string
 }
 export default function HostName({ children, src }: HostProps) {
   return (

@@ -1,5 +1,6 @@
-import Button from '@/components/ui/Button'
 import { Separator } from '@/components/ui/separator'
+import LeapButton from '@/components/ui/LeapButton'
+import LeapTag from '@/components/ui/LeapTag'
 import HostName from './HostName'
 import ClassDetails from './ClassDetails'
 import ClassDescription from './ClassDescription'
@@ -19,9 +20,9 @@ export default function ClassCard() {
         </div>
         <div>
           <div className="space-x-3 text-sm font-medium">
-            <Button>S1137</Button>
-            <Button>Sub-Theme</Button>
-            <Button>Tag Here</Button>
+            <LeapTag>S1137</LeapTag>
+            <LeapTag>Sub-Theme</LeapTag>
+            <LeapTag>Tag Here</LeapTag>
           </div>
           <h1 className="text-4xl font-bold my-4 w-[80vh]">
             R&Deploy Your Own Bot Workshop
@@ -49,9 +50,9 @@ export default function ClassCard() {
           </div>
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
-              <Button className="bg-[#ADADAD] px-4 py-2 font-medium">
+              <LeapButton className="bg-[#ADADAD] px-4 py-2 font-medium">
                 Join Now - Free
-              </Button>
+              </LeapButton>
               <p className="text-shadow-lg">Only {22} slots left!</p>
             </div>
             <div className="flex items-center space-x-4.5">
