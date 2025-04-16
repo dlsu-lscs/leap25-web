@@ -1,7 +1,9 @@
-'use client'
-
-import Image from 'next/image'
+'use client';
 
 export default function Home() {
-  return <>hello this is the first step of the leap web</>
+  return (
+    <>
+      <p>hello this is the first step of the leap web</p>
+    </>
+  );
 }

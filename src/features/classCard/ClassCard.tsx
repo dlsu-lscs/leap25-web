@@ -1,20 +1,20 @@
-import { Separator } from '@/components/ui/separator'
-import LeapButton from '@/components/ui/LeapButton'
-import LeapTag from '@/components/ui/LeapTag'
-import HostName from './HostName'
-import ClassDetails from './ClassDetails'
-import ClassDescription from './ClassDescription'
+import { Separator } from '@/components/ui/separator';
+import LeapButton from '@/components/ui/LeapButton';
+import LeapTag from '@/components/ui/LeapTag';
+import HostName from './HostName';
+import ClassDetails from './ClassDetails';
+import ClassDescription from './ClassDescription';
 
 export default function ClassCard() {
   const imgLink =
-    'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F'
+    'https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F';
 
   return (
     <>
       <div className="flex space-x-5">
         <div>
           <img
-            className="h-[500px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
+            className="h-[550px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
             src={imgLink || null}
           />
         </div>
@@ -24,9 +24,7 @@ export default function ClassCard() {
             <LeapTag>Sub-Theme</LeapTag>
             <LeapTag>Tag Here</LeapTag>
           </div>
-          <h1 className="text-4xl font-bold my-4 w-[80vh]">
-            R&Deploy Your Own Bot Workshop
-          </h1>
+          <h1 className="text-4xl font-bold my-4 w-[80vh]">R&Deploy Your Own Bot Workshop</h1>
           <div className="flex items-center">
             <p className="font-medium mr-3">Hosted By</p>
             <div className="space-x-2.5 flex">
@@ -42,10 +40,9 @@ export default function ClassCard() {
           </div>
           <div className="my-4 w-[70vh]">
             <ClassDescription>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi
-              est delectus doloribus cum ipsum? Deserunt officiis autem aperiam
-              quia dolor, magni quos dolore ducimus non eum eaque, beatae natus
-              blanditiis.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi est delectus
+              doloribus cum ipsum? Deserunt officiis autem aperiam quia dolor, magni quos dolore
+              ducimus non eum eaque, beatae natus blanditiis.
             </ClassDescription>
           </div>
           <div className="my-6 flex justify-between">
@@ -89,5 +86,5 @@ export default function ClassCard() {
         </div>
       </div>
     </>
-  )
+  );
 }

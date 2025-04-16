@@ -1,10 +1,9 @@
-// __tests__/ClassCard.test.tsx
 import { render, screen } from '@testing-library/react';
 import ClassCard from '@/features/classCard/ClassCard';
 import '@testing-library/jest-dom';
 
 describe('ClassCard', () => {
-  test('renders ClassCard with correct content', () => {
+  it('renders ClassCard with correct content', () => {
     render(<ClassCard />);
 
     // Check if the title is rendered
