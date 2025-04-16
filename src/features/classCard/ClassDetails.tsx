@@ -1,13 +1,15 @@
+import { ReactNode } from 'react'
+
 interface ClassDetailsProps {
-  details: string;
+  children?: ReactNode
 }
-export default function ClassDetails({ details }: ClassDetailsProps) {
+export default function ClassDetails({ children }: ClassDetailsProps) {
   return (
     <>
       <div className="flex space-x-2">
         <div className="bg-[#ADADAD] w-6 h-6 rounded-xs"></div>
-        <p className="font-medium text-shadow-xl">{details || "details"}</p>
+        <p className="font-medium text-shadow-xl">{children}</p>
       </div>
     </>
-  );
+  )
 }
