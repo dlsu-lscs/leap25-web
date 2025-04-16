@@ -27,7 +27,7 @@ export default function ClassCard() {
           <h1 className="text-4xl font-bold my-4 w-[80vh]">R&Deploy Your Own Bot Workshop</h1>
           <div className="flex items-center">
             <p className="font-medium mr-3">Hosted By</p>
-            <div className="space-x-2.5 flex">
+            <div className="space-x-2.5 flex flex-wrap w-[75vh] gap-y-1.5">
               <HostName>La Salle Computer Society</HostName>
               <HostName>College of Computer Studies</HostName>
             </div>
