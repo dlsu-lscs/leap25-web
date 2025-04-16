@@ -1,8 +1,5 @@
 # Leap 2025 Website
 
-> [!IMPORTANT]
-> READ the [Development Workflow](#development-workflow) for developers to see how to write tests along with your code
-
 ## Table of Contents
 
 - [Setup](#setup)
