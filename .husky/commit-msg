@@ -3,3 +3,4 @@
 
 echo "Checking commit message..."
 npx --no-install commitlint --edit $1 --config commitlint.config.mjs
+
