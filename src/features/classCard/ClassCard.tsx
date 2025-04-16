@@ -9,7 +9,10 @@ export default function ClassCard() {
     <>
       <div className="flex space-x-5">
         <div>
-          <div className="h-[500px] w-[500px] bg-[#D9D9D9]"></div>
+          <img
+            className="h-[500px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
+            src={""}
+          />
         </div>
         <div>
           <div className="space-x-3 text-sm font-medium">
