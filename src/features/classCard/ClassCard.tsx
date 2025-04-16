@@ -5,11 +5,17 @@ import ClassDetails from "./ClassDetails";
 import ClassDescription from "./ClassDescription";
 
 export default function ClassCard() {
+  const imgLink =
+    "https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F";
+
   return (
     <>
       <div className="flex space-x-5">
         <div>
-          <img className="h-[500px] min-w-[500px] bg-[#D9D9D9] border-none outline-none" />
+          <img
+            className="h-[500px] min-w-[500px] bg-[#D9D9D9] border-none outline-none"
+            src={imgLink || null}
+          />
         </div>
         <div>
           <div className="space-x-3 text-sm font-medium">
