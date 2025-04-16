@@ -31,5 +31,4 @@ npm run dev
 
 ```bash
 npm install -D eslint eslint-config-next prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged jest babel-jest @testing-library/react @testing-library/jest-dom @testing-library/user-event
-
 ```
