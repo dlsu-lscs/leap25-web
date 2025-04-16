@@ -5,7 +5,13 @@ interface ButtonProps {
   className?: string
 }
 
-export default function leapButton({ children, className }: ButtonProps) {
+/**
+ *
+ * @param row2 (boolean) determines if the carousel will have 2 rows
+ * @param itemsToShow array of items to be shown in the carousel, can be a div
+ * @returns
+ */
+export default function LeapButton({ children, className }: ButtonProps) {
   return (
     <>
       <button
