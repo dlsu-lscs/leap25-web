@@ -1,4 +1,4 @@
-interface eventModel {
+interface classModel {
   id: number;
   orgId: number;
   title: string;
@@ -13,30 +13,11 @@ interface eventModel {
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
-interface eventPubModel {
+interface classPubModel {
   id: number;
   eventId: number;
   pubType: PublicationType;
   pubURL: string;
-}
-
-interface orgModel {
-  id: number;
-  name: string;
-  orgLogo: string;
-}
-
-interface userModel {
-  id: number;
-  email: string;
-  displayPicture: string;
-  name: string;
-}
-
-interface registrationModel {
-  id: number;
-  userId: string;
-  eventId: string;
 }
 
 interface subThemeModel {
@@ -46,4 +27,4 @@ interface subThemeModel {
   bgPubURL: string;
 }
 
-export type { eventModel, eventPubModel, orgModel, userModel, registrationModel, subThemeModel };
+export type { classModel, classPubModel, subThemeModel };
