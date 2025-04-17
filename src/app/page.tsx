@@ -21,7 +21,7 @@ export default function Map() {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 min-h-screen"></div>
+      <div className="min-h-screen"></div>
     </>
   );
 }
