@@ -21,14 +21,12 @@ export default function Map() {
             <LeapTag>Tag Badge Here</LeapTag>
           </div>
           <div>
-            <h1 className="md:text-5xl text-4xl mx-5 font-bold max-w-[16ch]">
-              Leap into the Adventure
-            </h1>
+            <h1 className="md:text-5xl text-4xl mx-5 font-bold">Leap into the Adventure</h1>
           </div>
         </div>
       </div>
       <div className="min-h-screen">
-        <div className="md:hidden inline">
+        <div className="md:hidden min-h-screen flex items-end justify-center">
           <SubThemeCarousel></SubThemeCarousel>
         </div>
       </div>
