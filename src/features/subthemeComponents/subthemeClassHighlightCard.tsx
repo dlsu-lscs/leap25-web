@@ -13,7 +13,7 @@ export default function ClassHighlight({ imgLink, classTitle }: classHighlightPr
   return (
     <div>
       <img src={imgLink || undefined} className="h-[512px] w-[410px]" />
-      <h1 className="text-3xl font-semibold w-[410px]">{classTitle}</h1>
+      <h1 className="text-3xl font-semibold w-[410px] mt-4">{classTitle}</h1>
     </div>
   );
 }
