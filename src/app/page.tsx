@@ -25,10 +25,8 @@ export default function Map() {
           </div>
         </div>
       </div>
-      <div className="min-h-screen">
-        <div className="md:hidden min-h-screen flex items-end justify-center">
-          <SubThemeCarousel></SubThemeCarousel>
-        </div>
+      <div className="absolute bottom-0 left-1/2 z-20 -translate-x-1/2 flex justify-center md:hidden inline">
+        <SubThemeCarousel></SubThemeCarousel>
       </div>
     </>
   );
