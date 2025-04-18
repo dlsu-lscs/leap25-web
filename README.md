@@ -1,5 +1,7 @@
 # Leap 2025 Website
 
+![LSCS | RND](https://img.shields.io/badge/LSCS-RND-brightgreen)
+
 ## Table of Contents
 
 - [Setup](#setup)
