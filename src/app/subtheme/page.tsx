@@ -2,24 +2,11 @@
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassHighlight from '@/features/subthemeComponents/subthemeClassHighlightCard';
+import useMobileScreen from '@/hooks/useMobileScreen';
 import { useEffect, useState } from 'react';
 
 export default function Subtheme() {
-  const [isMobile, setIsMobile] = useState(false);
-  // Effect to detect screen size
-  useEffect(() => {
-    // Check initial screen size
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Function to handle screen size detection
-  const handleResize = () => {
-    setIsMobile(window.innerWidth < 768); // 768px is standard md breakpoint
-  };
+  const { isMobile } = useMobileScreen();
 
   return (
     <>
