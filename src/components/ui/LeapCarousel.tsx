@@ -16,7 +16,7 @@ interface CustomCarouselProps {
 }
 
 /**
- *
+ * NOTE: set overflow-hidden on parent div in order for the carousel to only take up the remaining width
  * @param row2 (boolean) determines if the carousel will have 2 rows
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
