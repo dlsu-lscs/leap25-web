@@ -6,7 +6,7 @@ import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 export default function Map() {
   return (
     <>
-      <div className="absolute left-1/2 z-20 -translate-x-1/2 flex justify-center">
+      <div className="flex justify-center flex-col">
         <div
           className="
         flex flex-col items-center py-8
@@ -24,9 +24,10 @@ export default function Map() {
             <h1 className="md:text-5xl text-4xl mx-5 font-bold">Leap into the Adventure</h1>
           </div>
         </div>
-      </div>
-      <div className="absolute bottom-0 left-1/2 z-20 -translate-x-1/2 flex justify-center md:hidden inline">
-        <SubThemeCarousel></SubThemeCarousel>
+
+        <div className="flex justify-center md:hidden overflow-hidden">
+          <SubThemeCarousel></SubThemeCarousel>
+        </div>
       </div>
     </>
   );
