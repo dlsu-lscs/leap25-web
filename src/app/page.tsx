@@ -6,12 +6,8 @@ import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 export default function Map() {
   return (
     <>
-      <div className="flex justify-center flex-col">
-        <div
-          className="
-        flex flex-col items-center py-8
-        "
-        >
+      <div className="flex justify-between h-full flex-col">
+        <div className="flex flex-col items-center py-8">
           <div className="hidden md:inline my-6 space-x-3 text-sm">
             <LeapTag>Tag Badge Here</LeapTag>
             <LeapTag>Tag Badge Here</LeapTag>
@@ -21,7 +17,9 @@ export default function Map() {
             <LeapTag>Tag Badge Here</LeapTag>
           </div>
           <div>
-            <h1 className="md:text-5xl text-4xl mx-5 font-bold">Leap into the Adventure</h1>
+            <h1 className="md:text-5xl text-4xl mx-5 font-bold text-center">
+              Leap into the Adventure
+            </h1>
           </div>
         </div>
 

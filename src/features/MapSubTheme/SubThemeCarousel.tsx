@@ -14,13 +14,14 @@ import { useCallback, useEffect, useState } from 'react';
 
 export default function SubThemeCarousel() {
   const tempArr = [
-    { content: 'Hi', id: 0 },
-    { content: 'Hi', id: 1 },
-    { content: 'Hi', id: 2 },
-    { content: 'Hi', id: 3 },
-    { content: 'Hi', id: 4 },
+    { content: 'PIXIE HOLLOW', id: 0, bgColor: '#27659B' },
+    { content: 'CORAL COVE', id: 1, bgColor: '#F5A1B4' },
+    { content: "PIRATE'S COVE", id: 2, bgColor: '#7B5D9E' },
+    { content: 'SECOND STAR', id: 3, bgColor: '#FCAE3E' },
+    { content: 'LOST BOY’S HIDEOUT', id: 4, bgColor: '#0E7769' },
   ];
   const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
 
   // Update selected item when carousel settles
@@ -29,6 +30,7 @@ export default function SubThemeCarousel() {
 
     const currentIndex = api.selectedScrollSnap();
     const newSelectedId = tempArr[currentIndex]?.id;
+    setSelectedIndex(currentIndex);
 
     if (newSelectedId !== undefined && newSelectedId !== selectedId) {
       setSelectedId(newSelectedId);
@@ -78,23 +80,34 @@ export default function SubThemeCarousel() {
         setApi={setApi}
       >
         <CarouselContent>
-          {tempArr.map(({ content, id }, index) => (
-            <CarouselItem key={index} className="basis-1/3 pl-2">
-              <div className="flex items-center justify-between h-36 relative select-none">
+          {tempArr.map(({ content, id, bgColor }, index) => (
+            <CarouselItem
+              key={index}
+              className="basis-1/3 pl-2"
+              style={{ backgroundColor: tempArr[selectedIndex].bgColor }}
+            >
+              <div className="flex items-center justify-between h-64 select-none backdrop-blur-md">
                 <LeapSubThemeDivider></LeapSubThemeDivider>
 
                 <div
                   className="flex justify-center items-center cursor-pointer"
                   onClick={() => handleSelect(id, index)}
                 >
-                  <Avatar className={id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}>
+                  <Avatar
+                    className={
+                      'transition-[width,height] duration-200 ease-in-out ' +
+                      (id === selectedId ? 'w-24 h-24' : 'w-16 h-16')
+                    }
+                  >
                     <AvatarImage src="" alt="Avatar" />
                     <AvatarFallback>{content + index}</AvatarFallback>
                   </Avatar>
                 </div>
 
                 {selectedId === id && (
-                  <h3 className="absolute bottom-0 left-1/2 -translate-x-1/2">{content}</h3>
+                  <h3 className="font-semibold text-lg text-white absolute bottom-10 left-1/2 -translate-x-1/2 text-nowrap">
+                    {content}
+                  </h3>
                 )}
 
                 <LeapSubThemeDivider></LeapSubThemeDivider>
