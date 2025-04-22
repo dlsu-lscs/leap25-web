@@ -1,17 +1,16 @@
 'use client';
 import googleLogin from '@/../public/googleLogin.svg';
 import useGoogleAuth from '@/hooks/useGoogleAuth';
-import { useGoogleLogin } from '@react-oauth/google';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 export default function GoogleLogin() {
   const { user, loading, error, login } = useGoogleAuth();
-  const [cookies] = useCookies(['currentUser']);
+  const [cookie] = useCookies(['currentUser']);
 
   useEffect(() => {
-    if (cookies['currentUser']) {
+    if ('currentUser' in cookie) {
       window.location.replace('/');
     }
   }, [user]);
