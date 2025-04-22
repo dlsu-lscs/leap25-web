@@ -2,11 +2,12 @@
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassHighlight from '@/features/subthemeComponents/subthemeClassHighlightCard';
+import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import useMobileScreen from '@/hooks/useMobileScreen';
-import { useEffect, useState } from 'react';
 
 export default function Subtheme() {
   const { isMobile } = useMobileScreen();
+  useGoogleAuthRedirect();
 
   return (
     <>
