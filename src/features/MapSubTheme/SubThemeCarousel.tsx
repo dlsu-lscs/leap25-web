@@ -104,10 +104,7 @@ export default function SubThemeCarousel() {
                   onClick={() => handleSelect(id, index)}
                 >
                   <Avatar
-                    className={
-                      'transition-[width,height] duration-200 ease-in-out ' +
-                      (id === selectedId ? 'w-24 h-24' : 'w-16 h-16')
-                    }
+                    className={`${id === selectedId ? '' : 'opacity-40'} transition-[width,height] duration-200 ease-in-out ${id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}`}
                   >
                     <AvatarImage src="" alt="Avatar" />
                     <AvatarFallback>😀</AvatarFallback>
