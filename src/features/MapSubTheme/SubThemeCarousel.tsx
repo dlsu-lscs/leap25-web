@@ -23,6 +23,7 @@ export default function SubThemeCarousel() {
   const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
+  const [currBgColor, setCurrBgColor] = useState<string>(tempArr[0].bgColor);
 
   // Update selected item when carousel settles
   const updateSelectedItem = useCallback(() => {
@@ -31,6 +32,7 @@ export default function SubThemeCarousel() {
     const currentIndex = api.selectedScrollSnap();
     const newSelectedId = tempArr[currentIndex]?.id;
     setSelectedIndex(currentIndex);
+    setCurrBgColor(tempArr[currentIndex].bgColor);
 
     if (newSelectedId !== undefined && newSelectedId !== selectedId) {
       setSelectedId(newSelectedId);
@@ -68,9 +70,13 @@ export default function SubThemeCarousel() {
   };
 
   return (
-    <>
+    <div className="relative h-72 w-full">
+      <div
+        className='opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'
+        style={{ backgroundColor: currBgColor }}
+      ></div>
       <Carousel
-        className="w-full"
+        className="w-full mt-16"
         opts={{
           align: 'center',
           loop: true,
@@ -78,15 +84,19 @@ export default function SubThemeCarousel() {
           dragFree: false, // Snap immediately
         }}
         setApi={setApi}
+        // style={{ backgroundColor: currBgColor }}
       >
-        <CarouselContent>
+        <CarouselContent
+          className=""
+          // style={{ backgroundColor: currBgColor }}
+        >
           {tempArr.map(({ content, id, bgColor }, index) => (
             <CarouselItem
               key={index}
               className="basis-1/3 pl-2"
-              style={{ backgroundColor: tempArr[selectedIndex].bgColor }}
+              // style={{ backgroundColor: currBgColor }}
             >
-              <div className="flex items-center justify-between h-64 select-none backdrop-blur-md">
+              <div className="flex items-center justify-between h-48 select-none backdrop-blur-md">
                 <LeapSubThemeDivider></LeapSubThemeDivider>
 
                 <div
@@ -100,12 +110,12 @@ export default function SubThemeCarousel() {
                     }
                   >
                     <AvatarImage src="" alt="Avatar" />
-                    <AvatarFallback>{content + index}</AvatarFallback>
+                    <AvatarFallback>😀</AvatarFallback>
                   </Avatar>
                 </div>
 
                 {selectedId === id && (
-                  <h3 className="font-semibold text-lg text-white absolute bottom-10 left-1/2 -translate-x-1/2 text-nowrap">
+                  <h3 className="font-semibold text-lg text-white absolute bottom-3 left-1/2 -translate-x-1/2 text-nowrap">
                     {content}
                   </h3>
                 )}
@@ -116,6 +126,6 @@ export default function SubThemeCarousel() {
           ))}
         </CarouselContent>
       </Carousel>
-    </>
+    </div>
   );
 }
