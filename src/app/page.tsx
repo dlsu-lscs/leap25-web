@@ -2,8 +2,10 @@
 
 import LeapTag from '@/components/ui/LeapTag';
 import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
+import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 
 export default function Map() {
+  useGoogleAuthRedirect();
   return (
     <>
       <div className="flex justify-between h-full flex-col">
