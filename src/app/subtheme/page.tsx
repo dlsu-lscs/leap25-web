@@ -24,24 +24,45 @@ export default function Subtheme() {
             <LeapCarousel
               row2={isMobile ? false : true}
               itemsToShow={Array.from({ length: 16 })}
+              loopItems={false}
             ></LeapCarousel>
           </div>
         </div>
         <div>
           <h3 className="font-semibold text-3xl ml-12 my-4">Day 2</h3>
-          <LeapCarousel row2={false} itemsToShow={Array.from({ length: 12 })}></LeapCarousel>
+          <LeapCarousel
+            loopItems={false}
+            row2={false}
+            itemsToShow={Array.from({ length: 12 })}
+            className="pl-4"
+          ></LeapCarousel>
         </div>
         <div>
           <h3 className="font-semibold text-3xl ml-12 my-4">Day 3</h3>
-          <LeapCarousel row2={false} itemsToShow={Array.from({ length: 12 })}></LeapCarousel>
+          <LeapCarousel
+            loopItems={false}
+            row2={false}
+            itemsToShow={Array.from({ length: 12 })}
+            className="pl-4"
+          ></LeapCarousel>
         </div>
         <div>
           <h3 className="font-semibold text-3xl ml-12 my-4">Day 4</h3>
-          <LeapCarousel row2={false} itemsToShow={Array.from({ length: 12 })}></LeapCarousel>
+          <LeapCarousel
+            loopItems={false}
+            row2={false}
+            itemsToShow={Array.from({ length: 12 })}
+            className="pl-4"
+          ></LeapCarousel>
         </div>
         <div className="pb-12">
           <h3 className="font-semibold text-3xl ml-12 my-4">Day 5</h3>
-          <LeapCarousel row2={false} itemsToShow={Array.from({ length: 12 })}></LeapCarousel>
+          <LeapCarousel
+            loopItems={false}
+            row2={false}
+            itemsToShow={Array.from({ length: 12 })}
+            className="pl-4"
+          ></LeapCarousel>
         </div>
       </div>
     </>
