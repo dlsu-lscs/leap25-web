@@ -72,7 +72,7 @@ export default function SubThemeCarousel() {
   return (
     <div className="relative h-72 w-full">
       <div
-        className='opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'
+        className='transition-colors duration-200 ease-in-out opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'
         style={{ backgroundColor: currBgColor }}
       ></div>
       <Carousel
@@ -107,7 +107,7 @@ export default function SubThemeCarousel() {
                     className={`${id === selectedId ? '' : 'opacity-40'} transition-[width,height] duration-200 ease-in-out ${id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}`}
                   >
                     <AvatarImage src="" alt="Avatar" />
-                    <AvatarFallback>😀</AvatarFallback>
+                    <AvatarFallback className="text-3xl">😀</AvatarFallback>
                   </Avatar>
                 </div>
 
