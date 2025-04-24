@@ -11,14 +11,19 @@ import {
 } from '@/components/ui/carousel';
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
 import { useCallback, useEffect, useState } from 'react';
+import pixieLogo from '@/../public/subthemeLogos/colored/Pixie Hollow.png';
+import coralLogo from '@/../public/subthemeLogos/colored/Coral Lagoon.png';
+import pirateLogo from '@/../public/subthemeLogos/colored/Pirate_s Cove.png';
+import secondStarLogo from '@/../public/subthemeLogos/colored/Second Star to the Right.png';
+import lostBoysLogo from '@/../public/subthemeLogos/colored/Lost Boys_ Hideout.png';
 
 export default function SubThemeCarousel() {
   const tempArr = [
-    { content: 'PIXIE HOLLOW', id: 0, bgColor: '#27659B' },
-    { content: 'CORAL COVE', id: 1, bgColor: '#F5A1B4' },
-    { content: "PIRATE'S COVE", id: 2, bgColor: '#7B5D9E' },
-    { content: 'SECOND STAR', id: 3, bgColor: '#FCAE3E' },
-    { content: 'LOST BOY’S HIDEOUT', id: 4, bgColor: '#0E7769' },
+    { content: 'PIXIE HOLLOW', id: 0, bgColor: '#F5A1B4', img: pixieLogo },
+    { content: 'CORAL LAGOON', id: 1, bgColor: '#27659B', img: coralLogo },
+    { content: "PIRATE'S COVE", id: 2, bgColor: '#7B5D9E', img: pirateLogo },
+    { content: 'SECOND STAR', id: 3, bgColor: '#FCAE3E', img: secondStarLogo },
+    { content: "LOST BOY'S HIDEOUT", id: 4, bgColor: '#0E7769', img: lostBoysLogo },
   ];
   const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -90,7 +95,7 @@ export default function SubThemeCarousel() {
           className=""
           // style={{ backgroundColor: currBgColor }}
         >
-          {tempArr.map(({ content, id, bgColor }, index) => (
+          {tempArr.map(({ content, id, bgColor, img }, index) => (
             <CarouselItem
               key={index}
               className="basis-1/3 pl-2"
@@ -106,7 +111,7 @@ export default function SubThemeCarousel() {
                   <Avatar
                     className={`${id === selectedId ? '' : 'opacity-40'} transition-[width,height] duration-200 ease-in-out ${id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}`}
                   >
-                    <AvatarImage src="" alt="Avatar" />
+                    <AvatarImage src={img?.src ?? undefined} alt="Avatar" />
                     <AvatarFallback className="text-3xl">😀</AvatarFallback>
                   </Avatar>
                 </div>
