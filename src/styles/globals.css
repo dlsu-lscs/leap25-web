@@ -1,7 +1,18 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+
+/* Desktop: reset to normal */
+@media (min-width: 769px) {
+  .zoom-img {
+    transform: none !important;
+  }
+  .bg-container {
+    background-size: cover !important;
+    background-position: center;
+  }
+}
 
 @theme inline {
   --color-background: var(--background);

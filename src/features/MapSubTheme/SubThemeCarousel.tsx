@@ -10,39 +10,46 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
-import { useCallback, useEffect, useState } from 'react';
-import pixieLogo from '@/../public/subthemeLogos/colored/Pixie Hollow.png';
-import coralLogo from '@/../public/subthemeLogos/colored/Coral Lagoon.png';
-import pirateLogo from '@/../public/subthemeLogos/colored/Pirate_s Cove.png';
-import secondStarLogo from '@/../public/subthemeLogos/colored/Second Star to the Right.png';
-import lostBoysLogo from '@/../public/subthemeLogos/colored/Lost Boys_ Hideout.png';
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import { StaticImageData } from 'next/image';
 
-export default function SubThemeCarousel() {
-  const tempArr = [
-    { content: 'PIXIE HOLLOW', id: 0, bgColor: '#F5A1B4', img: pixieLogo },
-    { content: 'CORAL LAGOON', id: 1, bgColor: '#27659B', img: coralLogo },
-    { content: "PIRATE'S COVE", id: 2, bgColor: '#7B5D9E', img: pirateLogo },
-    { content: 'SECOND STAR', id: 3, bgColor: '#FCAE3E', img: secondStarLogo },
-    { content: "LOST BOY'S HIDEOUT", id: 4, bgColor: '#0E7769', img: lostBoysLogo },
-  ];
-  const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
+// Define the type for the items in the carousel
+interface CarouselItemData {
+  content: string;
+  id: number;
+  bgColor: string;
+  img: StaticImageData; // Or a more specific type if available
+}
+
+// Define the props for the component
+interface SubThemeCarouselProps {
+  items: CarouselItemData[];
+  selectedId: number | undefined;
+  setSelectedId: Dispatch<SetStateAction<number | undefined>>;
+}
+
+export default function SubThemeCarousel({
+  items,
+  selectedId,
+  setSelectedId,
+}: SubThemeCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [currBgColor, setCurrBgColor] = useState<string>(tempArr[0].bgColor);
+  const [currBgColor, setCurrBgColor] = useState<string>(items[0].bgColor);
 
   // Update selected item when carousel settles
   const updateSelectedItem = useCallback(() => {
     if (!api) return;
 
     const currentIndex = api.selectedScrollSnap();
-    const newSelectedId = tempArr[currentIndex]?.id;
+    const newSelectedId = items[currentIndex]?.id;
     setSelectedIndex(currentIndex);
-    setCurrBgColor(tempArr[currentIndex].bgColor);
+    setCurrBgColor(items[currentIndex].bgColor);
 
     if (newSelectedId !== undefined && newSelectedId !== selectedId) {
       setSelectedId(newSelectedId);
     }
-  }, [api, tempArr, selectedId]);
+  }, [api, items, selectedId]);
 
   // Set up event listeners for the carousel
   useEffect(() => {
@@ -95,7 +102,7 @@ export default function SubThemeCarousel() {
           className=""
           // style={{ backgroundColor: currBgColor }}
         >
-          {tempArr.map(({ content, id, bgColor, img }, index) => (
+          {items.map(({ content, id, bgColor, img }, index) => (
             <CarouselItem
               key={index}
               className="basis-1/3 pl-2"
