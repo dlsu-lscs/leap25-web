@@ -1,23 +1,47 @@
 import LeapTag from '@/components/ui/LeapTag';
 import { useState } from 'react';
 
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+
 export default function SubThemeClassCard() {
-  const [onHover, setHover] = useState(false);
+  const [onHover, setHover] = useState(true);
   return (
     <>
       <div
-        className="h-[448px] w-[304px] bg-[url(/subthemeBG/Lost_Boys_Hideout_BG.png)] rounded-xl m-4 border-white border-2"
+        className={`h-[448px] w-[304px] bg-[url(/subthemeBG/Lost_Boys_Hideout_BG.png)] rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         {onHover ? (
           <>
-            <div>
-              <LeapTag className="text-xs m-4  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
-                20 Slots Available
+            <div className="m-4 my-6">
+              <LeapTag className="text-xs  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
+                {0} Slots Available
               </LeapTag>
             </div>
-            <div></div>
+            <div className="m-4  space-y-1.5">
+              <div className="flex space-x-1.5">
+                <LeapTag className="bg-[#FFE600] font-bold text-xs flex items-center px-2 py-1 rounded-sm">
+                  Main Event
+                </LeapTag>
+                <LeapTag className="bg-white font-bold text-xs flex items-center px-2 py-1 rounded-sm">
+                  Placeholder Badge
+                </LeapTag>
+              </div>
+              <div>
+                <h1 className="font-bold text-2xl text-white">Event Title</h1>
+                <div className="flex items-center space-x-1.5">
+                  <p className="text-white text-xs w-[80vh]">
+                    Ever wondered what lies beyond coding?  Tech is more than just lines of
+                    code—it's a treasure trove of untapped opportunities waiting to be
+                    discovered!  From...
+                  </p>
+                  <ArrowCircleRightIcon
+                    sx={{ fontSize: 64, color: 'white' }}
+                  ></ArrowCircleRightIcon>
+                </div>
+              </div>
+            </div>
           </>
         ) : null}
       </div>
