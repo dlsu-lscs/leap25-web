@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 interface CustomCarouselProps {
   row2: boolean;
@@ -49,10 +50,8 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
       >
         <CarouselContent>
           {carouselItems.map((_, index) => (
-            <CarouselItem key={index} className="flex-none lg:w-56 w-40">
-              <div className="bg-gray-400 flex justify-center items-center lg:h-72 h-54">
-                <span className="text-3xl font-semibold">{index + 1}</span>
-              </div>
+            <CarouselItem key={index} className="flex-none items-center lg:w-56 w-40 mx-12">
+              <SubThemeClassCard></SubThemeClassCard>
             </CarouselItem>
           ))}
         </CarouselContent>
