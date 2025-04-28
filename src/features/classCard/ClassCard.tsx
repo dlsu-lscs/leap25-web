@@ -8,6 +8,14 @@ import ClassDescription from './ClassDescription';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 
+import { Playfair_Display } from 'next/font/google';
+
+import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+
+const playfair_display = Playfair_Display({ subsets: ['latin'] });
+
 export default function ClassCard({
   //Class Model
   title: classTitle,
@@ -41,7 +49,11 @@ export default function ClassCard({
             <LeapTag>{subThemeTitle || 'sub theme'}</LeapTag>
             <LeapTag>Tag Here</LeapTag>
           </div>
-          <h1 className="text-4xl font-bold my-4 w-[80vh]">{classTitle || 'Class Title'}</h1>
+          <h1
+            className={`text-8xl font-bold my-4 w-[75vh] text-white ${playfair_display.className}`}
+          >
+            {classTitle || 'R&Deploy Your Own Bot Workshop'}
+          </h1>
           <div className="flex items-center">
             <p className="font-medium mr-3">Hosted By</p>
             <div className="space-x-2.5 flex flex-wrap w-[75vh] gap-y-1.5">
@@ -50,9 +62,36 @@ export default function ClassCard({
           </div>
           <Separator className="bg-black drop-shadow-md my-4"></Separator>
           <div className="flex space-x-4">
-            <ClassDetails>Wednesday, June 26, 2025</ClassDetails>
-            <ClassDetails>1:00 PM - 3:30 PM</ClassDetails>
-            <ClassDetails>{venue || 'venue'}</ClassDetails>
+            <ClassDetails
+              className="text-white"
+              icon={
+                <CalendarMonthOutlinedIcon
+                  sx={{ fontSize: 32, color: 'white' }}
+                ></CalendarMonthOutlinedIcon>
+              }
+            >
+              Wednesday, June 26, 2025
+            </ClassDetails>
+            <ClassDetails
+              className="text-white"
+              icon={
+                <AccessTimeOutlinedIcon
+                  sx={{ fontSize: 32, color: 'white' }}
+                ></AccessTimeOutlinedIcon>
+              }
+            >
+              1:00 PM - 3:30 PM
+            </ClassDetails>
+            <ClassDetails
+              className="text-white"
+              icon={
+                <LocationOnOutlinedIcon
+                  sx={{ fontSize: 32, color: 'white' }}
+                ></LocationOnOutlinedIcon>
+              }
+            >
+              {venue || 'venue'}
+            </ClassDetails>
           </div>
           <div className="my-4 w-[70vh]">
             <ClassDescription>{description || 'Description'}</ClassDescription>
