@@ -1,12 +1,16 @@
 'use client';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassCard from '@/features/classCard/ClassCard';
+import ClassNavbar from '@/features/classCard/ClassNavbar';
 import { subThemeModel } from '@/types/classModels';
 
 export default function Class({ title }: subThemeModel) {
   return (
     <>
-      <div className={`flex flex-col mx-40 my-28`}>
+      <div className="fixed top-0 z-20">
+        <ClassNavbar></ClassNavbar>
+      </div>
+      <div className={`flex flex-col m-40 my-44`}>
         <div>
           <ClassCard></ClassCard>
         </div>
