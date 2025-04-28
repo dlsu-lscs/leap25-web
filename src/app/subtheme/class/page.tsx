@@ -10,7 +10,7 @@ export default function Class({ title }: subThemeModel) {
       <div className="fixed top-0 z-20">
         <ClassNavbar></ClassNavbar>
       </div>
-      <div className={`flex flex-col m-40 my-44`}>
+      <div className={`flex flex-col p-40 py-44 bg-gray-200`}>
         <div>
           <ClassCard></ClassCard>
         </div>
