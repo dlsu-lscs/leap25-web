@@ -41,7 +41,7 @@ export default function ClassCard({
 }: classModel & subThemeModel & orgModel & classPubModel) {
   return (
     <>
-      <div className={`flex space-x-5 text-white ${public_sans.className}`}>
+      <div className={`flex space-x-10 text-white ${public_sans.className}`}>
         <div>
           <img
             className="h-[560px] w-[448px] bg-[#D9D9D9] border-none outline-none"
