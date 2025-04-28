@@ -1,8 +1,10 @@
 'use client';
 
 import LeapTag from '@/components/ui/LeapTag';
+import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 
 export default function Map() {
+  useGoogleAuthRedirect();
   return (
     <>
       <div className="absolute left-1/2 z-20 -translate-x-1/2 flex justify-center">
