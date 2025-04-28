@@ -49,7 +49,7 @@ export default function ClassCard({
           />
         </div>
         <div>
-          <div className="flex space-x-3 text-sm font-medium text-black">
+          <div className=" space-x-3 text-sm font-medium text-black">
             <LeapTag className="bg-white">{venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subThemeTitle || 'sub theme'}</LeapTag>
             <LeapTag className="bg-white">Tag Here</LeapTag>
