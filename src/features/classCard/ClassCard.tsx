@@ -46,7 +46,7 @@ export default function ClassCard({
         <div>
           <img
             className="h-[560px] w-[448px] bg-[#D9D9D9] border-none outline-none"
-            src={pubURL || undefined}
+            src={pubURL || '/encrypt.jpg'}
           />
         </div>
         <div>
