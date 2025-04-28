@@ -9,7 +9,7 @@ export default function SubThemeClassCard() {
   return (
     <>
       <div
-        className={`h-[448px] w-[304px] bg-[url(/subthemeBG/Lost_Boys_Hideout_BG.png)] rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`h-[448px] w-[304px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
