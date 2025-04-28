@@ -25,7 +25,11 @@ export default function Class({ title }: subThemeModel) {
         >
           <div className="space-y-5">
             <p>More in {title || 'SubTheme'}</p>
-            <LeapCarousel row2={false} itemsToShow={Array.from({ length: 8 })}></LeapCarousel>
+            <LeapCarousel
+              loopItems={false}
+              row2={false}
+              itemsToShow={Array.from({ length: 8 })}
+            ></LeapCarousel>
           </div>
           <div className="space-y-5">
             <p>If you liked this, you might like...</p>
