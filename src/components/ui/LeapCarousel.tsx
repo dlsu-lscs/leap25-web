@@ -13,6 +13,8 @@ interface CustomCarouselProps {
   row2: boolean;
   // Add more props as needed, for example:
   itemsToShow: any[];
+  loopItems: boolean;
+  className?: string;
 }
 
 /**
@@ -21,7 +23,7 @@ interface CustomCarouselProps {
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
  */
-export function LeapCarousel({ row2, itemsToShow }: CustomCarouselProps) {
+export function LeapCarousel({ row2, itemsToShow, loopItems, className }: CustomCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
   let carouselItems = [];
   let carouselItemsRow2 = [];
@@ -39,9 +41,9 @@ export function LeapCarousel({ row2, itemsToShow }: CustomCarouselProps) {
       <Carousel
         opts={{
           // align: "center",
-          loop: true,
+          loop: loopItems,
         }}
-        className="w-full relative"
+        className={`w-full relative ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
