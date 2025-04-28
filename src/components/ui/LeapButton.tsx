@@ -9,9 +9,7 @@ interface ButtonProps {
 export default function LeapButton({ children, className }: ButtonProps) {
   return (
     <>
-      <button className={`bg-[#FFFF] px-2 py-1 rounded-sm shadow-lg ${className}`}>
-        {children}
-      </button>
+      <button className={`px-2 py-1 rounded-sm shadow-lg ${className}`}>{children}</button>
     </>
   );
 }
