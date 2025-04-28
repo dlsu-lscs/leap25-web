@@ -50,10 +50,10 @@ export default function ClassCard({
           />
         </div>
         <div>
-          <div className="space-x-3 text-sm font-medium text-black">
-            <LeapTag>{venue || 'venue'}</LeapTag>
-            <LeapTag>{subThemeTitle || 'sub theme'}</LeapTag>
-            <LeapTag>Tag Here</LeapTag>
+          <div className="flex space-x-3 text-sm font-medium text-black">
+            <LeapTag className="bg-white">{venue || 'venue'}</LeapTag>
+            <LeapTag className="bg-white">{subThemeTitle || 'sub theme'}</LeapTag>
+            <LeapTag className="bg-white">Tag Here</LeapTag>
           </div>
           <h1
             className={`text-8xl font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
@@ -107,7 +107,7 @@ export default function ClassCard({
           </div>
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
-              <LeapButton className="bg-[#ADADAD] px-4 py-2 font-medium text-black">
+              <LeapButton className="bg-white px-4 py-2 font-medium text-black">
                 Join Now - Free
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
