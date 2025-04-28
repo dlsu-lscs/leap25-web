@@ -9,7 +9,7 @@ interface ButtonProps {
 export default function LeapTag({ children, className }: ButtonProps) {
   return (
     <>
-      <button className={`${className} flex p-2 rounded-lg shadow-lg `}>{children}</button>
+      <button className={`${className} p-2 rounded-lg shadow-lg `}>{children}</button>
     </>
   );
 }
