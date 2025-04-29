@@ -1,3 +1,4 @@
+'use client';
 import LeapTag from '@/components/ui/LeapTag';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +9,8 @@ export default function SubThemeClassCard() {
   const [onHover, setHover] = useState(false);
   return (
     <>
-      <div
+      <a
+        href="/subtheme/class"
         className={`h-[448px] w-[304px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -34,7 +36,7 @@ export default function SubThemeClassCard() {
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="flex space-x-1.5">
+                <div className="flex space-x-1.5 text-black">
                   <LeapTag className="bg-[#FFE600] font-bold text-xs flex items-center px-2 py-1 rounded-sm">
                     Main Event
                   </LeapTag>
@@ -59,7 +61,7 @@ export default function SubThemeClassCard() {
             </>
           ) : null}
         </AnimatePresence>
-      </div>
+      </a>
     </>
   );
 }
