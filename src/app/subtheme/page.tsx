@@ -1,5 +1,6 @@
 'use client';
 
+import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
@@ -23,7 +24,10 @@ export default function Subtheme() {
 
   return (
     <>
-      <div className="min-h-screen py-12 px-24 bg-gray-400 text-white">
+      <div className="fixed top-0 z-20">
+        <Navbar />
+      </div>
+      <div className="min-h-screen py-36 px-24 bg-gray-400 text-white">
         <div className="flex items-center w-full gap-24">
           <h1 className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className}`}>
             LEAP's choice

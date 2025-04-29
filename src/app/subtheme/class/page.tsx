@@ -1,7 +1,7 @@
 'use client';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassCard from '@/features/classCard/ClassCard';
-import ClassNavbar from '@/features/classCard/ClassNavbar';
+import Navbar from '@/components/layout/Navbar';
 import { subThemeModel } from '@/types/classModels';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
@@ -22,7 +22,7 @@ export default function Class({ title }: subThemeModel) {
   return (
     <>
       <div className="fixed top-0 z-20">
-        <ClassNavbar></ClassNavbar>
+        <Navbar />
       </div>
       <div
         className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)]  bg-black/40 bg-blend-multiply bg-cover`}
