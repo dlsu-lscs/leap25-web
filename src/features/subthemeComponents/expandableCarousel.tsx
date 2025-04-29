@@ -23,7 +23,7 @@ interface CustomCarouselProps {
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
  */
-export function LeapCarousel({ itemsToShow, loopItems, className }: CustomCarouselProps) {
+export function ExpandableCarousel({ itemsToShow, loopItems, className }: CustomCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
@@ -41,7 +41,7 @@ export function LeapCarousel({ itemsToShow, loopItems, className }: CustomCarous
           {itemsToShow.map((_, index) => (
             <CarouselItem
               key={index}
-              className="flex-none justify-center items-center lg:w-56 w-40 mx-12"
+              className="flex-none justify-center items-center lg:w-56 w-40 h-[600px] pl"
             >
               <SubThemeClassCard></SubThemeClassCard>
             </CarouselItem>

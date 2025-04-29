@@ -2,6 +2,7 @@
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import { ExpandableCarousel } from '@/features/subthemeComponents/expandableCarousel';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 
@@ -23,12 +24,13 @@ export default function Subtheme() {
 
   return (
     <>
-      <div className="min-h-screen py-12 px-24 bg-gray-400 text-white">
-        <div className="flex items-center">
+      <div className="min-h-screen sm:py-12 sm:px-24 bg-gray-400 text-white">
+        <div className="flex items-center flex-col">
           <h1 className={`text-[64px] font-bold ${playfair_display.className}`}>LEAP's choice</h1>
+          <ExpandableCarousel itemsToShow={dummyData} loopItems={true}></ExpandableCarousel>
         </div>
       </div>
-      <div className="min-h-screen py-12 px-24 bg-gray-800 text-white">
+      <div className="min-h-screen sm:py-12 sm:px-24 bg-gray-800 text-white">
         <div>
           <h1 className={`text-[64px] font-bold ${playfair_display.className}`}>
             The Pirate’s Cove
