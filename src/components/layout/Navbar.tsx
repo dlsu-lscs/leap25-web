@@ -11,6 +11,10 @@ interface NavbarProps {
   src?: string;
 }
 
+import { Public_Sans } from 'next/font/google';
+
+const public_sans = Public_Sans({ subsets: ['latin'] });
+
 export default function Navbar({ subtheme = 'Sub Theme', className, src }: NavbarProps) {
   const [loading, setLoading] = useState(false);
 
@@ -32,7 +36,7 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }}></ChevronLeftOutlinedIcon>
           </div>
-          <div>
+          <div className={public_sans.className}>
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
           </div>
           <Avatar className="w-8 h-8 mx-2 text-xs">
