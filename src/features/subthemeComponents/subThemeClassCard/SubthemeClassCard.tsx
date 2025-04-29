@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 
 export default function SubThemeClassCard() {
-  const [onHover, setHover] = useState(true);
+  const [onHover, setHover] = useState(false);
   return (
     <>
       <div
-        className={`h-[448px] w-[304px] bg-[url(/subthemeBG/Lost_Boys_Hideout_BG.png)] rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`h-[448px] w-[304px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -17,10 +17,10 @@ export default function SubThemeClassCard() {
           {onHover ? (
             <>
               <motion.div
-                className="m-4 my-6"
-                initial={{ opacity: 0, y: 50 }}
+                className="m-4"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
+                exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
               >
                 <LeapTag className="text-xs  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
@@ -28,10 +28,10 @@ export default function SubThemeClassCard() {
                 </LeapTag>
               </motion.div>
               <motion.div
-                className="m-4  space-y-1.5"
-                initial={{ opacity: 0, y: 50 }}
+                className="m-4 space-y-1.5"
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 50 }}
+                exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex space-x-1.5">

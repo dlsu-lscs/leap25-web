@@ -15,7 +15,7 @@ export default function Class({ title }: subThemeModel) {
         <ClassNavbar></ClassNavbar>
       </div>
       <div
-        className={`flex flex-col p-40 py-44 bg-[url(/subthemeBG/Lost_Boys_Hideout_BG.png)]  bg-black/40 bg-blend-multiply bg-cover`}
+        className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)]  bg-black/40 bg-blend-multiply bg-cover`}
       >
         <div>
           <ClassCard></ClassCard>
@@ -25,7 +25,11 @@ export default function Class({ title }: subThemeModel) {
         >
           <div className="space-y-5">
             <p>More in {title || 'SubTheme'}</p>
-            <LeapCarousel row2={false} itemsToShow={Array.from({ length: 8 })}></LeapCarousel>
+            <LeapCarousel
+              loopItems={false}
+              row2={false}
+              itemsToShow={Array.from({ length: 8 })}
+            ></LeapCarousel>
           </div>
           <div className="space-y-5">
             <p>If you liked this, you might like...</p>
