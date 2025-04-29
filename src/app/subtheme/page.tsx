@@ -23,7 +23,7 @@ export default function Subtheme() {
 
   return (
     <>
-      <div className="py-12 px-24 bg-gray-400 text-white">
+      <div className="min-h-screen py-12 px-24 bg-gray-400 text-white">
         <div className="flex items-center">
           <h1 className={`text-[64px] font-bold ${playfair_display.className}`}>LEAP's choice</h1>
           <LeapSeperator></LeapSeperator>
