@@ -54,10 +54,7 @@ export default function Map() {
           </div>
         </div>
         <>
-          <ZoomPicker
-            bgPos={tempArr.find((i) => i.id === selectedId)?.bgPos || ''}
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5F_2VfrypbL03JhhClQu5-qiUPkqCzWjExQ&s"
-          ></ZoomPicker>
+          <ZoomPicker bgPos={tempArr.find((i) => i.id === selectedId)?.bgPos || ''}></ZoomPicker>
         </>
         <div className="flex justify-center md:hidden overflow-x-hidden">
           <SubThemeCarousel
