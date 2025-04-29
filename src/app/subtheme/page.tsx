@@ -24,22 +24,25 @@ export default function Subtheme() {
   return (
     <>
       <div className="min-h-screen py-12 px-24 bg-gray-400 text-white">
-        <div className="flex items-center w-full gap-4">
+        <div className="flex items-center w-full gap-24">
           <h1 className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className}`}>
             LEAP's choice
           </h1>
           <div className="flex mt-4">
-            <LeapSeperator></LeapSeperator>
+            <LeapSeperator variant="diamond"></LeapSeperator>
           </div>
         </div>
       </div>
       <div className="min-h-screen sm:py-12 sm:px-24 bg-gray-800 text-white">
         <div>
-          <h1
-            className={`text-4xl sm:text-[64px] font-bold text-center sm:text-justify ${playfair_display.className}`}
-          >
-            The Pirate’s Cove
-          </h1>
+          <div className="flex items-center w-full gap-24">
+            <h1 className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className}`}>
+              The Pirate’s Cove
+            </h1>
+            <div className="flex mt-4">
+              <LeapSeperator></LeapSeperator>
+            </div>
+          </div>
           <div className="py-4 space-y-4">
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 ${playfair_display.className}`}>
