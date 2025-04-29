@@ -3,12 +3,22 @@ import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassCard from '@/features/classCard/ClassCard';
 import ClassNavbar from '@/features/classCard/ClassNavbar';
 import { subThemeModel } from '@/types/classModels';
+import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Class({ title }: subThemeModel) {
+  const dummyData = [
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+    <SubThemeClassCard />,
+  ];
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -25,19 +35,15 @@ export default function Class({ title }: subThemeModel) {
         >
           <div className="space-y-5">
             <p>More in {title || 'SubTheme'}</p>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={Array.from({ length: 8 })}
-            ></LeapCarousel>
+            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
           </div>
           <div className="space-y-5">
             <p>If you liked this, you might like...</p>
-            <LeapCarousel row2={false} itemsToShow={Array.from({ length: 8 })}></LeapCarousel>
+            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
           </div>
           <div className="space-y-5">
             <p>Recently Viewed</p>
-            <LeapCarousel row2={false} itemsToShow={Array.from({ length: 8 })}></LeapCarousel>
+            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
           </div>
         </div>
       </div>
