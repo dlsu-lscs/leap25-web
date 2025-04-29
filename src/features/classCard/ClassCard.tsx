@@ -39,7 +39,7 @@ export default function ClassCard({
   //Class Pub Model
   pubURL,
 }: classModel & subThemeModel & orgModel & classPubModel) {
-  const hostedBy = ['', '', ''];
+  const hostedBy = [<HostName />, <HostName />];
   return (
     <>
       <div className={`flex space-x-10 text-white ${public_sans.className}`}>
@@ -62,8 +62,10 @@ export default function ClassCard({
           </h1>
           <div className="flex items-center my-8">
             <div className="space-x-3 flex flex-wrap w-[75vh] gap-y-1.5">
-              {hostedBy.map((host) => (
-                <HostName src={orgLogo || undefined}>{name || 'Org Name'}</HostName>
+              {hostedBy.map((host, hostID) => (
+                <HostName src={orgLogo || undefined} key={hostID}>
+                  {name || 'Org Name'}
+                </HostName>
               ))}
             </div>
           </div>
