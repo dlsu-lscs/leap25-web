@@ -25,7 +25,7 @@ export default function Class({ title }: subThemeModel) {
         <Navbar />
       </div>
       <div
-        className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)]  bg-black/40 bg-blend-multiply bg-cover`}
+        className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)] bg-black/50 bg-blend-multiply bg-cover`}
       >
         <div>
           <ClassCard></ClassCard>
