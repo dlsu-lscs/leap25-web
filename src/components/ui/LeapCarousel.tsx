@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 interface CustomCarouselProps {
   row2: boolean;
@@ -19,6 +20,7 @@ interface CustomCarouselProps {
 
 /**
  * NOTE: set overflow-hidden on parent div in order for the carousel to only take up the remaining width
+ * NOTE: the passed in divs will be responsible for the width, height, and the spacing between them
  * @param row2 (boolean) determines if the carousel will have 2 rows
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
@@ -48,11 +50,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
         onMouseLeave={() => setIsHovering(false)}
       >
         <CarouselContent>
-          {carouselItems.map((_, index) => (
-            <CarouselItem key={index} className="flex-none lg:w-56 w-40">
-              <div className="bg-gray-400 flex justify-center items-center lg:h-72 h-54">
-                <span className="text-3xl font-semibold">{index + 1}</span>
-              </div>
+          {carouselItems.map((item, index) => (
+            <CarouselItem key={index} className="flex-none justify-center items-center pl-0">
+              {item}
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -79,11 +79,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
           onMouseLeave={() => setIsHovering(false)}
         >
           <CarouselContent>
-            {carouselItemsRow2.map((_, index) => (
-              <CarouselItem key={index} className="flex-none lg:w-56 w-40">
-                <div className="bg-gray-400 flex justify-center items-center lg:h-72 h-54">
-                  <span className="text-3xl font-semibold">{index + 1}</span>
-                </div>
+            {carouselItemsRow2.map((item, index) => (
+              <CarouselItem key={index} className="flex-none pl-0">
+                {item}
               </CarouselItem>
             ))}
           </CarouselContent>
