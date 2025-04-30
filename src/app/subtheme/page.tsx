@@ -11,6 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { Playfair_Display } from 'next/font/google';
 import GetBackground from '@/services/GetBackground';
+import FadeOverlay from '@/components/ui/FadeOverlay';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyData = [
@@ -42,7 +43,7 @@ export default function Subtheme() {
       <div className="fixed top-0 z-20">
         <Navbar />
       </div>
-      <div className="min-h-screen py-36 px-24 text-white bg-[url(/encrypt.jpg)] bg-black/50 bg-blend-multiply bg-cover">
+      <div className="min-h-screen py-36 px-24 text-white bg-[url(/encrypt.jpg)] bg-black/60 bg-blend-multiply bg-cover">
         <div className="flex items-center w-full">
           <h1
             className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
@@ -54,8 +55,11 @@ export default function Subtheme() {
           </div>
         </div>
       </div>
+      <div className="absolute -translate-y-10">
+        <FadeOverlay></FadeOverlay>
+      </div>
       <div
-        className={`min-h-screen sm:py-24 sm:px-24 text-white  bg-black/50 bg-blend-multiply bg-contain`}
+        className={`min-h-screen sm:py-24 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-contain`}
         style={{ backgroundImage: `url("/SubThemeBG/${subThemeBG}")` }}
       >
         <div>
