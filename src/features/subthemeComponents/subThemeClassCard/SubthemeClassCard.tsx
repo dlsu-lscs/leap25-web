@@ -3,7 +3,7 @@ import LeapTag from '@/components/ui/LeapTag';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 
 export default function SubThemeClassCard() {
   const [onHover, setHover] = useState(false);
@@ -52,9 +52,9 @@ export default function SubThemeClassCard() {
                       code—it's a treasure trove of untapped opportunities waiting to be
                       discovered!  From...
                     </p>
-                    <ArrowCircleRightIcon
+                    <ArrowCircleRightOutlinedIcon
                       sx={{ fontSize: 64, color: 'white' }}
-                    ></ArrowCircleRightIcon>
+                    ></ArrowCircleRightOutlinedIcon>
                   </div>
                 </div>
               </motion.div>
