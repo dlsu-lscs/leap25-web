@@ -28,7 +28,8 @@ interface SubThemeProps {
   src?: string;
 }
 
-export default function Subtheme({ subtheme, src }: SubThemeProps) {
+// no props sa page
+export default function Subtheme() {
   useGoogleAuthRedirect();
 
   return (
@@ -52,8 +53,8 @@ export default function Subtheme({ subtheme, src }: SubThemeProps) {
         <div>
           <div className="flex items-center w-full">
             <Avatar className="w-24 h-24 text-xs">
-              <AvatarImage src={src || undefined} />
-              <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
+              <AvatarImage src={undefined} /> {/** wala muna */}
+              <AvatarFallback>{nameInitials('na')}</AvatarFallback>
             </Avatar>
             <h1
               className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
