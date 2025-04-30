@@ -56,7 +56,7 @@ export default function ClassCard({
             <LeapTag className="bg-white">Tag Here</LeapTag>
           </div>
           <h1
-            className={`text-8xl font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
+            className={`text-[64px] font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
           >
             {classTitle || 'R&Deploy Your Own Bot Workshop'}
           </h1>
