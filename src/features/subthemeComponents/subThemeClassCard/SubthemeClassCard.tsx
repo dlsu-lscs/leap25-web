@@ -11,7 +11,7 @@ export default function SubThemeClassCard() {
     <>
       <a
         href="/subtheme/class"
-        className={`h-[368px] w-[224px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`h-[368px] w-[224px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
