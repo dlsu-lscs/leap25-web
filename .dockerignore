@@ -7,3 +7,8 @@ README.md
 !.next/static
 !.next/standalone
 .git
+eslint.config.mjs
+jest.config.ts
+jest.setup.ts
+.prettierrc
+.commintlint.config.mjs
