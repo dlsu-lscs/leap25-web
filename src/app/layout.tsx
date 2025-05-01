@@ -3,6 +3,8 @@ import '@/styles/globals.css';
 // import { Inter } from 'next/font/google';
 import Providers from '@/context/Providers';
 
+import LeapCursor from '@/components/cursor/LeapCursor';
+
 import { Public_Sans } from 'next/font/google';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
@@ -22,7 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={public_sans.className + ' h-full'}>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <LeapCursor />
+        </Providers>
       </body>
     </html>
   );

@@ -34,7 +34,7 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
             }}
             className="hover:opacity-50 transition duration-50"
           >
-            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }}></ChevronLeftOutlinedIcon>
+            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
           </div>
           <div className={public_sans.className}>
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
