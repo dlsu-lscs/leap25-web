@@ -7,7 +7,7 @@ const useGoogleAuth = () => {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState<any>(null);
   const [error, setError] = useState<any>(null);
-  const [, setCookie] = useCookies(['currentUser']);
+  const [, setCookie] = useCookies(['currentUser', 'currentUserPicture']);
 
   const login = useGoogleLogin({
     onSuccess: async (response: any) => {
@@ -24,6 +24,7 @@ const useGoogleAuth = () => {
         );
         setUser(res.data);
         setCookie('currentUser', res.data.email, { path: '/' });
+        setCookie('currentUserPicture', res.data.picture, { path: '/' });
       } catch (e: any) {
         setError(e.message || 'Error logging in');
       } finally {
