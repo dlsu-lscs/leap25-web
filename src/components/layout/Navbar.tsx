@@ -1,6 +1,5 @@
 'use client';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
 import { useEffect, useState } from 'react';

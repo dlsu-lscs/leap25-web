@@ -11,7 +11,7 @@ export default function SubThemeClassCard() {
     <>
       <a
         href="/subtheme/class"
-        className={`h-[368px] w-[224px] bg-[url(/encrypt.jpg)] bg-cover rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`h-[368px] w-[224px] bg-[url(/encrypt.jpg)] bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -19,7 +19,7 @@ export default function SubThemeClassCard() {
           {onHover ? (
             <>
               <motion.div
-                className="m-4"
+                className="mx-5 my-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
@@ -30,30 +30,22 @@ export default function SubThemeClassCard() {
                 </LeapTag>
               </motion.div>
               <motion.div
-                className="m-4 space-y-1.5"
+                className="mx-5 my-4 space-y-1.5"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="flex space-x-1.5 text-black">
-                  <LeapTag className="bg-[#FFE600] font-bold text-[8px] flex items-center px-2 py-1 rounded-sm">
-                    Main Event
-                  </LeapTag>
-                  <LeapTag className="bg-white font-bold text-[8px] flex items-center px-2 py-1 rounded-sm">
-                    Placeholder Badge
-                  </LeapTag>
-                </div>
                 <div>
-                  <h1 className="font-bold text-2xl text-white">Event Title</h1>
+                  <h1 className="font-bold text-[16px] text-white">Event Title</h1>
                   <div className="flex items-center space-x-1.5">
-                    <p className="text-white text-[8px] w-[80vh]">
+                    <p className="text-white text-[11px] w-[80vh] text-wrap">
                       Ever wondered what lies beyond coding?  Tech is more than just lines of
                       code—it's a treasure trove of untapped opportunities waiting to be
                       discovered!  From...
                     </p>
                     <ArrowCircleRightOutlinedIcon
-                      sx={{ fontSize: 64, color: 'white' }}
+                      sx={{ fontSize: 48, color: 'white' }}
                     ></ArrowCircleRightOutlinedIcon>
                   </div>
                 </div>
