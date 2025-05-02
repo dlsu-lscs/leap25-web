@@ -49,7 +49,7 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
         <div>
           <Avatar className="w-10 h-10 text-xs text-black">
             <AvatarImage src={cookies['currentUserPicture'] || undefined} />
-            <AvatarFallback>{nameInitials(cookies['currentUser'])}</AvatarFallback>
+            <AvatarFallback>{nameInitials(cookies['currentUser'] || 'user')}</AvatarFallback>
           </Avatar>
         </div>
       </div>
