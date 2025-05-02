@@ -44,6 +44,7 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
         opts={{
           // align: "center",
           loop: loopItems,
+          dragFree: true,
         }}
         className={`w-full relative ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
