@@ -39,6 +39,7 @@ export default function ClassCard({
   //Class Pub Model
   pubURL,
 }: classModel & subThemeModel & orgModel & classPubModel) {
+  const hostedBy = [<HostName />, <HostName />];
   return (
     <>
       <div className={`flex space-x-10 text-white ${public_sans.className}`}>
@@ -55,13 +56,17 @@ export default function ClassCard({
             <LeapTag className="bg-white">Tag Here</LeapTag>
           </div>
           <h1
-            className={`text-8xl font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
+            className={`text-[64px] font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
           >
             {classTitle || 'R&Deploy Your Own Bot Workshop'}
           </h1>
           <div className="flex items-center my-8">
-            <div className="space-x-2.5 flex flex-wrap w-[75vh] gap-y-1.5">
-              <HostName src={orgLogo || undefined}>{name || 'Org Name'}</HostName>
+            <div className="space-x-3 flex flex-wrap w-[75vh] gap-y-1.5">
+              {hostedBy.map((host, hostID) => (
+                <HostName src={orgLogo || undefined} key={hostID}>
+                  {name || 'Org Name'}
+                </HostName>
+              ))}
             </div>
           </div>
           <div className="flex space-x-4">

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import Providers from '@/context/Providers';
 
 import { Public_Sans } from 'next/font/google';
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: 'Leap 2025 Website',
 };
 
-const inter = Inter({ subsets: ['latin'] });
+// const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
