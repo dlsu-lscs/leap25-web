@@ -4,6 +4,7 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
 import { useEffect, useState } from 'react';
+import { useCookies } from 'react-cookie';
 
 interface NavbarProps {
   subtheme?: string;
@@ -17,6 +18,7 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Navbar({ subtheme = 'Sub Theme', className, src }: NavbarProps) {
   const [loading, setLoading] = useState(false);
+  const [cookies, ,] = useCookies(['currentUser', 'currentUserPicture']);
 
   useEffect(() => {
     setLoading(typeof window !== 'undefined');
@@ -45,7 +47,10 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           </Avatar>
         </div>
         <div>
-          <AccountCircleOutlinedIcon sx={{ fontSize: 48 }}></AccountCircleOutlinedIcon>
+          <Avatar className="w-10 h-10 text-xs text-black">
+            <AvatarImage src={cookies['currentUserPicture'] || undefined} />
+            <AvatarFallback>{nameInitials(cookies['currentUser'])}</AvatarFallback>
+          </Avatar>
         </div>
       </div>
     </>
