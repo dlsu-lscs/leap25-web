@@ -38,10 +38,10 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
           </div>
-          <div className={public_sans.className}>
+          <div className={`text-[20px] ${public_sans.className}`}>
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
           </div>
-          <Avatar className="w-8 h-8 mx-2 text-xs">
+          <Avatar className="w-10 h-10 mx-2 text-xs">
             <AvatarImage src={src || undefined} />
             <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
           </Avatar>

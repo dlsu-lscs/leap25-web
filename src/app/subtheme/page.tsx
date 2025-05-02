@@ -24,13 +24,6 @@ const dummyData = [
   <SubThemeClassCard />,
 ];
 
-interface SubThemeProps {
-  subtheme?: string;
-  className?: string;
-  src?: string;
-}
-
-// no props sa page
 export default function Subtheme() {
   useGoogleAuthRedirect();
 
