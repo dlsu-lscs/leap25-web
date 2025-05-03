@@ -30,6 +30,14 @@ interface SubThemeProps {
   className?: string;
   src?: string;
 }
+const dummyHighlightData = [
+  { content: 1, id: 1 },
+  { content: 2, id: 2 },
+  { content: 3, id: 3 },
+  { content: 4, id: 4 },
+  { content: 5, id: 5 },
+  { content: 6, id: 6 },
+];
 
 // no props sa page
 export default function Subtheme() {
@@ -51,9 +59,9 @@ export default function Subtheme() {
           >
             LEAP's choice
           </h1>
-          <div className="flex flex-col mt-4">
+          <div className="flex flex-col mt-4 w-full px-12">
             <LeapSeperator variant="diamond"></LeapSeperator>
-            <ExpandableCarousel itemsToShow={[1, 2, 3]}></ExpandableCarousel>
+            <ExpandableCarousel itemsToShow={dummyHighlightData}></ExpandableCarousel>
           </div>
         </div>
       </div>
