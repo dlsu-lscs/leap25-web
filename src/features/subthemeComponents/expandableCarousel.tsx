@@ -10,28 +10,26 @@ import {
 } from '@/components/ui/carousel';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
-interface CustomCarouselProps {
+interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: any[];
-  loopItems: boolean;
   className?: string;
 }
 
 /**
  * NOTE: set overflow-hidden on parent div in order for the carousel to only take up the remaining width
- * @param row2 (boolean) determines if the carousel will have 2 rows
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
  */
-export function ExpandableCarousel({ itemsToShow, loopItems, className }: CustomCarouselProps) {
+export function ExpandableCarousel({ itemsToShow, className }: ExpandableCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
     <>
       <Carousel
         opts={{
-          // align: "center",
-          loop: loopItems,
+          align: 'start',
+          loop: true,
         }}
         className={`w-full relative ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
@@ -39,11 +37,8 @@ export function ExpandableCarousel({ itemsToShow, loopItems, className }: Custom
       >
         <CarouselContent>
           {itemsToShow.map((_, index) => (
-            <CarouselItem
-              key={index}
-              className="flex-none justify-center items-center lg:w-56 w-40 h-[600px] pl"
-            >
-              <SubThemeClassCard></SubThemeClassCard>
+            <CarouselItem key={index} className="h-[600px] basis-full md:basis-1/2">
+              <div className="bg-black w-full h-full"></div>
             </CarouselItem>
           ))}
         </CarouselContent>

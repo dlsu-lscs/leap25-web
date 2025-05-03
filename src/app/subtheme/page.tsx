@@ -44,15 +44,16 @@ export default function Subtheme() {
       <div className="fixed top-0 z-20">
         <Navbar />
       </div>
-      <div className="min-h-screen py-36 px-24 text-white bg-[url(/encrypt.jpg)] bg-black/60 bg-blend-multiply bg-cover">
-        <div className="flex items-center w-full">
+      <div className="min-h-screen text-white bg-[url(/encrypt.jpg)] bg-black/60 bg-blend-multiply bg-cover">
+        <div className="flex flex-col items-center w-full">
           <h1
-            className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
+            className={`mt-28 text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
           >
             LEAP's choice
           </h1>
-          <div className="flex mt-4">
+          <div className="flex flex-col mt-4">
             <LeapSeperator variant="diamond"></LeapSeperator>
+            <ExpandableCarousel itemsToShow={[1, 2, 3]}></ExpandableCarousel>
           </div>
         </div>
       </div>
