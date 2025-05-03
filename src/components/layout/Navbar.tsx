@@ -12,6 +12,7 @@ interface NavbarProps {
 }
 
 import { Public_Sans } from 'next/font/google';
+import GetSubTheme from '@/services/GetSubTheme';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -22,6 +23,8 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
   useEffect(() => {
     setLoading(typeof window !== 'undefined');
   }, []);
+
+  const subTheme = GetSubTheme('Coral Lagoon');
 
   return (
     <>
@@ -40,8 +43,8 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           <div className={`text-[20px] ${public_sans.className}`}>
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
           </div>
-          <Avatar className="w-10 h-10 mx-2 text-xs">
-            <AvatarImage src={src || undefined} />
+          <Avatar className="w-9 h-9 mx-2 text-xs">
+            <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
             <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
           </Avatar>
         </div>
