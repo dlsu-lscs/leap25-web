@@ -56,7 +56,7 @@ export default function Subtheme() {
         <div>
           <div className="flex items-center w-full">
             <Avatar className="w-24 h-24 text-xs">
-              <AvatarImage src={'/subthemeLogos/colored/' + subTheme} /> {/** wala muna */}
+              <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
               <AvatarFallback>{nameInitials('na')}</AvatarFallback>
             </Avatar>
             <h1
