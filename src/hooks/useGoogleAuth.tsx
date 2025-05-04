@@ -24,8 +24,8 @@ const useGoogleAuth = () => {
           }
         );
         setUser(res.data);
-        GetGoogleLogin();
-        setCookie('currentUser', res.data.email, { path: '/' });
+        GetGoogleLogin(response.access_token);
+        // setCookie('currentUser', res.data.email, { path: '/' });
         setCookie('currentUserPicture', res.data.picture, { path: '/' });
       } catch (e: any) {
         setError(e.message || 'Error logging in');
