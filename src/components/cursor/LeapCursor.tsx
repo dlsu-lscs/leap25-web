@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 
 export default function LeapCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -59,7 +60,7 @@ export default function LeapCursor() {
         transition: 'transform 0.03s linear',
       }}
     >
-      <img src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />
+      <Image src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />
     </div>
   );
 }
