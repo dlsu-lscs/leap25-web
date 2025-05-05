@@ -1,6 +1,5 @@
 'use client';
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
 import { useEffect, useState } from 'react';
@@ -14,6 +13,7 @@ interface NavbarProps {
 
 import { Public_Sans } from 'next/font/google';
 import { decodeJWT } from '@/lib/decodeJWT';
+import GetSubTheme from '@/services/GetSubTheme';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -26,6 +26,8 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
   useEffect(() => {
     setLoading(typeof window !== 'undefined');
   }, []);
+
+  const subTheme = GetSubTheme('Coral Lagoon');
 
   return (
     <>
@@ -41,11 +43,11 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
           </div>
-          <div className={public_sans.className}>
+          <div className={`text-[20px] ${public_sans.className}`}>
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
           </div>
-          <Avatar className="w-8 h-8 mx-2 text-xs">
-            <AvatarImage src={src || undefined} />
+          <Avatar className="w-9 h-9 mx-2 text-xs">
+            <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
             <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
           </Avatar>
         </div>

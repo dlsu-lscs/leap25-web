@@ -1,13 +1,15 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function LeapCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [cursorState, setCursorState] = useState<'default' | 'hover' | 'click'>('default');
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+      }
     };
 
     const handleDown = () => setCursorState('click');
@@ -46,14 +48,15 @@ export default function LeapCursor() {
 
   return (
     <div
+      ref={cursorRef}
       style={{
         position: 'fixed',
-        left: position.x,
-        top: position.y,
+        left: 0,
+        top: 0,
         pointerEvents: 'none',
         transform: 'translate(-50%, -50%)',
         zIndex: 9999,
-        transition: 'transform 0.1s ease',
+        transition: 'transform 0.03s linear',
       }}
     >
       <img src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />

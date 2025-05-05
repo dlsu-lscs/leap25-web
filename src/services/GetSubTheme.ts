@@ -1,8 +1,8 @@
-export default function GetBackground(subtheme: string) {
+export default function GetSubTheme(subtheme: string) {
   if (subtheme === 'Fairy Nook') {
     return 'FairyNook.png';
-  } else if (subtheme === 'Coral Lacoon') {
-    return 'CoralLacoon.png';
+  } else if (subtheme === 'Coral Lagoon') {
+    return 'CoralLagoon.png';
   } else if (subtheme === 'Hollow tree Hideaway') {
     return 'HollowtreeHideway.png';
   } else if (subtheme === 'Northern Star Stop') {
