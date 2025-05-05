@@ -12,7 +12,7 @@ const GetGoogleLogin = async (token: string) => {
         },
       }
     );
-    return await response.data;
+    return response.data;
   } catch (error: any) {
     console.log('error: ' + error);
   }
