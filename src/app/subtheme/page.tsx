@@ -1,68 +1,88 @@
 'use client';
 
+import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import ClassHighlight from '@/features/subthemeComponents/subthemeClassHighlightCard';
+import LeapSeperator from '@/components/ui/LeapSeperator';
+import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
-import useMobileScreen from '@/hooks/useMobileScreen';
+import { nameInitials } from '@/lib/helpers';
+
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+
+import { Playfair_Display } from 'next/font/google';
+import FadeOverlay from '@/components/ui/FadeOverlay';
+import GetSubTheme from '@/services/GetSubTheme';
+const playfair_display = Playfair_Display({ subsets: ['latin'] });
+
+const dummyData = [
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+  <SubThemeClassCard />,
+];
 
 export default function Subtheme() {
-  const { isMobile } = useMobileScreen();
   useGoogleAuthRedirect();
+
+  const subTheme = GetSubTheme('Coral Lagoon');
 
   return (
     <>
-      <div className="h-full w-full pt-12">
-        <div className="flex w-full flex-row flex-wrap md:flex-nowrap justify-center gap-12">
-          <div className="sm:pl-12 pl-0 w-full flex-0">
-            <ClassHighlight imgLink="https://scontent.fcrk1-2.fna.fbcdn.net/v/t39.30808-6/480109991_988152660123302_5845435330837760038_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFoLZ4YxfFUQZ6gacPygpuMqHDmVHJtWQyocOZUcm1ZDE-K5ilAniNWGZmbKQwNYDda0BSPp5W-LWZ328FNSR4P&_nc_ohc=cKYUfYGnImQQ7kNvwFsjwz3&_nc_oc=AdkP3tJFrxTUgEU92tnAQwrF7wRgNMU0hS2-wUEa_SN6WKtl6krU_12X_ujs4hgL1O8&_nc_zt=23&_nc_ht=scontent.fcrk1-2.fna&_nc_gid=rBy56VX3nEQkql8Q4zf0Tg&oh=00_AfEfdGqjdaQl2KcNsyB-4qTaTR0eCHz3Cu5PLhczJyav6A&oe=68056D8F">
-              R&Deploy Your Own Bot Workshop
-            </ClassHighlight>
-          </div>
+      <div className="fixed top-0 z-20">
+        <Navbar />
+      </div>
+      <div className="min-h-screen py-36 px-24 text-white bg-[url(/encrypt.jpg)] bg-black/60 bg-blend-multiply bg-cover">
+        <div className="flex items-center w-full">
+          <h1
+            className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
+          >
+            LEAP's choice
+          </h1>
+          <div className="flex mt-4">
+            <LeapSeperator variant="diamond"></LeapSeperator>
 
-          <div className="overflow-hidden flex-grow-1">
-            <h3 className="font-semibold text-3xl ml-12 mb-4">Day 1</h3>
-            <LeapCarousel
-              row2={isMobile ? false : true}
-              itemsToShow={Array.from({ length: 16 })}
-              loopItems={false}
-            ></LeapCarousel>
           </div>
         </div>
+      </div>
+      <div className="absolute -translate-y-10">
+        <FadeOverlay></FadeOverlay>
+      </div>
+      <div
+        className={`min-h-screen sm:py-24 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-contain`}
+        style={{ backgroundImage: `url("/SubThemeBG/${subTheme}")` }}
+      >
         <div>
-          <h3 className="font-semibold text-3xl ml-12 my-4">Day 2</h3>
-          <LeapCarousel
-            loopItems={false}
-            row2={false}
-            itemsToShow={Array.from({ length: 12 })}
-            className="pl-4"
-          ></LeapCarousel>
-        </div>
-        <div>
-          <h3 className="font-semibold text-3xl ml-12 my-4">Day 3</h3>
-          <LeapCarousel
-            loopItems={false}
-            row2={false}
-            itemsToShow={Array.from({ length: 12 })}
-            className="pl-4"
-          ></LeapCarousel>
-        </div>
-        <div>
-          <h3 className="font-semibold text-3xl ml-12 my-4">Day 4</h3>
-          <LeapCarousel
-            loopItems={false}
-            row2={false}
-            itemsToShow={Array.from({ length: 12 })}
-            className="pl-4"
-          ></LeapCarousel>
-        </div>
-        <div className="pb-12">
-          <h3 className="font-semibold text-3xl ml-12 my-4">Day 5</h3>
-          <LeapCarousel
-            loopItems={false}
-            row2={false}
-            itemsToShow={Array.from({ length: 12 })}
-            className="pl-4"
-          ></LeapCarousel>
+          <div className="flex items-center w-full">
+            <Avatar className="w-24 h-24 text-xs">
+              <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
+              <AvatarFallback>{nameInitials('na')}</AvatarFallback>
+            </Avatar>
+            <h1
+              className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
+            >
+              Fairy Nook
+            </h1>
+            <div className="flex mt-4">
+              <LeapSeperator></LeapSeperator>
+            </div>
+          </div>
+          <div className="py-12 space-y-4">
+            <div>
+              <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 ${playfair_display.className}`}>
+                Day 1
+              </h2>
+            </div>
+            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+            <div>
+              <h2 className={`text-[30px] font-bold sm:ml-0 ml- ${playfair_display.className}`}>
+                Day 2
+              </h2>
+            </div>
+            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+          </div>
         </div>
       </div>
     </>

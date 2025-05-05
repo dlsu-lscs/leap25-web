@@ -1,18 +1,15 @@
-import { ReactNode } from 'react'
+'use client';
+import { ReactNode } from 'react';
 
 interface ButtonProps {
-  children?: ReactNode
-  className?: string
+  children?: ReactNode;
+  className?: string;
 }
 
 export default function LeapTag({ children, className }: ButtonProps) {
   return (
     <>
-      <button
-        className={`bg-[#D9D9D9] px-2 py-1 rounded-xs shadow-lg ${className}`}
-      >
-        {children}
-      </button>
+      <button className={`${className} p-2 rounded-lg shadow-lg `}>{children}</button>
     </>
-  )
+  );
 }

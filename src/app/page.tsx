@@ -3,9 +3,12 @@
 import LeapTag from '@/components/ui/LeapTag';
 import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
+import { useCookies } from 'react-cookie';
 
 export default function Map() {
   useGoogleAuthRedirect();
+  const [cookies] = useCookies(['currentUser']);
+  console.log(cookies['currentUser']);
   return (
     <>
       <div className="flex justify-between h-full flex-col">
