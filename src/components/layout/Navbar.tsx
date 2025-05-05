@@ -12,13 +12,16 @@ interface NavbarProps {
 }
 
 import { Public_Sans } from 'next/font/google';
+import { decodeJWT } from '@/lib/decodeJWT';
 import GetSubTheme from '@/services/GetSubTheme';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Navbar({ subtheme = 'Sub Theme', className, src }: NavbarProps) {
   const [loading, setLoading] = useState(false);
-  const [cookies, ,] = useCookies(['currentUser', 'currentUserPicture']);
+  const [cookies, ,] = useCookies(['currentUser']);
+  const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
+  console.log(decodedJWT.display_picture);
 
   useEffect(() => {
     setLoading(typeof window !== 'undefined');
@@ -50,8 +53,8 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
         </div>
         <div>
           <Avatar className="w-10 h-10 text-xs text-black">
-            <AvatarImage src={cookies['currentUserPicture'] || undefined} />
-            <AvatarFallback>{nameInitials(cookies['currentUser'] || 'user')}</AvatarFallback>
+            <AvatarImage src={decodedJWT.display_picture} />
+            <AvatarFallback>{nameInitials(decodedJWT.email || 'user')}</AvatarFallback>
           </Avatar>
         </div>
       </div>
