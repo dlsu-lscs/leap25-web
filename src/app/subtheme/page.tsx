@@ -43,6 +43,7 @@ export default function Subtheme() {
           </h1>
           <div className="flex mt-4">
             <LeapSeperator variant="diamond"></LeapSeperator>
+
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import LeapTag from '@/components/ui/LeapTag';
+import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { useCookies } from 'react-cookie';
 
@@ -10,23 +11,27 @@ export default function Map() {
   console.log(cookies['currentUser']);
   return (
     <>
-      <div className="absolute left-1/2 z-20 -translate-x-1/2 flex justify-center">
-        <div
-          className="
-        flex flex-col items-center py-8
-        "
-        >
-          <div className="my-3 space-x-3 text-xs">
+      <div className="flex justify-between h-full flex-col">
+        <div className="flex flex-col items-center py-8">
+          <div className="hidden md:inline my-6 space-x-3 text-sm">
             <LeapTag>Tag Badge Here</LeapTag>
             <LeapTag>Tag Badge Here</LeapTag>
+            <LeapTag>Tag Badge Here</LeapTag>
+          </div>
+          <div className="md:hidden inline my-3 space-x-3 text-xs">
             <LeapTag>Tag Badge Here</LeapTag>
           </div>
           <div>
-            <h1 className="text-4xl font-bold">Leap into the Adventure</h1>
+            <h1 className="md:text-5xl text-4xl mx-5 font-bold text-center">
+              Leap into the Adventure
+            </h1>
           </div>
         </div>
+
+        <div className="flex justify-center md:hidden overflow-hidden">
+          <SubThemeCarousel></SubThemeCarousel>
+        </div>
       </div>
-      <div className="min-h-screen"></div>
     </>
   );
 }
