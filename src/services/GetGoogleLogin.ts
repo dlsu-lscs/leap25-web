@@ -8,12 +8,11 @@ const GetGoogleLogin = async (token: string) => {
       { token: token },
       {
         headers: {
-          //   Authorization: `Bearer ${token}`,
           Accept: 'application/json',
         },
       }
     );
-    console.log(response);
+    return await response.data;
   } catch (error: any) {
     console.log('error: ' + error);
   }
