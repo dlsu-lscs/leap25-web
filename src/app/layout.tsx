@@ -5,10 +5,6 @@ import Providers from '@/context/Providers';
 
 import LeapCursor from '@/components/cursor/LeapCursor';
 
-import { Public_Sans } from 'next/font/google';
-
-const public_sans = Public_Sans({ subsets: ['latin'] });
-
 export const metadata: Metadata = {
   title: 'LEAP 2025',
   description: 'Leap 2025 Website',
@@ -38,9 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={`h-full font-public-sans`}>
       <link rel="icon" href="/leapLogos/Logo_v1.png" />
-      <body className={public_sans.className + ' h-full'}>
+      <body className='h-full'>
         <Providers>
           {children}
           <LeapCursor />
