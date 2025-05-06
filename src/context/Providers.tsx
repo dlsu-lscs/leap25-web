@@ -6,7 +6,7 @@ interface ProvidersProps {
   children?: React.ReactNode;
 }
 export default function Providers({ children }: ProvidersProps) {
-  const clientID = '112879338322-58o490i8bdlag1dhio1d98n693furloc.apps.googleusercontent.com';
+  const clientID = '417662644693-3ebmp4qkddo9oaso162h6ma09laue9mj.apps.googleusercontent.com';
 
   return (
     <>

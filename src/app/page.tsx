@@ -5,12 +5,20 @@ import LeapTag from '@/components/ui/LeapTag';
 import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { useState } from 'react';
-
 import pixieLogo from '@/../public/subthemeLogos/colored/Pixie Hollow.png';
 import coralLogo from '@/../public/subthemeLogos/colored/Coral Lagoon.png';
 import pirateLogo from '@/../public/subthemeLogos/colored/Pirate_s Cove.png';
 import secondStarLogo from '@/../public/subthemeLogos/colored/Second Star to the Right.png';
 import lostBoysLogo from '@/../public/subthemeLogos/colored/Lost Boys_ Hideout.png';
+
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { Playfair_Display_SC } from 'next/font/google';
+import MapButton from '@/components/ui/MapButton';
+import { useState } from 'react';
+import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
+
+const playfair_display_sc_bold = Playfair_Display_SC({ subsets: ['latin'], weight: '700' });
 
 const tempArr = [
   { content: 'PIXIE HOLLOW', id: 0, bgColor: '#F5A1B4', img: pixieLogo, bgPos: 'bg-[100%_100%]' },
@@ -31,38 +39,59 @@ const tempArr = [
     bgPos: 'bg-[0%_0%]',
   },
 ];
-
 export default function Map() {
   const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
   useGoogleAuthRedirect();
+  const [isStart, setStart] = useState(false);
   return (
     <>
-      <div className="flex justify-between h-full flex-col">
-        <div className="flex flex-col items-center py-8">
-          <div className="hidden md:inline my-6 space-x-3 text-sm">
-            <LeapTag>Tag Badge Here</LeapTag>
-            <LeapTag>Tag Badge Here</LeapTag>
-            <LeapTag>Tag Badge Here</LeapTag>
-          </div>
-          <div className="md:hidden inline my-3 space-x-3 text-xs">
-            <LeapTag>Tag Badge Here</LeapTag>
-          </div>
-          <div>
-            <h1 className="md:text-5xl text-4xl mx-5 font-bold text-center">
-              Leap into the Adventure
-            </h1>
-          </div>
-        </div>
-        <>
-          <ZoomPicker bgPos={tempArr.find((i) => i.id === selectedId)?.bgPos || ''}></ZoomPicker>
-        </>
-        <div className="flex justify-center md:hidden overflow-x-hidden">
-          <SubThemeCarousel
-            selectedId={selectedId}
-            setSelectedId={setSelectedId}
-            items={tempArr}
-          ></SubThemeCarousel>
-        </div>
+      <div className="flex justify-between w-full h-full flex-col bg-[url('/map/LEAP_MAP.webp')] bg-black/40 bg-blend-multiply bg-cover bg-center">
+        <AnimatePresence>
+          {isStart ? (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_30%,_rgba(0,10,30,0.45)_100%)]  pointer-events-none z-10"></div>
+              <div className="fixed z-20">
+                <SubThemeMapPicker></SubThemeMapPicker>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_30%,_rgba(0,10,30,0.95)_100%)]  pointer-events-none z-10"></div>
+              <motion.div
+                className="flex flex-col items-center justify-center my-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <h1
+                  className={`text-center font-bold text-[30px] sm:text-[32px] text-[#98C10E] ${playfair_display_sc_bold.className} text-shadow-lg inset-shadow-lg`}
+                >
+                  LEAP INTO THE
+                </h1>
+                <h1
+                  className={`text-center font-bold text-[30px] sm:text-[70px] text-[#FBBC05] ${playfair_display_sc_bold.className} text-shadow-lg inset-shadow-lg -translate-y-6`}
+                >
+                  ADVENTURE
+                </h1>
+              </motion.div>
+
+              <motion.div
+                className="flex justify-center my-36"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+                <MapButton
+                  onClick={() => {
+                    setStart(!isStart);
+                  }}
+                ></MapButton>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </>
   );

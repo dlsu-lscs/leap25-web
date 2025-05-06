@@ -6,14 +6,14 @@ import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 
 export default function GoogleLogin() {
-  const { user, loading, error, login } = useGoogleAuth();
+  const { login } = useGoogleAuth();
   const [cookie] = useCookies(['currentUser']);
 
   useEffect(() => {
     if ('currentUser' in cookie) {
       window.location.replace('/');
     }
-  }, [user]);
+  }, [cookie]);
 
   return (
     <>
