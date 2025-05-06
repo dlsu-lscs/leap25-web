@@ -1,10 +1,6 @@
 import GoogleLogin from '@/features/auth/GoogleLogin';
 import Image from 'next/image';
 
-import { Playfair_Display_SC } from 'next/font/google';
-
-const playfair_display_sc_bold = Playfair_Display_SC({ subsets: ['latin'], weight: '700' });
-const playfair_display_sc_regular = Playfair_Display_SC({ subsets: ['latin'], weight: '400' });
 
 export default function Login() {
   return (
@@ -23,13 +19,13 @@ export default function Login() {
               />
             </div>
             <h1
-              className={`text-center font-bold text-[30px] sm:text-[48px] text-[#FBBC05] ${playfair_display_sc_bold.className} text-shadow-lg inset-shadow-lg`}
+              className={`text-center font-bold text-[30px] sm:text-[48px] text-[#FBBC05] font-bold font-playfair text-shadow-lg inset-shadow-lg`}
             >
               WELCOME TO
               <span className="text-[#98C10E]"> NEVERLAND</span>
             </h1>
             <h2
-              className={`text-center text-white text-[16px] sm:text-[20px] ${playfair_display_sc_regular.className} text-shadow-lg inset-shadow-lg`}
+              className={`text-center text-white text-[16px] sm:text-[20px] font-playfair text-shadow-lg inset-shadow-lg`}
             >
               STEP INTO NEVERLAND - THE ADVENTURE AWAITS.
             </h2>
