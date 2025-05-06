@@ -15,7 +15,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { Playfair_Display_SC } from 'next/font/google';
 import MapButton from '@/components/ui/MapButton';
-import { useState } from 'react';
 import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
 
 const playfair_display_sc_bold = Playfair_Display_SC({ subsets: ['latin'], weight: '700' });
