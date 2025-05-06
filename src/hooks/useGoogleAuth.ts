@@ -1,7 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
-import { useState } from 'react';
+import { use, useState } from 'react';
 import GetGoogleLogin from '@/services/GetGoogleLogin';
 
 const useGoogleAuth = () => {
@@ -24,8 +24,7 @@ const useGoogleAuth = () => {
           }
         );
         setUser(res.data);
-        const jwtToken = await GetGoogleLogin(response.access_token);
-        setCookie('currentUser', jwtToken, { path: '/' });
+        setCookie('currentUser', use(GetGoogleLogin(response.access_token)), { path: '/' });
       } catch (e: any) {
         setError(e.message || 'Error logging in');
       } finally {
