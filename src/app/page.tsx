@@ -1,7 +1,5 @@
 'use client';
 
-import ZoomPicker from '@/features/MapSubTheme/MobileMap';
-import LeapTag from '@/components/ui/LeapTag';
 import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { useState } from 'react';
@@ -10,9 +8,7 @@ import coralLogo from '@/../public/subthemeLogos/colored/Coral Lagoon.png';
 import pirateLogo from '@/../public/subthemeLogos/colored/Pirate_s Cove.png';
 import secondStarLogo from '@/../public/subthemeLogos/colored/Second Star to the Right.png';
 import lostBoysLogo from '@/../public/subthemeLogos/colored/Lost Boys_ Hideout.png';
-
 import { motion, AnimatePresence } from 'framer-motion';
-
 import { Playfair_Display_SC } from 'next/font/google';
 import MapButton from '@/components/ui/MapButton';
 import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
