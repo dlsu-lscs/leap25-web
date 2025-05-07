@@ -3,7 +3,7 @@
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
-import { ExpandableCarousel } from '@/features/subthemeComponents/expandableCarousel';
+import ExpandableCarousel from '@/features/subthemeComponents/expandableCarousel';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { nameInitials } from '@/lib/helpers';

@@ -1,21 +1,6 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
-
-export function Example() {
-  return (
-    <Carousel
-      plugins={[
-        Autoplay({
-          delay: 2000,
-        }),
-      ]}
-    >
-      // ...
-    </Carousel>
-  );
-}
-
 import {
   Carousel,
   CarouselApi,
@@ -23,6 +8,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  HighlightNext,
+  HighlightPrev,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 
@@ -37,7 +24,7 @@ interface ExpandableCarouselProps {
  * @param itemsToShow array of items to be shown in the carousel, can be a div
  * @returns
  */
-export function ExpandableCarousel({ itemsToShow, className }: ExpandableCarouselProps) {
+export default function ExpandableCarousel({ itemsToShow, className }: ExpandableCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedId, setSelectedId] = useState(itemsToShow[selectedIndex].id);
@@ -78,7 +65,7 @@ export function ExpandableCarousel({ itemsToShow, className }: ExpandableCarouse
     <>
       <Carousel
         setApi={setApi}
-        plugins={[Autoplay({ delay: 2000 })]}
+        // plugins={[Autoplay({ delay: 10000 })]}
         opts={{
           align: 'start',
           loop: true,
@@ -92,25 +79,32 @@ export function ExpandableCarousel({ itemsToShow, className }: ExpandableCarouse
             <CarouselItem
               key={index}
               className={cn(
-                `h-[600px] basis-full transition-all ease-in-out duration-350`,
-                item.id === selectedId ? 'md:basis-2/3' : 'md:basis-1/3'
+                `h-[600px] flex basis-full transition-all ease-in-out duration-350 pl-0`,
+                item.id === selectedId
+                  ? 'md:basis-2/3 justify-end pr-8'
+                  : 'md:basis-1/3 flex-start '
               )}
             >
-              <div className="bg-white text-black w-full h-full">{item.content}</div>
+              <div
+                className={cn(
+                  'bg-white flex items-center w-full h-full relative',
+                  item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
+                )}
+              >
+                {item.id === selectedId && (
+                  <div className={cn('w-[400] ml-12 bg-black h-[460]')}></div>
+                )}
+
+                {item.id === selectedId && (
+                  <>
+                    <HighlightNext className={`absolute top-135 right-8 `} />
+                    <HighlightPrev className="absolute top-135 right-25" />
+                  </>
+                )}
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <CarouselPrevious
-          className={`absolute left-0 transition-all duration-300 ${
-            isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        />
-        <CarouselNext
-          className={`absolute right-0 transition-all duration-300 ${
-            isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        />
       </Carousel>
     </>
   );
