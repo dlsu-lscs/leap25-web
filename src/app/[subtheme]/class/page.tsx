@@ -1,5 +1,7 @@
 'use client';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
+import Loading from '@/app/loading';
+import Custom404 from '@/app/not-found';
 import ClassCard from '@/features/classCard/ClassCard';
 import Navbar from '@/components/layout/Navbar';
 import type { subThemeModel } from '@/types/classModels';
@@ -20,7 +22,12 @@ export default function Class() {
     <SubThemeClassCard />,
     <SubThemeClassCard />,
   ];
+
   const { event, error, loading } = useFetchEventByID(1);
+
+  if (loading) return <Loading></Loading>;
+  if (error) return <Custom404></Custom404>;
+
   console.log(event);
   return (
     <>
@@ -30,7 +37,10 @@ export default function Class() {
       <div
         className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)] bg-black/50 bg-blend-multiply bg-cover`}
       >
-        <div>{/* <ClassCard></ClassCard> */}</div>
+        <div>
+          {' '}
+          <ClassCard event={event}></ClassCard>
+        </div>
         <div
           className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold text-4xl text-shadow-lg`}
         >

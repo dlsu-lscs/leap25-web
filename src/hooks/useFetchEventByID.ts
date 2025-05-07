@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { classModel } from '@/types/classModels';
 import GetEventByID from '@/services/GetEventByID';
 
-const useFetchEventByID = (eventID: string) => {
+const useFetchEventByID = (eventID: number) => {
   const [event, setEvents] = useState<classModel[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
