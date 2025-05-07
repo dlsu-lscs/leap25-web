@@ -1,0 +1,112 @@
+---
+name: Build and Push Image
+
+on:
+  workflow_run:
+    workflows: ["Test Workflow"]
+    branches: [main, staging]
+    types:
+      - completed
+
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Custom tag for development images'
+        required: false
+        default: 'dev'
+
+jobs:
+  build-push:
+    name: Build and Push Docker Image
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch' }}
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Generate tag strategy
+        id: tags
+        run: |
+          # initialize tags array
+          TAGS=""
+
+          # determine branch name based on trigger type
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" && -n "${{ github.event.inputs.tag }}" ]]; then
+            # use custom tag from manual workflow input
+            BRANCH_TAG="${{ github.event.inputs.tag }}"
+          elif [[ "${{ github.event_name }}" == "workflow_run" ]]; then
+            # use branch name from the workflow that triggered this
+            BRANCH_TAG="${{ github.event.workflow_run.head_branch }}"
+          else
+            # fallback to current ref
+            BRANCH_TAG="${GITHUB_REF#refs/heads/}"
+          fi
+
+          # add branch name as tag
+          TAGS="ghcr.io/${{ github.repository }}:${BRANCH_TAG}"
+
+          # add short SHA
+          SHORT_SHA=$(echo ${{ github.sha }} | cut -c1-7)
+          TAGS="${TAGS},ghcr.io/${{ github.repository }}:${BRANCH_TAG}-${SHORT_SHA}"
+
+          # add latest tag only for main branch
+          if [[ "${BRANCH_TAG}" == "main" ]]; then
+            TAGS="${TAGS},ghcr.io/${{ github.repository }}:latest"
+          fi
+
+          # export to GitHub environment
+          echo "tags=${TAGS}" >> $GITHUB_OUTPUT
+          echo "Using tags: ${TAGS}"
+
+      # - name: Extract metadata for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@v5
+      #   with:
+      #     images: ghcr.io/${{ github.repository }}
+      #     tags: |
+      #       type=ref,event=branch
+      #       type=ref,event=pr
+      #       type=sha,format=short
+      #       type=semver,pattern={{version}}
+      #       type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          labels: |
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.created=${{ github.event.repository.updated_at }}
+
+    # - name: Trigger chart update
+    #   uses: peter-evans/repository-dispatch@v2
+    #   with:
+    #     token: ${{ secrets.PAT_TOKEN }}
+    #     repository: ${{ github.repository_owner }}/event-platform-infra
+    #     event-type: update-api-chart
+    #     client-payload: |
+    #       {
+    #         "branch": "${{ github.ref_name }}",
+    #         "sha": "${{ github.sha }}",
+    #         "short_sha": "${{ github.sha }}",
+    #         "is_default_branch": "${{ github.ref == format('refs/heads/{0}', github.event.repository.default_branch) }}",
+    #         "tags": ${{ steps.meta.outputs.json }}
+    #       }

@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
@@ -169,12 +170,11 @@ function CarouselPrevious({
   const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
-    <Button
+    <button
       data-slot="carousel-previous"
-      variant={variant}
-      size={size}
+      type="button"
       className={cn(
-        'absolute size-8 rounded-full',
+        'absolute rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -left-12 -translate-y-1/2'
           : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -184,9 +184,12 @@ function CarouselPrevious({
       onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft />
+      <ArrowLeftIcon
+        style={{ fontSize: 50 }}
+        className={!canScrollPrev ? `opacity-0` : `opacity-100`}
+      />
       <span className="sr-only">Previous slide</span>
-    </Button>
+    </button>
   );
 }
 
@@ -199,12 +202,11 @@ function CarouselNext({
   const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
-    <Button
+    <button
       data-slot="carousel-next"
-      variant={variant}
-      size={size}
+      type="button"
       className={cn(
-        'absolute size-8 rounded-full',
+        'absolute rounded-full',
         orientation === 'horizontal'
           ? 'top-1/2 -right-12 -translate-y-1/2'
           : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
@@ -214,9 +216,12 @@ function CarouselNext({
       onClick={scrollNext}
       {...props}
     >
-      <ArrowRight />
+      <ArrowRightIcon
+        style={{ fontSize: 50 }}
+        className={cn(!canScrollNext ? `opacity-0` : `opacity-100`)}
+      />
       <span className="sr-only">Next slide</span>
-    </Button>
+    </button>
   );
 }
 

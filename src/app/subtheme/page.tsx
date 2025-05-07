@@ -11,8 +11,8 @@ import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { Playfair_Display } from 'next/font/google';
-import GetBackground from '@/services/GetBackground';
 import FadeOverlay from '@/components/ui/FadeOverlay';
+import GetSubTheme from '@/services/GetSubTheme';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyData = [
@@ -25,27 +25,12 @@ const dummyData = [
   <SubThemeClassCard />,
 ];
 
-interface SubThemeProps {
-  subtheme?: string;
-  className?: string;
-  src?: string;
-}
-const dummyHighlightData = [
-  { content: 1, id: 1 },
-  { content: 2, id: 2 },
-  { content: 3, id: 3 },
-  { content: 4, id: 4 },
-  { content: 5, id: 5 },
-  { content: 6, id: 6 },
-];
+const dummyHighlightData = [1, 2, 3, 4, 5, 6];
 
-// no props sa page
 export default function Subtheme() {
   useGoogleAuthRedirect();
 
-  const subThemeBG = GetBackground('Coral Lacoon');
-
-  console.log(subThemeBG);
+  const subTheme = GetSubTheme('Coral Lagoon');
 
   return (
     <>
@@ -70,12 +55,12 @@ export default function Subtheme() {
       </div>
       <div
         className={`min-h-screen sm:py-24 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-contain`}
-        style={{ backgroundImage: `url("/SubThemeBG/${subThemeBG}")` }}
+        style={{ backgroundImage: `url("/SubThemeBG/${subTheme}")` }}
       >
         <div>
           <div className="flex items-center w-full">
             <Avatar className="w-24 h-24 text-xs">
-              <AvatarImage src={undefined} /> {/** wala muna */}
+              <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
               <AvatarFallback>{nameInitials('na')}</AvatarFallback>
             </Avatar>
             <h1
