@@ -28,7 +28,6 @@ export default function Class() {
   if (loading) return <Loading></Loading>;
   if (error) return <Custom404></Custom404>;
 
-  console.log(event);
   return (
     <>
       <div className="fixed top-0 z-20">

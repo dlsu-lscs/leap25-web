@@ -21,7 +21,12 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function ClassCard(event: classModel & subThemeModel & orgModel & classPubModel) {
+type ClassCardsProps = {
+  event: classModel;
+};
+
+export default function ClassCard({ event }: ClassCardsProps) {
+  console.log(event);
   const hostedBy = [<HostName />, <HostName />];
   const date = new Date(event.schedule);
   const dateOptions: Intl.DateTimeFormatOptions = {
@@ -54,12 +59,12 @@ export default function ClassCard(event: classModel & subThemeModel & orgModel &
           <div className=" space-x-3 text-sm font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{'sub theme'}</LeapTag>
-            <LeapTag className="bg-white">{event.fee || 0}</LeapTag>
+            <LeapTag className="bg-white">{'₱' + event.fee || 0}</LeapTag>
           </div>
           <h1
             className={`text-[64px] font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
           >
-            {event.name || 'R&Deploy Your Own Bot Workshop'}
+            {event.title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
           <div className="flex items-center my-8">
             <div className="space-x-3 flex flex-wrap w-[75vh] gap-y-1.5">
@@ -111,10 +116,12 @@ export default function ClassCard(event: classModel & subThemeModel & orgModel &
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
               <LeapButton className="bg-white px-4 py-2 font-medium text-black">
-                Join Now - Free
+                {event.registered_slots > 0 ? 'Join Now - Free' : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
-                Only {event.registered_slots || 0} slots left!
+                {event.registered_slots > 0
+                  ? `Only ${event.registered_slots || 0} slots left!`
+                  : null}
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
