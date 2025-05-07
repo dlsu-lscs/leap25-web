@@ -9,7 +9,7 @@ interface classModel {
   fee: number;
   code: string;
   registered_slots: number;
-  maxSlots: number;
+  max_slots: number;
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';

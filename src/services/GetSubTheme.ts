@@ -1,13 +1,21 @@
 export default function GetSubTheme(subtheme: string) {
-  if (subtheme === 'Fairy Nook') {
-    return 'FairyNook.png';
-  } else if (subtheme === 'Coral Lagoon') {
-    return 'CoralLagoon.png';
-  } else if (subtheme === 'Hollow tree Hideaway') {
-    return 'HollowtreeHideway.png';
-  } else if (subtheme === 'Northern Star Stop') {
-    return 'NorthernStarStop.png';
-  } else if (subtheme === 'Pirates Cove') {
-    return 'PiratesCove.png';
+  let asset, name;
+  if (subtheme === 'fairy-nook') {
+    asset = 'FairyNook.png';
+    name = 'Fairy Nook';
+  } else if (subtheme === 'coral-lagoon') {
+    asset = 'CoralLagoon.png';
+    name = 'Coral Lagoon';
+  } else if (subtheme === 'hollow-tree-hideaway') {
+    asset = 'HollowtreeHideway.png';
+    name = 'Hollow Tree Hideaway';
+  } else if (subtheme === 'northern-star-stop') {
+    asset = 'NorthernStarStop.png';
+    name = 'Northern Star Stop';
+  } else if (subtheme === 'pirates-cove') {
+    asset = 'PiratesCove.png';
+    name = 'Pirates Cove';
   }
+
+  return { asset, name };
 }

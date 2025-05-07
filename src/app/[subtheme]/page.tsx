@@ -1,5 +1,6 @@
 'use client';
 
+import { use } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
@@ -12,6 +13,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import GetSubTheme from '@/services/GetSubTheme';
+import useFetchEvents from '@/hooks/useFetchEvents';
+import Loading from '../loading';
+import Custom404 from '../not-found';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyData = [
@@ -24,11 +28,18 @@ const dummyData = [
   <SubThemeClassCard />,
 ];
 
-export default function Subtheme() {
+export default function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   useGoogleAuthRedirect();
 
-  const subTheme = GetSubTheme('Coral Lagoon');
+  const { subtheme } = use(params);
+  const { asset, name } = GetSubTheme(subtheme);
 
+  const { events, error, loading } = useFetchEvents('Test Subtheme with Image');
+
+  if (loading) return <Loading></Loading>;
+  if (error) return <Custom404></Custom404>;
+
+  console.log(events);
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -43,7 +54,6 @@ export default function Subtheme() {
           </h1>
           <div className="flex mt-4">
             <LeapSeperator variant="diamond"></LeapSeperator>
-
           </div>
         </div>
       </div>
@@ -52,18 +62,18 @@ export default function Subtheme() {
       </div>
       <div
         className={`min-h-screen sm:py-24 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-contain`}
-        style={{ backgroundImage: `url("/SubThemeBG/${subTheme}")` }}
+        style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
       >
         <div>
           <div className="flex items-center w-full">
             <Avatar className="w-24 h-24 text-xs">
-              <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
+              <AvatarImage src={'/subthemeLogos/colored/' + asset} />
               <AvatarFallback>{nameInitials('na')}</AvatarFallback>
             </Avatar>
             <h1
               className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
             >
-              Fairy Nook
+              {name}
             </h1>
             <div className="flex mt-4">
               <LeapSeperator></LeapSeperator>
