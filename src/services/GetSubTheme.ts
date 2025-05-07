@@ -7,7 +7,7 @@ export default function GetSubTheme(subtheme: string) {
     asset = 'CoralLagoon.png';
     name = 'Coral Lagoon';
   } else if (subtheme === 'hollow-tree-hideaway') {
-    asset = 'HollowtreeHideway.png';
+    asset = 'HollowTreeHideaway.png';
     name = 'Hollow Tree Hideaway';
   } else if (subtheme === 'northern-star-stop') {
     asset = 'NorthernStarStop.png';
