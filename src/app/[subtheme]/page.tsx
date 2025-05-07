@@ -67,7 +67,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
         <div>
           <div className="flex items-center w-full">
             <Avatar className="w-24 h-24 text-xs">
-              <AvatarImage src={'/subthemeLogos/colored/' + asset} />
+              <AvatarImage src={'/subthemeLogos/' + asset} />
               <AvatarFallback>{nameInitials('na')}</AvatarFallback>
             </Avatar>
             <h1
