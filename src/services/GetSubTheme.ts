@@ -14,7 +14,7 @@ export default function GetSubTheme(subtheme: string) {
     name = 'Northern Star Stop';
   } else if (subtheme === 'pirates-cove') {
     asset = 'PiratesCove.png';
-    name = 'Pirates Cove';
+    name = "Pirate's Cove";
   }
 
   return { asset, name };

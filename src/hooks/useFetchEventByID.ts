@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import GetEvents from '@/services/GetEvents';
 import { classModel } from '@/types/classModels';
+import GetEventByID from '@/services/GetEventByID';
 
-const useFetchEvents = (subthemeName: string) => {
-  const [events, setEvents] = useState<classModel[]>([]);
+const useFetchEventByID = (eventID: string) => {
+  const [event, setEvents] = useState<classModel[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -11,7 +11,7 @@ const useFetchEvents = (subthemeName: string) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const eventsData = await GetEvents(subthemeName);
+        const eventsData = await GetEventByID(eventID);
         setEvents(eventsData);
       } catch (error: any) {
         setError(error.message);
@@ -21,9 +21,9 @@ const useFetchEvents = (subthemeName: string) => {
     };
 
     fetchData();
-  }, [subthemeName]);
+  }, [eventID]);
 
-  return { events, error, loading };
+  return { event, error, loading };
 };
 
-export default useFetchEvents;
+export default useFetchEventByID;
