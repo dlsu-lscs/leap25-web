@@ -12,7 +12,7 @@ export default function SubThemeMapPicker() {
         {/* Northern Star Stop */}
         <div className="fixed z-0">
           <a
-            href="/subtheme"
+            href="/northern-star-stop"
             className="fixed top-[0%] left-[6%] rounded-full w-[32vw] h-[32vw] bg-transparent"
             onMouseEnter={() => {
               setSubTheme('NorthernStarStop');
@@ -38,7 +38,7 @@ export default function SubThemeMapPicker() {
 
           {/* Pirates Cove */}
           <a
-            href="/subtheme"
+            href="/pirates-cove"
             className="fixed top-[10%] left-[30%] rounded-full w-[40vw] h-[40vw] bg-transparent"
             onMouseEnter={() => {
               setSubTheme('PiratesCove');
@@ -64,7 +64,7 @@ export default function SubThemeMapPicker() {
 
           {/* Fairy Nook */}
           <a
-            href="/subtheme"
+            href="/fairy-nook"
             className="fixed -top-[8%] left-[68%] rounded-full w-[32vw] h-[32vw] bg-transparent"
             onMouseEnter={() => {
               setSubTheme('FairyNook');
@@ -90,7 +90,7 @@ export default function SubThemeMapPicker() {
 
           {/* Hollow Tree Hideaway */}
           <a
-            href="/subtheme"
+            href="/hollow-tree-hideaway"
             className="fixed top-[44%] left-[65%] rounded-full w-[32vw] h-[32vw] bg-transparent"
             onMouseEnter={() => {
               setSubTheme('HollowTreeHideaway');
@@ -116,7 +116,7 @@ export default function SubThemeMapPicker() {
 
           {/* Coral Lagoon */}
           <a
-            href="/subtheme"
+            href="/coral-lagoon"
             className="fixed top-[65%] left-[0%] rounded-full w-[32vw] h-[32vw] bg-transparent"
             onMouseEnter={() => {
               setSubTheme('CoralLagoon');
