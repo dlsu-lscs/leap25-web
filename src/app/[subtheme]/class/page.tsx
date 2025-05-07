@@ -6,6 +6,7 @@ import type { subThemeModel } from '@/types/classModels';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
+import useFetchEventByID from '@/hooks/useFetchEventByID';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -19,6 +20,8 @@ export default function Class() {
     <SubThemeClassCard />,
     <SubThemeClassCard />,
   ];
+  const { event, error, loading } = useFetchEventByID(1);
+  console.log(event);
   return (
     <>
       <div className="fixed top-0 z-20">

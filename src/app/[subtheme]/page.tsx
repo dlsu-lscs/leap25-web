@@ -34,6 +34,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
   const { subtheme } = use(params);
   const { asset, name } = GetSubTheme(subtheme);
 
+  console.log(name);
   const { events, error, loading } = useFetchEvents('Test Subtheme with Image');
 
   if (loading) return <Loading></Loading>;
