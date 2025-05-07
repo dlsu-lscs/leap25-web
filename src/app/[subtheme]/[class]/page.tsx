@@ -9,10 +9,11 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 
 import { Public_Sans } from 'next/font/google';
 import useFetchEventByID from '@/hooks/useFetchEventByID';
+import { use } from 'react';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Class() {
+export default function Class({ params }: { params: { class: string } }) {
   const dummyData = [
     <SubThemeClassCard />,
     <SubThemeClassCard />,
@@ -23,7 +24,8 @@ export default function Class() {
     <SubThemeClassCard />,
   ];
 
-  const { event, error, loading } = useFetchEventByID(1);
+  const id = Number(params.class);
+  const { event, error, loading } = useFetchEventByID(id);
 
   if (loading) return <Loading></Loading>;
   if (error) return <Custom404></Custom404>;

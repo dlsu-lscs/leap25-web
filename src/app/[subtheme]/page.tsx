@@ -16,6 +16,7 @@ import GetSubTheme from '@/services/GetSubTheme';
 import useFetchEvents from '@/hooks/useFetchEvents';
 import Loading from '../loading';
 import Custom404 from '../not-found';
+import { EventEmitter } from 'stream';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyData = [
@@ -39,6 +40,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
   if (loading) return <Loading></Loading>;
   if (error) return <Custom404></Custom404>;
 
+  console.log(events);
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -84,13 +86,45 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                 Day 1
               </h2>
             </div>
-            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+            <LeapCarousel
+              loopItems={false}
+              row2={false}
+              itemsToShow={events.map((event, index) => {
+                return (
+                  <>
+                    <SubThemeClassCard
+                      subtheme={subtheme}
+                      id={event.id}
+                      registered_slots={event.registered_slots}
+                      descripton={event.description}
+                      title={event.title}
+                    />
+                  </>
+                );
+              })}
+            ></LeapCarousel>
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml- ${playfair_display.className}`}>
                 Day 2
               </h2>
             </div>
-            <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+            <LeapCarousel
+              loopItems={false}
+              row2={false}
+              itemsToShow={events.map((event, index) => {
+                return (
+                  <>
+                    <SubThemeClassCard
+                      subtheme={subtheme}
+                      id={event.id}
+                      registered_slots={event.registered_slots}
+                      descripton={event.description}
+                      title={event.title}
+                    />
+                  </>
+                );
+              })}
+            ></LeapCarousel>
           </div>
         </div>
       </div>
