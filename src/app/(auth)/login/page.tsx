@@ -1,7 +1,6 @@
 import GoogleLogin from '@/features/auth/GoogleLogin';
 import Image from 'next/image';
 
-
 export default function Login() {
   return (
     <>
@@ -19,7 +18,7 @@ export default function Login() {
               />
             </div>
             <h1
-              className={`text-center font-bold text-[30px] sm:text-[48px] text-[#FBBC05] font-bold font-playfair text-shadow-lg inset-shadow-lg`}
+              className={`text-center text-[30px] sm:text-[48px] text-[#FBBC05] font-bold font-playfair text-shadow-lg inset-shadow-lg`}
             >
               WELCOME TO
               <span className="text-[#98C10E]"> NEVERLAND</span>
