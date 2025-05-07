@@ -1,5 +1,6 @@
 'use client';
 
+import { use } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
@@ -12,6 +13,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import GetSubTheme from '@/services/GetSubTheme';
+import useFetchEvents from '@/hooks/useFetchEvents';
+import Loading from '../loading';
+import Custom404 from '../not-found';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyData = [
@@ -24,12 +28,18 @@ const dummyData = [
   <SubThemeClassCard />,
 ];
 
-export default function Subtheme({ params }: { params: { subtheme: string } }) {
+export default function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   useGoogleAuthRedirect();
 
-  const { subtheme } = params;
+  const { subtheme } = use(params);
   const { asset, name } = GetSubTheme(subtheme);
 
+  const { events, error, loading } = useFetchEvents('Test Subtheme with Image');
+
+  if (loading) return <Loading></Loading>;
+  if (error) return <Custom404></Custom404>;
+
+  console.log(events);
   return (
     <>
       <div className="fixed top-0 z-20">
