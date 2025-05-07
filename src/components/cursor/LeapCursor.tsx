@@ -6,9 +6,12 @@ export default function LeapCursor() {
   const [cursorState, setCursorState] = useState<'default' | 'hover' | 'click'>('default');
 
   useEffect(() => {
+    let animationFrameId: number;
     const moveCursor = (e: MouseEvent) => {
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        animationFrameId = requestAnimationFrame(() => {
+          cursorRef.current!.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        });
       }
     };
 
@@ -23,6 +26,7 @@ export default function LeapCursor() {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mousedown', handleDown);
       window.removeEventListener('mouseup', handleUp);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
@@ -56,7 +60,8 @@ export default function LeapCursor() {
         pointerEvents: 'none',
         transform: 'translate(-50%, -50%)',
         zIndex: 9999,
-        transition: 'transform 0.03s linear',
+        transition: 'transform 0.02s linear',
+        willChange: 'transform',
       }}
     >
       <img src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />
