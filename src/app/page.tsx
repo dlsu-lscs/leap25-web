@@ -91,6 +91,13 @@ export default function Map() {
             </>
           )}
         </AnimatePresence>
+        <div className="flex justify-center md:hidden overflow-x-hidden">
+          <SubThemeCarousel
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+            items={tempArr}
+          ></SubThemeCarousel>
+        </div>
       </div>
     </>
   );

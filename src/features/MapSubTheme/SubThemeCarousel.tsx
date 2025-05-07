@@ -108,7 +108,7 @@ export default function SubThemeCarousel({
               className="basis-1/3 pl-2"
               // style={{ backgroundColor: currBgColor }}
             >
-              <div className="flex items-center justify-between h-48 select-none backdrop-blur-md">
+              <div className="flex items-center justify-between h-48 select-none ">
                 <LeapSubThemeDivider></LeapSubThemeDivider>
 
                 <div
