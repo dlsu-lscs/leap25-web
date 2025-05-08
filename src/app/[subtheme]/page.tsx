@@ -1,6 +1,4 @@
-'use client';
-
-import { use } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
@@ -10,22 +8,16 @@ import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import GetSubTheme from '@/services/subthemeService';
-import useFetchEvents from '@/hooks/useFetchEvents';
-import Loading from '../loading';
-import Custom404 from '../not-found';
-import { EventEmitter } from 'stream';
+import { getEventByID, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 
-export default function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
-  useGoogleAuthRedirect();
-  const { subtheme } = use(params);
+export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
+  // useGoogleAuthRedirect();
+  // const [bgImg, setBgImg] = useState('');
+  const { subtheme } = await params;
   const { asset, name } = GetSubTheme(subtheme);
-
-  const { events, error, loading } = useFetchEvents('Test Subtheme with Image');
-
-  if (loading) return <Loading></Loading>;
-  if (error) return <Custom404></Custom404>;
-
+  const events = await getEvents('Test Subtheme with Image');
+  console.log(events);
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -60,7 +52,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 1</h2>
             </div>
-            <LeapCarousel
+            {/* <LeapCarousel
               loopItems={false}
               row2={false}
               itemsToShow={events.map((event, index) => {
@@ -76,11 +68,11 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                   </>
                 );
               })}
-            ></LeapCarousel>
+            ></LeapCarousel> */}
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml- font-playfair`}>Day 2</h2>
             </div>
-            <LeapCarousel
+            {/* <LeapCarousel
               loopItems={false}
               row2={false}
               itemsToShow={events.map((event, index) => {
@@ -96,7 +88,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                   </>
                 );
               })}
-            ></LeapCarousel>
+            ></LeapCarousel> */}
           </div>
         </div>
       </div>
