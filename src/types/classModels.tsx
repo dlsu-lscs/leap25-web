@@ -1,9 +1,9 @@
 interface classModel {
   id: number;
-  orgId: number;
+  org_id: number;
   title: string;
   description: string;
-  subthemeId: number;
+  subtheme_id: number;
   venue: string;
   schedule: string;
   fee: number;
