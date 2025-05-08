@@ -47,7 +47,7 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
             {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
           </div>
           <Avatar className="w-9 h-9 mx-2 text-xs">
-            <AvatarImage src={'/subthemeLogos/colored/' + subTheme} />
+            <AvatarImage src={'/subthemeLogos/' + subTheme} />
             <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
           </Avatar>
         </div>
