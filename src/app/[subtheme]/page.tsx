@@ -12,10 +12,8 @@ import { getEventByID, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel } from '@/types/classModels';
 
-
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   // useGoogleAuthRedirect();
-  // const [bgImg, setBgImg] = useState('');
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events = await getEvents('Test Subtheme with Image');
