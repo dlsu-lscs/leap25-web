@@ -1,3 +1,4 @@
+'use client';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import ExpandableCarousel from './expandableCarousel';
 import { useState } from 'react';
