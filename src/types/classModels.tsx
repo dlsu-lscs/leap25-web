@@ -23,8 +23,8 @@ interface classPubModel {
 interface subThemeModel {
   id: number;
   title: string;
-  logoPubURL: string;
-  bgPubURL: string;
+  logo_pub_url: string;
+  background_pub_url: string;
 }
 
 export type { classModel, classPubModel, subThemeModel };

@@ -117,7 +117,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
               row2={false}
               itemsToShow={events.map((event: classModel, index: number) => {
                 return (
-                  <>
+                  <div key={index}>
                     <SubThemeClassCard
                       key={index}
                       subtheme={subtheme}
@@ -126,7 +126,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                       descripton={event.description}
                       title={event.title}
                     />
-                  </>
+                  </div>
                 );
               })}
             ></LeapCarousel>
@@ -140,7 +140,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
               row2={false}
               itemsToShow={events.map((event: classModel, index: number) => {
                 return (
-                  <>
+                  <div key={index}>
                     <SubThemeClassCard
                       key={index}
                       subtheme={subtheme}
@@ -149,7 +149,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                       descripton={event.description}
                       title={event.title}
                     />
-                  </>
+                  </div>
                 );
               })}
             ></LeapCarousel>

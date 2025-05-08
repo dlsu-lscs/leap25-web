@@ -47,4 +47,22 @@ const getEventByID = async (eventID: number) => {
   }
 };
 
-export { getEvents, getEventByID };
+const getEventMedia = async (eventID: number) => {
+  try {
+    const response = await fetch(`${API_URL}/events/${eventID}/media`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get event');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
+export { getEvents, getEventByID, getEventMedia };

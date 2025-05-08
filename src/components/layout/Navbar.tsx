@@ -2,13 +2,10 @@
 import ChevronLeftOutlinedIcon from '@mui/icons-material/ChevronLeftOutlined';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
-import { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
 
 interface NavbarProps {
-  subtheme?: string;
   className?: string;
-  src?: string;
 }
 
 import { Public_Sans } from 'next/font/google';
@@ -17,16 +14,11 @@ import { getSubTheme } from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Navbar({ subtheme = 'Sub Theme', className, src }: NavbarProps) {
-  const [loading, setLoading] = useState(false);
+export default function Navbar({ className }: NavbarProps) {
   const [cookies, ,] = useCookies(['currentUser']);
   const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
-
-  useEffect(() => {
-    setLoading(typeof window !== 'undefined');
-  }, []);
-
-  const subTheme = getSubTheme('Coral Lagoon');
+  let subtheme;
+  console.log(subtheme);
 
   return (
     <>
@@ -42,13 +34,17 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
           </div>
-          <div className={`text-[20px] ${public_sans.className}`}>
-            {loading && window.location.pathname == '/subtheme' ? 'Back to Menu' : subtheme}
-          </div>
-          <Avatar className="w-9 h-9 mx-2 text-xs">
-            <AvatarImage src={'/subthemeLogos/' + subTheme} />
-            <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
-          </Avatar>
+          {subtheme == undefined ? (
+            <div className={`text-[20px] ${public_sans.className}`}>Back to Map</div>
+          ) : (
+            <>
+              <div className={`text-[20px] ${public_sans.className}`}>{subtheme}</div>
+              <Avatar className="w-9 h-9 mx-2 text-xs">
+                <AvatarImage src={'/subthemeLogos/' + subtheme} />
+                <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
+              </Avatar>
+            </>
+          )}
         </div>
         <div>
           <Avatar className="w-10 h-10 text-xs text-black">

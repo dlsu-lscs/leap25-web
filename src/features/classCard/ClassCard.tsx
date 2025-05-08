@@ -24,9 +24,10 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 type ClassCardsProps = {
   event: classModel;
   orgs: orgModel;
+  subtheme: subThemeModel;
 };
 
-export default function ClassCard({ event, orgs }: ClassCardsProps) {
+export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
   const date = new Date(event.schedule);
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -57,7 +58,7 @@ export default function ClassCard({ event, orgs }: ClassCardsProps) {
         <div>
           <div className=" space-x-3 text-sm font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
-            <LeapTag className="bg-white">{'sub theme'}</LeapTag>
+            <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
             <LeapTag className="bg-white">{'₱' + event.fee || 0}</LeapTag>
           </div>
           <h1

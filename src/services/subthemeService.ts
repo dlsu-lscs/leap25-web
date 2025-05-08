@@ -1,3 +1,5 @@
+import { API_URL } from '@/lib/constants';
+
 const getSubTheme = (subtheme: string) => {
   let asset, name;
   if (subtheme === 'fairy-nook') {
@@ -20,4 +22,22 @@ const getSubTheme = (subtheme: string) => {
   return { asset, name };
 };
 
-export { getSubTheme };
+const getSubThemeByID = async (subthemeID: number) => {
+  try {
+    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get subtheme');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
+export { getSubTheme, getSubThemeByID };
