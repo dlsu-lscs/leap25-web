@@ -10,39 +10,45 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
-import { useCallback, useEffect, useState } from 'react';
-import pixieLogo from '@/../public/subthemeLogos/colored/Pixie Hollow.png';
-import coralLogo from '@/../public/subthemeLogos/colored/Coral Lagoon.png';
-import pirateLogo from '@/../public/subthemeLogos/colored/Pirate_s Cove.png';
-import secondStarLogo from '@/../public/subthemeLogos/colored/Second Star to the Right.png';
-import lostBoysLogo from '@/../public/subthemeLogos/colored/Lost Boys_ Hideout.png';
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
+import { StaticImageData } from 'next/image';
+import { cn } from '@/lib/utils';
 
-export default function SubThemeCarousel() {
-  const tempArr = [
-    { content: 'PIXIE HOLLOW', id: 0, bgColor: '#F5A1B4', img: pixieLogo },
-    { content: 'CORAL LAGOON', id: 1, bgColor: '#27659B', img: coralLogo },
-    { content: "PIRATE'S COVE", id: 2, bgColor: '#7B5D9E', img: pirateLogo },
-    { content: 'SECOND STAR', id: 3, bgColor: '#FCAE3E', img: secondStarLogo },
-    { content: "LOST BOY'S HIDEOUT", id: 4, bgColor: '#0E7769', img: lostBoysLogo },
-  ];
-  const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
+// Define the type for the items in the carousel
+interface CarouselItemData {
+  content: string;
+  id: number;
+  img: string; // Or a more specific type if available
+  bgPos: string;
+}
+
+// Define the props for the component
+interface SubThemeCarouselProps {
+  items: CarouselItemData[];
+  selectedId: number | undefined;
+  setSelectedId: Dispatch<SetStateAction<number | undefined>>;
+}
+
+export default function SubThemeCarousel({
+  items,
+  selectedId,
+  setSelectedId,
+}: SubThemeCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [currBgColor, setCurrBgColor] = useState<string>(tempArr[0].bgColor);
 
   // Update selected item when carousel settles
   const updateSelectedItem = useCallback(() => {
     if (!api) return;
 
     const currentIndex = api.selectedScrollSnap();
-    const newSelectedId = tempArr[currentIndex]?.id;
+    const newSelectedId = items[currentIndex]?.id;
     setSelectedIndex(currentIndex);
-    setCurrBgColor(tempArr[currentIndex].bgColor);
 
     if (newSelectedId !== undefined && newSelectedId !== selectedId) {
       setSelectedId(newSelectedId);
     }
-  }, [api, tempArr, selectedId]);
+  }, [api, items, selectedId]);
 
   // Set up event listeners for the carousel
   useEffect(() => {
@@ -70,18 +76,16 @@ export default function SubThemeCarousel() {
 
     // Then scroll to the item
     if (api) {
-      api.scrollTo(index);
+      api.scrollTo(id);
+      console.log(id);
     }
   };
 
   return (
-    <div className="relative h-72 w-full">
-      <div
-        className='transition-colors duration-200 ease-in-out opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'
-        style={{ backgroundColor: currBgColor }}
-      ></div>
+    <div className="relative h-80 w-full">
+      <div className=' transition-colors duration-200 ease-in-out opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'></div>
       <Carousel
-        className="w-full mt-16"
+        className="w-full !inline-block"
         opts={{
           align: 'center',
           loop: true,
@@ -95,14 +99,23 @@ export default function SubThemeCarousel() {
           className=""
           // style={{ backgroundColor: currBgColor }}
         >
-          {tempArr.map(({ content, id, bgColor, img }, index) => (
+          {items.map(({ content, id, bgPos, img }, index) => (
             <CarouselItem
               key={index}
-              className="basis-1/3 pl-2"
+              className="basis-1/3 relative"
               // style={{ backgroundColor: currBgColor }}
             >
-              <div className="flex items-center justify-between h-48 select-none backdrop-blur-md">
-                <LeapSubThemeDivider></LeapSubThemeDivider>
+              <div className="flex items-center justify-center h-48 select-none ">
+                {selectedId === id && (
+                  <>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -left-3')}
+                    ></LeapSubThemeDivider>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute left-1')}
+                    ></LeapSubThemeDivider>
+                  </>
+                )}
 
                 <div
                   className="flex justify-center items-center cursor-pointer"
@@ -111,18 +124,20 @@ export default function SubThemeCarousel() {
                   <Avatar
                     className={`${id === selectedId ? '' : 'opacity-40'} transition-[width,height] duration-200 ease-in-out ${id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}`}
                   >
-                    <AvatarImage src={img?.src ?? undefined} alt="Avatar" />
+                    <AvatarImage src={img} alt="Avatar" />
                     <AvatarFallback className="text-3xl">😀</AvatarFallback>
                   </Avatar>
                 </div>
-
                 {selectedId === id && (
-                  <h3 className="font-semibold text-lg text-white absolute bottom-3 left-1/2 -translate-x-1/2 text-nowrap">
-                    {content}
-                  </h3>
+                  <>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -right-7')}
+                    ></LeapSubThemeDivider>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -right-3')}
+                    ></LeapSubThemeDivider>
+                  </>
                 )}
-
-                <LeapSubThemeDivider></LeapSubThemeDivider>
               </div>
             </CarouselItem>
           ))}

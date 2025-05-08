@@ -4,6 +4,17 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Desktop: reset to normal */
+@media (min-width: 769px) {
+  .zoom-img {
+    transform: none !important;
+  }
+  .bg-container {
+    background-size: cover !important;
+    background-position: center;
+  }
+}
+
 @theme inline {
   --font-public-sans: "Public Sans", sans-serif;
   --font-playfair: "Playfair Display SC", serif;
