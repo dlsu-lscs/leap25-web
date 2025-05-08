@@ -1,4 +1,4 @@
-export default function GetSubTheme(subtheme: string) {
+const getSubTheme = (subtheme: string) => {
   let asset, name;
   if (subtheme === 'fairy-nook') {
     asset = 'FairyNook.png';
@@ -18,4 +18,6 @@ export default function GetSubTheme(subtheme: string) {
   }
 
   return { asset, name };
-}
+};
+
+export { getSubTheme };

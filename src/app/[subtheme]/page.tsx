@@ -11,7 +11,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import GetSubTheme from '@/services/subthemeService';
+import { getSubTheme } from '@/services/subthemeService';
 import { getEventByID, getEvents } from '@/services/eventService';
 import { classModel } from '@/types/classModels';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
@@ -55,8 +55,8 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   // useGoogleAuthRedirect();
   // const [bgImg, setBgImg] = useState('');
   const { subtheme } = await params;
-  const { asset, name } = GetSubTheme(subtheme);
-  const events = await getEvents('Test Subtheme with Image');
+  const { asset, name } = getSubTheme(subtheme);
+  const events = await getEvents(subtheme);
   const event = await getEventByID(1);
   console.log(event);
 

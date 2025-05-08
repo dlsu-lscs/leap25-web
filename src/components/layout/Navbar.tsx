@@ -13,7 +13,7 @@ interface NavbarProps {
 
 import { Public_Sans } from 'next/font/google';
 import { decodeJWT } from '@/lib/decodeJWT';
-import GetSubTheme from '@/services/subthemeService';
+import { getSubTheme } from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -21,13 +21,12 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
   const [loading, setLoading] = useState(false);
   const [cookies, ,] = useCookies(['currentUser']);
   const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
-  console.log(decodedJWT.display_picture);
 
   useEffect(() => {
     setLoading(typeof window !== 'undefined');
   }, []);
 
-  const subTheme = GetSubTheme('Coral Lagoon');
+  const subTheme = getSubTheme('Coral Lagoon');
 
   return (
     <>
