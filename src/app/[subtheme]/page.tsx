@@ -13,6 +13,7 @@ import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import GetSubTheme from '@/services/subthemeService';
 import { getEventByID, getEvents } from '@/services/eventService';
+import { classModel } from '@/types/classModels';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyHighlightData = [
@@ -56,7 +57,9 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   const { subtheme } = await params;
   const { asset, name } = GetSubTheme(subtheme);
   const events = await getEvents('Test Subtheme with Image');
-  console.log(events);
+  const event = await getEventByID(1);
+  console.log(event);
+
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -111,13 +114,14 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                 Day 1
               </h2>
             </div>
-            {/* <LeapCarousel
+            <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map((event, index) => {
+              itemsToShow={events.map((event: classModel, index: number) => {
                 return (
                   <>
                     <SubThemeClassCard
+                      key={index}
                       subtheme={subtheme}
                       id={event.id}
                       registered_slots={event.registered_slots}
@@ -127,19 +131,20 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                   </>
                 );
               })}
-            ></LeapCarousel> */}
+            ></LeapCarousel>
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml- ${playfair_display.className}`}>
                 Day 2
               </h2>
             </div>
-            {/* <LeapCarousel
+            <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map((event, index) => {
+              itemsToShow={events.map((event: classModel, index: number) => {
                 return (
                   <>
                     <SubThemeClassCard
+                      key={index}
                       subtheme={subtheme}
                       id={event.id}
                       registered_slots={event.registered_slots}
@@ -149,7 +154,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                   </>
                 );
               })}
-            ></LeapCarousel> */}
+            ></LeapCarousel>
           </div>
         </div>
       </div>

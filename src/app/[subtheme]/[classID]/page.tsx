@@ -1,18 +1,14 @@
-'use client';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import Loading from '@/app/loading';
-import Custom404 from '@/app/not-found';
 import ClassCard from '@/features/classCard/ClassCard';
 import Navbar from '@/components/layout/Navbar';
-import type { subThemeModel } from '@/types/classModels';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
-import { use } from 'react';
+import { getEventByID } from '@/services/eventService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Class({ params }: { params: { class: string } }) {
+export default async function Class({ params }: { params: Promise<{ classID: number }> }) {
   const dummyData = [
     <SubThemeClassCard />,
     <SubThemeClassCard />,
@@ -22,6 +18,8 @@ export default function Class({ params }: { params: { class: string } }) {
     <SubThemeClassCard />,
     <SubThemeClassCard />,
   ];
+
+  const { classID } = await params;
 
   return (
     <>
