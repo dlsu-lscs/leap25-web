@@ -1,4 +1,5 @@
-import { SetStateAction, useState } from 'react';
+'use client';
+import { useState } from 'react';
 import SubThemeCarousel from './SubThemeCarousel';
 import { cn } from '@/lib/utils';
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';

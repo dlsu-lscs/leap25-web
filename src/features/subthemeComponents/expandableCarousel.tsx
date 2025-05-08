@@ -34,7 +34,7 @@ export default function ExpandableCarousel({
 }: ExpandableCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedId, setSelectedId] = useState(itemsToShow[selectedIndex].id);
+  const [selectedId, setSelectedId] = useState(itemsToShow[0]?.id);
   const [api, setApi] = useState<CarouselApi>();
 
   // Update selected item when carousel settles
@@ -65,8 +65,21 @@ export default function ExpandableCarousel({
     return () => {
       api.off('settle', updateSelectedItem);
       api.off('init', updateSelectedItem);
+      api.off('init', updateSelectedItem);
     };
   }, [api, updateSelectedItem]);
+
+  useEffect(() => {
+    const currentItem = itemsToShow.find((item) => item.id === selectedId);
+    if (currentItem && currentItem.bgImg) {
+      setBgImg(currentItem.bgImg);
+    } else if (itemsToShow.length > 0 && itemsToShow[0]?.bgImg && selectedId === undefined) {
+      // Fallback to the first item's bgImg if selectedId is somehow undefined initially
+      // and itemsToShow is not empty. This depends on your logic for initial state.
+      // Or ensure selectedId is always valid.
+      setBgImg(itemsToShow[0].bgImg);
+    }
+  }, [selectedId, itemsToShow, setBgImg]);
 
   return (
     <>
@@ -83,9 +96,6 @@ export default function ExpandableCarousel({
       >
         <CarouselContent>
           {itemsToShow.map((item, index) => {
-            if (item.id === selectedId) {
-              setBgImg(item.bgImg);
-            }
             return (
               <CarouselItem
                 key={index}

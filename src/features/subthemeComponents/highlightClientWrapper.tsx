@@ -41,7 +41,7 @@ const dummyHighlightData = [
 ];
 
 export default function HighlightClientWrapper({ name, asset }: { name: string; asset: string }) {
-  const [bgImg, setBgImg] = useState('');
+  const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
   return (
     <>
       <div

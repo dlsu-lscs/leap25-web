@@ -1,10 +1,5 @@
 'use client';
-
-import SubThemeCarousel from '@/features/MapSubTheme/SubThemeCarousel';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
-import { SetStateAction, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import MapButton from '@/components/ui/MapButton';
 import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
 import MobileMapClientWrapper from '@/features/MapSubTheme/mapClientWrapper';
 
