@@ -27,7 +27,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   const event: classModel = await getEventByID(classID);
   // const eventMedia = await getEventMedia(classID);
   const orgs: orgModel = await getOrgByID(event.org_id);
-  const subtheme = await getSubThemeByID(event.subtheme_id);
+  const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
   return (
     <>
