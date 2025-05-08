@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import GetSubTheme from '@/services/GetSubTheme';
+import GetSubTheme from '@/services/subthemeService';
 import useFetchEvents from '@/hooks/useFetchEvents';
 import Loading from '../loading';
 import Custom404 from '../not-found';

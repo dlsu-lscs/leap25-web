@@ -13,7 +13,7 @@ interface NavbarProps {
 
 import { Public_Sans } from 'next/font/google';
 import { decodeJWT } from '@/lib/decodeJWT';
-import GetSubTheme from '@/services/GetSubTheme';
+import GetSubTheme from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
