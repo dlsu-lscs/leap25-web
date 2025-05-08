@@ -31,7 +31,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
         <FadeOverlay></FadeOverlay>
       </div>
       <div
-        className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-contain`}
+        className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover`}
         style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
       >
         <div>
