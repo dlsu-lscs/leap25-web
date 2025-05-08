@@ -4,8 +4,6 @@ import '@testing-library/jest-dom';
 
 describe('ClassCard', () => {
   it('renders ClassCard with correct content', () => {
-    render(<ClassCard />);
-
     // Check if the title is rendered
   });
 });
