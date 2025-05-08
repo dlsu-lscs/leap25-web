@@ -225,6 +225,68 @@ function CarouselNext({
   );
 }
 
+function HighlightNext({
+  className,
+  size = 'icon',
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
+
+  return (
+    <Button
+      data-slot="carousel-next"
+      variant={'outline'}
+      size={size}
+      className={cn(
+        'absolute size-12 rounded-md bg-transparent',
+        orientation === 'horizontal'
+          ? 'top-1/2 -right-12 -translate-y-1/2'
+          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+        className
+      )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
+      <img src="/highlightArrow.svg" alt="arrow" />
+      <span className="sr-only">Next slide</span>
+    </Button>
+  );
+}
+
+function HighlightPrev({
+  className,
+  size = 'icon',
+  ...props
+}: React.ComponentProps<typeof Button>) {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
+
+  return (
+    <Button
+      data-slot="carousel-next"
+      variant={'outline'}
+      size={size}
+      className={cn(
+        'absolute size-12 rounded-md bg-transparent',
+        orientation === 'horizontal'
+          ? 'top-1/2 -right-12 -translate-y-1/2'
+          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+        className
+      )}
+      disabled={!canScrollNext}
+      onClick={scrollNext}
+      {...props}
+    >
+      <img
+        className="[transform:rotateY(180deg)rotateX(180deg)]"
+        src="/highlightArrow.svg"
+        alt="arrow"
+      />
+      <span className="sr-only">Next slide</span>
+    </Button>
+  );
+}
+
 export {
   type CarouselApi,
   Carousel,
@@ -232,4 +294,6 @@ export {
   CarouselItem,
   CarouselPrevious,
   CarouselNext,
+  HighlightNext,
+  HighlightPrev,
 };

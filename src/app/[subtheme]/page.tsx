@@ -1,9 +1,10 @@
 'use client';
 
-import { use } from 'react';
+import { use, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import ExpandableCarousel from '@/features/subthemeComponents/expandableCarousel';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { nameInitials } from '@/lib/helpers';
@@ -19,19 +20,44 @@ import Custom404 from '../not-found';
 import { EventEmitter } from 'stream';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
-const dummyData = [
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
-  <SubThemeClassCard />,
+const dummyHighlightData = [
+  {
+    id: 1,
+    content:
+      "Ever wondered what lies beyond coding? Tech is more than just lines of code—it's a treasure trove of untapped opportunities waiting to be discovered! From UI/UX to digital forensics to embedded systems, your future in tech can be anything you make it! Join us for an insightful discussion with industry professionals and find your niche in the ever-evolving tech landscape!",
+    titleCard: '/dummy/lscsDummyTitle.png',
+    titleFallback: 'Beyond Code',
+    bgImg: '/dummy/lscsDummyBg.png',
+  },
+  {
+    id: 2,
+    content:
+      "Ever wondered what lies beyond coding? Tech is more than just lines of code—it's a treasure trove of untapped opportunities waiting to be discovered! From UI/UX to digital forensics to embedded systems, your future in tech can be anything you make it! Join us for an insightful discussion with industry professionals and find your niche in the ever-evolving tech landscape!",
+    titleCard: '/dummy/lscsDummyTitle.png',
+    titleFallback: 'Beyond Code',
+    bgImg: '/dummy/lscsDummyBg.png',
+  },
+  {
+    id: 3,
+    content:
+      "Ever wondered what lies beyond coding? Tech is more than just lines of code—it's a treasure trove of untapped opportunities waiting to be discovered! From UI/UX to digital forensics to embedded systems, your future in tech can be anything you make it! Join us for an insightful discussion with industry professionals and find your niche in the ever-evolving tech landscape!",
+    titleCard: '/dummy/lscsDummyTitle.png',
+    titleFallback: 'Beyond Code',
+    bgImg: '/dummy/lscsDummyBg.png',
+  },
+  {
+    id: 4,
+    content:
+      "Ever wondered what lies beyond coding? Tech is more than just lines of code—it's a treasure trove of untapped opportunities waiting to be discovered! From UI/UX to digital forensics to embedded systems, your future in tech can be anything you make it! Join us for an insightful discussion with industry professionals and find your niche in the ever-evolving tech landscape!",
+    titleCard: '/dummy/lscsDummyTitle.png',
+    titleFallback: 'Beyond Code',
+    bgImg: '/dummy/lscsDummyBg.png',
+  },
 ];
 
 export default function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   useGoogleAuthRedirect();
-
+  const [bgImg, setBgImg] = useState('');
   const { subtheme } = use(params);
   const { asset, name } = GetSubTheme(subtheme);
 
@@ -40,21 +66,28 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
   if (loading) return <Loading></Loading>;
   if (error) return <Custom404></Custom404>;
 
-  console.log(events);
+  console.log(bgImg);
   return (
     <>
       <div className="fixed top-0 z-20">
         <Navbar />
       </div>
-      <div className="min-h-screen py-36 px-24 text-white bg-[url(/encrypt.jpg)] bg-black/60 bg-blend-multiply bg-cover">
-        <div className="flex items-center w-full">
+      <div
+        className="min-h-screen text-white bg-black/60 bg-blend-multiply bg-cover"
+        style={{ backgroundImage: `url(${bgImg})` }}
+      >
+        <div className="flex flex-col items-center w-full">
           <h1
-            className={`text-[64px] font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
+            className={`mt-20 text-5xl font-bold whitespace-nowrap ${playfair_display.className} ml-6 mr-24`}
           >
             LEAP's choice
           </h1>
-          <div className="flex mt-4">
+          <div className="flex flex-col mt-4 w-full px-12 overflow-x-hidden">
             <LeapSeperator variant="diamond"></LeapSeperator>
+            <ExpandableCarousel
+              setBgImg={setBgImg}
+              itemsToShow={dummyHighlightData}
+            ></ExpandableCarousel>
           </div>
         </div>
       </div>
