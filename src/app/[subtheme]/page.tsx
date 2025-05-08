@@ -1,6 +1,4 @@
-'use client';
-
-import { use, useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
@@ -14,10 +12,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Playfair_Display } from 'next/font/google';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import GetSubTheme from '@/services/subthemeService';
-import useFetchEvents from '@/hooks/useFetchEvents';
-import Loading from '../loading';
-import Custom404 from '../not-found';
-import { EventEmitter } from 'stream';
+import { getEventByID, getEvents } from '@/services/eventService';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 
 const dummyHighlightData = [
@@ -55,18 +50,13 @@ const dummyHighlightData = [
   },
 ];
 
-export default function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
-  useGoogleAuthRedirect();
-  const [bgImg, setBgImg] = useState('');
-  const { subtheme } = use(params);
+export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
+  // useGoogleAuthRedirect();
+  // const [bgImg, setBgImg] = useState('');
+  const { subtheme } = await params;
   const { asset, name } = GetSubTheme(subtheme);
-
-  const { events, error, loading } = useFetchEvents('Test Subtheme with Image');
-
-  if (loading) return <Loading></Loading>;
-  if (error) return <Custom404></Custom404>;
-
-  console.log(bgImg);
+  const events = await getEvents('Test Subtheme with Image');
+  console.log(events);
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -74,7 +64,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
       </div>
       <div
         className="min-h-screen text-white bg-black/60 bg-blend-multiply bg-cover"
-        style={{ backgroundImage: `url(${bgImg})` }}
+        style={{ backgroundImage: `url()` }}
       >
         <div className="flex flex-col items-center w-full">
           <h1
@@ -84,10 +74,12 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
           </h1>
           <div className="flex flex-col mt-4 w-full px-12 overflow-x-hidden">
             <LeapSeperator variant="diamond"></LeapSeperator>
+            {/*
             <ExpandableCarousel
-              setBgImg={setBgImg}
+              setBgImg={setgBgImg}
               itemsToShow={dummyHighlightData}
             ></ExpandableCarousel>
+            */}
           </div>
         </div>
       </div>
@@ -119,7 +111,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                 Day 1
               </h2>
             </div>
-            <LeapCarousel
+            {/* <LeapCarousel
               loopItems={false}
               row2={false}
               itemsToShow={events.map((event, index) => {
@@ -135,13 +127,13 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                   </>
                 );
               })}
-            ></LeapCarousel>
+            ></LeapCarousel> */}
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml- ${playfair_display.className}`}>
                 Day 2
               </h2>
             </div>
-            <LeapCarousel
+            {/* <LeapCarousel
               loopItems={false}
               row2={false}
               itemsToShow={events.map((event, index) => {
@@ -157,7 +149,7 @@ export default function Subtheme({ params }: { params: Promise<{ subtheme: strin
                   </>
                 );
               })}
-            ></LeapCarousel>
+            ></LeapCarousel> */}
           </div>
         </div>
       </div>
