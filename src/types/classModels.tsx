@@ -1,6 +1,7 @@
 interface classModel {
   id: number;
   org_id: number;
+  contentful_id: string;
   title: string;
   description: string;
   subtheme_id: number;

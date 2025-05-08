@@ -47,7 +47,7 @@ const getEventByID = async (eventID: number) => {
   }
 };
 
-const getEventMedia = async (eventID: number) => {
+const getEventMedia = async (eventID: any) => {
   try {
     const response = await fetch(`${API_URL}/events/${eventID}/media`);
 
