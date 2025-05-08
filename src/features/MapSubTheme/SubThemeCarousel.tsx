@@ -12,13 +12,14 @@ import {
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { StaticImageData } from 'next/image';
+import { cn } from '@/lib/utils';
 
 // Define the type for the items in the carousel
 interface CarouselItemData {
   content: string;
   id: number;
-  bgColor: string;
-  img: StaticImageData; // Or a more specific type if available
+  img: string; // Or a more specific type if available
+  bgPos: string;
 }
 
 // Define the props for the component
@@ -35,7 +36,6 @@ export default function SubThemeCarousel({
 }: SubThemeCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [currBgColor, setCurrBgColor] = useState<string>(items[0].bgColor);
 
   // Update selected item when carousel settles
   const updateSelectedItem = useCallback(() => {
@@ -44,7 +44,6 @@ export default function SubThemeCarousel({
     const currentIndex = api.selectedScrollSnap();
     const newSelectedId = items[currentIndex]?.id;
     setSelectedIndex(currentIndex);
-    setCurrBgColor(items[currentIndex].bgColor);
 
     if (newSelectedId !== undefined && newSelectedId !== selectedId) {
       setSelectedId(newSelectedId);
@@ -77,18 +76,16 @@ export default function SubThemeCarousel({
 
     // Then scroll to the item
     if (api) {
-      api.scrollTo(index);
+      api.scrollTo(id);
+      console.log(id);
     }
   };
 
   return (
-    <div className="relative h-72 w-full">
-      <div
-        className='transition-colors duration-200 ease-in-out opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'
-        style={{ backgroundColor: currBgColor }}
-      ></div>
+    <div className="relative h-80 w-full">
+      <div className=' transition-colors duration-200 ease-in-out opacity-40 w-full h-full absolute [mask-image:linear-gradient(to_top,black_80%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_top,black_80%,transparent_100%)]"'></div>
       <Carousel
-        className="w-full mt-16"
+        className="w-full !inline-block"
         opts={{
           align: 'center',
           loop: true,
@@ -102,14 +99,23 @@ export default function SubThemeCarousel({
           className=""
           // style={{ backgroundColor: currBgColor }}
         >
-          {items.map(({ content, id, bgColor, img }, index) => (
+          {items.map(({ content, id, bgPos, img }, index) => (
             <CarouselItem
               key={index}
-              className="basis-1/3 pl-2"
+              className="basis-1/3 relative"
               // style={{ backgroundColor: currBgColor }}
             >
-              <div className="flex items-center justify-between h-48 select-none ">
-                <LeapSubThemeDivider></LeapSubThemeDivider>
+              <div className="flex items-center justify-center h-48 select-none ">
+                {selectedId === id && (
+                  <>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -left-3')}
+                    ></LeapSubThemeDivider>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute left-1')}
+                    ></LeapSubThemeDivider>
+                  </>
+                )}
 
                 <div
                   className="flex justify-center items-center cursor-pointer"
@@ -118,18 +124,20 @@ export default function SubThemeCarousel({
                   <Avatar
                     className={`${id === selectedId ? '' : 'opacity-40'} transition-[width,height] duration-200 ease-in-out ${id === selectedId ? 'w-24 h-24' : 'w-16 h-16'}`}
                   >
-                    <AvatarImage src={img?.src ?? undefined} alt="Avatar" />
+                    <AvatarImage src={img} alt="Avatar" />
                     <AvatarFallback className="text-3xl">😀</AvatarFallback>
                   </Avatar>
                 </div>
-
                 {selectedId === id && (
-                  <h3 className="font-semibold text-lg text-white absolute bottom-3 left-1/2 -translate-x-1/2 text-nowrap">
-                    {content}
-                  </h3>
+                  <>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -right-7')}
+                    ></LeapSubThemeDivider>
+                    <LeapSubThemeDivider
+                      className={cn('w-2 h-2 absolute -right-3')}
+                    ></LeapSubThemeDivider>
+                  </>
                 )}
-
-                <LeapSubThemeDivider></LeapSubThemeDivider>
               </div>
             </CarouselItem>
           ))}
