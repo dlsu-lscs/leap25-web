@@ -1,18 +1,18 @@
-'use client';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import Loading from '@/app/loading';
-import Custom404 from '@/app/not-found';
 import ClassCard from '@/features/classCard/ClassCard';
 import Navbar from '@/components/layout/Navbar';
-import type { subThemeModel } from '@/types/classModels';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
-import { use } from 'react';
+import { getEventByID, getEventMedia } from '@/services/eventService';
+import { getOrgByID, getOrgs } from '@/services/orgsServce';
+import { classModel, subThemeModel } from '@/types/classModels';
+import { orgModel } from '@/types/orgModels';
+import { getSubTheme, getSubThemeByID } from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Class({ params }: { params: { class: string } }) {
+export default async function Class({ params }: { params: Promise<{ classID: number }> }) {
   const dummyData = [
     <SubThemeClassCard />,
     <SubThemeClassCard />,
@@ -22,6 +22,12 @@ export default function Class({ params }: { params: { class: string } }) {
     <SubThemeClassCard />,
     <SubThemeClassCard />,
   ];
+
+  const { classID } = await params;
+  const event: classModel = await getEventByID(classID);
+  // const eventMedia = await getEventMedia(classID);
+  const orgs: orgModel = await getOrgByID(event.org_id);
+  const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
   return (
     <>
@@ -33,7 +39,7 @@ export default function Class({ params }: { params: { class: string } }) {
       >
         <div>
           {' '}
-          <ClassCard event={event}></ClassCard>
+          <ClassCard event={event} orgs={orgs} subtheme={subtheme}></ClassCard>
         </div>
         <div
           className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold text-4xl text-shadow-lg`}

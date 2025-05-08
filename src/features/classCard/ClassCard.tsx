@@ -23,11 +23,11 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 
 type ClassCardsProps = {
   event: classModel;
+  orgs: orgModel;
+  subtheme: subThemeModel;
 };
 
-export default function ClassCard({ event }: ClassCardsProps) {
-  console.log(event);
-  const hostedBy = [<HostName />, <HostName />];
+export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
   const date = new Date(event.schedule);
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -58,7 +58,7 @@ export default function ClassCard({ event }: ClassCardsProps) {
         <div>
           <div className=" space-x-3 text-sm font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
-            <LeapTag className="bg-white">{'sub theme'}</LeapTag>
+            <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
             <LeapTag className="bg-white">{'₱' + event.fee || 0}</LeapTag>
           </div>
           <h1
@@ -68,11 +68,12 @@ export default function ClassCard({ event }: ClassCardsProps) {
           </h1>
           <div className="flex items-center my-8">
             <div className="space-x-3 flex flex-wrap w-[75vh] gap-y-1.5">
-              {hostedBy.map((host, hostID) => (
-                <HostName src={undefined} key={hostID}>
-                  {'Org Name'}
+              <HostName src={orgs.org_logo || undefined}>{orgs.name}</HostName>
+              {/* {orgs.map((org: orgModel, hostID: number) => (
+                <HostName src={org.orgLogo || undefined} key={hostID}>
+                  {org.name}
                 </HostName>
-              ))}
+              ))} */}
             </div>
           </div>
           <div className="flex space-x-4">

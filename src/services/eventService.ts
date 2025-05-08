@@ -1,29 +1,68 @@
 import { API_URL } from '@/lib/constants';
-import axios from 'axios';
 
-const getEvents = async (subtheme: string) => {
-  const response = await fetch(`${API_URL}/events/subtheme`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ subtheme }),
-    cache: 'default',
-  });
+const getEvents = async (subtheme: any) => {
+  try {
+    console.log(subtheme);
+    const response = await fetch(`${API_URL}/events/subtheme`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ subtheme }),
+      cache: 'default',
+    });
 
-  if (!response.ok) throw new Error('Failed to get Classes');
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Failed to get Classes: ${response.status} - ${errorText}`);
+    }
 
-  return response.json();
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+    throw error;
+  }
 };
 
 const getEventByID = async (eventID: number) => {
   try {
-    const response = await axios.get(`${API_URL}/events/${eventID}`);
-    return response.data;
+    const response = await fetch(`${API_URL}/events/${eventID}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get event');
+    }
+
+    return await response.json();
   } catch (error: any) {
-    console.log('error:' + error);
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
   }
 };
 
-export { getEvents, getEventByID };
+const getEventMedia = async (eventID: any) => {
+  try {
+    const response = await fetch(`${API_URL}/events/${eventID}/media`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get event');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
+export { getEvents, getEventByID, getEventMedia };

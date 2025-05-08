@@ -7,17 +7,18 @@ import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import GetSubTheme from '@/services/subthemeService';
+import { getSubTheme } from '@/services/subthemeService';
 import { getEventByID, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
+import { classModel } from '@/types/classModels';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   // useGoogleAuthRedirect();
   // const [bgImg, setBgImg] = useState('');
   const { subtheme } = await params;
-  const { asset, name } = GetSubTheme(subtheme);
+  const { asset, name } = getSubTheme(subtheme);
   const events = await getEvents('Test Subtheme with Image');
-  console.log(events);
+
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -52,43 +53,45 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 1</h2>
             </div>
-            {/* <LeapCarousel
+            <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map((event, index) => {
+              itemsToShow={events.map((event: classModel, index: number) => {
                 return (
-                  <>
+                  <div key={index}>
                     <SubThemeClassCard
+                      key={index}
                       subtheme={subtheme}
                       id={event.id}
                       registered_slots={event.registered_slots}
                       descripton={event.description}
                       title={event.title}
                     />
-                  </>
+                  </div>
                 );
               })}
-            ></LeapCarousel> */}
+            ></LeapCarousel>
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml- font-playfair`}>Day 2</h2>
             </div>
-            {/* <LeapCarousel
+            <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map((event, index) => {
+              itemsToShow={events.map((event: classModel, index: number) => {
                 return (
-                  <>
+                  <div key={index}>
                     <SubThemeClassCard
+                      key={index}
                       subtheme={subtheme}
                       id={event.id}
                       registered_slots={event.registered_slots}
                       descripton={event.description}
                       title={event.title}
                     />
-                  </>
+                  </div>
                 );
               })}
-            ></LeapCarousel> */}
+            ></LeapCarousel>
           </div>
         </div>
       </div>
