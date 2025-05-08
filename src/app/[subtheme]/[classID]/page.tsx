@@ -20,6 +20,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   ];
 
   const { classID } = await params;
+  const event = await getEventByID(classID);
 
   return (
     <>

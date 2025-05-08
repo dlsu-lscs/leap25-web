@@ -56,9 +56,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   // const [bgImg, setBgImg] = useState('');
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
-  const events = await getEvents(subtheme);
-  const event = await getEventByID(1);
-  console.log(event);
+  const events = await getEvents('Test Subtheme with Image');
 
   return (
     <>
