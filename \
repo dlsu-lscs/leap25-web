@@ -1,5 +1,4 @@
 'use client';
-import ArrowCircleRightSharpIcon from '@mui/icons-material/ArrowCircleRightSharp';
 import { useCallback, useEffect, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import {
@@ -14,7 +13,7 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { style } from '@mui/system';
-import { Button } from '@/components/ui/Button';
+
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: any[];
@@ -99,26 +98,12 @@ export default function ExpandableCarousel({
                 <div
                   style={{ backgroundImage: `url(${item.bgImg})` }}
                   className={cn(
-                    'flex items-center duration-1000 w-full h-full relative bg-cover bg-center rounded-lg border-white border-solid border-2 bg-black/60 bg-blend-darken',
+                    'flex items-center duration-1000 w-full h-full relative bg-cover bg-center rounded-lg border-white border-solid border-2 bg-[#760181]/70 backdrop-blur-2xl',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
                   {item.id === selectedId && (
-                    <div className={cn('w-[400] ml-12 flex h-[420] flex-col')}>
-                      <img src={`${item.titleCard}`} className="w-64" alt="title card" />
-                      <div className="flex gap-2 my-4">
-                        <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                        <div className="w-24 h-6 border-solid border-white border-2  rounded-md"></div>
-                      </div>
-                      <p>{item.content}</p>
-                      <Button
-                        className="w-32 mt-8 text-base font-bold px-6 py-4 bg-white text-black"
-                        variant={'secondary'}
-                      >
-                        <ArrowCircleRightSharpIcon />
-                        Join Now
-                      </Button>
-                    </div>
+                    <div className={cn('w-[400] ml-12 bg-black h-[460]')}></div>
                   )}
 
                   {item.id === selectedId && (
