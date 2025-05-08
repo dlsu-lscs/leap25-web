@@ -32,7 +32,7 @@ export default function Navbar({ subtheme = 'Sub Theme', className, src }: Navba
   return (
     <>
       <div
-        className={`bg-black/75 bg-opacity-50 text-white min-w-screen flex justify-between px-8 py-5  ${className}`}
+        className={`bg-black/0.2 text-white min-w-screen flex justify-between px-8 py-5  ${className}`}
       >
         <div className="flex items-center text-2xl space-x-1.5">
           <div
