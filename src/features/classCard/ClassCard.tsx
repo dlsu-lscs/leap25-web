@@ -51,7 +51,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
 
   const [url, setUrl] = useState(window.location.href);
-  console.log(eventMedia);
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -127,7 +126,10 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           </div>
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
-              <LeapButton className="bg-white px-4 py-2 font-medium text-black">
+              <LeapButton
+                disabled={event.registered_slots > 0}
+                className={`${event.registered_slots > 0 ? 'bg-white/100' : 'bg-white/65'}  px-4 py-2 font-medium text-black`}
+              >
                 {event.registered_slots > 0 ? `Join Now - ₱${event.fee}` : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
