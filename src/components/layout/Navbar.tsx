@@ -5,6 +5,8 @@ import { nameInitials } from '@/lib/helpers';
 import { useCookies } from 'react-cookie';
 
 interface NavbarProps {
+  name?: string;
+  src?: string;
   className?: string;
 }
 
@@ -14,11 +16,10 @@ import { getSubTheme } from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Navbar({ className }: NavbarProps) {
+export default function Navbar({ className, src, name }: NavbarProps) {
   const [cookies, ,] = useCookies(['currentUser']);
   const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
-  let subtheme;
-  console.log(subtheme);
+  console.log(name);
 
   return (
     <>
@@ -34,14 +35,14 @@ export default function Navbar({ className }: NavbarProps) {
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
           </div>
-          {subtheme == undefined ? (
+          {name == undefined ? (
             <div className={`text-[20px] ${public_sans.className}`}>Back to Map</div>
           ) : (
             <>
-              <div className={`text-[20px] ${public_sans.className}`}>{subtheme}</div>
+              <div className={`text-[20px] ${public_sans.className}`}>{name}</div>
               <Avatar className="w-9 h-9 mx-2 text-xs">
-                <AvatarImage src={'/subthemeLogos/' + subtheme} />
-                <AvatarFallback>{nameInitials(subtheme || 'na')}</AvatarFallback>
+                <AvatarImage src={src} />
+                <AvatarFallback>{nameInitials(name || 'na')}</AvatarFallback>
               </Avatar>
             </>
           )}

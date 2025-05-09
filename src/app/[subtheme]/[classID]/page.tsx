@@ -25,7 +25,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
     <>
       <AuthRedirectProvider>
         <div className="fixed top-0 z-20">
-          <Navbar />
+          <Navbar name={subtheme.title} src={subtheme.logo_pub_url} />
         </div>
         <div
           className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)] bg-black/50 bg-blend-multiply bg-cover`}
