@@ -128,7 +128,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="my-6 flex justify-between">
             <div className="flex items-center space-x-3">
               <LeapButton className="bg-white px-4 py-2 font-medium text-black">
-                {event.registered_slots > 0 ? 'Join Now - Free' : 'Event is Full!'}
+                {event.registered_slots > 0 ? `Join Now - ₱${event.fee}` : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
                 {event.registered_slots > 0

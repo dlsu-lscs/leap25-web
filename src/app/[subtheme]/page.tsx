@@ -6,9 +6,9 @@ import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import { getSubTheme } from '@/services/subthemeService';
-import { getEvents } from '@/services/eventService';
+import { getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
-import { classModel } from '@/types/classModels';
+import { classModel, classPubModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
@@ -54,7 +54,8 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
               <LeapCarousel
                 loopItems={false}
                 row2={false}
-                itemsToShow={events.map((event: classModel, index: number) => {
+                itemsToShow={events.map(async (event: classModel, index: number) => {
+                  const eventMedia: classPubModel = await getEventMedia(event.id);
                   return (
                     <div key={index}>
                       <SubThemeClassCard
@@ -64,6 +65,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                         registered_slots={event.registered_slots}
                         descripton={event.description}
                         title={event.title}
+                        eventMedia={eventMedia}
                       />
                     </div>
                   );
@@ -75,7 +77,8 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
               <LeapCarousel
                 loopItems={false}
                 row2={false}
-                itemsToShow={events.map((event: classModel, index: number) => {
+                itemsToShow={events.map(async (event: classModel, index: number) => {
+                  const eventMedia: classPubModel = await getEventMedia(event.id);
                   return (
                     <div key={index}>
                       <SubThemeClassCard
@@ -85,6 +88,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                         registered_slots={event.registered_slots}
                         descripton={event.description}
                         title={event.title}
+                        eventMedia={eventMedia}
                       />
                     </div>
                   );

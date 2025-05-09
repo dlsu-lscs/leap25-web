@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import { subscribe } from 'diagnostics_channel';
+import { classPubModel } from '@/types/classModels';
 
 interface SubThemeClassCardProps {
   subtheme: string;
@@ -12,6 +12,7 @@ interface SubThemeClassCardProps {
   title: string;
   descripton: string;
   registered_slots: number;
+  eventMedia?: classPubModel;
 }
 export default function SubThemeClassCard({
   subtheme,
@@ -19,13 +20,15 @@ export default function SubThemeClassCard({
   title,
   descripton,
   registered_slots,
+  eventMedia,
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
   return (
     <>
       <a
         href={`/${subtheme}/${id}`}
-        className={`h-[280px] w-[224px] bg-[url(/encrypt.jpg)] bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        style={{ backgroundImage: `url(${eventMedia?.pub_url || undefined})` }}
+        className={`h-[280px] w-[224px] bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
