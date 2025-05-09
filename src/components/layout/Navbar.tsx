@@ -19,7 +19,6 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 export default function Navbar({ className, src, name }: NavbarProps) {
   const [cookies, ,] = useCookies(['currentUser']);
   const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
-  console.log(name);
 
   return (
     <>

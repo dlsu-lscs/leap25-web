@@ -1,11 +1,11 @@
-import { Separator } from '@/components/ui/separator';
+'use client';
 import LeapButton from '@/components/ui/LeapButton';
 import LeapTag from '@/components/ui/LeapTag';
 import HostName from './HostName';
 import ClassDetails from './ClassDetails';
 import ClassDescription from './ClassDescription';
 
-import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
+import { classModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 
 import { Playfair_Display } from 'next/font/google';
@@ -20,6 +20,8 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
+
+import { useEffect, useState } from 'react';
 
 type ClassCardsProps = {
   event: classModel;
@@ -45,6 +47,12 @@ export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
 
   const formattedDate = date.toLocaleDateString('en-US', dateOptions);
   const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
+
+  const [url, setUrl] = useState(window.location.href);
+
+  useEffect(() => {
+    setUrl(window.location.href);
+  }, []);
 
   return (
     <>
@@ -129,7 +137,15 @@ export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
               <BookmarkBorderOutlinedIcon
                 sx={{ fontSize: 32, color: 'white' }}
               ></BookmarkBorderOutlinedIcon>
-              <ShareOutlinedIcon sx={{ fontSize: 32, color: 'white' }}></ShareOutlinedIcon>
+              <div
+                onClick={() => {
+                  navigator.clipboard.writeText(url);
+                }}
+                role="button"
+                className="hover:opacity-50 duration-100 transition"
+              >
+                <ShareOutlinedIcon sx={{ fontSize: 32, color: 'white' }}></ShareOutlinedIcon>
+              </div>
             </div>
           </div>
         </div>

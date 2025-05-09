@@ -5,7 +5,7 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 
 import { Public_Sans } from 'next/font/google';
 import { getEventByID, getEventMedia, getEvents } from '@/services/eventService';
-import { getOrgByID, getOrgs } from '@/services/orgsServce';
+import { getOrgByID } from '@/services/orgsServce';
 import { classModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 import { getSubThemeByID } from '@/services/subthemeService';
@@ -20,6 +20,8 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   const orgs: orgModel = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
   const events: classModel[] = await getEvents(subtheme.title);
+
+  // console.log(eventMedia);
 
   return (
     <>
