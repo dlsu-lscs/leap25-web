@@ -12,7 +12,6 @@ interface NavbarProps {
 
 import { Public_Sans } from 'next/font/google';
 import { decodeJWT } from '@/lib/decodeJWT';
-import { getSubTheme } from '@/services/subthemeService';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -26,14 +25,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
         className={`bg-black/0.2 text-white min-w-screen flex justify-between px-8 py-5  ${className}`}
       >
         <div className="flex items-center text-2xl space-x-1.5">
-          <div
-            onClick={() => {
-              history.back();
-            }}
-            className="hover:opacity-50 transition duration-50"
-          >
+          <a href="./" className="hover:opacity-50 transition duration-50">
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
-          </div>
+          </a>
           {name == undefined ? (
             <div className={`text-[20px] ${public_sans.className}`}>Back to Map</div>
           ) : (
