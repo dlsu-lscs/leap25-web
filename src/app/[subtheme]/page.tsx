@@ -11,89 +11,91 @@ import { getSubTheme } from '@/services/subthemeService';
 import { getEventByID, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel } from '@/types/classModels';
+import AuthRedirectProvider from '@/context/authRedirectProvider';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
-  // useGoogleAuthRedirect();
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events = await getEvents('Test Subtheme with Image');
 
   return (
     <>
-      <div className="fixed top-0 z-20">
-        <Navbar />
-      </div>
-      <HighlightClientWrapper
-        asset={asset || 'error'}
-        name={name || 'error'}
-      ></HighlightClientWrapper>
-      <div className="absolute -translate-y-10">
-        <FadeOverlay></FadeOverlay>
-      </div>
-      <div
-        className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover`}
-        style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
-      >
-        <div>
-          <div className="py-12 space-y-4">
-            <div className="flex items-center w-full">
-              <Avatar className="w-24 h-24 text-xs">
-                <AvatarImage src={'/subthemeLogos/' + asset} />
-                <AvatarFallback>{nameInitials('na')}</AvatarFallback>
-              </Avatar>
-              <h1 className={`text-[64px] font-bold whitespace-nowrap font-playfair ml-6 mr-24`}>
-                {name}
-              </h1>
-              <div className="flex mt-4">
-                <LeapSeperator></LeapSeperator>
+      <AuthRedirectProvider>
+        <div className="fixed top-0 z-20">
+          <Navbar />
+        </div>
+        <HighlightClientWrapper
+          asset={asset || 'error'}
+          name={name || 'error'}
+        ></HighlightClientWrapper>
+        <div className="absolute -translate-y-10">
+          <FadeOverlay></FadeOverlay>
+        </div>
+        <div
+          className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover`}
+          style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
+        >
+          <div>
+            <div className="py-12 space-y-4">
+              <div className="flex items-center w-full">
+                <Avatar className="w-24 h-24 text-xs">
+                  <AvatarImage src={'/subthemeLogos/' + asset} />
+                  <AvatarFallback>{nameInitials('na')}</AvatarFallback>
+                </Avatar>
+                <h1 className={`text-[64px] font-bold whitespace-nowrap font-playfair ml-6 mr-24`}>
+                  {name}
+                </h1>
+                <div className="flex mt-4">
+                  <LeapSeperator></LeapSeperator>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 1</h2>
+              <div>
+                <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 1</h2>
+              </div>
+              <LeapCarousel
+                loopItems={false}
+                row2={false}
+                itemsToShow={events.map((event: classModel, index: number) => {
+                  return (
+                    <div key={index}>
+                      <SubThemeClassCard
+                        key={index}
+                        subtheme={subtheme}
+                        id={event.id}
+                        registered_slots={event.registered_slots}
+                        descripton={event.description}
+                        title={event.title}
+                      />
+                    </div>
+                  );
+                })}
+              ></LeapCarousel>
+              <div>
+                <h2 className={`text-[30px] font-bold sm:ml-0 ml- font-playfair`}>Day 2</h2>
+              </div>
+              <LeapCarousel
+                loopItems={false}
+                row2={false}
+                itemsToShow={events.map((event: classModel, index: number) => {
+                  return (
+                    <div key={index}>
+                      <SubThemeClassCard
+                        key={index}
+                        subtheme={subtheme}
+                        id={event.id}
+                        registered_slots={event.registered_slots}
+                        descripton={event.description}
+                        title={event.title}
+                      />
+                    </div>
+                  );
+                })}
+              ></LeapCarousel>
             </div>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={events.map((event: classModel, index: number) => {
-                return (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      descripton={event.description}
-                      title={event.title}
-                    />
-                  </div>
-                );
-              })}
-            ></LeapCarousel>
-            <div>
-              <h2 className={`text-[30px] font-bold sm:ml-0 ml- font-playfair`}>Day 2</h2>
-            </div>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={events.map((event: classModel, index: number) => {
-                return (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      descripton={event.description}
-                      title={event.title}
-                    />
-                  </div>
-                );
-              })}
-            ></LeapCarousel>
           </div>
         </div>
-      </div>
+      </AuthRedirectProvider>
     </>
   );
 }
