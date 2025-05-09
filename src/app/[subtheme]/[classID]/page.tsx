@@ -50,20 +50,22 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                 loopItems={false}
                 row2={false}
                 itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = await getEventMedia(event.id);
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme.title}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                      />
-                    </div>
-                  );
+                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
+                  if (eventMedia != undefined) {
+                    return (
+                      <div key={index}>
+                        <SubThemeClassCard
+                          key={index}
+                          subtheme={subtheme.title}
+                          id={event.id}
+                          registered_slots={event.registered_slots}
+                          descripton={event.description}
+                          title={event.title}
+                          eventMedia={eventMedia}
+                        />
+                      </div>
+                    );
+                  }
                 })}
               ></LeapCarousel>
             </div>
@@ -73,20 +75,22 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                 loopItems={false}
                 row2={false}
                 itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = await getEventMedia(event.id);
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme.title}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                      />
-                    </div>
-                  );
+                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
+                  if (eventMedia != undefined) {
+                    return (
+                      <div key={index}>
+                        <SubThemeClassCard
+                          key={index}
+                          subtheme={subtheme.title}
+                          id={event.id}
+                          registered_slots={event.registered_slots}
+                          descripton={event.description}
+                          title={event.title}
+                          eventMedia={eventMedia}
+                        />
+                      </div>
+                    );
+                  }
                 })}
               ></LeapCarousel>
             </div>
@@ -96,20 +100,22 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                 loopItems={false}
                 row2={false}
                 itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = await getEventMedia(event.id);
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme.title}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                      />
-                    </div>
-                  );
+                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
+                  if (eventMedia != undefined) {
+                    return (
+                      <div key={index}>
+                        <SubThemeClassCard
+                          key={index}
+                          subtheme={subtheme.title}
+                          id={event.id}
+                          registered_slots={event.registered_slots}
+                          descripton={event.description}
+                          title={event.title}
+                          eventMedia={eventMedia}
+                        />
+                      </div>
+                    );
+                  }
                 })}
               ></LeapCarousel>
             </div>
