@@ -6,7 +6,7 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 import { Public_Sans } from 'next/font/google';
 import { getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import { getOrgByID } from '@/services/orgsServce';
-import { classModel, subThemeModel } from '@/types/classModels';
+import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 import { getSubThemeByID } from '@/services/subthemeService';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
@@ -16,13 +16,12 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 export default async function Class({ params }: { params: Promise<{ classID: number }> }) {
   const { classID } = await params;
   const event: classModel = await getEventByID(classID);
-  // const eventMedia = await getEventMedia(classID);
+  const eventMedia: classPubModel = await getEventMedia(classID);
   const orgs: orgModel = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
   const events: classModel[] = await getEvents(subtheme.title);
 
-  // console.log(eventMedia);
-
+  console.log(eventMedia.pub_url);
   return (
     <>
       <AuthRedirectProvider>
@@ -30,11 +29,17 @@ export default async function Class({ params }: { params: Promise<{ classID: num
           <Navbar name={subtheme.title} src={subtheme.logo_pub_url} />
         </div>
         <div
-          className={`flex flex-col p-40 py-44 bg-[url(/encrypt.jpg)] bg-black/50 bg-blend-multiply bg-cover`}
+          style={{ backgroundImage: `url(${eventMedia.pub_url})` }}
+          className={`flex flex-col p-40 py-44 bg-black/50 bg-blend-multiply bg-cover`}
         >
           <div>
             {' '}
-            <ClassCard event={event} orgs={orgs} subtheme={subtheme}></ClassCard>
+            <ClassCard
+              event={event}
+              orgs={orgs}
+              subtheme={subtheme}
+              eventMedia={eventMedia}
+            ></ClassCard>
           </div>
           <div
             className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold text-4xl text-shadow-lg`}

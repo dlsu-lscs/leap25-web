@@ -52,7 +52,7 @@ const getEventMedia = async (eventID: any) => {
     const response = await fetch(`${API_URL}/events/${eventID}/media`);
 
     if (!response.ok) {
-      throw new Error('Failed to get event');
+      throw new Error('Failed to get event media');
     }
 
     return await response.json();

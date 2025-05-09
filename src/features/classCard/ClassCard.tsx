@@ -5,7 +5,7 @@ import HostName from './HostName';
 import ClassDetails from './ClassDetails';
 import ClassDescription from './ClassDescription';
 
-import { classModel, subThemeModel } from '@/types/classModels';
+import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 
 import { Playfair_Display } from 'next/font/google';
@@ -28,9 +28,10 @@ type ClassCardsProps = {
   event: classModel;
   orgs: orgModel;
   subtheme: subThemeModel;
+  eventMedia: classPubModel;
 };
 
-export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
+export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
   const date = new Date(event.schedule);
   const dateOptions: Intl.DateTimeFormatOptions = {
     weekday: 'long',
@@ -50,6 +51,7 @@ export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
   const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
 
   const [url, setUrl] = useState(window.location.href);
+  console.log(eventMedia);
 
   useEffect(() => {
     setUrl(window.location.href);
@@ -61,7 +63,7 @@ export default function ClassCard({ event, orgs, subtheme }: ClassCardsProps) {
         <div>
           <img
             className="h-[560px] w-[448px] bg-[#D9D9D9] border-none outline-none"
-            src={'/encrypt.jpg'}
+            src={eventMedia.pub_url}
           />
         </div>
         <div>

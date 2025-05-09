@@ -16,9 +16,10 @@ interface classModel {
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
 interface classPubModel {
   id: number;
-  eventId: number;
-  pubType: PublicationType;
-  pubURL: string;
+  event_id: number;
+  pub_type: PublicationType;
+  pub_url: string;
+  contentful_id: string;
 }
 
 interface subThemeModel {
