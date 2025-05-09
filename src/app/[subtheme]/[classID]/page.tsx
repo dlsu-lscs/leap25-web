@@ -38,7 +38,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
             className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold text-4xl text-shadow-lg`}
           >
             <div className="space-y-5">
-              <p>More in {'SubTheme'}</p>
+              <p>More in {subtheme.title}</p>
               <LeapCarousel
                 loopItems={false}
                 row2={false}
