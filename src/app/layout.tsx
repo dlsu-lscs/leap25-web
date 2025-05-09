@@ -4,6 +4,7 @@ import '@/styles/globals.css';
 import Providers from '@/context/Providers';
 
 import LeapCursor from '@/components/cursor/LeapCursor';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'LEAP 2025',
@@ -40,6 +41,7 @@ export default function RootLayout({
         <Providers>
           {children}
           <LeapCursor />
+          <Toaster />
         </Providers>
       </body>
     </html>
