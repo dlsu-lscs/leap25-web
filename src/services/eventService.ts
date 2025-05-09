@@ -2,7 +2,6 @@ import { API_URL } from '@/lib/constants';
 
 const getEvents = async (subtheme: any) => {
   try {
-    console.log(subtheme);
     const response = await fetch(`${API_URL}/events/subtheme`, {
       method: 'POST',
       headers: {

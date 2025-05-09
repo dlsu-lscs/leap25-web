@@ -4,31 +4,22 @@ import Navbar from '@/components/layout/Navbar';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
-import { getEventByID, getEventMedia } from '@/services/eventService';
+import { getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import { getOrgByID, getOrgs } from '@/services/orgsServce';
 import { classModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
-import { getSubTheme, getSubThemeByID } from '@/services/subthemeService';
+import { getSubThemeByID } from '@/services/subthemeService';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default async function Class({ params }: { params: Promise<{ classID: number }> }) {
-  const dummyData = [
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-    <SubThemeClassCard />,
-  ];
-
   const { classID } = await params;
   const event: classModel = await getEventByID(classID);
   // const eventMedia = await getEventMedia(classID);
   const orgs: orgModel = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
+  const events: classModel[] = await getEvents(subtheme.title);
 
   return (
     <>
@@ -48,15 +39,66 @@ export default async function Class({ params }: { params: Promise<{ classID: num
           >
             <div className="space-y-5">
               <p>More in {'SubTheme'}</p>
-              <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+              <LeapCarousel
+                loopItems={false}
+                row2={false}
+                itemsToShow={events.map((event: classModel, index: number) => {
+                  return (
+                    <div key={index}>
+                      <SubThemeClassCard
+                        key={index}
+                        subtheme={subtheme.title}
+                        id={event.id}
+                        registered_slots={event.registered_slots}
+                        descripton={event.description}
+                        title={event.title}
+                      />
+                    </div>
+                  );
+                })}
+              ></LeapCarousel>
             </div>
             <div className="space-y-5">
               <p>If you liked this, you might like...</p>
-              <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+              <LeapCarousel
+                loopItems={false}
+                row2={false}
+                itemsToShow={events.map((event: classModel, index: number) => {
+                  return (
+                    <div key={index}>
+                      <SubThemeClassCard
+                        key={index}
+                        subtheme={subtheme.title}
+                        id={event.id}
+                        registered_slots={event.registered_slots}
+                        descripton={event.description}
+                        title={event.title}
+                      />
+                    </div>
+                  );
+                })}
+              ></LeapCarousel>
             </div>
             <div className="space-y-5">
               <p>Recently Viewed</p>
-              <LeapCarousel loopItems={false} row2={false} itemsToShow={dummyData}></LeapCarousel>
+              <LeapCarousel
+                loopItems={false}
+                row2={false}
+                itemsToShow={events.map((event: classModel, index: number) => {
+                  return (
+                    <div key={index}>
+                      <SubThemeClassCard
+                        key={index}
+                        subtheme={subtheme.title}
+                        id={event.id}
+                        registered_slots={event.registered_slots}
+                        descripton={event.description}
+                        title={event.title}
+                      />
+                    </div>
+                  );
+                })}
+              ></LeapCarousel>
             </div>
           </div>
         </div>

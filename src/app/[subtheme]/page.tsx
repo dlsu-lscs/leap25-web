@@ -1,14 +1,12 @@
-import { GetStaticPaths, GetStaticProps } from 'next';
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
-import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import { getSubTheme } from '@/services/subthemeService';
-import { getEventByID, getEvents } from '@/services/eventService';
+import { getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
@@ -16,7 +14,7 @@ import AuthRedirectProvider from '@/context/authRedirectProvider';
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
-  const events = await getEvents('Test Subtheme with Image');
+  const events: classModel[] = await getEvents('Test Subtheme with Image');
 
   return (
     <>
