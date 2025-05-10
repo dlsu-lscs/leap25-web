@@ -48,12 +48,16 @@ export default function HighlightClientWrapper({ name, asset }: { name: string; 
         className="h-[728px] text-white bg-black/60 bg-blend-multiply bg-cover"
         style={{ backgroundImage: `url(${bgImg})` }}
       >
-        <div className="flex flex-col items-center w-full">
-          <h1 className={`mt-14 text-5xl font-bold whitespace-nowrap font-playfair ml-6 mr-24`}>
-            LEAP's choice
-          </h1>
-          <div className="flex flex-col mt-4 w-full px-12 overflow-x-hidden">
-            <LeapSeperator variant="diamond"></LeapSeperator>
+        <div className="flex flex-col w-full items-center pt-18">
+          <div className="flex items-center overflow-hidden sm:justify-start w-full sm:pl-12">
+            <h1
+              className={`mr-4 sm:text-5xl text-4xl font-bold whitespace-nowrap font-playfair lg:ml-[14vw] `}
+            >
+              LEAP's choice
+            </h1>
+            <LeapSeperator className="ml-4" variant="diamond"></LeapSeperator>
+          </div>
+          <div className="flex flex-col mt-4 w-full ml-2 px-8 overflow-x-hidden">
             <ExpandableCarousel
               setBgImg={setBgImg}
               itemsToShow={dummyHighlightData}

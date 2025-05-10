@@ -100,7 +100,7 @@ export default function ExpandableCarousel({
               <CarouselItem
                 key={index}
                 className={cn(
-                  `h-[524px] flex basis-full transition-all ease-in-out duration-700 pl-0`,
+                  `h-[524px] flex basis-full transition-all ease-in-out duration-700 `,
                   item.id === selectedId
                     ? 'md:basis-2/3 justify-end pr-8'
                     : 'md:basis-1/3 flex-start '
