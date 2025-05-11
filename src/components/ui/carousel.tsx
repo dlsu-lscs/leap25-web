@@ -134,7 +134,7 @@ function CarouselContent({ className, ...props }: React.ComponentProps<'div'>) {
   const { carouselRef, orientation } = useCarousel();
 
   return (
-    <div ref={carouselRef} className="overflow-hidden" data-slot="carousel-content">
+    <div ref={carouselRef} className="overflow-hidden h-full" data-slot="carousel-content">
       <div
         className={cn('flex', orientation === 'horizontal' ? '-ml-4' : '-mt-4 flex-col', className)}
         {...props}
@@ -231,6 +231,7 @@ function HighlightNext({
   ...props
 }: React.ComponentProps<typeof Button>) {
   const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <Button
@@ -246,9 +247,15 @@ function HighlightNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
-      <img src="/highlightArrow.svg" alt="arrow" />
+      <img
+        src={isHovered ? '/arrows/highlightArrow.svg' : '/arrows/highlightArrowWhite.svg'}
+        className={isHovered ? 'text-black fill-current' : ''}
+        alt="arrow"
+      />
       <span className="sr-only">Next slide</span>
     </Button>
   );
@@ -259,30 +266,33 @@ function HighlightPrev({
   size = 'icon',
   ...props
 }: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel();
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <Button
-      data-slot="carousel-next"
+      data-slot="carousel-prev"
       variant={'outline'}
       size={size}
       className={cn(
         'absolute size-12 rounded-md bg-transparent',
         orientation === 'horizontal'
-          ? 'top-1/2 -right-12 -translate-y-1/2'
-          : '-bottom-12 left-1/2 -translate-x-1/2 rotate-90',
+          ? 'top-1/2 -left-12 -translate-y-1/2'
+          : '-top-12 left-1/2 -translate-x-1/2 rotate-90',
         className
       )}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
+      disabled={!canScrollPrev}
+      onClick={scrollPrev}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       {...props}
     >
       <img
-        className="[transform:rotateY(180deg)rotateX(180deg)]"
-        src="/highlightArrow.svg"
+        className={`[transform:rotateY(180deg)rotateX(180deg)] ${isHovered ? 'text-black fill-current' : ''}`}
+        src={isHovered ? '/arrows/highlightArrow.svg' : '/arrows/highlightArrowWhite.svg'}
         alt="arrow"
       />
-      <span className="sr-only">Next slide</span>
+      <span className="sr-only">Previous slide</span>
     </Button>
   );
 }

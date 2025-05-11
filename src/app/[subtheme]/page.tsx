@@ -34,17 +34,18 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
           style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
         >
           <div>
-            <div className="py-12 space-y-4">
-              <div className="flex items-center w-full">
+            <div className="py-12 sm:px-0 px-4 space-y-4">
+              <div className="flex gap-4 sm:gap-8 items-center sm:justify-start sm:flex-row flex-col justify-center w-full">
                 <Avatar className="w-24 h-24 text-xs">
                   <AvatarImage src={'/subthemeLogos/' + asset} />
                   <AvatarFallback>{nameInitials('na')}</AvatarFallback>
                 </Avatar>
-                <h1 className={`text-[64px] font-bold whitespace-nowrap font-playfair ml-6 mr-24`}>
-                  {name}
-                </h1>
-                <div className="flex mt-4">
-                  <LeapSeperator></LeapSeperator>
+                <div className="flex gap-4 justify-center">
+                  <LeapSeperator direction="left" className="sm:hidden"></LeapSeperator>
+                  <h1 className={`text-5xl md:text-6xl font-bold whitespace-nowrap font-playfair `}>
+                    {name}
+                  </h1>
+                  <LeapSeperator direction="right"></LeapSeperator>
                 </div>
               </div>
 
