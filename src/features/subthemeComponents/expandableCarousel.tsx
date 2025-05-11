@@ -85,7 +85,7 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        plugins={[Autoplay({ delay: 10000 })]}
+        // plugins={[Autoplay({ delay: 10000 })]}
         opts={{
           align: 'start',
           loop: true,
@@ -102,14 +102,14 @@ export default function ExpandableCarousel({
                 className={cn(
                   `h-[524px] flex basis-full transition-all ease-in-out duration-700 `,
                   item.id === selectedId
-                    ? 'md:basis-2/3 justify-end pr-8'
+                    ? 'md:basis-2/3 justify-end px-0 sm:pr-8'
                     : 'md:basis-1/3 flex-start '
                 )}
               >
                 <div
                   style={{ backgroundImage: `url(${item.bgImg})` }}
                   className={cn(
-                    'flex items-center duration-1000 w-full h-full relative bg-cover bg-center rounded-lg border-white border-solid border-2 bg-black/60 bg-blend-darken',
+                    'flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-white border-solid sm:border-2 bg-black/60 bg-blend-darken',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
