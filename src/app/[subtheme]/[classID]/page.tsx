@@ -21,7 +21,6 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
   const events: classModel[] = await getEvents(subtheme.title);
 
-  console.log(eventMedia.pub_url);
   return (
     <>
       <AuthRedirectProvider>

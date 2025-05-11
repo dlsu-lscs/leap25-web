@@ -21,7 +21,6 @@ import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 type ClassCardsProps = {
@@ -49,12 +48,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const formattedDate = date.toLocaleDateString('en-US', dateOptions);
   const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
-
-  const [url, setUrl] = useState(window.location.href);
-
-  useEffect(() => {
-    setUrl(window.location.href);
-  }, []);
 
   return (
     <>
@@ -128,7 +121,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <div className="flex items-center space-x-3">
               <LeapButton
                 disabled={event.registered_slots > 0}
-                className={`${event.registered_slots > 0 ? 'bg-white/100' : 'bg-white/65'}  px-4 py-2 font-medium text-black`}
+                className={`${event.registered_slots > 0 ? 'bg-white/100' : 'bg-white/65'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
                 {event.registered_slots > 0 ? `Join Now - ₱${event.fee}` : 'Event is Full!'}
               </LeapButton>
@@ -144,7 +137,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               ></BookmarkBorderOutlinedIcon>
               <div
                 onClick={() => {
-                  navigator.clipboard.writeText(url);
                   toast.success(`${event.title} link is ready to be shared`, {
                     style: {
                       backgroundColor: 'white',
