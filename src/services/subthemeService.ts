@@ -42,7 +42,7 @@ const getSubThemeByID = async (subthemeID: number) => {
 
 const getSubThemeByName = async (subtheme: any) => {
   try {
-    const response = await fetch(`${API_URL}/subthemes/`);
+    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`);
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');
