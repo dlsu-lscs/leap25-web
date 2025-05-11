@@ -90,51 +90,63 @@ export default function ExpandableCarousel({
           align: 'start',
           loop: true,
         }}
-        className={`w-full relative duration-1000 ${className ?? ''}`}
+        className={`w-full h-full relative duration-1000 ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <CarouselContent>
+        <CarouselContent className="!h-full">
           {itemsToShow.map((item, index) => {
             return (
               <CarouselItem
                 key={index}
                 className={cn(
-                  `h-[524px] flex basis-full transition-all ease-in-out duration-700 `,
+                  `sm:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 `,
                   item.id === selectedId
                     ? 'md:basis-2/3 justify-end px-0 sm:pr-8'
                     : 'md:basis-1/3 flex-start '
                 )}
               >
                 <div
-                  style={{ backgroundImage: `url(${item.bgImg})` }}
+                  style={{
+                    backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bgImg})`,
+                  }}
                   className={cn(
-                    'flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-white border-solid sm:border-2 bg-black/60 bg-blend-darken',
+                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-white border-solid sm:border-2 ',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
                   {item.id === selectedId && (
-                    <div className={cn('w-[400] ml-12 flex h-[420] flex-col')}>
-                      <img src={`${item.titleCard}`} className="w-64" alt="title card" />
-                      <div className="flex gap-2 my-4">
-                        <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                        <div className="w-24 h-6 border-solid border-white border-2  rounded-md"></div>
+                    <div
+                      className={cn(
+                        'sm:w-[400] w-full sm:ml-12 flex h-[420] sm:items-start justify-between items-center flex-col'
+                      )}
+                    >
+                      {item.titleCard.length > 0 ? (
+                        <img src={`${item.titleCard}`} className="w-64" alt="title card" />
+                      ) : (
+                        <h1 className="text-5xl">{item.titleFallback}</h1>
+                      )}
+                      <div className="flex flex-col sm:items-start items-center">
+                        <div className="flex sm:flex-row flex-col gap-2 my-4">
+                          <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
+                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md"></div>
+                        </div>
+                        <p className="sm:block hidden">{item.content}</p>
+                        <Button
+                          className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
+                          variant={'secondary'}
+                        >
+                          <ArrowCircleRightSharpIcon />
+                          Join Now
+                        </Button>
                       </div>
-                      <p>{item.content}</p>
-                      <Button
-                        className="w-32 mt-8 text-base font-bold px-6 py-4 bg-white text-black"
-                        variant={'secondary'}
-                      >
-                        <ArrowCircleRightSharpIcon />
-                        Join Now
-                      </Button>
                     </div>
                   )}
 
                   {item.id === selectedId && (
                     <>
-                      <HighlightNext className={`absolute top-135 right-8 `} />
-                      <HighlightPrev className="absolute top-135 right-25" />
+                      <HighlightNext className={`absolute sm:top-120 sm:right-8 top-80 right-6 `} />
+                      <HighlightPrev className="absolute sm:top-120 sm:left-auto sm:right-24 top-80 left-10" />
                     </>
                   )}
                 </div>
