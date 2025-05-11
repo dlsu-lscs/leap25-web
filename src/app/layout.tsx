@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full font-public-sans`}>
       <link rel="icon" href="/leapLogos/Logo_v1.png" />
-      <body className="h-full overflow-x-hidden">
+      <body className="h-full">
         <Providers>
           {children}
           <LeapCursor />
