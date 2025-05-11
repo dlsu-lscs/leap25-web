@@ -22,6 +22,7 @@ const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 import { toast } from 'sonner';
+import { useSaveEvent } from '@/hooks/useSaveEvent';
 
 type ClassCardsProps = {
   event: classModel;
@@ -132,9 +133,33 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <BookmarkBorderOutlinedIcon
-                sx={{ fontSize: 32, color: 'white' }}
-              ></BookmarkBorderOutlinedIcon>
+              <div
+                onClick={() => {
+                  toast.success(`${event.title} link is saved to google calendar`, {
+                    style: {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                      fontFamily: public_sans.style.fontFamily,
+                    },
+                  });
+                  useSaveEvent(
+                    event.title,
+                    event.description,
+                    orgs.name,
+                    event.venue,
+                    event.schedule
+                  );
+                }}
+                role="button"
+                className="hover:opacity-50 duration-100 transition"
+              >
+                <BookmarkBorderOutlinedIcon
+                  sx={{ fontSize: 32, color: 'white' }}
+                ></BookmarkBorderOutlinedIcon>
+              </div>
               <div
                 onClick={() => {
                   toast.success(`${event.title} link is ready to be shared`, {
