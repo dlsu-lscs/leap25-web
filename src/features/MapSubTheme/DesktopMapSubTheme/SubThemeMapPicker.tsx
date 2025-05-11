@@ -1,146 +1,188 @@
 'use client';
-import Image from 'next/image';
-import { useState } from 'react';
 
-export default function SubThemeMapPicker() {
-  const [subTheme, setSubTheme] = useState<string>('');
-  const [onHover, setHover] = useState(false);
+import type React from 'react';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+// Define the type for static images
+const subthemes = [
+  {
+    positionX: -4,
+    positionY: 50,
+    src: '/landmarks/CoralLagoon.png',
+    alt: 'Coral Lagoon',
+    route: 'coral-lagoon',
+  },
+  {
+    positionX: 36,
+    positionY: 20,
+    src: '/landmarks/PiratesCove.png',
+    alt: 'Pirates Cove',
+    route: 'pirates-cove',
+  },
+  {
+    positionX: 4,
+    positionY: -4,
+    src: '/landmarks/NorthernStarStop.png',
+    alt: 'Northern Star Stop',
+    route: 'northern-star-stop',
+  },
+  {
+    positionX: 57,
+    positionY: 45,
+    src: '/landmarks/HollowTreeHideaway.png',
+    alt: 'Hollow Tree Hideaway',
+    route: 'hollow-tree-hideaway',
+  },
+  {
+    positionX: 72,
+    positionY: 2,
+    src: '/landmarks/FairyNook.png',
+    alt: 'Fairy Nook',
+    route: 'fairy-nook',
+  },
+];
+export default function ParallaxBackground({ className = '' }: { className?: string }) {
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const strength = 50;
+  const [bgImageDims, setBgImageDims] = useState({ width: 0, height: 0 });
+  const [viewportDims, setViewportDims] = useState({ width: 0, height: 0 });
+  const [hoveredButtonIndex, setHoveredButtonIndex] = useState<number | null>(null); // Added state for hover
+
+  useEffect(() => {
+    const imgEl = new window.Image();
+    imgEl.onload = () => {
+      setBgImageDims({ width: imgEl.naturalWidth, height: imgEl.naturalHeight });
+    };
+    imgEl.src = '/map/LEAP_MAP.webp';
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 2;
+      const y = (e.clientY / window.innerHeight - 0.5) * 2;
+      setPosition({ x, y });
+    };
+
+    const updateViewportDims = () => {
+      setViewportDims({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    updateViewportDims(); // Initial dimensions
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('resize', updateViewportDims);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('resize', updateViewportDims);
+    };
+  }, []);
+
+  const translateX = -position.x * strength;
+  const translateY = -position.y * strength;
+
+  // Variables for scaled image dimensions and offsets
+  let Wi = 0,
+    Hi = 0; // Scaled width and height of the background image after 'cover'
+  let imageRenderedLeft = 0,
+    imageRenderedTop = 0; // Top-left offset of the rendered bg image content
+
+  if (
+    bgImageDims.width > 0 &&
+    bgImageDims.height > 0 &&
+    viewportDims.width > 0 &&
+    viewportDims.height > 0
+  ) {
+    const Wc = viewportDims.width + 2 * strength; // Container width
+    const Hc = viewportDims.height + 2 * strength; // Container height
+
+    const imageAspectRatio = bgImageDims.width / bgImageDims.height;
+    const containerAspectRatio = Wc / Hc;
+
+    if (imageAspectRatio > containerAspectRatio) {
+      Hi = Hc;
+      Wi = Hc * imageAspectRatio;
+    } else {
+      Wi = Wc;
+      Hi = Wc / imageAspectRatio;
+    }
+
+    const Px_norm = (position.x + 1) / 2; // Normalized mouse X (0 to 1)
+    const Py_norm = (position.y + 1) / 2; // Normalized mouse Y (0 to 1)
+
+    imageRenderedLeft = Px_norm * (Wc - Wi);
+    imageRenderedTop = Py_norm * (Hc - Hi);
+  }
 
   return (
-    <>
-      <div className="relative w-[100vw] h-[100vh] overflow-hidden">
-        {/* Northern Star Stop */}
-        <div className="fixed z-0">
-          <a
-            href="/northern-star-stop"
-            className="fixed top-[0%] left-[6%] rounded-full w-[32vw] h-[32vw] bg-transparent"
-            onMouseEnter={() => {
-              setSubTheme('NorthernStarStop');
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            {onHover && subTheme == 'NorthernStarStop' ? (
-              <>
-                <Image
-                  src="/landmarks/NorthernStarStop.png"
-                  width={150}
-                  height={150}
-                  alt="Northern Star Stop Landmark"
-                  className="fixed -top-[2.5%] left-[15%] animate-bounce"
-                  priority
-                />
-              </>
-            ) : null}
-          </a>
+    <div
+      style={{ position: 'fixed' }}
+      className={`relative overflow-hidden w-[100vw] h-[100vh] top-0 left-0 ${className}`}
+    >
+      {/* Main background image */}
+      <div
+        className="absolute inset-0 transition-transform duration-200 ease-out"
+        style={{
+          width: `calc(100% + ${2 * strength}px)`,
+          height: `calc(100% + ${2 * strength}px)`,
+          top: `-${strength}px`,
+          left: `-${strength}px`,
+          backgroundImage: `url(/map/LEAP_MAP.webp)`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat', // Added for good practice
+          backgroundPosition: `${((position.x + 1) / 2) * 100}% ${((position.y + 1) / 2) * 100}%`, // Dynamic background position
+          transform: `translate(${translateX}px, ${translateY}px)`, // Ensure no scale(1.1) here
+        }}
+      />
 
-          {/* Pirates Cove */}
-          <a
-            href="/pirates-cove"
-            className="fixed top-[10%] left-[30%] rounded-full w-[40vw] h-[40vw] bg-transparent"
-            onMouseEnter={() => {
-              setSubTheme('PiratesCove');
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            {onHover && subTheme == 'PiratesCove' ? (
-              <>
-                <Image
-                  src="/landmarks/PiratesCove.png"
-                  width={150}
-                  height={150}
-                  alt="Pirates Cove Landmark"
-                  className="fixed top-[31%] left-[46.5%] animate-bounce"
-                  priority
-                />
-              </>
-            ) : null}
-          </a>
+      {/* Static images that move with the background */}
+      {subthemes.map((img, index) => {
+        let finalSubthemeLeft = 0;
+        let finalSubthemeTop = 0;
 
-          {/* Fairy Nook */}
-          <a
-            href="/fairy-nook"
-            className="fixed -top-[8%] left-[68%] rounded-full w-[32vw] h-[32vw] bg-transparent"
-            onMouseEnter={() => {
-              setSubTheme('FairyNook');
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            {onHover && subTheme == 'FairyNook' ? (
-              <>
-                <Image
-                  src="/landmarks/FairyNook.png"
-                  width={150}
-                  height={150}
-                  alt="Fairy Nook Landmark"
-                  className="fixed -top-[2%] left-[84%] animate-bounce"
-                  priority
-                />
-              </>
-            ) : null}
-          </a>
+        if (Wi > 0 && Hi > 0) {
+          // Ensure Wi and Hi are calculated
+          const subthemeBaseXOnScaledBg = (img.positionX / 100) * Wi;
+          const subthemeBaseYOnScaledBg = (img.positionY / 100) * Hi;
 
-          {/* Hollow Tree Hideaway */}
-          <a
-            href="/hollow-tree-hideaway"
-            className="fixed top-[44%] left-[65%] rounded-full w-[32vw] h-[32vw] bg-transparent"
-            onMouseEnter={() => {
-              setSubTheme('HollowTreeHideaway');
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
-            }}
-          >
-            {onHover && subTheme == 'HollowTreeHideaway' ? (
-              <>
-                <Image
-                  src="/landmarks/HollowTreeHideaway.png"
-                  width={150}
-                  height={150}
-                  alt="Hollow Tree Hideaway Landmark"
-                  className="fixed top-[64.5%] left-[67.2%] animate-bounce"
-                  priority
-                />
-              </>
-            ) : null}
-          </a>
+          finalSubthemeLeft = imageRenderedLeft + subthemeBaseXOnScaledBg;
+          finalSubthemeTop = imageRenderedTop + subthemeBaseYOnScaledBg;
+        }
 
-          {/* Coral Lagoon */}
-          <a
-            href="/coral-lagoon"
-            className="fixed top-[65%] left-[0%] rounded-full w-[32vw] h-[32vw] bg-transparent"
-            onMouseEnter={() => {
-              setSubTheme('CoralLagoon');
-              setHover(true);
-            }}
-            onMouseLeave={() => {
-              setHover(false);
+        return (
+          <div
+            key={index}
+            className="absolute transition-transform duration-200 ease-out" // Consider transition-all if left/top changes should also be smooth
+            style={{
+              left: `${finalSubthemeLeft}px`,
+              top: `${finalSubthemeTop}px`,
+              transform: `translate(${translateX}px, ${translateY}px)`,
+              zIndex: 5,
             }}
           >
-            {onHover && subTheme == 'CoralLagoon' ? (
-              <>
-                <Image
-                  src="/landmarks/CoralLagoon.png"
-                  width={150}
-                  height={150}
-                  alt="Coral Lagoon Landmark"
-                  className="fixed top-[73%] left-[7%] animate-bounce"
-                  priority
-                />
-              </>
-            ) : null}
-          </a>
-        </div>
-      </div>
-    </>
+            <Link
+              href={`/${img.route}`}
+              className="lg:!w-[500px] lg:!h-[500px] w-96 h-96 flex justify-center items-center" // Removed hover:hidden
+              onClick={() => console.log(`Clicked landmark: ${img.alt}`)} // Example onClick
+              onMouseEnter={() => setHoveredButtonIndex(index)} // Show image on hover
+              onMouseLeave={() => setHoveredButtonIndex(null)} // Hide image when hover ends
+            >
+              {/* Image is now always rendered, opacity and bounce are conditional */}
+              <Image
+                src={img.src || '/placeholder.svg'}
+                alt={img.alt}
+                width={200}
+                height={200}
+                className={`
+                  transition-opacity duration-300 ease-in-out
+                  ${hoveredButtonIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+                  ${hoveredButtonIndex === index ? 'animate-bounce' : ''}
+                `}
+              />
+            </Link>
+          </div>
+        );
+      })}
+    </div>
   );
 }
