@@ -5,16 +5,18 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import { getSubTheme } from '@/services/subthemeService';
+import { getSubTheme, getSubThemeByName } from '@/services/subthemeService';
 import { getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
-import { classModel, classPubModel } from '@/types/classModels';
+import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events: classModel[] = await getEvents('Test Subtheme with Image');
+  const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+  console.log(subthemeDetails);
 
   return (
     <>
