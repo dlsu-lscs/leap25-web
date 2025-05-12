@@ -10,7 +10,6 @@ import { getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
-import ErrorPage from '../error';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
@@ -43,7 +42,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                   <AvatarFallback>{nameInitials('na')}</AvatarFallback>
                 </Avatar>
                 <div className="flex gap-4 justify-center">
-                  <h1 className={`text-3xl md:text-6xl font-bold text-nowrap font-playfair `}>
+                  <h1 className={`text-5xl md:text-6xl font-bold whitespace-nowrap font-playfair `}>
                     {subthemeDetails.title}
                   </h1>
                   <LeapSeperator direction="right"></LeapSeperator>
