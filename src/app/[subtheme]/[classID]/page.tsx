@@ -29,7 +29,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
         </div>
         <div
           style={{ backgroundImage: `url(${eventMedia.pub_url})` }}
-          className={`flex flex-col p-40 py-44 bg-black/50 bg-blend-multiply bg-cover bg-center`}
+          className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/50 bg-blend-multiply bg-cover`}
         >
           <div>
             {' '}
@@ -41,7 +41,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
             ></ClassCard>
           </div>
           <div
-            className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold text-4xl text-shadow-lg`}
+            className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
           >
             <div className="space-y-5">
               <p>More in {subtheme.title}</p>

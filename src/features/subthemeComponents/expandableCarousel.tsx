@@ -86,7 +86,7 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        // plugins={[Autoplay({ delay: 10000 })]}
+        plugins={[Autoplay({ delay: 8000 })]}
         opts={{
           align: 'start',
           loop: true,
@@ -112,7 +112,7 @@ export default function ExpandableCarousel({
                     backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bgImg})`,
                   }}
                   className={cn(
-                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-white border-solid sm:border-2 ',
+                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-solid sm:border-2 border-white/70',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
@@ -142,12 +142,12 @@ export default function ExpandableCarousel({
                       <div className="flex flex-col sm:flex-col-reverse gap-2 items-center sm:mt-8">
                         <div className="flex gap-2 sm:justify-start justify-center items-center w-full sm:flex-row flex-col">
                           <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md mb-2"></div>
+                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md "></div>
                         </div>
                         {item.titleCard.length > 0 ? (
-                          <img src={`${item.titleCard}`} className="w-64" alt="title card" />
+                          <img src={`${item.titleCard}`} className="w-64 mt-2" alt="title card" />
                         ) : (
-                          <h1 className="text-5xl">{item.titleFallback}</h1>
+                          <h1 className="text-5xl mt-2">{item.titleFallback}</h1>
                         )}
                       </div>
 
