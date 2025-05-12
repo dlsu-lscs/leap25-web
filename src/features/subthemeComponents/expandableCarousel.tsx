@@ -86,7 +86,7 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        plugins={[Autoplay({ delay: 8000 })]}
+        // plugins={[Autoplay({ delay: 8000 })]}
         opts={{
           align: 'start',
           loop: true,
@@ -122,7 +122,7 @@ export default function ExpandableCarousel({
                         'relative sm:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
                       )}
                     >
-                      <div className="absolute sm:-left-10 left-1/2 sm:translate-0 -translate-x-1/2 sm:-top-22 -top-28 flex items-center justify-center ">
+                      <div className="absolute sm:-left-10 left-1/2 sm:translate-0 -translate-x-[49%] sm:-top-22 -top-28 flex items-center justify-center ">
                         <LeapSeperator
                           direction="left"
                           className="sm:hidden"

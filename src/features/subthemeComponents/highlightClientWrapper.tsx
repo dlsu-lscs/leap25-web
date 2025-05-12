@@ -55,7 +55,7 @@ export default function HighlightClientWrapper({ name, asset }: { name: string; 
         <div className="absolute inset-0 bg-black/60 bg-blend-multiply" />
         {/* Content Layer - sits on top of the background layers */}
         <div className="relative z-10 sm:px-0 flex flex-col w-full h-full items-center pt-24 sm:pt-36">
-          <div className="flex flex-col mt-4 px-0 sm:px-4 h-full w-full overflow-x-hidden">
+          <div className="flex flex-col mt-4 px-0 sm:px-4 h-full w-full">
             <ExpandableCarousel
               setBgImg={setBgImg}
               itemsToShow={dummyHighlightData}
