@@ -152,7 +152,9 @@ export default function ExpandableCarousel({
                       </div>
 
                       <div className="flex flex-col sm:items-start items-center">
-                        <p className="sm:block hidden">{item.content}</p>
+                        <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">
+                          {item.content}
+                        </p>
                         <Button
                           className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
                           variant={'secondary'}
