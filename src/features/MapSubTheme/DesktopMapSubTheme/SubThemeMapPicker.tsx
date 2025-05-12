@@ -175,7 +175,7 @@ export default function ParallaxBackground({ className = '' }: { className?: str
                 height={200}
                 className={`
                   transition-opacity duration-300 ease-in-out
-                  ${hoveredButtonIndex === index ? 'opacity-100' : 'opacity-0 pointer-events-none'}
+                  ${hoveredButtonIndex === index ? 'opacity-100' : 'opacity-50 pointer-events-none'}
                   ${hoveredButtonIndex === index ? 'animate-bounce' : ''}
                 `}
               />
