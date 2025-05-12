@@ -1,9 +1,23 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
+/* Desktop: reset to normal */
+@media (min-width: 769px) {
+  .zoom-img {
+    transform: none !important;
+  }
+  .bg-container {
+    background-size: cover !important;
+    background-position: center;
+  }
+}
+
 @theme inline {
+  --font-public-sans: 'Public Sans', sans-serif;
+  --font-playfair: 'Playfair Display SC', serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -115,6 +129,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    cursor: none;
   }
   body {
     @apply bg-background text-foreground;
