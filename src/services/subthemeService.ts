@@ -10,7 +10,7 @@ const getSubTheme = (subtheme: string) => {
     name = 'Coral Lagoon';
   } else if (subtheme === 'hollow-tree-hideaway') {
     asset = 'HollowTreeHideaway.png';
-    name = 'Hollow Tree Hideaway';
+    name = 'Hollowtree Hideway';
   } else if (subtheme === 'northern-star-stop') {
     asset = 'NorthernStarStop.png';
     name = 'Northern Star Stop';

@@ -10,13 +10,13 @@ import { getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
+import ErrorPage from '../error';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events: classModel[] = await getEvents('Test Subtheme with Image');
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
-  console.log(subthemeDetails);
 
   return (
     <>
@@ -32,19 +32,19 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
           <FadeOverlay></FadeOverlay>
         </div>
         <div
-          className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover`}
-          style={{ backgroundImage: `url("/SubThemeBG/${asset}")` }}
+          className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover bg-center`}
+          style={{ backgroundImage: `url("${subthemeDetails.background_pub_url}")` }}
         >
           <div>
             <div className="py-12 sm:px-0 px-4 space-y-4">
               <div className="flex gap-4 sm:gap-8 items-center justify-start flex-row center w-full">
                 <Avatar className="sm:w-24 sm:h-24 w-20 h-20 text-xs">
-                  <AvatarImage src={'/subthemeLogos/' + asset} />
+                  <AvatarImage src={subthemeDetails.logo_pub_url} />
                   <AvatarFallback>{nameInitials('na')}</AvatarFallback>
                 </Avatar>
                 <div className="flex gap-4 justify-center">
                   <h1 className={`text-3xl md:text-6xl font-bold text-nowrap font-playfair `}>
-                    {name}
+                    {subthemeDetails.title}
                   </h1>
                   <LeapSeperator direction="right"></LeapSeperator>
                 </div>

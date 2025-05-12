@@ -25,7 +25,10 @@ export default function Navbar({ className, src, name }: NavbarProps) {
         className={`bg-black/0.2 text-white min-w-screen flex justify-between sm:px-8 px-4 py-5  ${className}`}
       >
         <div className="flex items-center text-2xl space-x-1.5">
-          <a href="./" className="hover:opacity-50 transition duration-50 flex items-center">
+          <a
+            href="./"
+            className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+          >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button"></ChevronLeftOutlinedIcon>
             {name == undefined ? (
               <div className={`text-[20px] ${public_sans.className}`}>Back to Map</div>
