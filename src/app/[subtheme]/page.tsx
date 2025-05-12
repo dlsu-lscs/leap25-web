@@ -42,7 +42,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                   <AvatarFallback>{nameInitials('na')}</AvatarFallback>
                 </Avatar>
                 <div className="flex gap-4 justify-center">
-                  <h1 className={`text-5xl md:text-6xl font-bold whitespace-nowrap font-playfair `}>
+                  <h1 className={`text-3xl md:text-6xl font-bold whitespace-nowrap font-playfair `}>
                     {subthemeDetails.title}
                   </h1>
                   <LeapSeperator direction="right"></LeapSeperator>
