@@ -13,6 +13,7 @@ import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { StaticImageData } from 'next/image';
 import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 // Define the type for the items in the carousel
 interface CarouselItemData {
@@ -20,6 +21,7 @@ interface CarouselItemData {
   id: number;
   img: string; // Or a more specific type if available
   bgPos: string;
+  route: string;
 }
 
 // Define the props for the component
@@ -36,6 +38,7 @@ export default function SubThemeCarousel({
 }: SubThemeCarouselProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
+  const router = useRouter();
 
   // Update selected item when carousel settles
   const updateSelectedItem = useCallback(() => {
@@ -71,7 +74,11 @@ export default function SubThemeCarousel({
 
   // Immediately update selection when clicking
   const handleSelect = (id: number, index: number) => {
-    // Update selection state immediately for responsiveness
+    // Update selection state immediately for responsivenes
+    if (id === selectedId) {
+      router.push(items[selectedId].route);
+    }
+
     setSelectedId(id);
 
     // Then scroll to the item
