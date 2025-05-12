@@ -65,4 +65,9 @@ const getEventMedia = async (eventID: any) => {
   }
 };
 
-export { getEvents, getEventByID, getEventMedia };
+const shareEvent = () => {
+  if (typeof window === 'undefined') return;
+  navigator.clipboard.writeText(window.location.href);
+};
+
+export { getEvents, getEventByID, getEventMedia, shareEvent };
