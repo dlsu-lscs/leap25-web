@@ -21,8 +21,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   return (
     <>
-      <ErrorPage></ErrorPage>
-      {/* <AuthRedirectProvider>
+      <AuthRedirectProvider>
         <div className="fixed top-0 z-20">
           <Navbar />
         </div>
@@ -105,7 +104,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             </div>
           </div>
         </div>
-      </AuthRedirectProvider> */}
+      </AuthRedirectProvider>
     </>
   );
 }
