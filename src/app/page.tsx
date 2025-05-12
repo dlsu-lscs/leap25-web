@@ -15,7 +15,7 @@ export default function Map() {
     };
   }, []);
   return (
-    <>
+    <div className="overflow-hidden h-full">
       <AuthRedirectProvider>
         <img
           src="/map/LEAP_MAP.webp"
@@ -45,6 +45,6 @@ export default function Map() {
           </>
         )}
       </AuthRedirectProvider>
-    </>
+    </div>
   );
 }

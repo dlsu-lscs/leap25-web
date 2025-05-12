@@ -18,7 +18,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
   return (
-    <>
+    <div className="overflow-hidden">
       <AuthRedirectProvider>
         <div className="fixed top-0 z-20">
           <Navbar />
@@ -27,7 +27,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
           asset={asset || 'error'}
           name={name || 'error'}
         ></HighlightClientWrapper>
-        <div className="absolute -translate-y-10">
+        <div className="absolute -translate-y-10 ">
           <FadeOverlay></FadeOverlay>
         </div>
         <div
@@ -103,6 +103,6 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
           </div>
         </div>
       </AuthRedirectProvider>
-    </>
+    </div>
   );
 }
