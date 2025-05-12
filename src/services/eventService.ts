@@ -67,7 +67,10 @@ const getEventMedia = async (eventID: any) => {
 
 const shareEvent = () => {
   if (typeof window === 'undefined') return;
-  navigator.clipboard.writeText(window.location.href);
+  navigator.clipboard
+    .writeText(window.location.href)
+    .then(() => console.log('Copied!'))
+    .catch((err) => console.error('Clipboard error:', err));
 };
 
 export { getEvents, getEventByID, getEventMedia, shareEvent };
