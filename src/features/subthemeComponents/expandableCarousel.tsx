@@ -86,7 +86,7 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        // plugins={[Autoplay({ delay: 8000 })]}
+        plugins={[Autoplay({ delay: 8000 })]}
         opts={{
           align: 'start',
           loop: true,
