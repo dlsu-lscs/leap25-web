@@ -22,7 +22,7 @@ const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 import { toast } from 'sonner';
-import { useSaveEvent } from '@/hooks/useSaveEvent';
+import { saveEventToCalendar } from '@/services/googleCalendarService';
 
 type ClassCardsProps = {
   event: classModel;
@@ -145,7 +145,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                       fontFamily: public_sans.style.fontFamily,
                     },
                   });
-                  useSaveEvent(
+                  saveEventToCalendar(
                     event.title,
                     event.description,
                     orgs.name,
