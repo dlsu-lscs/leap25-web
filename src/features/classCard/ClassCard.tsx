@@ -24,6 +24,7 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 import { toast } from 'sonner';
 import { saveEventToCalendar } from '@/services/googleCalendarService';
 import { registerEvent } from '@/services/registerService';
+import { shareEvent } from '@/services/eventService';
 
 type ClassCardsProps = {
   event: classModel;
@@ -178,6 +179,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                       fontFamily: public_sans.style.fontFamily,
                     },
                   });
+                  shareEvent();
                 }}
                 role="button"
                 className="hover:opacity-50 duration-100 transition"
