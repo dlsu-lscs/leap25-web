@@ -10,6 +10,7 @@ import { getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
+import ErrorPage from '../error';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
@@ -20,7 +21,8 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   return (
     <>
-      <AuthRedirectProvider>
+      <ErrorPage></ErrorPage>
+      {/* <AuthRedirectProvider>
         <div className="fixed top-0 z-20">
           <Navbar />
         </div>
@@ -103,7 +105,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             </div>
           </div>
         </div>
-      </AuthRedirectProvider>
+      </AuthRedirectProvider> */}
     </>
   );
 }

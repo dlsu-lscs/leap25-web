@@ -6,7 +6,7 @@ export default function Loading() {
       <div className="h-full w-full bg-[url('/landingBG.png')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
         <div className="flex flex-col items-center justify-center -translate-y-8">
           <Image
-            src={'/loadingMacky.gif'}
+            src={'/lscsAssets/loadingMacky.gif'}
             width={120}
             height={120}
             unoptimized

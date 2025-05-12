@@ -9,7 +9,14 @@ export default function ErrorPage() {
 
   return (
     <div className="h-full w-full bg-[url('/landingBG.png')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
-      <h1 className="text-5xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
+      <Image
+        width={200}
+        height={200}
+        alt="not found"
+        src="/lscsAssets/XXMACKY.png"
+        className="my-6"
+      />
+      <h1 className="text-4xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
         <span className="text-[#FBBC05] font-playfair">Oops! </span>
         <span className="text-[#98C10E] font-playfair">You’ve drifted into Neverland..</span>
       </h1>
