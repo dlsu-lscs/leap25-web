@@ -2,7 +2,7 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useState } from 'react';
-import GetGoogleLogin from '@/services/googleLoginServce';
+import GetGoogleLogin from '@/services/googleLoginService';
 
 const useGoogleAuth = () => {
   const [user, setUser] = useState<any>(null);
