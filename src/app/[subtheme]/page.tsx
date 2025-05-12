@@ -37,13 +37,12 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
         >
           <div>
             <div className="py-12 sm:px-0 px-4 space-y-4">
-              <div className="flex gap-4 sm:gap-8 items-center sm:justify-start sm:flex-row flex-col justify-center w-full">
-                <Avatar className="w-24 h-24 text-xs">
+              <div className="flex gap-4 sm:gap-8 items-center justify-start flex-row center w-full">
+                <Avatar className="sm:w-24 sm:h-24 w-20 h-20 text-xs">
                   <AvatarImage src={'/subthemeLogos/' + asset} />
                   <AvatarFallback>{nameInitials('na')}</AvatarFallback>
                 </Avatar>
                 <div className="flex gap-4 justify-center">
-                  <LeapSeperator direction="left" className="sm:hidden"></LeapSeperator>
                   <h1 className={`text-5xl md:text-6xl font-bold whitespace-nowrap font-playfair `}>
                     {name}
                   </h1>
@@ -77,7 +76,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                 })}
               ></LeapCarousel>
               <div>
-                <h2 className={`text-[30px] font-bold sm:ml-0 ml- font-playfair`}>Day 2</h2>
+                <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 2</h2>
               </div>
               <LeapCarousel
                 loopItems={false}

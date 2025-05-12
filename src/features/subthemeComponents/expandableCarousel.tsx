@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils';
 import { style } from '@mui/system';
 import { Button } from '@/components/ui/Button';
+import LeapSeperator from '@/components/ui/LeapSeperator';
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: any[];
@@ -94,13 +95,13 @@ export default function ExpandableCarousel({
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        <CarouselContent className="!h-full">
+        <CarouselContent className="!h-full !overflow-visible">
           {itemsToShow.map((item, index) => {
             return (
               <CarouselItem
                 key={index}
                 className={cn(
-                  `sm:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 `,
+                  `sm:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 overflow-visible`,
                   item.id === selectedId
                     ? 'md:basis-2/3 justify-end px-0 sm:pr-8'
                     : 'md:basis-1/3 flex-start '
@@ -118,19 +119,39 @@ export default function ExpandableCarousel({
                   {item.id === selectedId && (
                     <div
                       className={cn(
-                        'sm:w-[400] w-full sm:ml-12 flex h-[420] sm:items-start justify-between items-center flex-col'
+                        'relative sm:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
                       )}
                     >
-                      {item.titleCard.length > 0 ? (
-                        <img src={`${item.titleCard}`} className="w-64" alt="title card" />
-                      ) : (
-                        <h1 className="text-5xl">{item.titleFallback}</h1>
-                      )}
-                      <div className="flex flex-col sm:items-start items-center">
-                        <div className="flex sm:flex-row flex-col gap-2 my-4">
+                      <div className="absolute sm:-left-10 left-1/2 sm:translate-0 -translate-x-1/2 sm:-top-22 -top-28 flex items-center justify-center ">
+                        <LeapSeperator
+                          direction="left"
+                          className="sm:hidden"
+                          variant="diamond"
+                        ></LeapSeperator>
+                        <h1
+                          className={`sm:text-5xl text-3xl font-bold whitespace-nowrap text-center font-playfair`}
+                        >
+                          LEAP's choice
+                        </h1>
+                        <LeapSeperator
+                          direction="right"
+                          className="pl-4"
+                          variant="diamond"
+                        ></LeapSeperator>
+                      </div>
+                      <div className="flex flex-col sm:flex-col-reverse gap-2 items-center sm:mt-8">
+                        <div className="flex gap-2 sm:justify-start justify-center items-center w-full sm:flex-row flex-col">
                           <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md"></div>
+                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md mb-2"></div>
                         </div>
+                        {item.titleCard.length > 0 ? (
+                          <img src={`${item.titleCard}`} className="w-64" alt="title card" />
+                        ) : (
+                          <h1 className="text-5xl">{item.titleFallback}</h1>
+                        )}
+                      </div>
+
+                      <div className="flex flex-col sm:items-start items-center">
                         <p className="sm:block hidden">{item.content}</p>
                         <Button
                           className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
