@@ -1,9 +1,11 @@
 'use client';
+import useMobileScreen from '@/hooks/useMobileScreen';
 import { useEffect, useRef, useState } from 'react';
 
 export default function LeapCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [cursorState, setCursorState] = useState<'default' | 'hover' | 'click'>('default');
+  const isMobile = useMobileScreen();
 
   useEffect(() => {
     let animationFrameId: number;
@@ -50,21 +52,23 @@ export default function LeapCursor() {
     click: '/cursors/Click.png',
   };
 
-  return (
-    <div
-      ref={cursorRef}
-      style={{
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        pointerEvents: 'none',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 9999,
-        transition: 'transform 0.02s linear',
-        willChange: 'transform',
-      }}
-    >
-      <img src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />
-    </div>
-  );
+  if (!isMobile.isMobile) {
+    return (
+      <div
+        ref={cursorRef}
+        style={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          pointerEvents: 'none',
+          transform: 'translate(-50%, -50%)',
+          zIndex: 9999,
+          transition: 'transform 0.02s linear',
+          willChange: 'transform',
+        }}
+      >
+        <img src={cursorImage[cursorState]} alt="cursor" width={40} height={40} draggable={false} />
+      </div>
+    );
+  }
 }
