@@ -58,6 +58,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                           subtheme={subtheme.title}
                           id={event.id}
                           registered_slots={event.registered_slots}
+                          max_slots={event.max_slots}
                           descripton={event.description}
                           title={event.title}
                           eventMedia={eventMedia}
@@ -83,6 +84,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                           subtheme={subtheme.title}
                           id={event.id}
                           registered_slots={event.registered_slots}
+                          max_slots={event.max_slots}
                           descripton={event.description}
                           title={event.title}
                           eventMedia={eventMedia}
@@ -108,6 +110,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                           subtheme={subtheme.title}
                           id={event.id}
                           registered_slots={event.registered_slots}
+                          max_slots={event.max_slots}
                           descripton={event.description}
                           title={event.title}
                           eventMedia={eventMedia}
