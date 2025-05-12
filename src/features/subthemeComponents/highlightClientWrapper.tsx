@@ -54,17 +54,8 @@ export default function HighlightClientWrapper({ name, asset }: { name: string; 
         {/* Black Overlay with Blend Mode Layer */}
         <div className="absolute inset-0 bg-black/60 bg-blend-multiply" />
         {/* Content Layer - sits on top of the background layers */}
-        <div className="relative z-10 sm:px-0 flex flex-col w-full h-full items-center pt-24 sm:pt-20">
-          <div className="flex items-center justify-center overflow-hidden sm:justify-start w-full sm:pl-12">
-            <LeapSeperator direction="left" className="sm:hidden" variant="diamond"></LeapSeperator>
-            <h1
-              className={`sm:text-5xl text-3xl font-bold whitespace-nowrap text-center font-playfair lg:ml-[14vw] `}
-            >
-              LEAP's choice
-            </h1>
-            <LeapSeperator direction="right" className="pl-4" variant="diamond"></LeapSeperator>
-          </div>
-          <div className="flex flex-col mt-4 h-full w-full overflow-x-hidden">
+        <div className="relative z-10 sm:px-0 flex flex-col w-full h-full items-center pt-24 sm:pt-36">
+          <div className="flex flex-col mt-4 px-0 sm:px-4 h-full w-full over-x-hidden">
             <ExpandableCarousel
               setBgImg={setBgImg}
               itemsToShow={dummyHighlightData}
