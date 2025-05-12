@@ -69,7 +69,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                 })}
               ></LeapCarousel>
             </div>
-            <div className="space-y-5">
+            {/* <div className="space-y-5">
               <p>If you liked this, you might like...</p>
               <LeapCarousel
                 loopItems={false}
@@ -94,7 +94,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
                   }
                 })}
               ></LeapCarousel>
-            </div>
+            </div> */}
             <div className="space-y-5">
               <p>Recently Viewed</p>
               <LeapCarousel
