@@ -29,7 +29,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
         </div>
         <div
           style={{ backgroundImage: `url(${eventMedia.pub_url})` }}
-          className={`flex flex-col p-40 py-44 bg-black/50 bg-blend-multiply bg-cover`}
+          className={`flex flex-col p-40 py-44 bg-black/50 bg-blend-multiply bg-cover bg-center`}
         >
           <div>
             {' '}
