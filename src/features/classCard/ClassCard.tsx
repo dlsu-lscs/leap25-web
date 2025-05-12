@@ -23,6 +23,7 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 
 import { toast } from 'sonner';
 import { saveEventToCalendar } from '@/services/googleCalendarService';
+import { registerEvent } from '@/services/registerService';
 
 type ClassCardsProps = {
   event: classModel;
@@ -121,8 +122,13 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="my-4 flex justify-between">
             <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
-                disabled={event.registered_slots > 0}
-                className={`${event.registered_slots > 0 ? 'bg-white/100' : 'bg-white/65'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
+                onClick={() => {
+                  registerEvent(
+                    'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                  );
+                }}
+                disabled={event.registered_slots === 0}
+                className={`${event.registered_slots === 0 ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
                 {event.registered_slots > 0 ? `Join Now - ₱${event.fee}` : 'Event is Full!'}
               </LeapButton>
