@@ -40,4 +40,22 @@ const getSubThemeByID = async (subthemeID: number) => {
   }
 };
 
-export { getSubTheme, getSubThemeByID };
+const getSubThemeByName = async (subtheme: any) => {
+  try {
+    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get subtheme');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
+export { getSubTheme, getSubThemeByID, getSubThemeByName };
