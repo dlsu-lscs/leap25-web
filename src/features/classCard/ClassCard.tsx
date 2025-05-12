@@ -70,7 +70,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <h1
             className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
           >
-            {0 || 'R&Deploy Your Own Bot Workshop'}
+            {event.title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
