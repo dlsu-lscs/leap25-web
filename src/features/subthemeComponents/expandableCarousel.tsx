@@ -86,7 +86,7 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        // plugins={[Autoplay({ delay: 10000 })]}
+        plugins={[Autoplay({ delay: 8000 })]}
         opts={{
           align: 'start',
           loop: true,
@@ -112,7 +112,7 @@ export default function ExpandableCarousel({
                     backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bgImg})`,
                   }}
                   className={cn(
-                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-white border-solid sm:border-2 ',
+                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-solid sm:border-2 border-white/70',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >

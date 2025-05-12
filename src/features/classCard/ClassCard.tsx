@@ -52,26 +52,26 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   return (
     <>
-      <div className={`flex space-x-10 text-white ${public_sans.className}`}>
-        <div>
-          <img
-            className="h-[560px] w-[448px] bg-[#D9D9D9] border-none outline-none"
-            src={eventMedia.pub_url}
-          />
-        </div>
-        <div>
-          <div className=" space-x-3 text-sm font-medium text-black">
+      <div
+        className={`flex justify-center md:flex-row flex-col items-center gap-6 text-white ${public_sans.className}`}
+      >
+        <img
+          className="sm:h-[560px] h-[496px] w-[448px] bg-[#D9D9D9] border-none outline-none"
+          src={eventMedia.pub_url}
+        />
+        <div className="flex flex-col ">
+          <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
             <LeapTag className="bg-white">{'₱' + event.fee || 0}</LeapTag>
           </div>
           <h1
-            className={`text-[64px] font-bold my-4 w-[75vh] text-white text-shadow-lg ${playfair_display.className}`}
+            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
           >
-            {event.title || 'R&Deploy Your Own Bot Workshop'}
+            {0 || 'R&Deploy Your Own Bot Workshop'}
           </h1>
-          <div className="flex items-center my-8">
-            <div className="space-x-3 flex flex-wrap w-[75vh] gap-y-1.5">
+          <div className="flex items-center sm:my-8 my-4">
+            <div className="space-x-3 flex flex-wrap gap-y-1.5">
               <HostName src={orgs.org_logo || undefined}>{orgs.name}</HostName>
               {/* {orgs.map((org: orgModel, hostID: number) => (
                 <HostName src={org.orgLogo || undefined} key={hostID}>
@@ -80,12 +80,12 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               ))} */}
             </div>
           </div>
-          <div className="flex space-x-4">
+          <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
             <ClassDetails
               className="text-white"
               icon={
                 <CalendarMonthOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
+                  sx={{ fontSize: 24, color: 'white' }}
                 ></CalendarMonthOutlinedIcon>
               }
             >
@@ -95,7 +95,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               className="text-white"
               icon={
                 <AccessTimeOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
+                  sx={{ fontSize: 24, color: 'white' }}
                 ></AccessTimeOutlinedIcon>
               }
             >
@@ -105,21 +105,21 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               className="text-white"
               icon={
                 <LocationOnOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
+                  sx={{ fontSize: 24, color: 'white' }}
                 ></LocationOnOutlinedIcon>
               }
             >
               {event.venue || 'venue'}
             </ClassDetails>
           </div>
-          <div className="my-4 w-[70vh]">
+          <div className="my-4">
             <ClassDescription className="font-extrabold">
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
           </div>
-          <div className="my-6 flex justify-between">
-            <div className="flex items-center space-x-3">
+          <div className="my-4 flex justify-between">
+            <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
                 disabled={event.registered_slots > 0}
                 className={`${event.registered_slots > 0 ? 'bg-white/100' : 'bg-white/65'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
