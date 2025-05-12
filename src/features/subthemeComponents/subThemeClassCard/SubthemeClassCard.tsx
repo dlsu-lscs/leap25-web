@@ -13,6 +13,7 @@ interface SubThemeClassCardProps {
   descripton: string;
   registered_slots: number;
   eventMedia: classPubModel;
+  max_slots: number;
 }
 export default function SubThemeClassCard({
   subtheme,
@@ -21,6 +22,7 @@ export default function SubThemeClassCard({
   descripton,
   registered_slots,
   eventMedia,
+  max_slots,
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
   return (
@@ -35,19 +37,25 @@ export default function SubThemeClassCard({
         <AnimatePresence>
           {onHover ? (
             <>
+              {registered_slots > max_slots * (1 / 4) ? (
+                <div className="mx-5 my-4"></div>
+              ) : (
+                <>
+                  <motion.div
+                    className="mx-5 my-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <LeapTag className="text-[10px]  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
+                      {registered_slots} Slots Available
+                    </LeapTag>
+                  </motion.div>
+                </>
+              )}
               <motion.div
-                className="mx-5 my-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.2 }}
-              >
-                <LeapTag className="text-[10px]  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
-                  {registered_slots} Slots Available
-                </LeapTag>
-              </motion.div>
-              <motion.div
-                className="mx-5 my-4 space-y-1.5"
+                className="mx-5 my-4 space-y-1.5 -translate-y-3"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 10 }}
