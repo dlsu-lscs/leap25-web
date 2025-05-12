@@ -17,9 +17,9 @@ export default function Map() {
   return (
     <div className="overflow-hidden h-full relative z-50">
       {onImageLoad && (
-        <div className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg -translate-x-1/2 font-playfair text-center z-30">
-          <h3 className="sm:text-3xl text-2xl text-[#98C10E]">Leap Into The</h3>
-          <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">Adventure</h1>
+        <div className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30">
+          <h3 className="sm:text-3xl text-2xl text-[#98C10E]">LEAP INTO THE</h3>
+          <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">ADVENTURE</h1>
         </div>
       )}
       <AuthRedirectProvider>
