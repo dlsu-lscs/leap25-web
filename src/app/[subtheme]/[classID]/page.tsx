@@ -44,58 +44,6 @@ export default async function Class({ params }: { params: Promise<{ classID: num
             className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
           >
             <div className="space-y-5">
-              <p>More in {subtheme.title}</p>
-              <LeapCarousel
-                loopItems={false}
-                row2={false}
-                itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                  if (eventMedia != undefined) {
-                    return (
-                      <div key={index}>
-                        <SubThemeClassCard
-                          key={index}
-                          subtheme={subtheme.title}
-                          id={event.id}
-                          registered_slots={event.registered_slots}
-                          max_slots={event.max_slots}
-                          descripton={event.description}
-                          title={event.title}
-                          eventMedia={eventMedia}
-                        />
-                      </div>
-                    );
-                  }
-                })}
-              ></LeapCarousel>
-            </div>
-            {/* <div className="space-y-5">
-              <p>If you liked this, you might like...</p>
-              <LeapCarousel
-                loopItems={false}
-                row2={false}
-                itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                  if (eventMedia != undefined) {
-                    return (
-                      <div key={index}>
-                        <SubThemeClassCard
-                          key={index}
-                          subtheme={subtheme.title}
-                          id={event.id}
-                          registered_slots={event.registered_slots}
-                          max_slots={event.max_slots}
-                          descripton={event.description}
-                          title={event.title}
-                          eventMedia={eventMedia}
-                        />
-                      </div>
-                    );
-                  }
-                })}
-              ></LeapCarousel>
-            </div> */}
-            <div className="space-y-5">
               <p>Recently Viewed</p>
               <LeapCarousel
                 loopItems={false}
