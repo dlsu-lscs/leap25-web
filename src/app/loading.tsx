@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function Loading() {
   return (
     <>
-      <div className="h-full w-full bg-[url('/landingBG.png')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
+      <div className="h-full w-full bg-[url('/landingBG.webp')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
         <div className="flex flex-col items-center justify-center -translate-y-8">
           <Image
             src={'/lscsAssets/loadingMacky.gif'}

@@ -9,7 +9,7 @@ export default function Login() {
 
   useEffect(() => {
     const img = new window.Image();
-    img.src = '/landingBG.png';
+    img.src = '/landingBG.webp';
     img.onload = () => {
       setImageLoad(true);
     };
@@ -18,7 +18,7 @@ export default function Login() {
   return (
     <>
       <img
-        src="/landingBG.png"
+        src="/landingBG.webp"
         alt="image"
         onLoad={() => {
           setImageLoad(true);
@@ -27,7 +27,7 @@ export default function Login() {
       />
       {onImageLoad ? (
         <>
-          <div className="flex flex-col h-full w-full justify-center items-center bg-[url('/landingBG.png')] bg-center bg-cover bg-black/50 bg-blend-multiply text-center">
+          <div className="flex flex-col h-full w-full justify-center items-center bg-[url('/landingBG.webp')] bg-center bg-cover bg-black/50 bg-blend-multiply text-center">
             <div className="-translate-y-20">
               <div className={`flex flex-col items-center justify-center space-y-3 `}>
                 <div className="h-[300px] overflow-hidden">
