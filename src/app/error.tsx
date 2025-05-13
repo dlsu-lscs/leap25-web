@@ -8,7 +8,7 @@ export default function ErrorPage() {
   const router = useRouter();
 
   return (
-    <div className="h-full w-full bg-[url('/landingBG.png')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
+    <div className="h-full w-full bg-[url('/landingBG.webp')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
       <Image
         width={200}
         height={200}
