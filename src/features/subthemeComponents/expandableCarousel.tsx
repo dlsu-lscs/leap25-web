@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 import { style } from '@mui/system';
 import { Button } from '@/components/ui/Button';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import { registerEvent } from '@/services/registerService';
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: any[];
@@ -158,6 +159,11 @@ export default function ExpandableCarousel({
                         <Button
                           className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
                           variant={'secondary'}
+                          onClick={() => {
+                            registerEvent(
+                              'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                            );
+                          }}
                         >
                           <ArrowCircleRightSharpIcon />
                           Join Now
