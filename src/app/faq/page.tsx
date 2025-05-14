@@ -29,7 +29,7 @@ export default function FAQ() {
             <FAQAccordion></FAQAccordion>
           </div>
           <div className="my-8 hidden sm:inline">
-            <ScrollArea className="h-[400px] w-[800px] p-4">
+            <ScrollArea className="h-[400px] w-[800px]">
               <FAQAccordion></FAQAccordion>
             </ScrollArea>
           </div>
