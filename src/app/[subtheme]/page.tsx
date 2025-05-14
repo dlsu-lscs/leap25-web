@@ -14,7 +14,7 @@ import AuthRedirectProvider from '@/context/authRedirectProvider';
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
-  const events: classModel[] = await getEvents('Test Subtheme with Image');
+  const events: classModel[] = await getEvents(name);
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
   return (
