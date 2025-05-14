@@ -11,13 +11,13 @@ interface NavbarProps {
 }
 
 import { Public_Sans } from 'next/font/google';
-import { decodeJWT } from '@/lib/decodeJWT';
+import { useDecodeJWT } from '@/hooks/useDecodeJWT';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Navbar({ className, src, name }: NavbarProps) {
   const [cookies, ,] = useCookies(['currentUser']);
-  const decodedJWT = decodeJWT(cookies['currentUser']) || 'user';
+  const decodedJWT = useDecodeJWT(cookies['currentUser']);
 
   return (
     <>
