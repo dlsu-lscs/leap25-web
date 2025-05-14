@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const dummyData = [
   {
@@ -75,23 +76,27 @@ export default function FAQ() {
         >
           <div
             className="flex flex-col justify-center items-center
-          font-bold tracking-wide text-shadow-xl inset-shadow-xl font-playfair text-[48px] 
+          font-bold tracking-wide text-shadow-xl inset-shadow-xl font-playfair text-[52px] 
           "
           >
             <h1 className="text-[#FBBC05]">Frequently Asked</h1>
             <h1 className="text-[#98C10E]">Questions</h1>
           </div>
           <div className="my-12">
-            <Accordion type="single" className="space-y-3" collapsible>
-              {dummyData.map((question, index) => {
-                return (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-[24px]">{question.question}</AccordionTrigger>
-                    <AccordionContent>{question.answer}</AccordionContent>
-                  </AccordionItem>
-                );
-              })}
-            </Accordion>
+            <ScrollArea className="h-[400px] w-[800px] p-4">
+              <Accordion type="single" className="space-y-3" collapsible>
+                {dummyData.map((question, index) => {
+                  return (
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-[24px]">
+                        {question.question}
+                      </AccordionTrigger>
+                      <AccordionContent>{question.answer}</AccordionContent>
+                    </AccordionItem>
+                  );
+                })}
+              </Accordion>
+            </ScrollArea>
           </div>
         </div>
       </AuthRedirectProvider>
