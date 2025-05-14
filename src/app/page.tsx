@@ -1,29 +1,56 @@
 'use client';
-
-import LeapTag from '@/components/ui/LeapTag';
-import useGoogleAuthRedirect from '@/hooks/useGoogleAuthRedirect';
+import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
+import MobileMapClientWrapper from '@/features/MapSubTheme/mapClientWrapper';
+import AuthRedirectProvider from '@/context/authRedirectProvider';
+import { useEffect, useState } from 'react';
+import Loading from './loading';
 
 export default function Map() {
-  useGoogleAuthRedirect();
+  const [onImageLoad, setImageLoad] = useState(false);
+  useEffect(() => {
+    const img = new Image();
+    img.src = '/map/LEAP_MAP.webp';
+    img.onload = () => {
+      setImageLoad(true);
+    };
+  }, []);
   return (
-    <>
-      <div className="absolute left-1/2 z-20 -translate-x-1/2 flex justify-center">
-        <div
-          className="
-        flex flex-col items-center py-8
-        "
-        >
-          <div className="my-3 space-x-3 text-xs">
-            <LeapTag>Tag Badge Here</LeapTag>
-            <LeapTag>Tag Badge Here</LeapTag>
-            <LeapTag>Tag Badge Here</LeapTag>
-          </div>
-          <div>
-            <h1 className="text-4xl font-bold">Leap into the Adventure</h1>
-          </div>
+    <div className="overflow-hidden h-full relative z-50">
+      {onImageLoad && (
+        <div className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30">
+          <h3 className="sm:text-3xl text-2xl text-[#98C10E]">LEAP INTO THE</h3>
+          <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">ADVENTURE</h1>
         </div>
-      </div>
-      <div className="min-h-screen"></div>
-    </>
+      )}
+      <AuthRedirectProvider>
+        <img
+          src="/map/LEAP_MAP.webp"
+          alt="image"
+          onLoad={() => {
+            setImageLoad(true);
+          }}
+          className="hidden"
+        />
+        {onImageLoad ? (
+          <>
+            <div className="sm:hidden w-full h-full">
+              <MobileMapClientWrapper></MobileMapClientWrapper>
+            </div>
+            <div className="sm:inline hidden">
+              <div className="flex justify-between w-full h-full flex-col bg-[url('/map/LEAP_MAP.webp')] bg-black/40 bg-blend-multiply bg-cover bg-center">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_30%,_rgba(0,10,30,0.45)_100%)]  pointer-events-none z-10"></div>
+                <div className="fixed z-20">
+                  <SubThemeMapPicker></SubThemeMapPicker>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Loading></Loading>
+          </>
+        )}
+      </AuthRedirectProvider>
+    </div>
   );
 }

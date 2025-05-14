@@ -1,30 +1,32 @@
 interface classModel {
   id: number;
-  orgId: number;
+  org_id: number;
+  contentful_id: string;
   title: string;
   description: string;
-  subthemeId: number;
+  subtheme_id: number;
   venue: string;
-  schedule: Date;
+  schedule: string;
   fee: number;
   code: string;
   registered_slots: number;
-  maxSlots: number;
+  max_slots: number;
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
 interface classPubModel {
   id: number;
-  eventId: number;
-  pubType: PublicationType;
-  pubURL: string;
+  event_id: number;
+  pub_type: PublicationType;
+  pub_url: string;
+  contentful_id: string;
 }
 
 interface subThemeModel {
   id: number;
   title: string;
-  logoPubURL: string;
-  bgPubURL: string;
+  logo_pub_url: string;
+  background_pub_url: string;
 }
 
 export type { classModel, classPubModel, subThemeModel };

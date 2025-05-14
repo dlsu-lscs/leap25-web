@@ -1,18 +1,33 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
-import { Inter } from 'next/font/google';
+// import { Inter } from 'next/font/google';
 import Providers from '@/context/Providers';
 
-import { Public_Sans } from 'next/font/google';
-
-const public_sans = Public_Sans({ subsets: ['latin'] });
+import LeapCursor from '@/components/cursor/LeapCursor';
+import { Toaster } from '@/components/ui/sonner';
 
 export const metadata: Metadata = {
   title: 'LEAP 2025',
   description: 'Leap 2025 Website',
+  openGraph: {
+    title: 'LEAP 2025',
+    description: 'Leap 2025 Website',
+    images: [
+      {
+        url: '/leapLogos/Logo_v1.png',
+        width: 800,
+        height: 600,
+        alt: 'LEAP 2025 Logo',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LEAP 2025',
+    description: 'Leap 2025 Website',
+    images: '/leapLogos/Logo_v1.png',
+  },
 };
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default function RootLayout({
   children,
@@ -20,9 +35,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className={public_sans.className + ' h-full'}>
-        <Providers>{children}</Providers>
+    <html lang="en" className={`h-full font-public-sans`}>
+      <link rel="icon" href="/leapLogos/Logo_v1.png" />
+      <body className="h-full overflow-x-hidden">
+        <Providers>
+          {children}
+          <LeapCursor />
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
