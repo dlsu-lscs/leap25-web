@@ -1,71 +1,14 @@
 import Navbar from '@/components/layout/Navbar';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion';
-
-const dummyData = [
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-  {
-    question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
-    answer:
-      'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
-  },
-];
+import { ScrollArea } from '@/components/ui/scroll-area';
+import FAQAccordion from '@/features/faqAccordion/FAQAccordoin';
 
 export default function FAQ() {
   return (
     <>
       <AuthRedirectProvider>
-        <div className="fixed top-0 z-20">
+        <div className="sm:bg-black/0 bg-black/20 fixed top-0 z-20">
           <Navbar />
         </div>
         <div
@@ -75,23 +18,20 @@ export default function FAQ() {
         >
           <div
             className="flex flex-col justify-center items-center
-          font-bold tracking-wide text-shadow-xl inset-shadow-xl font-playfair text-[48px] 
+          font-bold tracking-wide text-shadow-xl inset-shadow-xl font-playfair 
+           text-[32px] sm:text-[52px] text-center 
           "
           >
             <h1 className="text-[#FBBC05]">Frequently Asked</h1>
             <h1 className="text-[#98C10E]">Questions</h1>
           </div>
-          <div className="my-12">
-            <Accordion type="single" className="space-y-3" collapsible>
-              {dummyData.map((question, index) => {
-                return (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-[24px]">{question.question}</AccordionTrigger>
-                    <AccordionContent>{question.answer}</AccordionContent>
-                  </AccordionItem>
-                );
-              })}
-            </Accordion>
+          <div className="sm:hidden p-4">
+            <FAQAccordion></FAQAccordion>
+          </div>
+          <div className="my-8 hidden sm:inline">
+            <ScrollArea className="h-[400px] w-[800px]">
+              <FAQAccordion></FAQAccordion>
+            </ScrollArea>
           </div>
         </div>
       </AuthRedirectProvider>
