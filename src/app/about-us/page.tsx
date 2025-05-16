@@ -20,7 +20,7 @@ export default function AboutUs() {
            text-[32px] sm:text-[52px] text-center 
           "
           >
-            <div className="relative w-[500px] h-[125px] overflow-hidden">
+            <div className="relative w-[525px] h-[155px] overflow-hidden">
               <Image
                 src="/leapLogos/Logo_v1.png"
                 alt="Leap 2025"
