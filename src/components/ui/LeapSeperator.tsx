@@ -14,7 +14,7 @@ export default function LeapSeperator({
   direction?: string;
   variant?: string;
   className?: string;
-  length?: number;
+  length?: string;
 }) {
   return (
     <>
@@ -48,7 +48,7 @@ export default function LeapSeperator({
           className={cn(
             direction === 'right' ? 'bg-gradient-to-r' : 'bg-gradient-to-l ',
             variant === 'diamond' ? 'mr-9 ml-[19px]' : '',
-            length ? `min-w-[${length}vw]` : 'min-w-6xl',
+            length === 'full' ? 'min-w-[100vw]' : 'min-w-5xl',
             'from-white to-transparent h-[0.2vh]'
           )}
         ></div>

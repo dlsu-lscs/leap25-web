@@ -17,7 +17,7 @@ export default function AboutUs() {
         >
           <AboutLSCS></AboutLSCS>
           <div className="min-w-screen flex justify-end p-28">
-            <LeapSeperator length={100}></LeapSeperator>
+            <LeapSeperator length="full"></LeapSeperator>
           </div>
         </div>
       </AuthRedirectProvider>
