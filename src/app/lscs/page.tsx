@@ -1,4 +1,5 @@
 import Navbar from '@/components/layout/Navbar';
+import LeapSeperator from '@/components/ui/LeapSeperator';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
 import AboutLSCS from '@/features/lscsContent/AboutLSCS';
 
@@ -15,6 +16,9 @@ export default function AboutUs() {
             `}
         >
           <AboutLSCS></AboutLSCS>
+          <div className="min-w-screen flex justify-end p-28">
+            <LeapSeperator length={100}></LeapSeperator>
+          </div>
         </div>
       </AuthRedirectProvider>
     </>
