@@ -15,8 +15,6 @@ export default function Login() {
     };
   }, []);
 
-  console.log(process.env.NEXT_PUBLIC_GOOGLE_ID);
-
   return (
     <>
       <img
