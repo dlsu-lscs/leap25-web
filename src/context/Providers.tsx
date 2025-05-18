@@ -8,9 +8,7 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <>
-      <GoogleOAuthProvider
-        clientId={'417662644693-3ebmp4qkddo9oaso162h6ma09laue9mj.apps.googleusercontent.com'}
-      >
+      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
         <CookiesProvider>{children}</CookiesProvider>
       </GoogleOAuthProvider>
     </>
