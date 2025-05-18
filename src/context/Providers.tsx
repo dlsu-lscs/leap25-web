@@ -6,11 +6,9 @@ interface ProvidersProps {
   children?: React.ReactNode;
 }
 export default function Providers({ children }: ProvidersProps) {
-  const clientID = '417662644693-3ebmp4qkddo9oaso162h6ma09laue9mj.apps.googleusercontent.com';
-
   return (
     <>
-      <GoogleOAuthProvider clientId={clientID}>
+      <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!}>
         <CookiesProvider>{children}</CookiesProvider>
       </GoogleOAuthProvider>
     </>
