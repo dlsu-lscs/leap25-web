@@ -3,6 +3,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
 import { Public_Sans } from 'next/font/google';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 import dynamic from 'next/dynamic';
 
@@ -20,6 +22,13 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Navbar({ className, src, name }: NavbarProps) {
   const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!session) {
+      router.push('/login');
+    }
+  }, [session, router]);
 
   return (
     <div
