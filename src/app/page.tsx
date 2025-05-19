@@ -3,8 +3,13 @@ import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThem
 import MobileMapClientWrapper from '@/features/MapSubTheme/mapClientWrapper';
 import { useEffect, useState } from 'react';
 import Loading from './loading';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 export default function Map() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   const [onImageLoad, setImageLoad] = useState(false);
   useEffect(() => {
     const img = new Image();
@@ -13,6 +18,13 @@ export default function Map() {
       setImageLoad(true);
     };
   }, []);
+
+  useEffect(() => {
+    if (!session) {
+      router.push('/login');
+    }
+  }, [session, router]);
+
   return (
     <div className="overflow-hidden h-full relative z-50">
       {onImageLoad && (

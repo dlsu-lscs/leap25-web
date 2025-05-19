@@ -11,7 +11,7 @@ export default function GoogleLogin() {
   const router = useRouter();
 
   useEffect(() => {
-    if (status === 'authenticated') {
+    if (status == 'authenticated') {
       router.push('/');
     }
   }, [status, router]);
