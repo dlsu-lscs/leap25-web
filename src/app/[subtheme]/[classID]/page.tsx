@@ -10,6 +10,9 @@ import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 import { getSubThemeByID } from '@/services/subthemeService';
 import AuthRedirectProvider from '@/context/authRedirectProvider';
+import RecentlyViewed from '@/context/recentlyViewed';
+import RecentlyViewedList from '@/features/RecentlyViewed/RecentlyViewedCarousel';
+import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCarousel';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -24,6 +27,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   return (
     <>
       <AuthRedirectProvider>
+        <RecentlyViewed classID={classID} />
         <div className="fixed top-0 z-20">
           <Navbar name={subtheme.title} src={subtheme.logo_pub_url} />
         </div>
@@ -45,29 +49,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
           >
             <div className="space-y-5">
               <p>Recently Viewed</p>
-              <LeapCarousel
-                loopItems={false}
-                row2={false}
-                itemsToShow={events.map(async (event: classModel, index: number) => {
-                  const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                  if (eventMedia != undefined) {
-                    return (
-                      <div key={index}>
-                        <SubThemeClassCard
-                          key={index}
-                          subtheme={subtheme.title}
-                          id={event.id}
-                          registered_slots={event.registered_slots}
-                          max_slots={event.max_slots}
-                          descripton={event.description}
-                          title={event.title}
-                          eventMedia={eventMedia}
-                        />
-                      </div>
-                    );
-                  }
-                })}
-              ></LeapCarousel>
+              <RecentlyViewedCarousel subtheme={subtheme}></RecentlyViewedCarousel>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ interface SubThemeClassCardProps {
   title: string;
   descripton: string;
   registered_slots: number;
-  eventMedia: classPubModel;
+  eventMedia?: classPubModel;
   max_slots: number;
 }
 export default function SubThemeClassCard({
