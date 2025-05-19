@@ -29,7 +29,7 @@ export default function SubThemeClassCard({
     <>
       <a
         href={`/${subtheme}/${id}`}
-        style={{ backgroundImage: `url(${eventMedia.pub_url || undefined})` }}
+        style={{ backgroundImage: `url(${eventMedia?.pub_url || undefined})` }}
         className={`h-[280px] w-[224px] bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
