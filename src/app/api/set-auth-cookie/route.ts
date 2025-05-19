@@ -5,7 +5,7 @@ import { cookies } from 'next/headers';
 export async function POST(req: Request) {
   const { token } = await req.json();
 
-  cookies().set('c_user', token, {
+  (await cookies()).set('c_user', token, {
     httpOnly: true,
     secure: true,
     path: '/',
