@@ -18,4 +18,12 @@ const GetGoogleLogin = async (token: string) => {
   }
 };
 
-export default GetGoogleLogin;
+const SetGoogleLogin = async (jwtToken: string) => {
+  await fetch('/api/set-auth-cookie', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: jwtToken }),
+  });
+};
+
+export { GetGoogleLogin, SetGoogleLogin };
