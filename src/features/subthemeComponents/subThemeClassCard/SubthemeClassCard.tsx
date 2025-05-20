@@ -50,7 +50,7 @@ export default function SubThemeClassCard({
                     transition={{ duration: 0.2 }}
                   >
                     <LeapTag className="text-[10px]  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
-                      {registered_slots} Slots Available
+                      {registered_slots > 0 ? `${registered_slots} Slots Available` : 'Event Full'}
                     </LeapTag>
                   </motion.div>
                 </>
