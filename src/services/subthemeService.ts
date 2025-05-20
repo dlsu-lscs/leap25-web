@@ -22,9 +22,23 @@ const getSubTheme = (subtheme: string) => {
   return { asset, name };
 };
 
+const getSubThemeLink = (subtheme: string) => {
+  if (subtheme === 'Fairy Nook') {
+    return 'fairy-nook';
+  } else if (subtheme == 'Coral Lagoon') {
+    return 'coral-lagoon';
+  } else if (subtheme == 'Hollowtree Hideaway') {
+    return 'hollow-tree-hideaway';
+  } else if (subtheme == 'Northern Star Stop') {
+    return 'northern-star-stop';
+  } else if (subtheme == "Pirate's Cove") {
+    return 'pirates-cove';
+  }
+};
+
 const getSubThemeByID = async (subthemeID: number) => {
   try {
-    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`);
+    const response = await fetch(`${API_URL || CLIENT_API_URL}/subthemes/${subthemeID}`);
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');
@@ -58,4 +72,4 @@ const getSubThemeByName = async (subtheme: any) => {
   }
 };
 
-export { getSubTheme, getSubThemeByID, getSubThemeByName };
+export { getSubTheme, getSubThemeLink, getSubThemeByID, getSubThemeByName };

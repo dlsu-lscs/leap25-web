@@ -1,10 +1,10 @@
-import { CLIENT_API_URL } from '@/lib/constants';
+import { API_URL } from '@/lib/constants';
 import axios from 'axios';
 
 const GetGoogleLogin = async (token: any) => {
   try {
     const response = await axios.post(
-      `${CLIENT_API_URL}/auth/google`,
+      `${API_URL}/auth/google`,
       { token: token },
       {
         headers: {
