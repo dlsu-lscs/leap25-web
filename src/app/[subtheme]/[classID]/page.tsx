@@ -1,7 +1,5 @@
-import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import ClassCard from '@/features/classCard/ClassCard';
 import Navbar from '@/components/layout/Navbar';
-import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
 import { getEventByID, getEventMedia } from '@/services/eventService';
