@@ -1,10 +1,11 @@
 'use client';
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import { CLIENT_API_URL } from '@/lib/constants';
 import { classPubModel } from '@/types/classModels';
 import { useEffect, useState } from 'react';
 import SubThemeClassCard from '../subthemeComponents/subThemeClassCard/SubthemeClassCard';
+import { getEventByID, getEventMedia } from '@/services/eventService';
+import { getSubThemeByID, getSubThemeLink } from '@/services/subthemeService';
 
 interface Event {
   id: number;
@@ -21,37 +22,18 @@ interface Event {
   max_slots: number;
 }
 
-interface EventWithMedia {
+interface EventWithMediaAndSubtheme {
   event: Event;
   media?: classPubModel;
+  subtheme: any; // Adjust type if you have a defined Subtheme type
 }
 
-const getClientEventByID = async (eventID: number) => {
-  try {
-    const response = await fetch(`${CLIENT_API_URL}/events/${eventID}`);
-    if (!response.ok) throw new Error('Failed to get event');
-    return await response.json();
-  } catch (error: any) {
-    console.error('Error fetching event:', error.message);
-  }
-};
-
-const getClientEventMedia = async (eventID: number) => {
-  try {
-    const response = await fetch(`${CLIENT_API_URL}/events/${eventID}/media`);
-    if (!response.ok) return undefined;
-    return await response.json();
-  } catch (error: any) {
-    console.error('Error fetching media:', error.message);
-  }
-};
-
-export default function RecentlyViewedCarousel({ subtheme }: any) {
-  const [recentClassesWithMedia, setRecentClassesWithMedia] = useState<EventWithMedia[]>([]);
+export default function RecentlyViewedCarousel() {
+  const [recentItems, setRecentItems] = useState<EventWithMediaAndSubtheme[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchEventsWithMedia() {
+    async function fetchEventsData() {
       const stored = localStorage.getItem('recentlyViewedClasses');
       if (!stored) {
         setLoading(false);
@@ -62,40 +44,49 @@ export default function RecentlyViewedCarousel({ subtheme }: any) {
 
       const results = await Promise.all(
         ids.map(async (id) => {
-          const event = await getClientEventByID(id);
+          const event = await getEventByID(id);
           if (!event) return null;
 
-          const media = await getClientEventMedia(id);
-          return { event, media } as EventWithMedia;
+          const media = await getEventMedia(id);
+          const subtheme = await getSubThemeByID(event.subtheme_id);
+
+          return { event, media, subtheme } as EventWithMediaAndSubtheme;
         })
       );
 
-      setRecentClassesWithMedia(results.filter((item): item is EventWithMedia => item !== null));
+      setRecentItems(results.filter((item): item is EventWithMediaAndSubtheme => item !== null));
       setLoading(false);
     }
 
-    fetchEventsWithMedia();
+    fetchEventsData();
   }, []);
 
-  if (loading || recentClassesWithMedia.length === 0) return null;
+  if (loading || recentItems.length === 0) return null;
 
   return (
     <LeapCarousel
       loopItems={false}
       row2={false}
-      itemsToShow={recentClassesWithMedia.map(({ event, media }, index) => (
-        <div key={index}>
-          <SubThemeClassCard
-            subtheme={subtheme}
-            id={event.id}
-            registered_slots={event.registered_slots}
-            max_slots={event.max_slots}
-            descripton={event.description}
-            title={event.title}
-            eventMedia={media}
-          />
-        </div>
-      ))}
+      itemsToShow={recentItems.map(({ event, media, subtheme }, index) => {
+        const subthemeLink = getSubThemeLink(subtheme.title) ?? '';
+        return (
+          <>
+            (
+            <div key={index}>
+              <SubThemeClassCard
+                subtheme={subthemeLink}
+                id={event.id}
+                registered_slots={event.registered_slots}
+                max_slots={event.max_slots}
+                descripton={event.description}
+                title={event.title}
+                eventMedia={media}
+              />
+            </div>
+            )
+          </>
+        );
+      })}
     />
   );
 }
