@@ -4,6 +4,7 @@ import SubThemeCarousel from './SubThemeCarousel';
 import { cn } from '@/lib/utils';
 import LeapSubThemeDivider from '@/components/ui/LeapSubThemeDivider';
 import { useRouter } from 'next/navigation';
+import sleep from '@/lib/sleep';
 
 const tempArr = [
   {
@@ -46,6 +47,22 @@ const tempArr = [
 export default function MobileMapClientWrapper() {
   const [selectedId, setSelectedId] = useState<number | undefined>(tempArr[0].id);
   const router = useRouter();
+
+  async function handleSelect() {
+    const leftCloud = document.querySelector('.left-cloud');
+    const rightCloud = document.querySelector('.right-cloud');
+    console.log(leftCloud);
+    console.log(rightCloud);
+
+    leftCloud?.classList.add('left-cloud-inout');
+    rightCloud?.classList.add('right-cloud-inout');
+    await sleep(800);
+    router.push(tempArr[selectedId ?? 0].route);
+    await sleep(1600);
+    leftCloud?.classList.remove('left-cloud-inout');
+    rightCloud?.classList.remove('right-cloud-inout');
+  }
+
   return (
     <div
       className={cn(
@@ -54,10 +71,7 @@ export default function MobileMapClientWrapper() {
       )}
       style={{ backgroundImage: `url(/map/mapWithLandmark.png)` }}
     >
-      <div
-        className="w-full h-full"
-        onClick={() => router.push(tempArr[selectedId ?? 0].route)}
-      ></div>
+      <div className="w-full h-full" onClick={handleSelect}></div>
       <SubThemeCarousel
         items={tempArr}
         selectedId={selectedId}

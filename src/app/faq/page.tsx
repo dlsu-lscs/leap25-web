@@ -17,7 +17,7 @@ export default function FAQ() {
         <div
           className="flex flex-col justify-center items-center
           font-bold tracking-wide text-shadow-xl inset-shadow-xl font-playfair 
-           text-[32px] sm:text-[52px] text-center 
+           text-[32px] sm:text-[52px] text-center mt-20 sm:mt-0 
           "
         >
           <h1 className="text-[#FBBC05]">Frequently Asked</h1>
