@@ -6,9 +6,10 @@ import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import { getSubTheme, getSubThemeByName } from '@/services/subthemeService';
-import { getEventMedia, getEvents } from '@/services/eventService';
+import { getEventByDay, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
+import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
