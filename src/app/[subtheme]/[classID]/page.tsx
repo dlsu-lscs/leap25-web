@@ -46,7 +46,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
         >
           <div className="space-y-5">
             <p>Recently Viewed</p>
-            <RecentlyViewedCarousel subtheme={subtheme}></RecentlyViewedCarousel>
+            <RecentlyViewedCarousel></RecentlyViewedCarousel>
           </div>
         </div>
       </div>
