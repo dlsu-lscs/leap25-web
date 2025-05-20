@@ -4,7 +4,7 @@ import { nameInitials } from '@/lib/helpers';
 import { Public_Sans } from 'next/font/google';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   DropdownMenu,
@@ -31,6 +31,7 @@ import {
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -47,6 +48,7 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 export default function Navbar({ className, src, name }: NavbarProps) {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -68,33 +70,104 @@ export default function Navbar({ className, src, name }: NavbarProps) {
             <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Back to Map</div>
           ) : (
             <>
+              {' '}
               <p className={`sm:text-[20px] text-base ${public_sans.className}`}>{name}</p>
-              <Avatar className="w-9 h-9 mx-2 text-xs hidden sm:block">
-                <AvatarImage src={src} />
-                <AvatarFallback>{nameInitials(name || 'na')}</AvatarFallback>
-              </Avatar>
+              <div
+                className="w-10 h-10 mx-2 hidden sm:block rounded-full p-[2px]"
+                style={{
+                  background:
+                    'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+                }}
+              >
+                <Avatar className="w-full h-full text-xs">
+                  <AvatarImage src={src} className="rounded-full" />
+                  <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
+                    {nameInitials(name || 'na')}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
             </>
           )}
         </a>
-      </div>
-      <div>
+      </div>{' '}
+      <div className="flex items-center gap-4">
+        <div
+          onClick={() => {
+            if (!showSearch) setShowSearch(true);
+          }}
+          className="hidden px-2 py-[6px] rounded-full sm:flex items-center transition-all duration-500 ease-in-out"
+          style={{
+            background:
+              'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+            border: '2px solid transparent',
+          }}
+        >
+          <input
+            type="text"
+            placeholder="Search..."
+            className={cn(
+              'bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
+              showSearch ? 'w-64 opacity-100 mr-2' : 'w-0 opacity-0 p-0 m-0'
+            )}
+          />
+          <button onClick={() => setShowSearch((prev) => !prev)}>
+            <Image src={'/dropdown/search.svg'} alt="search" width={20} height={20}></Image>
+          </button>
+        </div>
         <Sheet>
+          {' '}
           <SheetTrigger className="sm:hidden block">
-            <Avatar className="w-10 h-10 text-xs text-black">
-              <AvatarImage src={session?.user?.image?.toString()} />
-              <AvatarFallback>
-                {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
-              </AvatarFallback>
-            </Avatar>
-          </SheetTrigger>
-          <SheetContent className="bg-black text-white border-none">
-            <SheetTitle className="px-4 flex items-center gap-2 mt-10 justify-center border-b-2 border-[#A67C00] pb-4">
-              <Avatar className="w-10 h-10 text-xs font-playfair !text-[#FBBC05]">
-                <AvatarImage src={session?.user?.image?.toString()} />
-                <AvatarFallback>
+            <div
+              className="w-10 h-10 rounded-full p-[2px]"
+              style={{
+                background:
+                  'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+              }}
+            >
+              <Avatar className="w-full h-full text-xs bg-black">
+                <AvatarImage src={session?.user?.image?.toString()} className="rounded-full" />
+                <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
                   {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
                 </AvatarFallback>
               </Avatar>
+            </div>
+          </SheetTrigger>
+          <SheetContent className="bg-black text-white border-none">
+            <div
+              className="mt-10 p-2 rounded-full flex items-center transition-all duration-500 ease-in-out mx-2"
+              style={{
+                background:
+                  'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                border: '2px solid transparent',
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Search..."
+                className={cn(
+                  'bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
+                  'w-full opacity-100 mr-2'
+                )}
+              />
+              <button>
+                <Image src={'/dropdown/search.svg'} alt="search" width={24} height={24}></Image>
+              </button>
+            </div>{' '}
+            <SheetTitle className="px-4 flex items-center gap-2 justify-center border-b-2 border-[#A67C00] pb-4">
+              <div
+                className="w-10 h-10 rounded-full p-[2px]"
+                style={{
+                  background:
+                    'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+                }}
+              >
+                <Avatar className="w-9 h-9 text-xs">
+                  <AvatarImage src={session?.user?.image?.toString()} className="rounded-full" />
+                  <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
+                    {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
               <span className="font-playfair text-lg text-[#FBBC05]">
                 Welcome, {session?.user?.name}
               </span>
@@ -154,13 +227,22 @@ export default function Navbar({ className, src, name }: NavbarProps) {
           </SheetContent>
         </Sheet>
         <DropdownMenu>
+          {' '}
           <DropdownMenuTrigger className="hidden sm:block">
-            <Avatar className="w-10 h-10 text-xs text-black">
-              <AvatarImage src={session?.user?.image?.toString()} />
-              <AvatarFallback>
-                {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
-              </AvatarFallback>
-            </Avatar>
+            <div
+              className="w-10 h-10 rounded-full p-[2px]"
+              style={{
+                background:
+                  'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+              }}
+            >
+              <Avatar className="w-full h-full text-xs">
+                <AvatarImage src={session?.user?.image?.toString()} className="rounded-full" />
+                <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
+                  {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
+                </AvatarFallback>
+              </Avatar>
+            </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
@@ -173,13 +255,22 @@ export default function Navbar({ className, src, name }: NavbarProps) {
             }}
           >
             <div className="bg-black rounded-sm w-full">
+              {' '}
               <DropdownMenuLabel className="font-playfair text-xl flex items-center gap-4 text-[#FBBC05]">
-                <Avatar className="w-10 h-10 text-xs text-black">
-                  <AvatarImage src={session?.user?.image?.toString()} />
-                  <AvatarFallback>
-                    {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
-                  </AvatarFallback>
-                </Avatar>
+                <div
+                  className="w-10 h-10 rounded-full p-[2px]"
+                  style={{
+                    background:
+                      'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+                  }}
+                >
+                  <Avatar className="w-9 h-9 text-xs">
+                    <AvatarImage src={session?.user?.image?.toString()} className="rounded-full" />
+                    <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
+                      {session?.user?.email?.toUpperCase().slice(0, 2) || nameInitials('user')}
+                    </AvatarFallback>
+                  </Avatar>
+                </div>
                 <span className="font-playfair text-xl font-bold text-[#FBBC05]">
                   Welcome, {session?.user?.name}
                 </span>
