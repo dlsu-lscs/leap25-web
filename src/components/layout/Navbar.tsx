@@ -28,11 +28,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import Bookmarked from '@/features/bookmark/Bookmarked';
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -93,7 +93,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
       </div>{' '}
       <div className="flex items-center gap-4">
         <div>
-          <BookmarkedEvents />
+          <Bookmarked />
         </div>
         <div
           onClick={() => {
@@ -178,7 +178,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
             </SheetTitle>
             <div className="flex flex-col gap-4 px-4 font-playfair font-bold text-[#98C10E]">
               <div className="flex text-lg">
-                <BookmarkedEvents />
+                <Bookmarked />
               </div>
               <Link href={'/faq'} className="flex text-lg">
                 <Image
@@ -274,6 +274,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </DropdownMenuLabel>{' '}
               <DropdownMenuSeparator className="bg-[#B38B18]" />
               <DropdownMenuGroup className="p-2 font-playfair font-bold text-base">
+                <DropdownMenuItem>
+                  <Bookmarked />
+                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href={'/faq'} className="flex text-lg">
                     <Image

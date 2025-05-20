@@ -9,7 +9,7 @@ import { getSubTheme, getSubThemeByName } from '@/services/subthemeService';
 import { getEventByDay, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
-import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
+import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;

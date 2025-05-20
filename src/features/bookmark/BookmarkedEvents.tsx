@@ -1,44 +1,28 @@
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/Drawer';
+import dynamic from 'next/dynamic';
 
-import { Button } from '@/components/ui/button';
-
-import Image from 'next/image';
+const PersonIcon = dynamic(() => import('@mui/icons-material/Person'), { ssr: false });
+const CalendarViewIcon = dynamic(() => import('@mui/icons-material/CalendarViewDay'), {
+  ssr: false,
+});
 
 export default function BookmarkedEvents() {
   return (
     <>
-      <Drawer>
-        <DrawerTrigger>
-          <div
-            className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
-            style={{
-              background:
-                'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
-              border: '2px solid transparent',
-            }}
-          >
-            <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
+      <div className="font-playfair bg-gray-500 p-4 sm:p-6 rounded-full hover:bg-black/60 duration-200 transition ease-in-out">
+        <div className="flex flex-col items-center justify-center text-center gap-2">
+          <div className="font-semibold text-[16px] sm:text-[24px]">{'Event Title'}</div>
+          <div className="text-[12px] sm:text-[16px] flex justify-between gap-4">
+            <div className="flex items-center gap-1">
+              <PersonIcon />
+              <p>{20} slots left</p>
+            </div>
+            <div className="flex items-center gap-1">
+              <CalendarViewIcon />
+              <p>{'September 9, 2025'}</p>
+            </div>
           </div>
-        </DrawerTrigger>
-        <DrawerContent>
-          <DrawerHeader>
-            <DrawerTitle>Are you absolutely sure?</DrawerTitle>
-            <DrawerDescription>This action cannot be undone.</DrawerDescription>
-          </DrawerHeader>
-          <DrawerFooter>
-            <DrawerClose></DrawerClose>
-          </DrawerFooter>
-        </DrawerContent>
-      </Drawer>
+        </div>
+      </div>
     </>
   );
 }
