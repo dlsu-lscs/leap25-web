@@ -15,7 +15,6 @@ const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 import { toast } from 'sonner';
-import { saveEventToCalendar } from '@/services/googleCalendarService';
 import { registerEvent } from '@/services/registerService';
 import { shareEvent } from '@/services/eventService';
 
@@ -45,7 +44,7 @@ const ShareOutlinedIcon = dynamic(() => import('@mui/icons-material/ShareOutline
 
 type ClassCardsProps = {
   event: classModel;
-  orgs: orgModel;
+  orgs: orgModel[];
   subtheme: subThemeModel;
   eventMedia: classPubModel;
 };
@@ -72,10 +71,10 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   return (
     <>
       <div
-        className={`flex justify-center md:flex-row flex-col items-center gap-6 text-white ${public_sans.className}`}
+        className={`flex justify-center md:flex-row flex-col items-center gap-6  text-white ${public_sans.className}`}
       >
         <img
-          className="sm:h-[560px] h-[496px] w-[448px] bg-[#D9D9D9] border-none outline-none"
+          className="aspect-[4/5] w-full max-w-[400px]  bg-[#D9D9D9] border-none outline-none object-cover"
           src={eventMedia.pub_url}
         />
         <div className="flex flex-col ">
@@ -91,12 +90,11 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           </h1>
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
-              <HostName src={orgs.org_logo || undefined}>{orgs.name}</HostName>
-              {/* {orgs.map((org: orgModel, hostID: number) => (
-                <HostName src={org.orgLogo || undefined} key={hostID}>
+              {orgs.map((org: orgModel, hostID: number) => (
+                <HostName src={org.org_logo || undefined} key={hostID}>
                   {org.name}
                 </HostName>
-              ))} */}
+              ))}
             </div>
           </div>
           <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
@@ -132,12 +130,12 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             </ClassDetails>
           </div>
           <div className="my-4">
-            <ClassDescription className="font-extrabold">
+            <ClassDescription className="font-extrabold sm:w-1/2">
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
           </div>
-          <div className="my-4 flex justify-between">
+          <div className="my-4 flex justify-between sm:w-1/2">
             <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
                 onClick={() => {
@@ -157,29 +155,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <div
-                onClick={() => {
-                  toast.success(`${event.title} link is saved to google calendar`, {
-                    style: {
-                      backgroundColor: 'white',
-                      color: 'black',
-                      borderRadius: '8px',
-                      padding: '16px',
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      fontFamily: public_sans.style.fontFamily,
-                    },
-                  });
-                  saveEventToCalendar(
-                    event.title,
-                    event.description,
-                    orgs.name,
-                    event.venue,
-                    event.schedule
-                  );
-                }}
-                role="button"
-                className="hover:opacity-50 duration-100 transition"
-              >
+              <div role="button" className="hover:opacity-50 duration-100 transition">
                 <BookmarkBorderOutlinedIcon
                   sx={{ fontSize: 32, color: 'white' }}
                 ></BookmarkBorderOutlinedIcon>
