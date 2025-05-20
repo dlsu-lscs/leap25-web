@@ -31,18 +31,15 @@ export default function Bookmarked() {
           >
             <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
           </div>
-          <div className="flex items-center sm:hidden">
-            <Image
-              src={'/dropdown/bookmark.svg'}
-              alt="faq"
-              width={28}
-              height={28}
-              className="mr-3"
-            ></Image>
-            Bookmark
-          </div>
         </DrawerTrigger>
-        <DrawerContent className="bg-[#161515] border-none">
+        <DrawerContent
+          className="bg-[#161515] border-none"
+          style={{
+            background:
+              'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+            border: '2px solid transparent',
+          }}
+        >
           <DrawerHeader className="text-white font-playfair">
             <div className="flex flex-col items-center justify-center mt-4">
               <DrawerTitle className="text-white text-[24px] sm:text-[36px] font-bold">
