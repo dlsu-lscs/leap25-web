@@ -2,8 +2,12 @@
 
 import * as React from 'react';
 import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
-import ArrowRightIcon from '@mui/icons-material/ArrowRight';
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+
+import dynamic from 'next/dynamic';
+
+const ArrowRightIcon = dynamic(() => import('@mui/icons-material/ArrowRight'), { ssr: false });
+
+const ArrowLeftIcon = dynamic(() => import('@mui/icons-material/ArrowLeft'), { ssr: false });
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
