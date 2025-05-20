@@ -4,8 +4,6 @@ import { AuthOptions } from 'next-auth';
 import { GetGoogleLogin } from '@/services/googleLoginService';
 
 export const authOptions: AuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
-
   providers: [
     CredentialsProvider({
       name: 'CustomTokenAuth',
