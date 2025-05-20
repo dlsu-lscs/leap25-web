@@ -4,7 +4,7 @@ import Navbar from '@/components/layout/Navbar';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
 import { Public_Sans } from 'next/font/google';
-import { getEventByID, getEventMedia, getEvents } from '@/services/eventService';
+import { getEventByID, getEventMedia } from '@/services/eventService';
 import { getOrgByID } from '@/services/orgsServce';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
@@ -18,9 +18,8 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   const { classID } = await params;
   const event: classModel = await getEventByID(classID);
   const eventMedia: classPubModel = await getEventMedia(classID);
-  const orgs: orgModel = await getOrgByID(event.org_id);
+  const orgs: orgModel[] = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
-  const events: classModel[] = await getEvents(subtheme.title);
 
   return (
     <>
