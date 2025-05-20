@@ -11,13 +11,6 @@ import { orgModel } from '@/types/orgModels';
 import { Playfair_Display } from 'next/font/google';
 import { Public_Sans } from 'next/font/google';
 
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -25,6 +18,30 @@ import { toast } from 'sonner';
 import { saveEventToCalendar } from '@/services/googleCalendarService';
 import { registerEvent } from '@/services/registerService';
 import { shareEvent } from '@/services/eventService';
+
+import dynamic from 'next/dynamic';
+
+const CalendarMonthOutlinedIcon = dynamic(
+  () => import('@mui/icons-material/CalendarMonthOutlined'),
+  { ssr: false }
+);
+
+const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessTimeOutlined'), {
+  ssr: false,
+});
+
+const LocationOnOutlinedIcon = dynamic(() => import('@mui/icons-material/LocationOnOutlined'), {
+  ssr: false,
+});
+
+const BookmarkBorderOutlinedIcon = dynamic(
+  () => import('@mui/icons-material/BookmarkBorderOutlined'),
+  { ssr: false }
+);
+
+const ShareOutlinedIcon = dynamic(() => import('@mui/icons-material/ShareOutlined'), {
+  ssr: false,
+});
 
 type ClassCardsProps = {
   event: classModel;

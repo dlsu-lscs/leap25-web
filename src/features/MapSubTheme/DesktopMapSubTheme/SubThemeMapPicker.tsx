@@ -5,6 +5,7 @@ import type React from 'react';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import TransitionLink from '@/components/ui/transitionLink';
 
 // Define the type for static images
 const subthemes = [
@@ -159,13 +160,12 @@ export default function ParallaxBackground({ className = '' }: { className?: str
               transform: `translate(${translateX}px, ${translateY}px)`,
               zIndex: 5,
             }}
+            onMouseLeave={() => setHoveredButtonIndex(null)} // Hide image when hover ends
+            onMouseEnter={() => setHoveredButtonIndex(index)} // Show image on hover
           >
-            <Link
+            <TransitionLink
               href={`/${img.route}`}
               className="lg:!w-[500px] lg:!h-[500px] w-96 h-96 flex justify-center items-center" // Removed hover:hidden
-              onClick={() => console.log(`Clicked landmark: ${img.alt}`)} // Example onClick
-              onMouseEnter={() => setHoveredButtonIndex(index)} // Show image on hover
-              onMouseLeave={() => setHoveredButtonIndex(null)} // Hide image when hover ends
             >
               {/* Image is now always rendered, opacity and bounce are conditional */}
               <Image
@@ -179,7 +179,7 @@ export default function ParallaxBackground({ className = '' }: { className?: str
                   ${hoveredButtonIndex === index ? 'animate-bounce' : ''}
                 `}
               />
-            </Link>
+            </TransitionLink>
           </div>
         );
       })}
