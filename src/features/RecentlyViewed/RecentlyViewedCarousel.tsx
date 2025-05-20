@@ -79,7 +79,6 @@ export default function RecentlyViewedCarousel({ subtheme }: any) {
 
   if (loading || recentClassesWithMedia.length === 0) return null;
 
-  console.log(recentClassesWithMedia);
   return (
     <LeapCarousel
       loopItems={false}
