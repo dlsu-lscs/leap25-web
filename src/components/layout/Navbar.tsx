@@ -21,14 +21,14 @@ interface NavbarProps {
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 export default function Navbar({ className, src, name }: NavbarProps) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (status === 'unauthenticated') {
       router.push('/login');
     }
-  }, [session, router]);
+  }, [status, router]);
 
   return (
     <div

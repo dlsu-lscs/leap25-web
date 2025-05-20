@@ -20,10 +20,11 @@ export default function Map() {
   }, []);
 
   useEffect(() => {
-    if (!session) {
+    // Only redirect if session is definitely not available (after loading completed)
+    if (status === 'unauthenticated') {
       router.push('/login');
     }
-  }, [session, router]);
+  }, [status, router]);
 
   return (
     <div className="overflow-hidden h-full relative z-50">
