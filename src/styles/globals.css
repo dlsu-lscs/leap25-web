@@ -139,3 +139,40 @@
 .clip-circle-top {
   clip-path: inset(0 0 50px 0);
 }
+
+body {
+  transition-property: opacity, background;
+  transition-timing-function: ease-in-out;
+  transition: 500ms;
+}
+
+.page-transition {
+  opacity: 0;
+  background-color: black;
+}
+
+.left-cloud {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  transition: transform 0.8s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.left-cloud-inout {
+  transform: translateX(0%);
+}
+
+.right-cloud {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  transition: transform 0.8s ease-in-out;
+  transform: translateX(100%);
+}
+
+.right-cloud-inout {
+  transform: translateX(0);
+}

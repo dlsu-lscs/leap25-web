@@ -1,6 +1,8 @@
 'use client';
 import googleLogin from '@/../public/googleLogin.svg';
 import Image from 'next/image';
+import { useCookies } from 'react-cookie';
+import sleep from '@/lib/sleep';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState, useCallback } from 'react';
@@ -12,9 +14,23 @@ export default function GoogleLogin() {
   const [isSigningIn, setIsSigningIn] = useState(false);
 
   useEffect(() => {
-    if (status == 'authenticated') {
-      router.push('/');
-    }
+    const handleLoginRedirect = async () => {
+      if (status === 'authenticated') {
+        const leftCloud = document.querySelector('.left-cloud');
+        const rightCloud = document.querySelector('.right-cloud');
+        console.log(leftCloud);
+        console.log(rightCloud);
+
+        leftCloud?.classList.add('left-cloud-inout');
+        rightCloud?.classList.add('right-cloud-inout');
+        await sleep(800);
+        router.push('/');
+        await sleep(1600);
+        leftCloud?.classList.remove('left-cloud-inout');
+        rightCloud?.classList.remove('right-cloud-inout');
+      }
+    };
+    handleLoginRedirect();
   }, [status, router]);
 
   // Add event listener for message from popup window
