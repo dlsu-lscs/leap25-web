@@ -2,7 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
 import { Public_Sans } from 'next/font/google';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
@@ -326,7 +326,13 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Link href={'/logout'} className="flex text-lg">
+                  <div
+                    role="button"
+                    className="flex text-lg"
+                    onClick={() => {
+                      signOut({ callbackUrl: '/login', redirect: true });
+                    }}
+                  >
                     <Image
                       src={'/dropdown/logout.svg'}
                       alt="logout"
@@ -335,7 +341,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                       className="mr-3"
                     ></Image>
                     Log Out
-                  </Link>
+                  </div>
                 </DropdownMenuItem>
               </DropdownMenuGroup>
             </div>
