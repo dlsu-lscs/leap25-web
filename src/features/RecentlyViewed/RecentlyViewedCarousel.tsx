@@ -71,7 +71,6 @@ export default function RecentlyViewedCarousel() {
         const subthemeLink = getSubThemeLink(subtheme.title) ?? '';
         return (
           <>
-            (
             <div key={index}>
               <SubThemeClassCard
                 subtheme={subthemeLink}
@@ -83,7 +82,6 @@ export default function RecentlyViewedCarousel() {
                 eventMedia={media}
               />
             </div>
-            )
           </>
         );
       })}
