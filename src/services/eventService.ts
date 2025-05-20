@@ -73,4 +73,12 @@ const shareEvent = () => {
     .catch((err) => console.error('Clipboard error:', err));
 };
 
-export { getEvents, getEventByID, getEventMedia, shareEvent };
+const viewEvent = async (classID: number) => {
+  await fetch('/api/viewEvent', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ classID }),
+  });
+};
+
+export { getEvents, getEventByID, getEventMedia, shareEvent, viewEvent };

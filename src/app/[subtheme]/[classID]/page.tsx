@@ -9,6 +9,8 @@ import { getOrgByID } from '@/services/orgsServce';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 import { getSubThemeByID } from '@/services/subthemeService';
+import RecentlyViewed from '@/context/recentlyViewed';
+import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCarousel';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -23,6 +25,7 @@ export default async function Class({ params }: { params: Promise<{ classID: num
   return (
     <>
       <div className="fixed top-0 z-20">
+        <RecentlyViewed classID={classID} />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} />
       </div>
       <div
@@ -41,32 +44,22 @@ export default async function Class({ params }: { params: Promise<{ classID: num
         <div
           className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
         >
-          <div className="space-y-5">
-            <p>Recently Viewed</p>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={events.map(async (event: classModel, index: number) => {
-                const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                if (eventMedia != undefined) {
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme.title}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        max_slots={event.max_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                      />
-                    </div>
-                  );
-                }
-              })}
-            ></LeapCarousel>
+          <div>
+            {' '}
+            <ClassCard
+              event={event}
+              orgs={orgs}
+              subtheme={subtheme}
+              eventMedia={eventMedia}
+            ></ClassCard>
           </div>
+          <div
+            className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
+          >
+            <div className="space-y-5">
+              <p>Recently Viewed</p>
+              <RecentlyViewedCarousel subtheme={subtheme}></RecentlyViewedCarousel>
+            </div>
         </div>
       </div>
     </>
