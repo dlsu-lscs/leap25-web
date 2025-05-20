@@ -19,7 +19,7 @@ import {
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 // import { style } from '@mui/system';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import { registerEvent } from '@/services/registerService';
 interface ExpandableCarouselProps {

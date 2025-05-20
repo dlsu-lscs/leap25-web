@@ -32,6 +32,7 @@ import {
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -91,6 +92,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
         </a>
       </div>{' '}
       <div className="flex items-center gap-4">
+        <div>
+          <BookmarkedEvents />
+        </div>
         <div
           onClick={() => {
             if (!showSearch) setShowSearch(true);
@@ -173,16 +177,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </span>
             </SheetTitle>
             <div className="flex flex-col gap-4 px-4 font-playfair font-bold text-[#98C10E]">
-              <Link href={'/bookmark'} className="flex text-lg">
-                <Image
-                  src={'/dropdown/bookmark.svg'}
-                  alt="Bookmark"
-                  width={28}
-                  height={28}
-                  className="mr-3"
-                />
-                Bookmark
-              </Link>
+              <div className="flex text-lg">
+                <BookmarkedEvents />
+              </div>
               <Link href={'/faq'} className="flex text-lg">
                 <Image
                   src={'/dropdown/faq.svg'}
@@ -277,18 +274,6 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </DropdownMenuLabel>{' '}
               <DropdownMenuSeparator className="bg-[#B38B18]" />
               <DropdownMenuGroup className="p-2 font-playfair font-bold text-base">
-                <DropdownMenuItem>
-                  <Link href={'/bookmark'} className="flex text-lg">
-                    <Image
-                      src={'/dropdown/bookmark.svg'}
-                      alt="Bookmark"
-                      width={28}
-                      height={28}
-                      className="mr-3"
-                    />
-                    Bookmark
-                  </Link>
-                </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href={'/faq'} className="flex text-lg">
                     <Image
