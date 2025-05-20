@@ -1,4 +1,3 @@
-import Subtheme from '@/app/[subtheme]/page';
 import { API_URL } from '@/lib/constants';
 
 const getSubTheme = (subtheme: string) => {
@@ -21,24 +20,6 @@ const getSubTheme = (subtheme: string) => {
   }
 
   return { asset, name };
-};
-
-const getSubThemeLink = (subtheme: any) => {
-  let link;
-
-  if (subtheme === 'Fairy Nook') {
-    link = 'fairy-nook';
-  } else if (subtheme === 'Coral Lagoon') {
-    link = 'coral-lagoon';
-  } else if (subtheme === 'Hollowtree Hideway') {
-    link = 'hollow-tree-hideaway';
-  } else if (subtheme === 'Northern Star Stop') {
-    link = 'northern-star-stop';
-  } else if (subtheme === "Pirate's Cove") {
-    link = 'pirates-cove';
-  }
-
-  return link;
 };
 
 const getSubThemeByID = async (subthemeID: number) => {
@@ -77,4 +58,4 @@ const getSubThemeByName = async (subtheme: any) => {
   }
 };
 
-export { getSubTheme, getSubThemeLink, getSubThemeByID, getSubThemeByName };
+export { getSubTheme, getSubThemeByID, getSubThemeByName };
