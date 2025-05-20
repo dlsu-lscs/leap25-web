@@ -1,7 +1,7 @@
 'use client';
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import { classPubModel } from '@/types/classModels';
+import { classPubModel, subThemeModel } from '@/types/classModels';
 import { useEffect, useState } from 'react';
 import SubThemeClassCard from '../subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import { getEventByID, getEventMedia } from '@/services/eventService';
@@ -25,7 +25,7 @@ interface Event {
 interface EventWithMediaAndSubtheme {
   event: Event;
   media?: classPubModel;
-  subtheme: any; // Adjust type if you have a defined Subtheme type
+  subtheme: subThemeModel;
 }
 
 export default function RecentlyViewedCarousel() {
