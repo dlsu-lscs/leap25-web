@@ -161,6 +161,7 @@ body {
   background-image: url('/map/leftCloud.webp');
   background-position: right;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .left-cloud-inout {
@@ -177,6 +178,7 @@ body {
   background-image: url('/map/rightCloud.webp');
   background-position: left;
   background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .right-cloud-inout {
