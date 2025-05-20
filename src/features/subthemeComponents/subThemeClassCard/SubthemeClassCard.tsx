@@ -4,11 +4,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
-import { classPubModel, subThemeModel } from '@/types/classModels';
-import { getSubThemeLink } from '@/services/subthemeService';
+import { classPubModel } from '@/types/classModels';
 
 interface SubThemeClassCardProps {
-  subtheme: subThemeModel;
+  subtheme: string;
   id: number;
   title: string;
   descripton: string;
@@ -26,17 +25,10 @@ export default function SubThemeClassCard({
   max_slots,
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
-
-  const subthemeLink = getSubThemeLink(subtheme.title);
-
   return (
     <>
       <a
-        href={`/${
-          typeof subtheme === 'object' && subtheme !== null
-            ? subthemeLink
-            : subtheme || subthemeLink
-        }/${id}`}
+        href={`/${subtheme}/${id}`}
         style={{ backgroundImage: `url(${eventMedia?.pub_url || undefined})` }}
         className={`h-[280px] w-[224px] bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
