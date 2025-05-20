@@ -7,7 +7,7 @@ interface RecentlyViewedProps {
   maxItems?: number;
 }
 
-export default function RecentlyViewed({ classID, maxItems = 5 }: RecentlyViewedProps) {
+export default function RecentlyViewed({ classID, maxItems = 8 }: RecentlyViewedProps) {
   useEffect(() => {
     if (!classID) return;
 
@@ -23,10 +23,11 @@ export default function RecentlyViewed({ classID, maxItems = 5 }: RecentlyViewed
       viewed = [];
     }
 
-    const uniqueSet = new Set(viewed.filter((id) => id !== classID));
+    const uniqueSet = new Set(viewed.filter((id) => id != classID));
+
     uniqueSet.add(classID);
 
-    const updated = [classID, ...Array.from(uniqueSet).filter((id) => id !== classID)];
+    const updated = [classID, ...Array.from(uniqueSet).filter((id) => id != classID)];
 
     const limited = updated.slice(0, maxItems);
 

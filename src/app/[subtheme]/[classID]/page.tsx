@@ -44,22 +44,10 @@ export default async function Class({ params }: { params: Promise<{ classID: num
         <div
           className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
         >
-          <div>
-            {' '}
-            <ClassCard
-              event={event}
-              orgs={orgs}
-              subtheme={subtheme}
-              eventMedia={eventMedia}
-            ></ClassCard>
+          <div className="space-y-5">
+            <p>Recently Viewed</p>
+            <RecentlyViewedCarousel subtheme={subtheme}></RecentlyViewedCarousel>
           </div>
-          <div
-            className={`my-20 space-y-8 text-white ${public_sans.className} font-semibold md:text-4xl sm:text-3xl text-2xl text-shadow-lg`}
-          >
-            <div className="space-y-5">
-              <p>Recently Viewed</p>
-              <RecentlyViewedCarousel subtheme={subtheme}></RecentlyViewedCarousel>
-            </div>
         </div>
       </div>
     </>
