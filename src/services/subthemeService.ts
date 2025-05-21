@@ -22,7 +22,7 @@ const getSubTheme = (subtheme: string) => {
   return { asset, name };
 };
 
-const getSubThemeLink = (subtheme: string) => {
+const getSubThemeLink = (subtheme: any) => {
   if (subtheme === 'Fairy Nook') {
     return 'fairy-nook';
   } else if (subtheme == 'Coral Lagoon') {

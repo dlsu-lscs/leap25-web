@@ -31,4 +31,10 @@ interface subThemeModel {
   background_pub_url: string;
 }
 
-export type { classModel, classPubModel, subThemeModel };
+interface bookmarkModel {
+  id: number;
+  event_id: number;
+  user_id: number;
+}
+
+export type { classModel, classPubModel, subThemeModel, bookmarkModel };

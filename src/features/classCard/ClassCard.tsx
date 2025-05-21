@@ -164,7 +164,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                     },
                   });
                   postBookmark(user?.id, event.id);
-                  console.log('user');
                 }}
               >
                 <BookmarkBorderOutlinedIcon
