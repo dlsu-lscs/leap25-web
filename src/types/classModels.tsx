@@ -7,6 +7,7 @@ interface classModel {
   subtheme_id: number;
   venue: string;
   schedule: string;
+  schedule_end: string;
   fee: number;
   code: string;
   registered_slots: number;
