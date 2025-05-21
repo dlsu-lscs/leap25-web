@@ -36,6 +36,8 @@ import { cn } from '@/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { ScrollArea } from '../ui/scroll-area';
 import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
+import { getEventBySearch } from '@/services/eventService';
+import { useSetSearchEvent } from '@/hooks/useSearchEvent';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -56,6 +58,8 @@ export default function Navbar({ className, src, name }: NavbarProps) {
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const { event: searchedEvents } = useSetSearchEvent(searchValue);
+
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -171,12 +175,19 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               >
                 <ScrollArea className="h-[500px]">
                   <div className="flex flex-col gap-4 p-4">
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
+                    {searchedEvents ? (
+                      searchedEvents.map((searchedEvent, index) => {
+                        return (
+                          <>
+                            <BookmarkedEvents key={index} event_id={searchedEvent.id} />
+                          </>
+                        );
+                      })
+                    ) : (
+                      <>
+                        <div className="font-public-sans text-white">No searched classes</div>
+                      </>
+                    )}
                   </div>
                 </ScrollArea>
               </div>
@@ -284,12 +295,19 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 >
                   <ScrollArea className="h-[500px]">
                     <div className="flex flex-col gap-4 p-4">
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
+                      {searchedEvents ? (
+                        searchedEvents.map((searchedEvent, index) => {
+                          return (
+                            <>
+                              <BookmarkedEvents key={index} event_id={searchedEvent.id} />
+                            </>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <div className="font-public-sans text-white">No searched classes</div>
+                        </>
+                      )}
                     </div>
                   </ScrollArea>
                 </div>
