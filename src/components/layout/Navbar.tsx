@@ -92,7 +92,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
         </a>
       </div>{' '}
       <div className="flex items-center gap-4">
-        <div>
+        <div className="hidden sm:inline">
           <Bookmarked />
         </div>
         <div
@@ -177,6 +177,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </span>
             </SheetTitle>
             <div className="flex flex-col gap-4 px-4 font-playfair font-bold text-[#98C10E]">
+              <div className="flex text-lg">
+                <Bookmarked variant="mobile" />
+              </div>
               <Link href={'/faq'} className="flex text-lg">
                 <Image
                   src={'/dropdown/faq.svg'}
@@ -271,9 +274,6 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </DropdownMenuLabel>{' '}
               <DropdownMenuSeparator className="bg-[#B38B18]" />
               <DropdownMenuGroup className="p-2 font-playfair font-bold text-base">
-                <div className="flex sm:hidden text-lg">
-                  <Bookmarked />
-                </div>
                 <DropdownMenuItem>
                   <Link href={'/faq'} className="flex text-lg">
                     <Image

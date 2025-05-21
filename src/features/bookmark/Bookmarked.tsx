@@ -16,21 +16,36 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import Image from 'next/image';
 import BookmarkedEvents from './BookmarkedEvents';
 
-export default function Bookmarked() {
+interface BookmarkProps {
+  variant?: string;
+}
+
+export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
         <DrawerTrigger>
-          <div
-            className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
-            style={{
-              background:
-                'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
-              border: '2px solid transparent',
-            }}
-          >
-            <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
-          </div>
+          {variant === 'mobile' ? (
+            <>
+              <div className="flex text-lg gap-4">
+                <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
+                <div className="flex">Bookmark</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
+                style={{
+                  background:
+                    'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                  border: '2px solid transparent',
+                }}
+              >
+                <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
+              </div>
+            </>
+          )}
         </DrawerTrigger>
         <DrawerContent
           className="bg-[#161515] border-none"
