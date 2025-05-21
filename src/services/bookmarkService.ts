@@ -26,7 +26,6 @@ const getBookmarks = async (userId: any) => {
   if (userId) {
     try {
       const response = await fetch(`${API_URL}/users/${userId}/bookmarks`);
-      console.log(response);
 
       if (!response.ok) {
         throw new Error('Failed to get users');

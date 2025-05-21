@@ -30,6 +30,7 @@ export default function Bookmarked({ variant }: BookmarkProps) {
   const { data: session, status } = useSession();
   const { user } = useSetUser(session);
   const { bookmarks } = useSetBookmark(user?.id);
+  console.log(typeof bookmarks);
   console.log(bookmarks);
 
   return (
@@ -79,7 +80,7 @@ export default function Bookmarked({ variant }: BookmarkProps) {
           <DrawerFooter>
             <div className="flex flex-col items-center justify-center ">
               <ScrollArea className="h-[500px] sm:min-w-1/2 min-w-screen text-white p-4">
-                <div className="flex flex-col gap-4"></div>
+                <div className="flex flex-col gap-4">{}</div>
               </ScrollArea>
             </div>
           </DrawerFooter>
