@@ -26,7 +26,6 @@ export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
-        g
         <DrawerTrigger>
           {variant === 'mobile' ? (
             <>
