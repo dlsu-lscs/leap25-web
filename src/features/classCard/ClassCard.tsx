@@ -65,7 +65,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks, refreshBookmarks } = useSetBookmark(user?.id);
+  const { bookmarks } = useSetBookmark(user?.id);
 
   return (
     <>
