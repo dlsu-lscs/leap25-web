@@ -79,7 +79,7 @@ export default function Bookmarked({ variant }: BookmarkProps) {
           <DrawerFooter>
             <div className="flex flex-col items-center justify-center ">
               <ScrollArea className="h-[500px] sm:min-w-1/2 min-w-screen text-white p-4">
-                <div className="flex flex-col gap-4">{bookmarks.map((bookmark, index) => {})}</div>
+                <div className="flex flex-col gap-4"></div>
               </ScrollArea>
             </div>
           </DrawerFooter>
