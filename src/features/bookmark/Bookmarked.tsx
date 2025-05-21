@@ -1,3 +1,4 @@
+'use client';
 import {
   Drawer,
   DrawerClose,
@@ -21,10 +22,11 @@ interface BookmarkProps {
   variant?: string;
 }
 
-export default async function Bookmarked({ variant }: BookmarkProps) {
+export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
+        g
         <DrawerTrigger>
           {variant === 'mobile' ? (
             <>
