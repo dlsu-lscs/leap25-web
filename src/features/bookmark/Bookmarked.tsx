@@ -16,33 +16,45 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import Image from 'next/image';
 import BookmarkedEvents from './BookmarkedEvents';
 
-export default function Bookmarked() {
+interface BookmarkProps {
+  variant?: string;
+}
+
+export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
         <DrawerTrigger>
-          <div
-            className="hidden sm:flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
-            style={{
-              background:
-                'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
-              border: '2px solid transparent',
-            }}
-          >
-            <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
-          </div>
-          <div className="flex items-center sm:hidden">
-            <Image
-              src={'/dropdown/bookmark.svg'}
-              alt="faq"
-              width={28}
-              height={28}
-              className="mr-3"
-            ></Image>
-            Bookmark
-          </div>
+          {variant === 'mobile' ? (
+            <>
+              <div className="flex text-lg gap-4">
+                <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
+                <div className="flex">Bookmark</div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div
+                className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
+                style={{
+                  background:
+                    'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                  border: '2px solid transparent',
+                }}
+              >
+                <Image src="/dropdown/bookmark.svg" alt="Bookmark" width={28} height={28} />
+              </div>
+            </>
+          )}
         </DrawerTrigger>
-        <DrawerContent className="bg-[#161515] border-none">
+        <DrawerContent
+          className="bg-[#161515] border-none"
+          style={{
+            background:
+              'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+            border: '2px solid transparent',
+          }}
+        >
           <DrawerHeader className="text-white font-playfair">
             <div className="flex flex-col items-center justify-center mt-4">
               <DrawerTitle className="text-white text-[24px] sm:text-[36px] font-bold">
