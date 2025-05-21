@@ -15,12 +15,16 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 import Image from 'next/image';
 import BookmarkedEvents from './BookmarkedEvents';
+import { getBookmarks } from '@/services/bookmarkService';
 
 interface BookmarkProps {
   variant?: string;
+  userId: number;
 }
 
-export default function Bookmarked({ variant }: BookmarkProps) {
+export default async function Bookmarked({ variant, userId }: BookmarkProps) {
+  const bookmarks = await getBookmarks(userId);
+  console.log(bookmarks);
   return (
     <>
       <Drawer>

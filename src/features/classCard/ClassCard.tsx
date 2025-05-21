@@ -20,6 +20,11 @@ import { shareEvent } from '@/services/eventService';
 
 import dynamic from 'next/dynamic';
 import { formatSchedule } from '@/lib/helpers';
+import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
+import { getUserByEmail } from '@/services/userService';
+import { useSetUser } from '@/hooks/useSetUser';
+import { postBookmark } from '@/services/bookmarkService';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -53,6 +58,9 @@ type ClassCardsProps = {
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
   const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
   const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
+
+  const { data: session } = useSession();
+  const { user } = useSetUser(session);
 
   return (
     <>
@@ -141,7 +149,24 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <div role="button" className="hover:opacity-50 duration-100 transition">
+              <div
+                role="button"
+                className="hover:opacity-50 duration-100 transition"
+                onClick={() => {
+                  toast.success(`${event.title} is saved as a bookmark`, {
+                    style: {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                      fontFamily: public_sans.style.fontFamily,
+                    },
+                  });
+                  postBookmark(user?.id, event.id);
+                  console.log('user');
+                }}
+              >
                 <BookmarkBorderOutlinedIcon
                   sx={{ fontSize: 32, color: 'white' }}
                 ></BookmarkBorderOutlinedIcon>
