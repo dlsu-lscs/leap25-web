@@ -122,7 +122,7 @@ export default function ExpandableCarousel({
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
-                  {item.id === selectedId && (
+                  {item.id === selectedId ? (
                     <div
                       className={cn(
                         'relative sm:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
@@ -174,6 +174,15 @@ export default function ExpandableCarousel({
                           Join Now
                         </Button>
                       </div>
+                    </div>
+                  ) : (
+                    <div className="h-full w-full flex flex-col justify-around items-center">
+                      {item.titleCard.length > 0 ? (
+                        <img src={`${item.titleCard}`} className="w-64 mt-2" alt="title card" />
+                      ) : (
+                        <h1 className="text-5xl mt-2">{item.titleFallback}</h1>
+                      )}
+                      <h3>Short desc</h3>
                     </div>
                   )}
 
