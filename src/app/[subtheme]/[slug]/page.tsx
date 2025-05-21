@@ -2,7 +2,7 @@ import ClassCard from '@/features/classCard/ClassCard';
 import Navbar from '@/components/layout/Navbar';
 
 import { Public_Sans } from 'next/font/google';
-import { getEventByID, getEventMedia } from '@/services/eventService';
+import { getEventByID, getEventBySlug, getEventMedia } from '@/services/eventService';
 import { getOrgByID } from '@/services/orgsServce';
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
@@ -12,17 +12,17 @@ import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCaro
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default async function Class({ params }: { params: Promise<{ classID: number }> }) {
-  const { classID } = await params;
-  const event: classModel = await getEventByID(classID);
-  const eventMedia: classPubModel = await getEventMedia(classID);
+export default async function Class({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const event: classModel = await getEventBySlug(slug);
+  const eventMedia: classPubModel = await getEventMedia(event.id);
   const orgs: orgModel[] = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
   return (
     <>
       <div className="fixed top-0 z-20">
-        <RecentlyViewed classID={classID} />
+        <RecentlyViewed classID={event.id} />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} />
       </div>
       <div

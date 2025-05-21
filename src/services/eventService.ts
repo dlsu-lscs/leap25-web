@@ -46,6 +46,24 @@ const getEventByID = async (eventID: number) => {
   }
 };
 
+const getEventBySlug = async (slug: string) => {
+  try {
+    const response = await fetch(`${API_URL}/events/slug/${slug}`);
+
+    if (!response.ok) {
+      throw new Error('Failed to get event');
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
 const getEventMedia = async (eventID: any) => {
   try {
     const response = await fetch(`${API_URL}/events/${eventID}/media`);
@@ -92,4 +110,4 @@ const shareEvent = () => {
     .catch((err) => console.error('Clipboard error:', err));
 };
 
-export { getEvents, getEventByID, getEventMedia, getEventByDay, shareEvent };
+export { getEvents, getEventByID, getEventBySlug, getEventMedia, getEventByDay, shareEvent };
