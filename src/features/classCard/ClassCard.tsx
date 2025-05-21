@@ -66,9 +66,11 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   const { data: session } = useSession();
   const { user } = useSetUser(session);
   const { bookmarks } = useSetBookmark(user?.id);
-  const [isBookmark, setBookmark] = useState(
-    bookmarks?.some((bookmark) => bookmark.event_id === event.id)
-  );
+  const [isBookmark, setBookmark] = useState(false);
+
+  useEffect(() => {
+    setBookmark(bookmarks?.some((bookmark) => bookmark.event_id === event.id) ?? false);
+  }, [bookmarks, event.id]);
 
   return (
     <>
@@ -174,7 +176,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       deleteBookmark(user?.id, event.id);
-                      setBookmark(false);
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
@@ -197,8 +198,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       postBookmark(user?.id, event.id);
-                      setBookmark(true);
-                      console.log(isBookmark);
                     }}
                   >
                     <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />

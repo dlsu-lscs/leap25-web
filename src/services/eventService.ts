@@ -10,6 +10,7 @@ const getEvents = async (subtheme: any) => {
       },
       body: JSON.stringify({ subtheme }),
       cache: 'default',
+      next: { revalidate: 60 },
     });
 
     if (!response.ok) {
@@ -30,7 +31,7 @@ const getEvents = async (subtheme: any) => {
 
 const getEventByID = async (eventID: number) => {
   try {
-    const response = await fetch(`${API_URL}/events/${eventID}`);
+    const response = await fetch(`${API_URL}/events/${eventID}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -48,7 +49,7 @@ const getEventByID = async (eventID: number) => {
 
 const getEventBySlug = async (slug: string) => {
   try {
-    const response = await fetch(`${API_URL}/events/slug/${slug}`);
+    const response = await fetch(`${API_URL}/events/slug/${slug}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -66,7 +67,9 @@ const getEventBySlug = async (slug: string) => {
 
 const getEventMedia = async (eventID: any) => {
   try {
-    const response = await fetch(`${API_URL}/events/${eventID}/media`);
+    const response = await fetch(`${API_URL}/events/${eventID}/media`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       console.log('no media yet');
@@ -85,7 +88,7 @@ const getEventMedia = async (eventID: any) => {
 
 const getEventByDay = async (day: number) => {
   try {
-    const response = await fetch(`${API_URL}/events/day?=${day}`);
+    const response = await fetch(`${API_URL}/events/day?=${day}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       console.log('no events yet');

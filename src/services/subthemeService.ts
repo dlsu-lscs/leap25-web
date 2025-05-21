@@ -38,7 +38,9 @@ const getSubThemeLink = (subtheme: any) => {
 
 const getSubThemeByID = async (subthemeID: number) => {
   try {
-    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`);
+    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');
@@ -56,7 +58,9 @@ const getSubThemeByID = async (subthemeID: number) => {
 
 const getSubThemeByName = async (subtheme: any) => {
   try {
-    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`);
+    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');
