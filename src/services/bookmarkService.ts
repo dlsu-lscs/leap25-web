@@ -22,6 +22,21 @@ const postBookmark = async (user_id: any, event_id: any) => {
   }
 };
 
+const deleteBookmark = async (user_id: any, event_id: any) => {
+  try {
+    const response = await axios.delete(`${API_URL}/bookmarks`, {
+      data: {
+        user_id: user_id,
+        event_id: event_id,
+      },
+    });
+    console.log(response.data);
+    return response.data;
+  } catch (error: any) {
+    console.log('error: ' + error);
+  }
+};
+
 const getBookmarks = async (userId: any) => {
   if (userId) {
     try {
@@ -42,4 +57,4 @@ const getBookmarks = async (userId: any) => {
   }
 };
 
-export { postBookmark, getBookmarks };
+export { postBookmark, deleteBookmark, getBookmarks };
