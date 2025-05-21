@@ -3,7 +3,7 @@ import { bookmarkModel } from '@/types/classModels';
 import { useEffect, useState } from 'react';
 
 const useSetBookmark = (userId: any) => {
-  const [bookmarks, setBookmarks] = useState<bookmarkModel>();
+  const [bookmarks, setBookmarks] = useState<bookmarkModel[]>();
 
   useEffect(() => {
     const fetchData = async () => {

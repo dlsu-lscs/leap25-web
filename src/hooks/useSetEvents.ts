@@ -7,11 +7,14 @@ const useSetEvent = (event_id: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const event = await getEventByID(event_id);
-      setEvents(event);
+      if (event_id) {
+        const event = await getEventByID(event_id);
+        setEvents(event);
+      }
     };
     fetchData();
   }, [event_id]);
+
   return { event };
 };
 
