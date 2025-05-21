@@ -19,12 +19,9 @@ import { getBookmarks } from '@/services/bookmarkService';
 
 interface BookmarkProps {
   variant?: string;
-  userId: number;
 }
 
-export default async function Bookmarked({ variant, userId }: BookmarkProps) {
-  const bookmarks = await getBookmarks(userId);
-  console.log(bookmarks);
+export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
