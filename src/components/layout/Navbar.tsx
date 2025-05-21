@@ -293,7 +293,21 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                   }}
                 >
                   <ScrollArea className="h-[500px]">
-                    <div className="flex flex-col gap-4 p-4"></div>
+                    <div className="flex flex-col gap-4 p-4">
+                      {searchedEvents ? (
+                        searchedEvents.map((searchedEvent, index) => {
+                          return (
+                            <>
+                              <BookmarkedEvents key={index} event_id={searchedEvent.id} />
+                            </>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <div className="font-public-sans text-white">No searched classes</div>
+                        </>
+                      )}
+                    </div>
                   </ScrollArea>
                 </div>
               </HoverCardContent>
