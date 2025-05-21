@@ -11,10 +11,17 @@ import HighlightClientWrapper from '@/features/subthemeComponents/highlightClien
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 
-export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
+export default async function Subtheme({ params }: { params: { subtheme: string } }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events: classModel[] = await getEvents(name);
+
+  const eventsWithMedia = await Promise.all(
+    events.map(async (event) => {
+      const eventMedia = await getEventMedia(event.id);
+      return { ...event, eventMedia };
+    })
+  );
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
   return (
@@ -56,26 +63,23 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map(async (event: classModel, index: number) => {
-                const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                if (eventMedia != undefined) {
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        max_slots={event.max_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                        slug={event.slug}
-                      />
-                    </div>
-                  );
-                }
-              })}
+              itemsToShow={eventsWithMedia.map((event, index) =>
+                event.eventMedia ? (
+                  <div key={index}>
+                    <SubThemeClassCard
+                      key={index}
+                      subtheme={subtheme}
+                      id={event.id}
+                      registered_slots={event.registered_slots}
+                      max_slots={event.max_slots}
+                      descripton={event.description}
+                      title={event.title}
+                      eventMedia={event.eventMedia}
+                      slug={event.slug}
+                    />
+                  </div>
+                ) : null
+              )}
             ></LeapCarousel>
             <div>
               <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 2</h2>
@@ -83,26 +87,23 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={events.map(async (event: classModel, index: number) => {
-                const eventMedia: classPubModel = (await getEventMedia(event.id)) || undefined;
-                if (eventMedia != undefined) {
-                  return (
-                    <div key={index}>
-                      <SubThemeClassCard
-                        key={index}
-                        subtheme={subtheme}
-                        id={event.id}
-                        registered_slots={event.registered_slots}
-                        max_slots={event.max_slots}
-                        descripton={event.description}
-                        title={event.title}
-                        eventMedia={eventMedia}
-                        slug={event.slug}
-                      />
-                    </div>
-                  );
-                }
-              })}
+              itemsToShow={eventsWithMedia.map((event, index) =>
+                event.eventMedia ? (
+                  <div key={index}>
+                    <SubThemeClassCard
+                      key={index}
+                      subtheme={subtheme}
+                      id={event.id}
+                      registered_slots={event.registered_slots}
+                      max_slots={event.max_slots}
+                      descripton={event.description}
+                      title={event.title}
+                      eventMedia={event.eventMedia}
+                      slug={event.slug}
+                    />
+                  </div>
+                ) : null
+              )}
             ></LeapCarousel>
           </div>
         </div>

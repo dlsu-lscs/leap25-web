@@ -12,7 +12,7 @@ import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCaro
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default async function Class({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Class({ params }: { params: { subtheme: string; slug: string } }) {
   const { slug } = await params;
   const event: classModel = await getEventBySlug(slug);
   const eventMedia: classPubModel = await getEventMedia(event.id);

@@ -37,11 +37,12 @@ const deleteBookmark = async (user_id: any, event_id: any) => {
   }
 };
 
-
 const getBookmarks = async (userId: any) => {
   if (userId) {
     try {
-      const response = await fetch(`${API_URL}/users/${userId}/bookmarks`);
+      const response = await fetch(`${API_URL}/users/${userId}/bookmarks`, {
+        next: { revalidate: 60 },
+      });
 
       if (!response.ok) {
         throw new Error('Failed to get users');
