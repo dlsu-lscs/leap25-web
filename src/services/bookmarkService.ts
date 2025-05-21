@@ -37,6 +37,7 @@ const deleteBookmark = async (user_id: any, event_id: any) => {
   }
 };
 
+
 const getBookmarks = async (userId: any) => {
   if (userId) {
     try {
