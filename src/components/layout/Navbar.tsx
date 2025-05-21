@@ -55,6 +55,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
   const [showSearch, setShowSearch] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -130,6 +131,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                     setTimeout(() => {
                       setShowSearchResults(false);
                     }, 200);
+                  }}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
                   }}
                 />
                 <button
@@ -233,6 +237,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                     }}
                     onBlur={(e) => {
                       e.stopPropagation();
+                    }}
+                    onChange={(e) => {
+                      setSearchValue(e.target.value);
                     }}
                     autoFocus={false}
                     tabIndex={-1}
