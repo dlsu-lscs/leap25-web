@@ -70,6 +70,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                         descripton={event.description}
                         title={event.title}
                         eventMedia={eventMedia}
+                        slug={event.slug}
                       />
                     </div>
                   );
@@ -96,6 +97,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                         descripton={event.description}
                         title={event.title}
                         eventMedia={eventMedia}
+                        slug={event.slug}
                       />
                     </div>
                   );

@@ -12,6 +12,7 @@ interface classModel {
   code: string;
   registered_slots: number;
   max_slots: number;
+  slug: string;
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
