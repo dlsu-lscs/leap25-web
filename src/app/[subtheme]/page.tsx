@@ -11,7 +11,7 @@ import HighlightClientWrapper from '@/features/subthemeComponents/highlightClien
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 
-export default async function Subtheme({ params }: { params: { subtheme: string } }) {
+export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
   const { asset, name } = getSubTheme(subtheme);
   const events: classModel[] = await getEvents(name);
