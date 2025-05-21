@@ -65,6 +65,25 @@ const getEventMedia = async (eventID: any) => {
   }
 };
 
+const getEventByDay = async (day: number) => {
+  try {
+    const response = await fetch(`${API_URL}/events/day?=${day}`);
+
+    if (!response.ok) {
+      console.log('no events yet');
+      return undefined;
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+};
+
 const shareEvent = () => {
   if (typeof window === 'undefined') return;
   navigator.clipboard
@@ -73,4 +92,4 @@ const shareEvent = () => {
     .catch((err) => console.error('Clipboard error:', err));
 };
 
-export { getEvents, getEventByID, getEventMedia, shareEvent };
+export { getEvents, getEventByID, getEventMedia, getEventByDay, shareEvent };

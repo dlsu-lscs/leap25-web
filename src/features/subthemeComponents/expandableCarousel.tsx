@@ -1,5 +1,10 @@
 'use client';
-import ArrowCircleRightSharpIcon from '@mui/icons-material/ArrowCircleRightSharp';
+import dynamic from 'next/dynamic';
+
+const ArrowCircleRightSharpIcon = dynamic(
+  () => import('@mui/icons-material/ArrowCircleRightSharp'),
+  { ssr: false }
+);
 import { useCallback, useEffect, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import {
@@ -13,8 +18,8 @@ import {
   HighlightPrev,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import { style } from '@mui/system';
-import { Button } from '@/components/ui/Button';
+// import { style } from '@mui/system';
+import { Button } from '@/components/ui/button';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import { registerEvent } from '@/services/registerService';
 interface ExpandableCarouselProps {

@@ -38,11 +38,15 @@ export default function RootLayout({
     <html lang="en" className={`h-full font-public-sans`}>
       <link rel="icon" href="/leapLogos/Logo_v1.png" />
       <body className="h-full overflow-x-hidden">
-        <Providers>
-          {children}
-          <LeapCursor />
-          <Toaster />
-        </Providers>
+        <div className="h-full relative overflow-x-hidden">
+          <div className="left-cloud "></div>
+          <div className="right-cloud "></div>
+          <Providers>
+            {children}
+            <LeapCursor />
+            <Toaster />
+          </Providers>
+        </div>
       </body>
     </html>
   );
