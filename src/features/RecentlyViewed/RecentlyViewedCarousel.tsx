@@ -1,29 +1,14 @@
 'use client';
 
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
-import { classPubModel, subThemeModel } from '@/types/classModels';
+import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { useEffect, useState } from 'react';
 import SubThemeClassCard from '../subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import { getEventByID, getEventMedia } from '@/services/eventService';
 import { getSubThemeByID, getSubThemeLink } from '@/services/subthemeService';
 
-interface Event {
-  id: number;
-  org_id: number;
-  contentful_id: string;
-  title: string;
-  description: string;
-  subtheme_id: number;
-  venue: string;
-  schedule: string;
-  fee: number;
-  code: string;
-  registered_slots: number;
-  max_slots: number;
-}
-
 interface EventWithMediaAndSubtheme {
-  event: Event;
+  event: classModel;
   media?: classPubModel;
   subtheme: subThemeModel;
 }
@@ -80,6 +65,7 @@ export default function RecentlyViewedCarousel() {
                 descripton={event.description}
                 title={event.title}
                 eventMedia={media}
+                slug={event.slug}
               />
             </div>
           </>
