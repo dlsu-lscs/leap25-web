@@ -29,6 +29,29 @@ const getEvents = async (subtheme: any) => {
   }
 };
 
+const getEventBySearch = async (searchValue: string) => {
+  try {
+    const response = await fetch(`${API_URL}/events/search?q=${encodeURIComponent(searchValue)}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null;
+      }
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+    return null;
+  }
+};
+
 const getEventByID = async (eventID: number) => {
   try {
     const response = await fetch(`${API_URL}/events/${eventID}`, { next: { revalidate: 60 } });
@@ -113,4 +136,12 @@ const shareEvent = () => {
     .catch((err) => console.error('Clipboard error:', err));
 };
 
-export { getEvents, getEventByID, getEventBySlug, getEventMedia, getEventByDay, shareEvent };
+export {
+  getEvents,
+  getEventByID,
+  getEventBySearch,
+  getEventBySlug,
+  getEventMedia,
+  getEventByDay,
+  shareEvent,
+};
