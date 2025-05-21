@@ -65,12 +65,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks } = useSetBookmark(user?.id);
-  const [isBookmark, setBookmark] = useState(false);
-
-  useEffect(() => {
-    setBookmark(bookmarks?.some((bookmark) => bookmark.event_id === event.id) ?? false);
-  }, [bookmarks, event.id]);
+  const { bookmarks, refreshBookmarks } = useSetBookmark(user?.id);
 
   return (
     <>
@@ -159,51 +154,25 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              {isBookmark ? (
-                <>
-                  <div
-                    role="button"
-                    className="hover:opacity-50 duration-100 transition"
-                    onClick={() => {
-                      toast.success(`${event.title} is deleted as a bookmark`, {
-                        style: {
-                          backgroundColor: 'white',
-                          color: 'black',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                          fontFamily: public_sans.style.fontFamily,
-                        },
-                      });
-                      deleteBookmark(user?.id, event.id);
-                    }}
-                  >
-                    <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div
-                    role="button"
-                    className="hover:opacity-50 duration-100 transition"
-                    onClick={() => {
-                      toast.success(`${event.title} is saved as a bookmark`, {
-                        style: {
-                          backgroundColor: 'white',
-                          color: 'black',
-                          borderRadius: '8px',
-                          padding: '16px',
-                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                          fontFamily: public_sans.style.fontFamily,
-                        },
-                      });
-                      postBookmark(user?.id, event.id);
-                    }}
-                  >
-                    <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
-                  </div>
-                </>
-              )}
+              <div
+                role="button"
+                className="hover:opacity-50 duration-100 transition"
+                onClick={() => {
+                  toast.success(`${event.title} is saved as a bookmark`, {
+                    style: {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                      fontFamily: public_sans.style.fontFamily,
+                    },
+                  });
+                  postBookmark(user?.id, event.id);
+                }}
+              >
+                <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
+              </div>
               <div
                 onClick={() => {
                   toast.success(`${event.title} link is ready to be shared`, {
