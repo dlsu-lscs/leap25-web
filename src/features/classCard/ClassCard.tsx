@@ -19,6 +19,7 @@ import { registerEvent } from '@/services/registerService';
 import { shareEvent } from '@/services/eventService';
 
 import dynamic from 'next/dynamic';
+import { formatSchedule } from '@/lib/helpers';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -50,23 +51,8 @@ type ClassCardsProps = {
 };
 
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
-  const date = new Date(event.schedule);
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  };
-  const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZone: 'UTC',
-  };
-
-  const formattedDate = date.toLocaleDateString('en-US', dateOptions);
-  const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
+  const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
+  const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
 
   return (
     <>
@@ -106,7 +92,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></CalendarMonthOutlinedIcon>
               }
             >
-              {formattedDate}
+              {startDate}
             </ClassDetails>
             <ClassDetails
               className="text-white"
@@ -116,7 +102,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></AccessTimeOutlinedIcon>
               }
             >
-              {formattedTime}
+              {startTime} - {endTime}
             </ClassDetails>
             <ClassDetails
               className="text-white"
