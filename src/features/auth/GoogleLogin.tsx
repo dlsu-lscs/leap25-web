@@ -18,8 +18,6 @@ export default function GoogleLogin() {
       if (status === 'authenticated') {
         const leftCloud = document.querySelector('.left-cloud');
         const rightCloud = document.querySelector('.right-cloud');
-        console.log(leftCloud);
-        console.log(rightCloud);
 
         leftCloud?.classList.add('left-cloud-inout');
         rightCloud?.classList.add('right-cloud-inout');

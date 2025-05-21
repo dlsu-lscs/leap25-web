@@ -342,7 +342,13 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 ></Image>
                 La Salle Computer Society
               </Link>
-              <Link href={'/logout'} className="flex text-lg">
+              <div
+                role="button"
+                className="flex text-lg"
+                onClick={() => {
+                  signOut({ callbackUrl: '/login', redirect: true });
+                }}
+              >
                 <Image
                   src={'/dropdown/logout.svg'}
                   alt="logout"
@@ -351,7 +357,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                   className="mr-3"
                 ></Image>
                 Log Out
-              </Link>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
