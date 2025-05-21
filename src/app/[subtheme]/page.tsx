@@ -37,7 +37,7 @@ export default async function Subtheme({ params }: { params: { subtheme: string 
         <FadeOverlay></FadeOverlay>
       </div>
       <div
-        className={`min-h-screen sm:py-6 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover bg-center`}
+        className={`min-h-screen py-12 sm:py-20 sm:px-24 text-white  bg-black/60 bg-blend-multiply bg-cover bg-center`}
         style={{ backgroundImage: `url("${subthemeDetails.background_pub_url}")` }}
       >
         <div>
@@ -58,7 +58,9 @@ export default async function Subtheme({ params }: { params: { subtheme: string 
             </div>
 
             <div>
-              <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 1</h2>
+              <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                Day 1
+              </h2>
             </div>
             <LeapCarousel
               loopItems={false}
@@ -82,7 +84,9 @@ export default async function Subtheme({ params }: { params: { subtheme: string 
               )}
             ></LeapCarousel>
             <div>
-              <h2 className={`text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>Day 2</h2>
+              <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                Day 2
+              </h2>
             </div>
             <LeapCarousel
               loopItems={false}
