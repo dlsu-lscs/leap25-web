@@ -21,11 +21,12 @@ import { shareEvent } from '@/services/eventService';
 import dynamic from 'next/dynamic';
 import { formatSchedule } from '@/lib/helpers';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserByEmail } from '@/services/userService';
 import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
+import { CodeSquare } from 'lucide-react';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -65,6 +66,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   const { data: session } = useSession();
   const { user } = useSetUser(session);
   const { bookmarks } = useSetBookmark(user?.id);
+  const [isBookmark, setBookmark] = useState(
+    bookmarks?.some((bookmark) => bookmark.event_id === event.id)
+  );
 
   return (
     <>
@@ -153,7 +157,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              {bookmarks?.some((bookmark) => bookmark.event_id === event.id) ? (
+              {isBookmark ? (
                 <>
                   <div
                     role="button"
@@ -170,6 +174,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       deleteBookmark(user?.id, event.id);
+                      setBookmark(false);
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
@@ -192,6 +197,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       postBookmark(user?.id, event.id);
+                      setBookmark(true);
+                      console.log(isBookmark);
                     }}
                   >
                     <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
