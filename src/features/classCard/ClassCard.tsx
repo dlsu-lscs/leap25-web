@@ -77,7 +77,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
               {orgs.map((org: orgModel, hostID: number) => (
-                <HostName src={org.org_logo || undefined} key={hostID}>
+                <HostName src={org.org_logo || undefined} key={hostID} org_url={org.org_url}>
                   {org.name}
                 </HostName>
               ))}
