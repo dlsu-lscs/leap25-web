@@ -7,22 +7,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   providers: [
-    CredentialsProvider({
-      name: 'CustomTokenAuth',
-      credentials: {
-        token: { label: 'Token', type: 'text' },
-      },
-      async authorize(credentials) {
-        if (credentials?.token) {
-          return {
-            id: 'user',
-            token: credentials.token,
-          };
-        }
-        return null;
-      },
-    }),
-
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID! || process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
       clientSecret:
@@ -43,12 +27,6 @@ export const authOptions: AuthOptions = {
       }
 
       return token;
-    },
-
-    async session({ session, token }: any) {
-      session.accessToken = token.accessToken;
-      session.provider = token.provider;
-      return session;
     },
   },
 };
