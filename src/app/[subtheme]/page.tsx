@@ -44,6 +44,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
       <HighlightClientWrapper
         asset={asset || 'error'}
         name={name || 'error'}
+        highlightEvent={highlightEventswithEventDetails}
       ></HighlightClientWrapper>
       <div className="absolute -translate-y-10 ">
         <FadeOverlay></FadeOverlay>

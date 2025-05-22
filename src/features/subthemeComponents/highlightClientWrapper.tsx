@@ -4,6 +4,7 @@ import ExpandableCarousel from './expandableCarousel';
 import { useState } from 'react';
 import { AvatarFallback, AvatarImage, Avatar } from '@/components/ui/avatar';
 import { nameInitials } from '@/lib/helpers';
+import { classModel } from '@/types/classModels';
 
 const dummyHighlightData = [
   {
@@ -40,8 +41,17 @@ const dummyHighlightData = [
   },
 ];
 
-export default function HighlightClientWrapper({ name, asset }: { name: string; asset: string }) {
+export default function HighlightClientWrapper({
+  name,
+  asset,
+  highlightEvent,
+}: {
+  name: string;
+  asset: string;
+  highlightEvent: any;
+}) {
   const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
+  console.log(highlightEvent);
   return (
     <>
       <div className="relative h-[728px] text-white">
