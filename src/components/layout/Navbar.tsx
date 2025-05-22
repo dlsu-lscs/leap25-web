@@ -60,7 +60,6 @@ export default function Navbar({ className, src, name }: NavbarProps) {
   const [searchValue, setSearchValue] = useState('');
   const { event: searchedEvents } = useSetSearchEvent(searchValue);
 
-
   useEffect(() => {
     if (status === 'unauthenticated') {
       router.push('/login');

@@ -6,41 +6,47 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import TransitionLink from '@/components/ui/transitionLink';
+import { cn } from '@/lib/utils';
 
 // Define the type for static images
 const subthemes = [
   {
-    positionX: -4,
-    positionY: 50,
+    positionX: 3,
+    positionY: 60,
     src: '/landmarks/CoralLagoon.png',
+    circleLogo: '/subthemeLogos/CoralLagoon.png',
     alt: 'Coral Lagoon',
     route: 'coral-lagoon',
   },
   {
-    positionX: 36,
-    positionY: 20,
+    positionX: 43,
+    positionY: 39,
     src: '/landmarks/PiratesCove.png',
+    circleLogo: '/subthemeLogos/PiratesCove.png',
     alt: 'Pirates Cove',
     route: 'pirates-cove',
   },
   {
-    positionX: 4,
-    positionY: -4,
+    positionX: 11,
+    positionY: 5,
     src: '/landmarks/NorthernStarStop.png',
+    circleLogo: '/subthemeLogos/NorthernStarStop.png',
     alt: 'Northern Star Stop',
     route: 'northern-star-stop',
   },
   {
-    positionX: 57,
-    positionY: 45,
+    positionX: 64,
+    positionY: 52,
     src: '/landmarks/HollowTreeHideaway.png',
+    circleLogo: '/subthemeLogos/HollowTreeHideaway.png',
     alt: 'Hollow Tree Hideaway',
     route: 'hollow-tree-hideaway',
   },
   {
-    positionX: 72,
-    positionY: 2,
+    positionX: 78,
+    positionY: 11,
     src: '/landmarks/FairyNook.png',
+    circleLogo: 'subthemeLogos/FairyNook.png',
     alt: 'Fairy Nook',
     route: 'fairy-nook',
   },
@@ -165,7 +171,7 @@ export default function ParallaxBackground({ className = '' }: { className?: str
           >
             <TransitionLink
               href={`/${img.route}`}
-              className="lg:!w-[500px] lg:!h-[500px] w-96 h-96 flex justify-center items-center" // Removed hover:hidden
+              className="lg:!w-[500px] lg:!h-[500px] w-96 h-96 flex" // Removed hover:hidden
             >
               {/* Image is now always rendered, opacity and bounce are conditional */}
               <Image
@@ -174,11 +180,26 @@ export default function ParallaxBackground({ className = '' }: { className?: str
                 width={200}
                 height={200}
                 className={`
-                  transition-opacity duration-300 ease-in-out
+                  transition-opacity duration-300 ease-in-out absolute
                   ${hoveredButtonIndex === index ? 'opacity-100' : 'opacity-50 pointer-events-none'}
                   ${hoveredButtonIndex === index ? 'animate-bounce' : ''}
                 `}
               />
+              <div
+                className={cn(
+                  'absolute top-35 left-5 w-36 h-16 transition-opacity ease-in-out duration-600',
+                  hoveredButtonIndex === index ? 'opacity:100' : 'opacity-0'
+                )}
+              >
+                <img
+                  src={img.circleLogo}
+                  alt="subtheme logo"
+                  className="w-12 h-12 absolute z-10 top-1/2 -translate-y-1/2"
+                />
+                <div className="bg-black/50 w-32 pl-9 font-bold flex items-center h-10 absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-xs font-playfair">
+                  {img.alt}
+                </div>
+              </div>
             </TransitionLink>
           </div>
         );
