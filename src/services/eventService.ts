@@ -10,6 +10,7 @@ const getEvents = async (subtheme: any) => {
       },
       body: JSON.stringify({ subtheme }),
       cache: 'default',
+      next: { revalidate: 60 },
     });
 
     if (!response.ok) {
@@ -28,9 +29,32 @@ const getEvents = async (subtheme: any) => {
   }
 };
 
+const getEventBySearch = async (searchValue: string) => {
+  try {
+    const response = await fetch(`${API_URL}/events/search?q=${encodeURIComponent(searchValue)}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return null;
+      }
+    }
+
+    return await response.json();
+  } catch (error: any) {
+    if (error instanceof TypeError) {
+      console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else {
+      console.error('Unexpected error:', error.message);
+    }
+    return null;
+  }
+};
+
 const getEventByID = async (eventID: number) => {
   try {
-    const response = await fetch(`${API_URL}/events/${eventID}`);
+    const response = await fetch(`${API_URL}/events/${eventID}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -48,7 +72,7 @@ const getEventByID = async (eventID: number) => {
 
 const getEventBySlug = async (slug: string) => {
   try {
-    const response = await fetch(`${API_URL}/events/slug/${slug}`);
+    const response = await fetch(`${API_URL}/events/slug/${slug}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -66,7 +90,9 @@ const getEventBySlug = async (slug: string) => {
 
 const getEventMedia = async (eventID: any) => {
   try {
-    const response = await fetch(`${API_URL}/events/${eventID}/media`);
+    const response = await fetch(`${API_URL}/events/${eventID}/media`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       console.log('no media yet');
@@ -85,7 +111,7 @@ const getEventMedia = async (eventID: any) => {
 
 const getEventByDay = async (day: number) => {
   try {
-    const response = await fetch(`${API_URL}/events/day?=${day}`);
+    const response = await fetch(`${API_URL}/events/day?=${day}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       console.log('no events yet');
@@ -110,4 +136,12 @@ const shareEvent = () => {
     .catch((err) => console.error('Clipboard error:', err));
 };
 
-export { getEvents, getEventByID, getEventBySlug, getEventMedia, getEventByDay, shareEvent };
+export {
+  getEvents,
+  getEventByID,
+  getEventBySearch,
+  getEventBySlug,
+  getEventMedia,
+  getEventByDay,
+  shareEvent,
+};

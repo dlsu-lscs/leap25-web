@@ -1,3 +1,4 @@
+'use client';
 import {
   Drawer,
   DrawerClose,
@@ -16,12 +17,21 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import Image from 'next/image';
 import BookmarkedEvents from './BookmarkedEvents';
 import { getBookmarks } from '@/services/bookmarkService';
+import { useSession } from 'next-auth/react';
+import { useSetUser } from '@/hooks/useSetUser';
+import { useSetBookmark } from '@/hooks/useSetBookmarks';
+import { bookmarkModel } from '@/types/classModels';
+import { useSetEvent } from '@/hooks/useSetEvents';
 
 interface BookmarkProps {
   variant?: string;
 }
 
 export default function Bookmarked({ variant }: BookmarkProps) {
+  const { data: session, status } = useSession();
+  const { user } = useSetUser(session);
+  const { bookmarks } = useSetBookmark(user?.id);
+
   return (
     <>
       <Drawer>
@@ -69,13 +79,10 @@ export default function Bookmarked({ variant }: BookmarkProps) {
           <DrawerFooter>
             <div className="flex flex-col items-center justify-center ">
               <ScrollArea className="h-[500px] sm:min-w-1/2 min-w-screen text-white p-4">
-                <div className="flex flex-col gap-4">
-                  <BookmarkedEvents />
-                  <BookmarkedEvents />
-                  <BookmarkedEvents />
-                  <BookmarkedEvents />
-                  <BookmarkedEvents />
-                  <BookmarkedEvents />
+                <div className="flex flex-col gap-4 text-white">
+                  {bookmarks?.map((bookmark, index) => {
+                    return <BookmarkedEvents key={index} event_id={bookmark.event_id} />;
+                  })}
                 </div>
               </ScrollArea>
             </div>

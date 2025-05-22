@@ -36,6 +36,8 @@ import { cn } from '@/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { ScrollArea } from '../ui/scroll-area';
 import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
+import { getEventBySearch } from '@/services/eventService';
+import { useSetSearchEvent } from '@/hooks/useSearchEvent';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -55,6 +57,8 @@ export default function Navbar({ className, src, name }: NavbarProps) {
   const [showSearch, setShowSearch] = useState(false);
   const [showSearchResults, setShowSearchResults] = useState(false);
   const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const { event: searchedEvents } = useSetSearchEvent(searchValue);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -131,6 +135,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                       setShowSearchResults(false);
                     }, 200);
                   }}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                  }}
                 />
                 <button
                   onClick={() => {
@@ -167,12 +174,19 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               >
                 <ScrollArea className="h-[500px]">
                   <div className="flex flex-col gap-4 p-4">
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
-                    <BookmarkedEvents />
+                    {searchedEvents ? (
+                      searchedEvents.map((searchedEvent, index) => {
+                        return (
+                          <>
+                            <BookmarkedEvents key={index} event_id={searchedEvent.id} />
+                          </>
+                        );
+                      })
+                    ) : (
+                      <>
+                        <div className="font-public-sans text-white">No searched classes</div>
+                      </>
+                    )}
                   </div>
                 </ScrollArea>
               </div>
@@ -234,6 +248,9 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                     onBlur={(e) => {
                       e.stopPropagation();
                     }}
+                    onChange={(e) => {
+                      setSearchValue(e.target.value);
+                    }}
                     autoFocus={false}
                     tabIndex={-1}
                     autoComplete="off"
@@ -277,12 +294,19 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 >
                   <ScrollArea className="h-[500px]">
                     <div className="flex flex-col gap-4 p-4">
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
-                      <BookmarkedEvents />
+                      {searchedEvents ? (
+                        searchedEvents.map((searchedEvent, index) => {
+                          return (
+                            <>
+                              <BookmarkedEvents key={index} event_id={searchedEvent.id} />
+                            </>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <div className="font-public-sans text-white">No searched classes</div>
+                        </>
+                      )}
                     </div>
                   </ScrollArea>
                 </div>
@@ -342,7 +366,13 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 ></Image>
                 La Salle Computer Society
               </Link>
-              <Link href={'/logout'} className="flex text-lg">
+              <div
+                role="button"
+                className="flex text-lg"
+                onClick={() => {
+                  signOut({ callbackUrl: '/login', redirect: true });
+                }}
+              >
                 <Image
                   src={'/dropdown/logout.svg'}
                   alt="logout"
@@ -351,7 +381,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                   className="mr-3"
                 ></Image>
                 Log Out
-              </Link>
+              </div>
             </div>
           </SheetContent>
         </Sheet>

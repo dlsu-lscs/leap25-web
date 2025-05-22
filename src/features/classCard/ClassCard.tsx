@@ -21,15 +21,19 @@ import { shareEvent } from '@/services/eventService';
 import dynamic from 'next/dynamic';
 import { formatSchedule } from '@/lib/helpers';
 import { useSession } from 'next-auth/react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getUserByEmail } from '@/services/userService';
 import { useSetUser } from '@/hooks/useSetUser';
-import { postBookmark } from '@/services/bookmarkService';
+import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
+import { useSetBookmark } from '@/hooks/useSetBookmarks';
+import { CodeSquare } from 'lucide-react';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
   { ssr: false }
 );
+
+const BookmarkIcon = dynamic(() => import('@mui/icons-material/Bookmark'), { ssr: false });
 
 const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessTimeOutlined'), {
   ssr: false,
@@ -61,6 +65,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
+  const { bookmarks } = useSetBookmark(user?.id);
 
   return (
     <>
@@ -164,12 +169,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                     },
                   });
                   postBookmark(user?.id, event.id);
-                  console.log('user');
                 }}
               >
-                <BookmarkBorderOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
-                ></BookmarkBorderOutlinedIcon>
+                <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
               </div>
               <div
                 onClick={() => {

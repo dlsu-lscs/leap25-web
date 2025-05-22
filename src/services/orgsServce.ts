@@ -2,7 +2,7 @@ import { API_URL } from '@/lib/constants';
 
 const getOrgs = async () => {
   try {
-    const response = await fetch(`${API_URL}/orgs/`);
+    const response = await fetch(`${API_URL}/orgs/`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get org');
@@ -20,7 +20,7 @@ const getOrgs = async () => {
 
 const getOrgByID = async (orgID: number) => {
   try {
-    const response = await fetch(`${API_URL}/orgs/${orgID}`);
+    const response = await fetch(`${API_URL}/orgs/${orgID}`, { next: { revalidate: 60 } });
 
     if (!response.ok) {
       throw new Error('Failed to get org');
