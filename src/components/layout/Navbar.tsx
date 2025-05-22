@@ -59,6 +59,7 @@ export default function Navbar({ className, src, name }: NavbarProps) {
   const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const { event: searchedEvents } = useSetSearchEvent(searchValue);
+  console.log(searchedEvents);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
