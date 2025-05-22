@@ -148,7 +148,6 @@ export default function ExpandableCarousel({
                       <div className="flex flex-col sm:flex-col-reverse gap-2 items-center sm:mt-8">
                         <div className="flex gap-2 sm:justify-start justify-center items-center w-full sm:flex-row flex-col">
                           <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md "></div>
                         </div>
                         {item.titleCard.length > 0 ? (
                           <img src={`${item.titleCard}`} className="w-64 mt-2" alt="title card" />

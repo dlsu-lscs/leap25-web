@@ -21,7 +21,7 @@ interface BookmarkProps {
   variant?: string;
 }
 
-export default async function Bookmarked({ variant }: BookmarkProps) {
+export default function Bookmarked({ variant }: BookmarkProps) {
   return (
     <>
       <Drawer>
