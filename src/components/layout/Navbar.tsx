@@ -177,9 +177,11 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                     {searchedEvents ? (
                       searchedEvents.map((searchedEvent, index) => {
                         return (
-                          <>
-                            <BookmarkedEvents key={index} event_id={searchedEvent.id} />
-                          </>
+                          <BookmarkedEvents
+                            key={index}
+                            event_id={searchedEvent.id}
+                            variant="search"
+                          />
                         );
                       })
                     ) : (
@@ -297,9 +299,11 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                       {searchedEvents ? (
                         searchedEvents.map((searchedEvent, index) => {
                           return (
-                            <>
-                              <BookmarkedEvents key={index} event_id={searchedEvent.id} />
-                            </>
+                            <BookmarkedEvents
+                              key={index}
+                              event_id={searchedEvent.id}
+                              variant="search"
+                            />
                           );
                         })
                       ) : (
