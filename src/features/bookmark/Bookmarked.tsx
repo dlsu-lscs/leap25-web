@@ -31,6 +31,7 @@ export default function Bookmarked({ variant }: BookmarkProps) {
   const { data: session, status } = useSession();
   const { user } = useSetUser(session);
   const { bookmarks } = useSetBookmark(user?.id);
+  console.log(bookmarks);
 
   return (
     <>
