@@ -168,7 +168,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                       fontFamily: public_sans.style.fontFamily,
                     },
                   });
-                  postBookmark(user?.id, event.id);
+                  postBookmark(process.env.NEXT_PUBLC_LEAP_API, user?.id, event.id);
                 }}
               >
                 <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />

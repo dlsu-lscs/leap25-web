@@ -7,7 +7,7 @@ const useSetBookmark = (userId: any, bookmarked: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const bookmark = await getBookmarks(userId);
+      const bookmark = await getBookmarks(process.env.NEXT_PUBLIC_LEAP_API, userId);
       setBookmarks(bookmark);
     };
     fetchData();
