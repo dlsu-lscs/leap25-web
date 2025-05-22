@@ -12,7 +12,12 @@ const CalendarViewIcon = dynamic(() => import('@mui/icons-material/CalendarViewD
   ssr: false,
 });
 
-export default function BookmarkedEvents({ event_id }: any) {
+interface BookmarkedEventsProps {
+  event_id: any;
+  variant?: string;
+}
+
+export default function BookmarkedEvents({ event_id, variant }: BookmarkedEventsProps) {
   const { event }: { event: classModel | undefined } = useSetEvent(event_id);
   const { eventMedia }: { eventMedia: classPubModel | undefined } = useSetEventMedia(event_id);
   const { subtheme }: { subtheme: subThemeModel | undefined } = useSetSubtheme(event?.subtheme_id);
@@ -21,7 +26,11 @@ export default function BookmarkedEvents({ event_id }: any) {
     <>
       <a
         href={`/${subthemeLink}/${event?.slug}`}
-        className="font-playfair p-4 sm:p-6 rounded-full bg-cover bg-center  bg-blend-multiply object-cover bg-black/70 hover:bg-black/90 duration-200 transition ease-in-out"
+        className={
+          variant === 'search'
+            ? 'font-playfair p-4 sm:p-6 rounded-lg bg-cover bg-center  bg-blend-multiply object-cover bg-black/70 hover:bg-black/90 duration-200 transition ease-in-out'
+            : 'font-playfair p-4 sm:p-6 rounded-full bg-cover bg-center  bg-blend-multiply object-cover bg-black/70 hover:bg-black/90 duration-200 transition ease-in-out'
+        }
         style={{ backgroundImage: `url(${eventMedia?.pub_url})` }}
       >
         <div className="flex flex-col items-center justify-center text-center gap-2">
