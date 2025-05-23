@@ -42,12 +42,11 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   return (
     <div className="overflow-hidden">
       <div className="fixed top-0 z-20">
-        <Navbar />
+        <Navbar variant="map" />
       </div>
       <HighlightClientWrapper
         asset={asset || 'error'}
         name={name || 'error'}
-        subtheme={subtheme}
         highlightEvent={highlightEventswithEventDetails}
       ></HighlightClientWrapper>
       <div className="absolute -translate-y-10 ">
