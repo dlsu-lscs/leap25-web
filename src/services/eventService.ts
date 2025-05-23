@@ -29,7 +29,8 @@ const getEvents = async (subtheme: any) => {
   }
 };
 
-const getEventBySearch = async (API_URL = process.env.LEAP_API, searchValue: string) => {
+const getEventBySearch = async (searchValue: string, API_URL = process.env.LEAP_API) => {
+
   try {
     const response = await fetch(`${API_URL}/events/search?q=${encodeURIComponent(searchValue)}`, {
       next: { revalidate: 60 },
@@ -52,7 +53,7 @@ const getEventBySearch = async (API_URL = process.env.LEAP_API, searchValue: str
   }
 };
 
-const getEventByID = async (eventID: number) => {
+const getEventByID = async (eventID: number, API_URL = process.env.LEAP_API) => {
   try {
     const response = await fetch(`${API_URL}/events/${eventID}`, { next: { revalidate: 60 } });
 
@@ -88,7 +89,8 @@ const getEventBySlug = async (slug: string) => {
   }
 };
 
-const getEventMedia = async (API_URL = process.env.LEAP_API, eventID: any) => {
+const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
+
   try {
     const response = await fetch(`${API_URL}/events/${eventID}/media`, {
       next: { revalidate: 60 },
