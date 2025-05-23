@@ -72,7 +72,7 @@ export default function Navbar({ className, src, name, variant }: NavbarProps) {
       className={`bg-black/0.2 text-white min-w-screen flex justify-between sm:px-8 px-4 py-5  ${className}`}
     >
       <div className="flex items-center text-2xl space-x-1.5">
-        {variant === 'non-map' ? (
+      {variant === 'non-map' ? (
           <a
             onClick={() => router.back()}
             className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
@@ -88,28 +88,30 @@ export default function Navbar({ className, src, name, variant }: NavbarProps) {
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
             <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Back to Map</div>
           </a>
-        ) : (
-          <a
-            href="./"
-            className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
-          >
-            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
-            <p className={`sm:text-[20px] text-base ${public_sans.className}`}>{name}</p>
-            <div
-              className="w-10 h-10 mx-2 hidden sm:block rounded-full p-[2px]"
-              style={{
-                background:
-                  'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
-              }}
+        ) : name === undefined ? null : (
+          <>
+            <a
+              href="./"
+              className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
             >
-              <Avatar className="w-full h-full text-xs">
-                <AvatarImage src={src} className="rounded-full" />
-                <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
-                  {nameInitials(name)}
-                </AvatarFallback>
-              </Avatar>
-            </div>
-          </a>
+              <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
+              <p className={`sm:text-[20px] text-base ${public_sans.className}`}>{name}</p>
+              <div
+                className="w-10 h-10 mx-2 hidden sm:block rounded-full p-[2px]"
+                style={{
+                  background:
+                    'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+                }}
+              >
+                <Avatar className="w-full h-full text-xs">
+                  <AvatarImage src={src} className="rounded-full" />
+                  <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
+                    {nameInitials(name)}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+            </a>
+          </>
         )}
       </div>{' '}
       <div className="flex items-center gap-4">
