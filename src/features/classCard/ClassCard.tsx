@@ -129,7 +129,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             </ClassDetails>
           </div>
           <div className="my-4">
-            <ClassDescription className="font-extrabold sm:w-1/2">
+            <ClassDescription className="font-extrabold">
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
@@ -139,7 +139,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               <LeapButton
                 onClick={() => {
                   registerEvent(
-                    'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                    event.gforms_url ||
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
                   );
                 }}
                 disabled={event.registered_slots === 0}
@@ -169,7 +170,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                     },
                   });
                   postBookmark(user?.id, event.id, process.env.NEXT_PUBLC_LEAP_API);
-
                 }}
               >
                 <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
