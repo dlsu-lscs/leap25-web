@@ -88,7 +88,17 @@ export default function Navbar({ className, src, name, variant }: NavbarProps) {
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
             <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Back to Map</div>
           </a>
-        ) : name === undefined ? null : (
+        ) : name === undefined ? (
+          <>
+            <a
+              onClick={() => router.back()}
+              className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+            >
+              <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
+              <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Go Back</div>
+            </a>
+          </>
+        ) : (
           <>
             <a
               href="./"
