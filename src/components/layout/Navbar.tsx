@@ -33,6 +33,11 @@ import Bookmarked from '@/features/bookmark/Bookmarked';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { ScrollArea } from '../ui/scroll-area';
+import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
+import { getEventBySearch } from '@/services/eventService';
+import { useSetSearchEvent } from '@/hooks/useSearchEvent';
 
 const ChevronLeftOutlinedIcon = dynamic(() => import('@mui/icons-material/ChevronLeftOutlined'), {
   ssr: false,
@@ -42,14 +47,19 @@ interface NavbarProps {
   name?: string;
   src?: string;
   className?: string;
+  variant?: string;
 }
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
-export default function Navbar({ className, src, name }: NavbarProps) {
+export default function Navbar({ className, src, name, variant }: NavbarProps) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showSearch, setShowSearch] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const { event: searchedEvents } = useSetSearchEvent(searchValue);
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -62,16 +72,39 @@ export default function Navbar({ className, src, name }: NavbarProps) {
       className={`bg-black/0.2 text-white min-w-screen flex justify-between sm:px-8 px-4 py-5  ${className}`}
     >
       <div className="flex items-center text-2xl space-x-1.5">
-        <a
-          href="./"
-          className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
-        >
-          <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
-          {name == undefined ? (
+                {variant === 'non-map' ? (
+          <a
+            onClick={() => router.back()}
+            className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+          >
+            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
+            <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Go Back</div>
+          </a>
+        ) : variant === 'map' ? (
+          <a
+            href="./"
+            className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+          >
+            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
             <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Back to Map</div>
-          ) : (
-            <>
-              {' '}
+          </a>
+        ) : name === undefined ? (
+          <>
+            <a
+              onClick={() => router.back()}
+              className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+            >
+              <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
+              <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Go Back</div>
+            </a>
+          </>
+        ) : (
+          <>
+            <a
+              href="./"
+              className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+            >
+              <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
               <p className={`sm:text-[20px] text-base ${public_sans.className}`}>{name}</p>
               <div
                 className="w-10 h-10 mx-2 hidden sm:block rounded-full p-[2px]"
@@ -83,13 +116,13 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 <Avatar className="w-full h-full text-xs">
                   <AvatarImage src={src} className="rounded-full" />
                   <AvatarFallback className="bg-black text-[#FBBC05] rounded-full">
-                    {nameInitials(name || 'na')}
+                    {nameInitials(name)}
                   </AvatarFallback>
                 </Avatar>
               </div>
-            </>
-          )}
-        </a>
+            </a>
+          </>
+        )}
       </div>{' '}
       <div className="flex items-center gap-4">
         <div className="hidden sm:inline">
@@ -106,26 +139,97 @@ export default function Navbar({ className, src, name }: NavbarProps) {
             border: '2px solid transparent',
           }}
         >
-          <input
-            type="text"
-            placeholder="Search..."
-            className={cn(
-              'bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
-              showSearch ? 'w-64 opacity-100 mr-2' : 'w-0 opacity-0 p-0 m-0'
-            )}
-          />
-          <button onClick={() => setShowSearch((prev) => !prev)}>
-            <Image src={'/dropdown/search.svg'} alt="search" width={20} height={20}></Image>
-          </button>
+          <HoverCard open={showSearchResults}>
+            <HoverCardTrigger asChild>
+              <div className="flex items-center">
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className={cn(
+                    'search-input bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
+                    showSearch ? 'w-72 opacity-100 mr-2' : 'w-0 opacity-0 p-0 m-0'
+                  )}
+                  onFocus={() => {
+                    setShowSearch(true);
+                    setShowSearchResults(true);
+                  }}
+                  onBlur={() => {
+                    // Add a slight delay to allow clicking on search results
+                    setTimeout(() => {
+                      setShowSearchResults(false);
+                    }, 200);
+                  }}
+                  onChange={(e) => {
+                    setSearchValue(e.target.value);
+                  }}
+                />
+                <button
+                  onClick={() => {
+                    const newState = !showSearch;
+                    setShowSearch(newState);
+                    setShowSearchResults(newState);
+                  }}
+                >
+                  <Image src={'/dropdown/search.svg'} alt="search" width={20} height={20}></Image>
+                </button>
+              </div>
+            </HoverCardTrigger>
+            <HoverCardContent
+              className="w-96 p-1 bg-black"
+              align="center"
+              side="bottom"
+              sideOffset={15}
+              style={{
+                background:
+                  'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                border: '2px solid transparent',
+                maxHeight: '70vh',
+                overflow: 'hidden',
+              }}
+              onMouseDown={(e) => {
+                e.preventDefault();
+              }}
+            >
+              <div
+                className="bg-black rounded-sm w-full text-[#FBBC05]"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <ScrollArea className="h-[500px]">
+                  <div className="flex flex-col gap-4 p-4">
+                    {searchedEvents ? (
+                      searchedEvents.map((searchedEvent, index) => {
+                        return (
+                          <BookmarkedEvents
+                            key={index}
+                            event_id={searchedEvent.id}
+                            variant="search"
+                          />
+                        );
+                      })
+                    ) : (
+                      <>
+                        <div className="font-public-sans text-white">No searched classes</div>
+                      </>
+                    )}
+                  </div>
+                </ScrollArea>
+              </div>
+            </HoverCardContent>
+          </HoverCard>
         </div>
-        <Sheet>
-          {' '}
+        <Sheet modal={false}>
           <SheetTrigger className="sm:hidden block">
             <div
               className="w-10 h-10 rounded-full p-[2px]"
               style={{
                 background:
                   'linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73)',
+              }}
+              onClick={() => {
+                // Reset mobile search when opening the sheet
+                setShowMobileSearchResults(false);
               }}
             >
               <Avatar className="w-full h-full text-xs bg-black">
@@ -136,27 +240,107 @@ export default function Navbar({ className, src, name }: NavbarProps) {
               </Avatar>
             </div>
           </SheetTrigger>
-          <SheetContent className="bg-black text-white border-none">
-            <div
-              className="mt-10 p-2 rounded-full flex items-center transition-all duration-500 ease-in-out mx-2"
-              style={{
-                background:
-                  'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
-                border: '2px solid transparent',
-              }}
-            >
-              <input
-                type="text"
-                placeholder="Search..."
-                className={cn(
-                  'bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
-                  'w-full opacity-100 mr-2'
-                )}
-              />
-              <button>
-                <Image src={'/dropdown/search.svg'} alt="search" width={24} height={24}></Image>
-              </button>
-            </div>{' '}
+          <SheetContent className="bg-black text-white border-none overflow-hidden">
+            <HoverCard open={showMobileSearchResults} onOpenChange={setShowMobileSearchResults}>
+              <HoverCardTrigger asChild>
+                <div
+                  className="mt-10 p-2 rounded-full flex items-center transition-all duration-500 ease-in-out mx-2 cursor-pointer"
+                  style={{
+                    background:
+                      'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                    border: '2px solid transparent',
+                  }}
+                  onClick={() => {
+                    // Only toggle on explicit click
+                    if (!showMobileSearchResults) {
+                      setShowMobileSearchResults(true);
+                    }
+                  }}
+                >
+                  <input
+                    type="text"
+                    placeholder="Search..."
+                    className={cn(
+                      'mobile-search-input bg-transparent outline-none text-[#FBBC05] placeholder:text-[#FBBC05]/50 transition-all duration-300 ease-in-out px-2 h-6',
+                      'w-full opacity-100 mr-2'
+                    )}
+                    onFocus={(e) => {
+                      e.stopPropagation();
+                      setShowMobileSearchResults(true);
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                    }}
+                    onBlur={(e) => {
+                      e.stopPropagation();
+                    }}
+                    onChange={(e) => {
+                      setSearchValue(e.target.value);
+                    }}
+                    autoFocus={false}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                  <Image src={'/dropdown/search.svg'} alt="search" width={24} height={24}></Image>
+                </div>
+              </HoverCardTrigger>
+
+              <HoverCardContent
+                className="w-[100vw] p-1 bg-black"
+                align="center"
+                side="bottom"
+                sideOffset={15}
+                style={{
+                  background:
+                    'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+                  border: '2px solid transparent',
+                  maxHeight: '60vh',
+                  overflow: 'hidden',
+                }}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                }}
+                onInteractOutside={(e) => {
+                  // Prevent the hovercard from closing when clicking inside the sheet
+                  if (e.target instanceof Element && e.target.closest('[data-sheet-content]')) {
+                    e.preventDefault();
+                  }
+                }}
+                forceMount
+              >
+                <div
+                  className="bg-black w-full text-[#FBBC05]"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                  onPointerDown={(e) => {
+                    // Prevent bubbling to ensure HoverCard stays open
+                    e.stopPropagation();
+                  }}
+                >
+                  <ScrollArea className="h-[500px]">
+                    <div className="flex flex-col gap-4 p-4">
+                      {searchedEvents ? (
+                        searchedEvents.map((searchedEvent, index) => {
+                          return (
+                            <BookmarkedEvents
+                              key={index}
+                              event_id={searchedEvent.id}
+                              variant="search"
+                            />
+                          );
+                        })
+                      ) : (
+                        <>
+                          <div className="font-public-sans text-white">No searched classes</div>
+                        </>
+                      )}
+                    </div>
+                  </ScrollArea>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
+
             <SheetTitle className="px-4 flex items-center gap-2 justify-center border-b-2 border-[#A67C00] pb-4">
               <div
                 className="w-10 h-10 rounded-full p-[2px]"
@@ -210,7 +394,13 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                 ></Image>
                 La Salle Computer Society
               </Link>
-              <Link href={'/logout'} className="flex text-lg">
+              <div
+                role="button"
+                className="flex text-lg"
+                onClick={() => {
+                  signOut({ callbackUrl: '/login', redirect: true });
+                }}
+              >
                 <Image
                   src={'/dropdown/logout.svg'}
                   alt="logout"
@@ -219,12 +409,11 @@ export default function Navbar({ className, src, name }: NavbarProps) {
                   className="mr-3"
                 ></Image>
                 Log Out
-              </Link>
+              </div>
             </div>
           </SheetContent>
         </Sheet>
         <DropdownMenu>
-          {' '}
           <DropdownMenuTrigger className="hidden sm:block">
             <div
               className="w-10 h-10 rounded-full p-[2px]"

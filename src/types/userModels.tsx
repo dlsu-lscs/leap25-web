@@ -1,7 +1,8 @@
 interface userModel {
   id: number;
   email: string;
-  displayPicture: string;
+  google_id: string;
+  display_picture: string;
   name: string;
 }
 

@@ -22,7 +22,7 @@ const getSubTheme = (subtheme: string) => {
   return { asset, name };
 };
 
-const getSubThemeLink = (subtheme: string) => {
+const getSubThemeLink = (subtheme: any) => {
   if (subtheme === 'Fairy Nook') {
     return 'fairy-nook';
   } else if (subtheme == 'Coral Lagoon') {
@@ -36,9 +36,12 @@ const getSubThemeLink = (subtheme: string) => {
   }
 };
 
-const getSubThemeByID = async (subthemeID: number) => {
+const getSubThemeByID = async (subthemeID: number, API_URL = process.env.LEAP_API) => {
+
   try {
-    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`);
+    const response = await fetch(`${API_URL}/subthemes/${subthemeID}`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');
@@ -56,7 +59,9 @@ const getSubThemeByID = async (subthemeID: number) => {
 
 const getSubThemeByName = async (subtheme: any) => {
   try {
-    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`);
+    const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`, {
+      next: { revalidate: 60 },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get subtheme');

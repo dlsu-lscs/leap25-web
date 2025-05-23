@@ -14,6 +14,7 @@ interface SubThemeClassCardProps {
   registered_slots: number;
   eventMedia?: classPubModel;
   max_slots: number;
+  slug: string;
 }
 export default function SubThemeClassCard({
   subtheme,
@@ -23,15 +24,16 @@ export default function SubThemeClassCard({
   registered_slots,
   eventMedia,
   max_slots,
+  slug,
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
   const trimmedDescription = descripton.substring(0, 80) + '...';
   return (
     <>
       <a
-        href={`/${subtheme}/${id}`}
+        href={`/${subtheme}/${slug}`}
         style={{ backgroundImage: `url(${eventMedia?.pub_url || undefined})` }}
-        className={`w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`w-[140px] sm:w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >

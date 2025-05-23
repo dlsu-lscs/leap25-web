@@ -8,38 +8,38 @@ import sleep from '@/lib/sleep';
 
 const tempArr = [
   {
-    content: 'CORAL LAGOON',
+    content: 'Wellness & Reflection',
     id: 0,
     img: '/subthemeLogos/CoralLagoon.png',
-    bgPos: 'bg-[0%_100%]',
+    bgPos: 'bg-[3%_100%]',
     route: '/coral-lagoon',
   },
   {
-    content: 'NORTHERN STAR STOP',
+    content: 'Future Planning',
     id: 1,
     img: '/subthemeLogos/NorthernStarStop.png',
     bgPos: 'bg-[10%_0%]',
     route: '/northern-star-stop',
   },
   {
-    content: "PIRATE'S COVE",
+    content: 'Strategic & Practical Skills',
     id: 2,
     img: '/subthemeLogos/PiratesCove.png',
-    bgPos: 'bg-[50%_50%]',
+    bgPos: 'bg-[48%_50%]',
     route: '/pirates-cove',
   },
   {
-    content: 'HOLLOWTREE HIDEWAY',
+    content: 'Teamwork & Adventure',
     id: 3,
     img: '/subthemeLogos/HollowTreeHideaway.png',
-    bgPos: 'bg-[77%_100%]',
+    bgPos: 'bg-[75%_100%]',
     route: '/hollow-tree-hideaway',
   },
   {
-    content: 'FAIRY NOOK',
+    content: 'Creativity & Expression',
     id: 4,
     img: 'subthemeLogos/FairyNook.png',
-    bgPos: 'bg-[98%_0%]',
+    bgPos: 'bg-[95%_0%]',
     route: '/fairy-nook',
   },
 ];
@@ -69,8 +69,18 @@ export default function MobileMapClientWrapper() {
         ' flex items-end w-full flex-col h-full bg-no-repeat bg-[length:450%_auto] transition-all duration-500 ease-in-out',
         tempArr[selectedId ?? 0].bgPos
       )}
-      style={{ backgroundImage: `url(/map/mapWithLandmark.png)` }}
+      style={{ backgroundImage: `url(/map/mapWithLandmark.webp)` }}
     >
+      <div className="absolute  top-5 left-1/2  -translate-x-1/2 w-36 h-16 ">
+        <img
+          src={tempArr[selectedId || 0].img ?? ''}
+          alt="subtheme logo"
+          className="w-12 h-12 absolute z-10 top-1/2 -translate-y-1/2"
+        />
+        <div className="bg-black/50 w-32 pl-9 font-bold flex items-center h-10 absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-xs font-playfair">
+          {tempArr[selectedId ?? 0].content}
+        </div>
+      </div>
       <div className="w-full h-full" onClick={handleSelect}></div>
       <SubThemeCarousel
         items={tempArr}

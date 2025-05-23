@@ -19,11 +19,21 @@ import { registerEvent } from '@/services/registerService';
 import { shareEvent } from '@/services/eventService';
 
 import dynamic from 'next/dynamic';
+import { formatSchedule } from '@/lib/helpers';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { getUserByEmail } from '@/services/userService';
+import { useSetUser } from '@/hooks/useSetUser';
+import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
+import { useSetBookmark } from '@/hooks/useSetBookmarks';
+import { CodeSquare } from 'lucide-react';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
   { ssr: false }
 );
+
+const BookmarkIcon = dynamic(() => import('@mui/icons-material/Bookmark'), { ssr: false });
 
 const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessTimeOutlined'), {
   ssr: false,
@@ -50,23 +60,12 @@ type ClassCardsProps = {
 };
 
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
-  const date = new Date(event.schedule);
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  };
-  const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZone: 'UTC',
-  };
+  const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
+  const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
 
-  const formattedDate = date.toLocaleDateString('en-US', dateOptions);
-  const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
+  const { data: session } = useSession();
+  const { user } = useSetUser(session);
+  const { bookmarks } = useSetBookmark(user?.id);
 
   return (
     <>
@@ -91,7 +90,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
               {orgs.map((org: orgModel, hostID: number) => (
-                <HostName src={org.org_logo || undefined} key={hostID}>
+                <HostName src={org.org_logo || undefined} key={hostID} org_url={org.org_url}>
                   {org.name}
                 </HostName>
               ))}
@@ -106,7 +105,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></CalendarMonthOutlinedIcon>
               }
             >
-              {formattedDate}
+              {startDate}
             </ClassDetails>
             <ClassDetails
               className="text-white"
@@ -116,7 +115,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></AccessTimeOutlinedIcon>
               }
             >
-              {formattedTime}
+              {startTime} - {endTime}
             </ClassDetails>
             <ClassDetails
               className="text-white"
@@ -130,17 +129,18 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             </ClassDetails>
           </div>
           <div className="my-4">
-            <ClassDescription className="font-extrabold sm:w-1/2">
+            <ClassDescription className="font-extrabold">
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
           </div>
-          <div className="my-4 flex justify-between sm:w-1/2">
+          <div className="my-4 flex justify-between">
             <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
                 onClick={() => {
                   registerEvent(
-                    'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                    event.gforms_url ||
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
                   );
                 }}
                 disabled={event.registered_slots === 0}
@@ -155,10 +155,24 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <div role="button" className="hover:opacity-50 duration-100 transition">
-                <BookmarkBorderOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
-                ></BookmarkBorderOutlinedIcon>
+              <div
+                role="button"
+                className="hover:opacity-50 duration-100 transition"
+                onClick={() => {
+                  toast.success(`${event.title} is saved as a bookmark`, {
+                    style: {
+                      backgroundColor: 'white',
+                      color: 'black',
+                      borderRadius: '8px',
+                      padding: '16px',
+                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                      fontFamily: public_sans.style.fontFamily,
+                    },
+                  });
+                  postBookmark(user?.id, event.id, process.env.NEXT_PUBLC_LEAP_API);
+                }}
+              >
+                <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
               </div>
               <div
                 onClick={() => {

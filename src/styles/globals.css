@@ -184,3 +184,13 @@ body {
 .right-cloud-inout {
   transform: translateX(0);
 }
+
+/* Add media query for small screens */
+@media (max-width: 768px) {
+  .right-cloud {
+    background-position: 30% 0%;
+  }
+  .left-cloud {
+    background-position: 60% 0%;
+  }
+}
