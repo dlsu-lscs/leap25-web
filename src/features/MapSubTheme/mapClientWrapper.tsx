@@ -8,35 +8,35 @@ import sleep from '@/lib/sleep';
 
 const tempArr = [
   {
-    content: 'CORAL LAGOON',
+    content: 'Wellness & Reflection',
     id: 0,
     img: '/subthemeLogos/CoralLagoon.png',
     bgPos: 'bg-[3%_100%]',
     route: '/coral-lagoon',
   },
   {
-    content: 'NORTHERN STAR STOP',
+    content: 'Future Planning',
     id: 1,
     img: '/subthemeLogos/NorthernStarStop.png',
     bgPos: 'bg-[10%_0%]',
     route: '/northern-star-stop',
   },
   {
-    content: "PIRATE'S COVE",
+    content: 'Strategic & Practical Skills',
     id: 2,
     img: '/subthemeLogos/PiratesCove.png',
     bgPos: 'bg-[48%_50%]',
     route: '/pirates-cove',
   },
   {
-    content: 'HOLLOWTREE HIDEWAY',
+    content: 'Teamwork & Adventure',
     id: 3,
     img: '/subthemeLogos/HollowTreeHideaway.png',
     bgPos: 'bg-[75%_100%]',
     route: '/hollow-tree-hideaway',
   },
   {
-    content: 'FAIRY NOOK',
+    content: 'Creativity & Expression',
     id: 4,
     img: 'subthemeLogos/FairyNook.png',
     bgPos: 'bg-[95%_0%]',

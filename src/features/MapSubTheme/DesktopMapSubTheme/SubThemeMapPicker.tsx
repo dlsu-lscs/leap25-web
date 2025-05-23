@@ -15,7 +15,7 @@ const subthemes = [
     positionY: 60,
     src: '/landmarks/CoralLagoon.png',
     circleLogo: '/subthemeLogos/CoralLagoon.png',
-    alt: 'Coral Lagoon',
+    alt: 'Wellness & Reflection',
     route: 'coral-lagoon',
   },
   {
@@ -23,7 +23,7 @@ const subthemes = [
     positionY: 39,
     src: '/landmarks/PiratesCove.png',
     circleLogo: '/subthemeLogos/PiratesCove.png',
-    alt: 'Pirates Cove',
+    alt: 'Strategic & Practical Skills',
     route: 'pirates-cove',
   },
   {
@@ -31,7 +31,7 @@ const subthemes = [
     positionY: 5,
     src: '/landmarks/NorthernStarStop.png',
     circleLogo: '/subthemeLogos/NorthernStarStop.png',
-    alt: 'Northern Star Stop',
+    alt: 'Future Planning',
     route: 'northern-star-stop',
   },
   {
@@ -39,7 +39,7 @@ const subthemes = [
     positionY: 52,
     src: '/landmarks/HollowTreeHideaway.png',
     circleLogo: '/subthemeLogos/HollowTreeHideaway.png',
-    alt: 'Hollow Tree Hideaway',
+    alt: 'Teamwork & Adventure',
     route: 'hollow-tree-hideaway',
   },
   {
@@ -47,7 +47,7 @@ const subthemes = [
     positionY: 11,
     src: '/landmarks/FairyNook.png',
     circleLogo: 'subthemeLogos/FairyNook.png',
-    alt: 'Fairy Nook',
+    alt: 'Creativity & Expression',
     route: 'fairy-nook',
   },
 ];
