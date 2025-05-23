@@ -72,7 +72,7 @@ export default function Navbar({ className, src, name, variant }: NavbarProps) {
       className={`bg-black/0.2 text-white min-w-screen flex justify-between sm:px-8 px-4 py-5  ${className}`}
     >
       <div className="flex items-center text-2xl space-x-1.5">
-        {variant === 'non-map' ? (
+      {variant === 'non-map' ? (
           <a
             onClick={() => router.back()}
             className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
