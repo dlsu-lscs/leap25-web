@@ -7,7 +7,7 @@ const useSetEventMedia = (event_id: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const eventMedia = await getEventMedia(event_id);
+      const eventMedia = await getEventMedia(event_id, process.env.NEXT_PUBLIC_LEAP_API);
       setEventMedia(eventMedia);
     };
     fetchData();

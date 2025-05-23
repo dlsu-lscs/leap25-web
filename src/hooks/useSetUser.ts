@@ -7,7 +7,7 @@ const useSetUser = (session: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = await getUserByEmail(session?.user?.email);
+      const user = await getUserByEmail(session?.user?.email, process.env.NEXT_PUBLIC_LEAP_API);
       setUser(user);
     };
     fetchData();

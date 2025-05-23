@@ -18,7 +18,7 @@ const getUserByID = async (userID: number) => {
   }
 };
 
-const getUserByEmail = async (email: any) => {
+const getUserByEmail = async (email: any, API_URL = process.env.LEAP_API) => {
   if (email) {
     try {
       const response = await fetch(`${API_URL}/users?email=${email}`);

@@ -1,7 +1,7 @@
 import { API_URL } from '@/lib/constants';
 import axios from 'axios';
 
-const postBookmark = async (API_URL = process.env.LEAP_API, user_id: any, event_id: any) => {
+const postBookmark = async (user_id: any, event_id: any, API_URL = process.env.LEAP_API) => {
   try {
     const response = await axios.post(
       `${API_URL}/bookmarks`,
@@ -22,7 +22,7 @@ const postBookmark = async (API_URL = process.env.LEAP_API, user_id: any, event_
   }
 };
 
-const deleteBookmark = async (API_URL = process.env.LEAP_API, user_id: any, event_id: any) => {
+const deleteBookmark = async (user_id: any, event_id: any, API_URL = process.env.LEAP_API) => {
   try {
     const response = await axios.delete(`${API_URL}/bookmarks`, {
       data: {
@@ -37,7 +37,7 @@ const deleteBookmark = async (API_URL = process.env.LEAP_API, user_id: any, even
   }
 };
 
-const getBookmarks = async (API_URL = process.env.LEAP_API, userId: any) => {
+const getBookmarks = async (userId: any, API_URL = process.env.LEAP_API) => {
   if (userId) {
     try {
       const response = await fetch(`${API_URL}/users/${userId}/bookmarks`, {
