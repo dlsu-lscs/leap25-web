@@ -22,17 +22,18 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import { registerEvent } from '@/services/registerService';
-import { classModel } from '@/types/classModels';
+import { classModel, subThemeModel } from '@/types/classModels';
+import { getSubTheme, getSubThemeLink } from '@/services/subthemeService';
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: highlightEvent[];
   className?: string;
-  subtheme: string;
   setBgImg: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface highlightEvent {
   highlightEvent: classModel;
+  highlightSubtheme: subThemeModel;
   bg_img: string;
   color: string;
   contentful_id: string;
@@ -51,7 +52,6 @@ interface highlightEvent {
 export default function ExpandableCarousel({
   itemsToShow,
   className,
-  subtheme,
   setBgImg,
 }: ExpandableCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
@@ -172,7 +172,7 @@ export default function ExpandableCarousel({
                       </div>
 
                       <a
-                        href={`/${subtheme}/${item.highlightEvent.slug}`}
+                        href={`/${getSubThemeLink(item.highlightSubtheme.title)}/${item.highlightEvent.slug}`}
                         className="flex flex-col sm:items-start items-center"
                       >
                         <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">

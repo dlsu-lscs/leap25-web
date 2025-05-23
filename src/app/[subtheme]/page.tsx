@@ -5,7 +5,7 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import { getSubTheme, getSubThemeByName } from '@/services/subthemeService';
+import { getSubTheme, getSubThemeByID, getSubThemeByName } from '@/services/subthemeService';
 import { getEventByDay, getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, highlightModel, subThemeModel } from '@/types/classModels';
@@ -30,9 +30,12 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   const highlightEventswithEventDetails = await Promise.all(
     highlightEvents.map(async (event) => {
       const highlightEvent: classModel = await getEventByID(event.event_id);
-      return { ...event, highlightEvent };
+      const highlightSubtheme: subThemeModel = await getSubThemeByID(highlightEvent.subtheme_id);
+      return { ...event, highlightEvent, highlightSubtheme };
     })
   );
+
+  console.log(highlightEventswithEventDetails);
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
