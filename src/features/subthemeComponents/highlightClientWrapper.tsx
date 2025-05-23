@@ -56,16 +56,13 @@ interface highlightEvent {
 export default function HighlightClientWrapper({
   name,
   asset,
-  subtheme,
   highlightEvent,
 }: {
   name: string;
   asset: string;
-  subtheme: string;
   highlightEvent: highlightEvent[];
 }) {
   const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
-  console.log(highlightEvent);
   return (
     <>
       <div className="relative h-[728px] text-white">
@@ -83,7 +80,6 @@ export default function HighlightClientWrapper({
             <ExpandableCarousel
               setBgImg={setBgImg}
               itemsToShow={highlightEvent}
-              subtheme={subtheme}
             ></ExpandableCarousel>
           </div>
         </div>
