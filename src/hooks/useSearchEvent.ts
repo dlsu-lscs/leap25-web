@@ -8,7 +8,7 @@ const useSetSearchEvent = (searchValue: string) => {
     const handler = setTimeout(() => {
       if (searchValue.trim() !== '') {
         const fetchData = async () => {
-          const event = await getEventBySearch(searchValue);
+          const event = await getEventBySearch(searchValue, process.env.NEXT_PUBLIC_LEAP_API);
           setEvent(event);
         };
         fetchData();

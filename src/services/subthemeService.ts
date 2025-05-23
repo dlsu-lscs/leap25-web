@@ -36,7 +36,8 @@ const getSubThemeLink = (subtheme: any) => {
   }
 };
 
-const getSubThemeByID = async (subthemeID: number) => {
+const getSubThemeByID = async (subthemeID: number, API_URL = process.env.LEAP_API) => {
+
   try {
     const response = await fetch(`${API_URL}/subthemes/${subthemeID}`, {
       next: { revalidate: 60 },

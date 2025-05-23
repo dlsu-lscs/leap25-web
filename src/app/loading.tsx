@@ -16,7 +16,7 @@ export default function Loading() {
           ></Image>
           <h1 className="text-[42px] font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
             <span className="text-[#FBBC05] font-playfair">Off to </span>
-            <span className="text-[#98C10E] font-playfair">Neverland...</span>
+            <span className="text-[#98C10E] font-playfair">AdventureLand...</span>
           </h1>
           <h3 className="text-white text-[16px] text-center my-4 font-normal">
             Pixie dust is settling. Please wait a moment.
