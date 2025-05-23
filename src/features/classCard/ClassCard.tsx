@@ -134,7 +134,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
           </div>
-          <div className="my-4 flex justify-between sm:w-1/2">
+          <div className="my-4 flex justify-between">
             <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
                 onClick={() => {
