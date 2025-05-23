@@ -33,7 +33,7 @@ interface ExpandableCarouselProps {
 
 interface highlightEvent {
   highlightEvent: classModel;
-  highlightSubtheme: subThemeModel;
+  highlightSubtheme?: subThemeModel;
   bg_img: string;
   color: string;
   contentful_id: string;
@@ -172,7 +172,7 @@ export default function ExpandableCarousel({
                       </div>
 
                       <a
-                        href={`/${getSubThemeLink(item.highlightSubtheme.title)}/${item.highlightEvent.slug}`}
+                        href={`/${getSubThemeLink(item.highlightSubtheme?.title)}/${item.highlightEvent.slug}`}
                         className="flex flex-col sm:items-start items-center"
                       >
                         <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">

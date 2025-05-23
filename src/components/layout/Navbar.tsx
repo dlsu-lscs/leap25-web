@@ -67,22 +67,26 @@ export default function Navbar({ className, src, name, variant }: NavbarProps) {
     }
   }, [status, router]);
 
-  console.log(name);
-
   return (
     <div
       className={`bg-black/0.2 text-white min-w-screen flex justify-between sm:px-8 px-4 py-5  ${className}`}
     >
       <div className="flex items-center text-2xl space-x-1.5">
-        {name === undefined ? (
+        {variant === 'non-map' ? (
           <a
             onClick={() => router.back()}
             className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
           >
             <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
-            <div className={`sm:text-[20px] text-base ${public_sans.className}`}>
-              {variant === 'non-map' ? 'Go Back' : 'Back to Map'}
-            </div>
+            <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Go Back</div>
+          </a>
+        ) : variant === 'map' ? (
+          <a
+            href="./"
+            className="flex items-center space-x-1 hover:opacity-50 transition duration-50"
+          >
+            <ChevronLeftOutlinedIcon sx={{ fontSize: 48 }} role="button" />
+            <div className={`sm:text-[20px] text-base ${public_sans.className}`}>Back to Map</div>
           </a>
         ) : (
           <a
