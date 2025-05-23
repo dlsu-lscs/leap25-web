@@ -41,14 +41,28 @@ const dummyHighlightData = [
   },
 ];
 
+interface highlightEvent {
+  highlightEvent: classModel;
+  bg_img: string;
+  color: string;
+  contentful_id: string;
+  event_id: number;
+  id: number;
+  short_desc: string;
+  title_card: string;
+  title_fallback: string;
+}
+
 export default function HighlightClientWrapper({
   name,
   asset,
+  subtheme,
   highlightEvent,
 }: {
   name: string;
   asset: string;
-  highlightEvent: any;
+  subtheme: string;
+  highlightEvent: highlightEvent[];
 }) {
   const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
   console.log(highlightEvent);
@@ -68,7 +82,8 @@ export default function HighlightClientWrapper({
           <div className="flex flex-col mt-4 px-0 sm:px-4 h-full w-full">
             <ExpandableCarousel
               setBgImg={setBgImg}
-              itemsToShow={dummyHighlightData}
+              itemsToShow={highlightEvent}
+              subtheme={subtheme}
             ></ExpandableCarousel>
           </div>
         </div>
