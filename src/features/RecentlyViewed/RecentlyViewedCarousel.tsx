@@ -29,7 +29,7 @@ export default function RecentlyViewedCarousel() {
 
       const results = await Promise.all(
         ids.map(async (id) => {
-          const event = await getEventByID(id);
+          const event = await getEventByID(id, process.env.NEXT_PUBLIC_LEAP_API);
           if (!event) return null;
 
           const media = await getEventMedia(id, process.env.NEXT_PUBLIC_LEAP_API);
