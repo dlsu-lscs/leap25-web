@@ -13,6 +13,18 @@ interface classModel {
   registered_slots: number;
   max_slots: number;
   slug: string;
+  gforms_url: string;
+}
+
+interface highlightModel {
+  bg_img: string;
+  color: string;
+  contentful_id: string;
+  event_id: number;
+  id: number;
+  short_desc: string;
+  title_card: string;
+  title_fallback: string;
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
@@ -37,4 +49,4 @@ interface bookmarkModel {
   user_id: number;
 }
 
-export type { classModel, classPubModel, subThemeModel, bookmarkModel };
+export type { classModel, classPubModel, subThemeModel, bookmarkModel, highlightModel };

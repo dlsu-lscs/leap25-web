@@ -6,22 +6,34 @@ import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import { getSubTheme, getSubThemeByName } from '@/services/subthemeService';
-import { getEventByDay, getEventMedia, getEvents } from '@/services/eventService';
+import { getEventByDay, getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
-import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
+import { classModel, classPubModel, highlightModel, subThemeModel } from '@/types/classModels';
 import BookmarkedEvents from '@/features/bookmark/Bookmarked';
+import { getAllHighlightEvent } from '@/services/highlightServices';
 
 export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
-  const { asset, name } = getSubTheme(subtheme);
-  const events: classModel[] = await getEvents(name);
 
+  const { asset, name } = getSubTheme(subtheme);
+
+  const events: classModel[] = await getEvents(name);
   const eventsWithMedia = await Promise.all(
     events.map(async (event) => {
       const eventMedia = await getEventMedia(event.id);
       return { ...event, eventMedia };
     })
   );
+
+  const highlightEvents: highlightModel[] = await getAllHighlightEvent();
+
+  const highlightEventswithEventDetails = await Promise.all(
+    highlightEvents.map(async (event) => {
+      const highlightEvent: classModel = await getEventByID(event.event_id);
+      return { ...event, highlightEvent };
+    })
+  );
+
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
   return (
@@ -32,6 +44,8 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
       <HighlightClientWrapper
         asset={asset || 'error'}
         name={name || 'error'}
+        subtheme={subtheme}
+        highlightEvent={highlightEventswithEventDetails}
       ></HighlightClientWrapper>
       <div className="absolute -translate-y-10 ">
         <FadeOverlay></FadeOverlay>
