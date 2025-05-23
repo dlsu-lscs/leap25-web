@@ -30,6 +30,7 @@ const getEvents = async (subtheme: any) => {
 };
 
 const getEventBySearch = async (searchValue: string, API_URL = process.env.LEAP_API) => {
+
   try {
     const response = await fetch(`${API_URL}/events/search?q=${encodeURIComponent(searchValue)}`, {
       next: { revalidate: 60 },
@@ -89,6 +90,7 @@ const getEventBySlug = async (slug: string) => {
 };
 
 const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
+
   try {
     const response = await fetch(`${API_URL}/events/${eventID}/media`, {
       next: { revalidate: 60 },

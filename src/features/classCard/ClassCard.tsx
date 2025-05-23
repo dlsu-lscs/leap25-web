@@ -169,6 +169,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                     },
                   });
                   postBookmark(user?.id, event.id, process.env.NEXT_PUBLC_LEAP_API);
+
                 }}
               >
                 <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
