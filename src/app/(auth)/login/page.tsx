@@ -44,12 +44,12 @@ export default function Login() {
                   className={`text-center text-[30px] sm:text-[48px] text-[#FBBC05] font-bold font-playfair text-shadow-lg inset-shadow-lg`}
                 >
                   WELCOME TO
-                  <span className="text-[#98C10E]"> NEVERLAND</span>
+                  <span className="text-[#98C10E]"> AdventureLand</span>
                 </h1>
                 <h2
                   className={`text-center text-white text-[16px] sm:text-[20px] font-playfair text-shadow-lg inset-shadow-lg`}
                 >
-                  STEP INTO NEVERLAND - THE ADVENTURE AWAITS.
+                  STEP INTO AdventureLand - THE ADVENTURE AWAITS.
                 </h2>
                 <div className="font-light text-[12px] sm:text-[15px] text-white text-shadow-lg inset-shadow-lg">
                   <p className="flex items-center justify-center">
