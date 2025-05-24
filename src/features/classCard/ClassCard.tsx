@@ -73,8 +73,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
     }
   }, [bookmarks, event]);
 
-  console.log(bookmarks);
-
   return (
     <>
       <div
