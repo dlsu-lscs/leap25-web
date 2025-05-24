@@ -26,7 +26,6 @@ import { getUserByEmail } from '@/services/userService';
 import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
-import { CodeSquare } from 'lucide-react';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -65,7 +64,16 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks } = useSetBookmark(user?.id);
+  const { bookmarks, setBookmarks } = useSetBookmark(user?.id);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>();
+
+  useEffect(() => {
+    if (bookmarks && event?.id) {
+      setIsBookmarked(bookmarks?.some((bookmark) => bookmark.event_id === event.id));
+    }
+  }, [bookmarks, event]);
+
+  console.log(bookmarks);
 
   return (
     <>
@@ -155,25 +163,53 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <div
-                role="button"
-                className="hover:opacity-50 duration-100 transition"
-                onClick={() => {
-                  toast.success(`${event.title} is saved as a bookmark`, {
-                    style: {
-                      backgroundColor: 'white',
-                      color: 'black',
-                      borderRadius: '8px',
-                      padding: '16px',
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      fontFamily: public_sans.style.fontFamily,
-                    },
-                  });
-                  postBookmark(user?.id, event.id, process.env.NEXT_PUBLC_LEAP_API);
-                }}
-              >
-                <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
-              </div>
+              {isBookmarked ? (
+                <>
+                  <div
+                    role="button"
+                    className="hover:opacity-50 duration-100 transition"
+                    onClick={() => {
+                      toast.success(`${event.title} is deleted as a bookmark`, {
+                        style: {
+                          backgroundColor: 'black',
+                          color: 'white',
+                          borderColor: 'white',
+                          padding: '16px',
+                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          fontFamily: public_sans.style.fontFamily,
+                        },
+                      });
+                      deleteBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                      console.log(isBookmarked);
+                      console.log(bookmarks);
+                    }}
+                  >
+                    <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    role="button"
+                    className="hover:opacity-50 duration-100 transition"
+                    onClick={() => {
+                      toast.success(`${event.title} is saved as a bookmark`, {
+                        style: {
+                          backgroundColor: 'black',
+                          color: 'white',
+                          borderColor: 'white',
+                          padding: '16px',
+                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          fontFamily: public_sans.style.fontFamily,
+                        },
+                      });
+                      postBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                    }}
+                  >
+                    <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
+                  </div>
+                </>
+              )}
               <div
                 onClick={() => {
                   toast.success(`${event.title} link is ready to be shared`, {
