@@ -7,14 +7,23 @@ const useSetBookmark = (userId: number | undefined) => {
   const [bookmarks, setBookmarks] = useState<bookmarkModel[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const bookmark = await getBookmarks(userId, process.env.NEXT_PUBLIC_LEAP_API);
+    let interval: NodeJS.Timeout;
 
-      setBookmarks(bookmark);
+    const fetchData = async () => {
+      if (userId) {
+        const bookmark = await getBookmarks(userId, process.env.NEXT_PUBLIC_LEAP_API);
+        setBookmarks(bookmark);
+      }
     };
-    if (userId) fetchData();
+
+    if (userId) {
+      fetchData();
+      interval = setInterval(fetchData, 500);
+    }
+
+    return () => clearInterval(interval);
   }, [userId]);
-  return { bookmarks, setBookmarks };
+  return { bookmarks };
 };
 
 export { useSetBookmark };

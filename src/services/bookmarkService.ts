@@ -39,7 +39,7 @@ const getBookmarks = async (userId: any, API_URL = process.env.LEAP_API) => {
   if (userId) {
     try {
       const response = await fetch(`${API_URL}/users/${userId}/bookmarks`, {
-        next: { revalidate: 60 },
+        cache: 'no-store',
       });
 
       if (!response.ok) {
