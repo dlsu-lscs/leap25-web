@@ -8,6 +8,7 @@ import sleep from '@/lib/sleep';
 
 const tempArr = [
   {
+    name: 'Coral Lagoon',
     content: 'Wellness & Reflection',
     id: 0,
     img: '/subthemeLogos/CoralLagoon.png',
@@ -15,6 +16,7 @@ const tempArr = [
     route: '/coral-lagoon',
   },
   {
+    name: 'Northern Star Stop',
     content: 'Future Planning',
     id: 1,
     img: '/subthemeLogos/NorthernStarStop.png',
@@ -22,6 +24,7 @@ const tempArr = [
     route: '/northern-star-stop',
   },
   {
+    name: 'Pirates Cove',
     content: 'Strategic & Practical Skills',
     id: 2,
     img: '/subthemeLogos/PiratesCove.png',
@@ -29,6 +32,7 @@ const tempArr = [
     route: '/pirates-cove',
   },
   {
+    name: 'HollowTree Hideway',
     content: 'Teamwork & Adventure',
     id: 3,
     img: '/subthemeLogos/HollowTreeHideaway.png',
@@ -36,6 +40,7 @@ const tempArr = [
     route: '/hollow-tree-hideaway',
   },
   {
+    name: 'Fairy Nook',
     content: 'Creativity & Expression',
     id: 4,
     img: 'subthemeLogos/FairyNook.png',
@@ -88,7 +93,7 @@ export default function MobileMapClientWrapper() {
         setSelectedId={setSelectedId}
       ></SubThemeCarousel>
       <h3 className="font-semibold text-lg text-white absolute bottom-12 font-playfair left-1/2 -translate-x-1/2 text-nowrap">
-        {tempArr[selectedId ?? 0].content}
+        {tempArr[selectedId ?? 0].name}
       </h3>
     </div>
   );
