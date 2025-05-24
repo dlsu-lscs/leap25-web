@@ -64,7 +64,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks, setBookmarks } = useSetBookmark(user?.id);
+  const { bookmarks } = useSetBookmark(user?.id);
   const [isBookmarked, setIsBookmarked] = useState<boolean>();
 
   useEffect(() => {
@@ -72,8 +72,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
       setIsBookmarked(bookmarks?.some((bookmark) => bookmark.event_id === event.id));
     }
   }, [bookmarks, event]);
-
-  console.log(bookmarks);
 
   return (
     <>
