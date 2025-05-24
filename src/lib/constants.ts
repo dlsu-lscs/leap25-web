@@ -1,7 +1,5 @@
 export const API_URL = process.env.LEAP_API || process.env.NEXT_PUBLIC_LEAP_API;
 
-export const CALENDAR_URL = 'https://calendar.google.com/calendar/render';
-
 export const FAQ_QUESTIONS = [
   {
     question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
