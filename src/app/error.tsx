@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 export default function ErrorPage() {
   const router = useRouter();
@@ -18,11 +18,13 @@ export default function ErrorPage() {
       />
       <h1 className="text-4xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
         <span className="text-[#FBBC05] font-playfair">Oops! </span>
-        <span className="text-[#98C10E] font-playfair">You’ve drifted into Neverland..</span>
+        <span className="text-[#98C10E] font-playfair">
+          You’ve drifted away from AdventureLand..
+        </span>
       </h1>
 
       <h3 className="text-white text-md text-center my-4 font-normal">
-        This page flew off to Neverland. Let’s guide you back.
+        This page flew away from AdventureLand. Let’s guide you back.
       </h3>
 
       <Button

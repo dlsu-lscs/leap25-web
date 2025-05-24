@@ -11,54 +11,77 @@ import { orgModel } from '@/types/orgModels';
 import { Playfair_Display } from 'next/font/google';
 import { Public_Sans } from 'next/font/google';
 
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import AccessTimeOutlinedIcon from '@mui/icons-material/AccessTimeOutlined';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
-
 const playfair_display = Playfair_Display({ subsets: ['latin'] });
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
 import { toast } from 'sonner';
-import { saveEventToCalendar } from '@/services/googleCalendarService';
 import { registerEvent } from '@/services/registerService';
 import { shareEvent } from '@/services/eventService';
 
+import dynamic from 'next/dynamic';
+import { formatSchedule } from '@/lib/helpers';
+import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+import { getUserByEmail } from '@/services/userService';
+import { useSetUser } from '@/hooks/useSetUser';
+import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
+import { useSetBookmark } from '@/hooks/useSetBookmarks';
+
+const CalendarMonthOutlinedIcon = dynamic(
+  () => import('@mui/icons-material/CalendarMonthOutlined'),
+  { ssr: false }
+);
+
+const BookmarkIcon = dynamic(() => import('@mui/icons-material/Bookmark'), { ssr: false });
+
+const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessTimeOutlined'), {
+  ssr: false,
+});
+
+const LocationOnOutlinedIcon = dynamic(() => import('@mui/icons-material/LocationOnOutlined'), {
+  ssr: false,
+});
+
+const BookmarkBorderOutlinedIcon = dynamic(
+  () => import('@mui/icons-material/BookmarkBorderOutlined'),
+  { ssr: false }
+);
+
+const ShareOutlinedIcon = dynamic(() => import('@mui/icons-material/ShareOutlined'), {
+  ssr: false,
+});
+
 type ClassCardsProps = {
   event: classModel;
-  orgs: orgModel;
+  orgs: orgModel[];
   subtheme: subThemeModel;
   eventMedia: classPubModel;
 };
 
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
-  const date = new Date(event.schedule);
-  const dateOptions: Intl.DateTimeFormatOptions = {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-    timeZone: 'UTC',
-  };
-  const timeOptions: Intl.DateTimeFormatOptions = {
-    hour: 'numeric',
-    minute: '2-digit',
-    hour12: true,
-    timeZone: 'UTC',
-  };
+  const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
+  const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
 
-  const formattedDate = date.toLocaleDateString('en-US', dateOptions);
-  const formattedTime = date.toLocaleTimeString('en-US', timeOptions);
+  const { data: session } = useSession();
+  const { user } = useSetUser(session);
+  const { bookmarks, setBookmarks } = useSetBookmark(user?.id);
+  const [isBookmarked, setIsBookmarked] = useState<boolean>();
+
+  useEffect(() => {
+    if (bookmarks && event?.id) {
+      setIsBookmarked(bookmarks?.some((bookmark) => bookmark.event_id === event.id));
+    }
+  }, [bookmarks, event]);
+
+  console.log(bookmarks);
 
   return (
     <>
       <div
-        className={`flex justify-center md:flex-row flex-col items-center gap-6 text-white ${public_sans.className}`}
+        className={`flex justify-center md:flex-row flex-col items-center gap-6  text-white ${public_sans.className}`}
       >
         <img
-          className="sm:h-[560px] h-[496px] w-[448px] bg-[#D9D9D9] border-none outline-none"
+          className="aspect-[4/5] w-full max-w-[400px]  bg-[#D9D9D9] border-none outline-none object-cover"
           src={eventMedia.pub_url}
         />
         <div className="flex flex-col ">
@@ -74,12 +97,11 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           </h1>
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
-              <HostName src={orgs.org_logo || undefined}>{orgs.name}</HostName>
-              {/* {orgs.map((org: orgModel, hostID: number) => (
-                <HostName src={org.orgLogo || undefined} key={hostID}>
+              {orgs.map((org: orgModel, hostID: number) => (
+                <HostName src={org.org_logo || undefined} key={hostID} org_url={org.org_url}>
                   {org.name}
                 </HostName>
-              ))} */}
+              ))}
             </div>
           </div>
           <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
@@ -91,7 +113,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></CalendarMonthOutlinedIcon>
               }
             >
-              {formattedDate}
+              {startDate}
             </ClassDetails>
             <ClassDetails
               className="text-white"
@@ -101,7 +123,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 ></AccessTimeOutlinedIcon>
               }
             >
-              {formattedTime}
+              {startTime} - {endTime}
             </ClassDetails>
             <ClassDetails
               className="text-white"
@@ -125,7 +147,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               <LeapButton
                 onClick={() => {
                   registerEvent(
-                    'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                    event.gforms_url ||
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
                   );
                 }}
                 disabled={event.registered_slots === 0}
@@ -140,33 +163,53 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               </p>
             </div>
             <div className="flex items-center space-x-4.5">
-              <div
-                onClick={() => {
-                  toast.success(`${event.title} link is saved to google calendar`, {
-                    style: {
-                      backgroundColor: 'white',
-                      color: 'black',
-                      borderRadius: '8px',
-                      padding: '16px',
-                      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                      fontFamily: public_sans.style.fontFamily,
-                    },
-                  });
-                  saveEventToCalendar(
-                    event.title,
-                    event.description,
-                    orgs.name,
-                    event.venue,
-                    event.schedule
-                  );
-                }}
-                role="button"
-                className="hover:opacity-50 duration-100 transition"
-              >
-                <BookmarkBorderOutlinedIcon
-                  sx={{ fontSize: 32, color: 'white' }}
-                ></BookmarkBorderOutlinedIcon>
-              </div>
+              {isBookmarked ? (
+                <>
+                  <div
+                    role="button"
+                    className="hover:opacity-50 duration-100 transition"
+                    onClick={() => {
+                      toast.success(`${event.title} is deleted as a bookmark`, {
+                        style: {
+                          backgroundColor: 'black',
+                          color: 'white',
+                          borderColor: 'white',
+                          padding: '16px',
+                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          fontFamily: public_sans.style.fontFamily,
+                        },
+                      });
+                      deleteBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                      console.log(isBookmarked);
+                      console.log(bookmarks);
+                    }}
+                  >
+                    <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div
+                    role="button"
+                    className="hover:opacity-50 duration-100 transition"
+                    onClick={() => {
+                      toast.success(`${event.title} is saved as a bookmark`, {
+                        style: {
+                          backgroundColor: 'black',
+                          color: 'white',
+                          borderColor: 'white',
+                          padding: '16px',
+                          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+                          fontFamily: public_sans.style.fontFamily,
+                        },
+                      });
+                      postBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                    }}
+                  >
+                    <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
+                  </div>
+                </>
+              )}
               <div
                 onClick={() => {
                   toast.success(`${event.title} link is ready to be shared`, {

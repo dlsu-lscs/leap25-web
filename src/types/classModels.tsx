@@ -7,10 +7,24 @@ interface classModel {
   subtheme_id: number;
   venue: string;
   schedule: string;
+  schedule_end: string;
   fee: number;
   code: string;
   registered_slots: number;
   max_slots: number;
+  slug: string;
+  gforms_url: string;
+}
+
+interface highlightModel {
+  bg_img: string;
+  color: string;
+  contentful_id: string;
+  event_id: number;
+  id: number;
+  short_desc: string;
+  title_card: string;
+  title_fallback: string;
 }
 
 type PublicationType = 'TEXTLESS_VERTICAL' | 'TEXTLESS_HORIZONTAL' | 'MAIN';
@@ -29,4 +43,10 @@ interface subThemeModel {
   background_pub_url: string;
 }
 
-export type { classModel, classPubModel, subThemeModel };
+interface bookmarkModel {
+  id: number;
+  event_id: number;
+  user_id: number;
+}
+
+export type { classModel, classPubModel, subThemeModel, bookmarkModel, highlightModel };

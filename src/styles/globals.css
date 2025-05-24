@@ -135,3 +135,66 @@
     @apply bg-background text-foreground;
   }
 }
+
+.clip-circle-top {
+  clip-path: inset(0 0 50px 0);
+}
+
+.clip-top {
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+body {
+  transition-property: opacity, background;
+  transition-timing-function: ease-in-out;
+  transition: 500ms;
+}
+
+.page-transition {
+  opacity: 0;
+  background-color: black;
+}
+
+.left-cloud {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  transition: transform 0.8s ease-in-out;
+  transform: translateX(-100%);
+  background-image: url('/map/leftCloud.webp');
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.left-cloud-inout {
+  transform: translateX(0%);
+}
+
+.right-cloud {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 100;
+  transition: transform 0.8s ease-in-out;
+  transform: translateX(100%);
+  background-image: url('/map/rightCloud.webp');
+  background-position: left;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.right-cloud-inout {
+  transform: translateX(0);
+}
+
+/* Add media query for small screens */
+@media (max-width: 768px) {
+  .right-cloud {
+    background-position: 30% 0%;
+  }
+  .left-cloud {
+    background-position: 60% 0%;
+  }
+}

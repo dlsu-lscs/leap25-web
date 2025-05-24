@@ -1,5 +1,10 @@
 'use client';
-import ArrowCircleRightSharpIcon from '@mui/icons-material/ArrowCircleRightSharp';
+import dynamic from 'next/dynamic';
+
+const ArrowCircleRightSharpIcon = dynamic(
+  () => import('@mui/icons-material/ArrowCircleRightSharp'),
+  { ssr: false }
+);
 import { useCallback, useEffect, useState } from 'react';
 import Autoplay from 'embla-carousel-autoplay';
 import {
@@ -13,15 +18,30 @@ import {
   HighlightPrev,
 } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
-import { style } from '@mui/system';
-import { Button } from '@/components/ui/Button';
+// import { style } from '@mui/system';
+import { Button } from '@/components/ui/button';
 import LeapSeperator from '@/components/ui/LeapSeperator';
 import { registerEvent } from '@/services/registerService';
+import { classModel, subThemeModel } from '@/types/classModels';
+import { getSubTheme, getSubThemeLink } from '@/services/subthemeService';
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
-  itemsToShow: any[];
+  itemsToShow: highlightEvent[];
   className?: string;
   setBgImg: React.Dispatch<React.SetStateAction<string>>;
+}
+
+interface highlightEvent {
+  highlightEvent: classModel;
+  highlightSubtheme?: subThemeModel;
+  bg_img: string;
+  color: string;
+  contentful_id: string;
+  event_id: number;
+  id: number;
+  short_desc: string;
+  title_card: string;
+  title_fallback: string;
 }
 
 /**
@@ -73,13 +93,13 @@ export default function ExpandableCarousel({
 
   useEffect(() => {
     const currentItem = itemsToShow.find((item) => item.id === selectedId);
-    if (currentItem && currentItem.bgImg) {
-      setBgImg(currentItem.bgImg);
-    } else if (itemsToShow.length > 0 && itemsToShow[0]?.bgImg && selectedId === undefined) {
+    if (currentItem && currentItem.bg_img) {
+      setBgImg(currentItem.bg_img);
+    } else if (itemsToShow.length > 0 && itemsToShow[0]?.bg_img && selectedId === undefined) {
       // Fallback to the first item's bgImg if selectedId is somehow undefined initially
       // and itemsToShow is not empty. This depends on your logic for initial state.
       // Or ensure selectedId is always valid.
-      setBgImg(itemsToShow[0].bgImg);
+      setBgImg(itemsToShow[0].bg_img);
     }
   }, [selectedId, itemsToShow, setBgImg]);
 
@@ -110,14 +130,14 @@ export default function ExpandableCarousel({
               >
                 <div
                   style={{
-                    backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bgImg})`,
+                    backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bg_img})`,
                   }}
                   className={cn(
                     'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-solid sm:border-2 border-white/70',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
-                  {item.id === selectedId && (
+                  {item.id === selectedId ? (
                     <div
                       className={cn(
                         'relative sm:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
@@ -143,32 +163,38 @@ export default function ExpandableCarousel({
                       <div className="flex flex-col sm:flex-col-reverse gap-2 items-center sm:mt-8">
                         <div className="flex gap-2 sm:justify-start justify-center items-center w-full sm:flex-row flex-col">
                           <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
-                          <div className="w-24 h-6 border-solid border-white border-2  rounded-md "></div>
                         </div>
-                        {item.titleCard.length > 0 ? (
-                          <img src={`${item.titleCard}`} className="w-64 mt-2" alt="title card" />
+                        {item.title_card.length > 0 ? (
+                          <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                         ) : (
-                          <h1 className="text-5xl mt-2">{item.titleFallback}</h1>
+                          <h1 className="text-5xl mt-2">{item.title_fallback}</h1>
                         )}
                       </div>
 
-                      <div className="flex flex-col sm:items-start items-center">
+                      <a
+                        href={`/${getSubThemeLink(item.highlightSubtheme?.title)}/${item.highlightEvent.slug}`}
+                        className="flex flex-col sm:items-start items-center"
+                      >
                         <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">
-                          {item.content}
+                          {item.short_desc}
                         </p>
                         <Button
                           className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
                           variant={'secondary'}
-                          onClick={() => {
-                            registerEvent(
-                              'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
-                            );
-                          }}
                         >
                           <ArrowCircleRightSharpIcon />
                           Join Now
                         </Button>
-                      </div>
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="h-full w-full flex flex-col justify-around items-center">
+                      {item.title_card.length > 0 ? (
+                        <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
+                      ) : (
+                        <h1 className="text-5xl mt-2">{item.title_fallback}</h1>
+                      )}
+                      <h3>Short desc</h3>
                     </div>
                   )}
 

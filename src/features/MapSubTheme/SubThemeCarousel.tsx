@@ -14,9 +14,11 @@ import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'reac
 import { StaticImageData } from 'next/image';
 import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import sleep from '@/lib/sleep';
 
 // Define the type for the items in the carousel
 interface CarouselItemData {
+  name: string;
   content: string;
   id: number;
   img: string; // Or a more specific type if available
@@ -73,10 +75,21 @@ export default function SubThemeCarousel({
   }, [api, updateSelectedItem]);
 
   // Immediately update selection when clicking
-  const handleSelect = (id: number, index: number) => {
+  const handleSelect = async (id: number, index: number) => {
     // Update selection state immediately for responsivenes
     if (id === selectedId) {
+      const leftCloud = document.querySelector('.left-cloud');
+      const rightCloud = document.querySelector('.right-cloud');
+      console.log(leftCloud);
+      console.log(rightCloud);
+
+      leftCloud?.classList.add('left-cloud-inout');
+      rightCloud?.classList.add('right-cloud-inout');
+      await sleep(800);
       router.push(items[selectedId].route);
+      await sleep(1600);
+      leftCloud?.classList.remove('left-cloud-inout');
+      rightCloud?.classList.remove('right-cloud-inout');
     }
 
     setSelectedId(id);
@@ -106,7 +119,7 @@ export default function SubThemeCarousel({
           className=""
           // style={{ backgroundColor: currBgColor }}
         >
-          {items.map(({ content, id, bgPos, img }, index) => (
+          {items.map(({ name, content, id, bgPos, img }, index) => (
             <CarouselItem
               key={index}
               className="basis-1/3 relative"

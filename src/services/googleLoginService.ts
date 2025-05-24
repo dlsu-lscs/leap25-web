@@ -1,7 +1,7 @@
 import { API_URL } from '@/lib/constants';
 import axios from 'axios';
 
-const GetGoogleLogin = async (token: string) => {
+const GetGoogleLogin = async (token: any) => {
   try {
     const response = await axios.post(
       `${API_URL}/auth/google`,
@@ -18,4 +18,4 @@ const GetGoogleLogin = async (token: string) => {
   }
 };
 
-export default GetGoogleLogin;
+export { GetGoogleLogin };

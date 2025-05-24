@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import { Button } from '@/components/ui/Button';
+import { Button } from '@/components/ui/button';
 
 export default function Custom404() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export default function Custom404() {
 
       <h1 className="text-5xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
         <span className="text-[#FBBC05] font-playfair">Lost in </span>
-        <span className="text-[#98C10E] font-playfair">Neverland...</span>
+        <span className="text-[#98C10E] font-playfair">AdventureLand...</span>
       </h1>
 
       <h3 className="text-white text-md text-center my-4 font-normal">
