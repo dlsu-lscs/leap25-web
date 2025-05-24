@@ -1,8 +1,9 @@
 import { getBookmarks } from '@/services/bookmarkService';
 import { bookmarkModel } from '@/types/classModels';
+import { fetchData } from 'next-auth/client/_utils';
 import { useEffect, useState } from 'react';
 
-const useSetBookmark = (userId: any) => {
+const useSetBookmark = (userId: number | undefined) => {
   const [bookmarks, setBookmarks] = useState<bookmarkModel[]>([]);
 
   useEffect(() => {
@@ -11,9 +12,9 @@ const useSetBookmark = (userId: any) => {
 
       setBookmarks(bookmark);
     };
-    fetchData();
+    if (userId) fetchData();
   }, [userId]);
-  return { bookmarks };
+  return { bookmarks, setBookmarks };
 };
 
 export { useSetBookmark };
