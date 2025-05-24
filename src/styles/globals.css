@@ -140,6 +140,10 @@
   clip-path: inset(0 0 50px 0);
 }
 
+.clip-top {
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
 body {
   transition-property: opacity, background;
   transition-timing-function: ease-in-out;
