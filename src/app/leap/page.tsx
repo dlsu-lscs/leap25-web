@@ -18,12 +18,13 @@ export default function AboutUs() {
            text-[32px] sm:text-[52px] text-center 
           "
         >
-          <div className="relative w-[525px] h-[155px] overflow-hidden">
+          <div className="relative h-[250px] sm:h-[350px] overflow-hidden">
             <Image
               src="/leapLogos/Logo_v1.png"
               alt="Leap 2025"
-              fill
-              className="object-cover object-center"
+              width={500}
+              height={300}
+              className="object-cover object-center w-[350px] sm:w-[500px]"
             />
           </div>
           <h1>
@@ -31,7 +32,7 @@ export default function AboutUs() {
             <span className="text-[#98C10E]">Us</span>
           </h1>
         </div>
-        <div className="h-[500px] w-[70vw] flex flex-col text-white font-public-sans text-[20px] py-12">
+        <div className="flex flex-col text-white font-public-sans text-[16px] sm:text-[20px] sm:w-1/2 sm:m-12 p-8">
           <p className="font-light">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
