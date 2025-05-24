@@ -23,7 +23,7 @@ const useSetBookmark = (userId: number | undefined) => {
 
     return () => clearInterval(interval);
   }, [userId]);
-  return { bookmarks };
+  return { bookmarks, setBookmarks };
 };
 
 export { useSetBookmark };
