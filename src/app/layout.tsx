@@ -5,28 +5,47 @@ import Providers from '@/context/Providers';
 
 import LeapCursor from '@/components/cursor/LeapCursor';
 import { Toaster } from '@/components/ui/sonner';
+import { BASE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'LEAP 2025',
-  description: 'Leap 2025 Website',
+  title: {
+    default: 'LEAP 2025',
+    template: '%s | LEAP 2025',
+  },
+  description:
+    'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices.',
   openGraph: {
     title: 'LEAP 2025',
-    description: 'Leap 2025 Website',
+    description:
+      'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices. ',
+    url: BASE_URL,
+    siteName: 'LEAP 2025',
+    type: 'website',
     images: [
       {
-        url: '/leapLogos/Logo_v1.png',
-        width: 800,
-        height: 600,
+        url: '/landingBG.webp',
+        width: 1200,
+        height: 630,
         alt: 'LEAP 2025 Logo',
       },
     ],
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'LEAP 2025',
-    description: 'Leap 2025 Website',
-    images: '/leapLogos/Logo_v1.png',
+    description:
+      'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices.',
+    images: ['/landingBG.webp'],
+    site: '@dlsu_leap',
+    creator: '@dlsu_lscs',
   },
+  icons: {
+    icon: '/leapLogos/Logo_v1.png',
+    shortcut: '/leapLogos/Logo_v1.png',
+    apple: '/leapLogos/Logo_v1.png',
+  },
+  metadataBase: new URL(BASE_URL),
 };
 
 export default function RootLayout({
