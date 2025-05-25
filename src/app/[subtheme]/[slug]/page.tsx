@@ -17,7 +17,7 @@ const public_sans = Public_Sans({ subsets: ['latin'] });
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
 
@@ -42,7 +42,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Class({ params }: { params: { slug: string } }) {
+export default async function Class({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const event: classModel = await getEventBySlug(slug);
   const eventMedia: classPubModel = await getEventMedia(event.id);
