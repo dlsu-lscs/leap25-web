@@ -30,13 +30,13 @@ export async function generateMetadata({
     openGraph: {
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.logo_pub_url ? [subthemeDetails.logo_pub_url] : [],
+      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
     },
     twitter: {
       card: 'summary_large_image',
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.logo_pub_url ? [subthemeDetails.logo_pub_url] : [],
+      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
     },
   };
 }
