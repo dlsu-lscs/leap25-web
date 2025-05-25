@@ -49,8 +49,6 @@ export default async function Class({ params }: { params: { slug: string } }) {
   const orgs: orgModel[] = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
-  console.log(event);
-
   return (
     <>
       <div className="fixed top-0 z-20">
