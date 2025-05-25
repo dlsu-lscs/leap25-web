@@ -28,5 +28,11 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) {
+        return url;
+      }
+      return baseUrl;
+    },
   },
 };
