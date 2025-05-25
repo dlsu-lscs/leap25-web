@@ -1,5 +1,7 @@
 export const API_URL = process.env.LEAP_API || process.env.NEXT_PUBLIC_LEAP_API;
 
+export const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
 export const FAQ_QUESTIONS = [
   {
     question: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do?',
