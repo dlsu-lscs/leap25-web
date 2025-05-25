@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/leapLogos/Logo_v1.png',
+        url: '/landingBG.webp',
         width: 1200,
         height: 630,
         alt: 'LEAP 2025 Logo',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: 'LEAP 2025',
     description:
       'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices.',
-    images: ['/leapLogos/Logo_v1.png'],
+    images: ['/landingBG.webp'],
     site: '@dlsu_leap',
     creator: '@dlsu_lscs',
   },
