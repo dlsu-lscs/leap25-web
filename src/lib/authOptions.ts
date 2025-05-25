@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
   },
-
+  
   callbacks: {
     async jwt({ token, user, account }) {
       if (account?.provider === 'google') {
@@ -28,11 +28,8 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async redirect({ url, baseUrl }) {
-      if (url.startsWith(baseUrl)) {
-        return url;
-      }
-      return baseUrl;
+    async redirect() {
+      return `${process.env.NEXTAUTH_URL}/auth/popup-close`;
     },
   },
 };
