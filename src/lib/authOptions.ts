@@ -28,8 +28,21 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async redirect() {
-      return `${process.env.NEXTAUTH_URL}/auth/popup-close`;
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) {
+        // After sign-in redirect
+        if (url.includes('/api/auth/callback/google')) {
+          return `${baseUrl}/auth/popup-close`;
+        }
+        // After sign-out redirect
+        if (url.includes('/api/auth/signout')) {
+          return `${baseUrl}/auth/popup-close`;
+        }
+        // default redirect for other URLs
+        return url;
+      }
+      // fallback redirect to baseUrl
+      return baseUrl;
     },
   },
 };
