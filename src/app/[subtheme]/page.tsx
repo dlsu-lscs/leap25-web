@@ -12,7 +12,36 @@ import { classModel, classPubModel, highlightModel, subThemeModel } from '@/type
 import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 import { getAllHighlightEvent } from '@/services/highlightServices';
 
-export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
+import type { Metadata } from 'next';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { subtheme: string };
+}): Promise<Metadata> {
+  const { subtheme } = await params;
+  const { name } = getSubTheme(subtheme);
+
+  const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+
+  return {
+    title: `${subthemeDetails.title}`,
+    description: `${subthemeDetails.title}`,
+    openGraph: {
+      title: subthemeDetails.title,
+      description: `${subthemeDetails.title}`,
+      images: subthemeDetails.logo_pub_url ? [subthemeDetails.logo_pub_url] : [],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: subthemeDetails.title,
+      description: `${subthemeDetails.title}`,
+      images: subthemeDetails.logo_pub_url ? [subthemeDetails.logo_pub_url] : [],
+    },
+  };
+}
+
+export default async function Subtheme({ params }: { params: { subtheme: string } }) {
   const { subtheme } = await params;
 
   const { asset, name } = getSubTheme(subtheme);
@@ -34,8 +63,6 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
       return { ...event, highlightEvent, highlightSubtheme };
     })
   );
-
-  console.log(highlightEventswithEventDetails);
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
 
