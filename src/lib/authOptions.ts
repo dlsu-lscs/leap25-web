@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: 'jwt',
   },
-
+  
   callbacks: {
     async jwt({ token, user, account }) {
       if (account?.provider === 'google') {
