@@ -17,7 +17,7 @@ import type { Metadata } from 'next';
 export async function generateMetadata({
   params,
 }: {
-  params: { subtheme: string };
+  params: Promise<{ subtheme: string }>;
 }): Promise<Metadata> {
   const { subtheme } = await params;
   const { name } = getSubTheme(subtheme);
@@ -41,7 +41,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function Subtheme({ params }: { params: { subtheme: string } }) {
+export default async function Subtheme({ params }: { params: Promise<{ subtheme: string }> }) {
   const { subtheme } = await params;
 
   const { asset, name } = getSubTheme(subtheme);
