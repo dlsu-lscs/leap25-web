@@ -25,7 +25,7 @@ export default function AboutLSCS() {
             <div>
               <p>
                 <span className="font-bold">La Salle Computer Society</span> is the pioneering
-                organization in the College of Computer Studies now on its 38th year of service for
+                organization in the College of Computer Studies now on its 39th year of service for
                 the Lasallian community. Developing members to become competent and well-rounded
                 Lasallians who are aware of the numerous advances in computer technology.
               </p>
