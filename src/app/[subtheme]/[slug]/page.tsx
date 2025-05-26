@@ -14,6 +14,8 @@ import type { Metadata } from 'next';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {
@@ -25,19 +27,21 @@ export async function generateMetadata({
   const eventMedia: classPubModel = await getEventMedia(event.id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
+  const fallBackImage = '/leapPub.webp';
+
   return {
-    title: `${subtheme.title}: ${event.title}`,
+    title: `${event.title}`,
     description: event.description,
     openGraph: {
       title: `${event.title} | ${subtheme.title}`,
       description: event.description,
-      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [],
+      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [fallBackImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: `${event.title} | ${subtheme.title}`,
       description: event.description,
-      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [],
+      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [fallBackImage],
     },
   };
 }
