@@ -5,7 +5,12 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import { getSubTheme, getSubThemeByID, getSubThemeByName } from '@/services/subthemeService';
+import {
+  getSubTheme,
+  getSubThemeByID,
+  getSubThemeByName,
+  getSubThemeLink,
+} from '@/services/subthemeService';
 import { getEventByDay, getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, highlightModel, subThemeModel } from '@/types/classModels';
@@ -72,6 +77,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   );
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+  const subthemeLink = getSubThemeLink(name);
 
   return (
     <div className="overflow-hidden">
@@ -82,6 +88,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
         asset={asset || 'error'}
         name={name || 'error'}
         highlightEvent={highlightEventswithEventDetails}
+        subthemeSlug={subthemeLink}
       ></HighlightClientWrapper>
       <div className="absolute -translate-y-10 ">
         <FadeOverlay></FadeOverlay>
