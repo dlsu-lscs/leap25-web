@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react';
 import Loading from './loading';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export default function Map() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [showText, setShowText] = useState(true);
 
   const [onImageLoad, setImageLoad] = useState(false);
   useEffect(() => {
@@ -26,13 +28,31 @@ export default function Map() {
     }
   }, [status, router]);
 
+  useEffect(() => {
+    const closeText = setTimeout(() => {
+      setShowText(false);
+    }, 3000);
+
+    return () => clearTimeout(closeText);
+  }, []);
+
   return (
     <div className="overflow-hidden h-full relative z-50">
       {onImageLoad && (
-        <div className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30">
-          <h3 className="sm:text-3xl text-2xl text-[#98C10E]">LEAP INTO THE</h3>
-          <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">ADVENTURE</h1>
-        </div>
+        <AnimatePresence>
+          {showText && (
+            <motion.div
+              initial={{ y: 50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 100, opacity: 0 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30"
+            >
+              <h3 className="sm:text-3xl text-2xl text-[#98C10E]">LEAP INTO THE</h3>
+              <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">ADVENTURE</h1>
+            </motion.div>
+          )}
+        </AnimatePresence>
       )}
       <img
         src="/map/LEAP_MAP.webp"
