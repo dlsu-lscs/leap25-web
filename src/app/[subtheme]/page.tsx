@@ -5,7 +5,12 @@ import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/S
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
-import { getSubTheme, getSubThemeByID, getSubThemeByName } from '@/services/subthemeService';
+import {
+  getSubTheme,
+  getSubThemeByID,
+  getSubThemeByName,
+  getSubThemeLink,
+} from '@/services/subthemeService';
 import { getEventByDay, getEventByID, getEventMedia, getEvents } from '@/services/eventService';
 import HighlightClientWrapper from '@/features/subthemeComponents/highlightClientWrapper';
 import { classModel, classPubModel, highlightModel, subThemeModel } from '@/types/classModels';
@@ -13,6 +18,8 @@ import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 import { getAllHighlightEvent } from '@/services/highlightServices';
 
 import type { Metadata } from 'next';
+
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -23,6 +30,7 @@ export async function generateMetadata({
   const { name } = getSubTheme(subtheme);
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+  const fallBackImage = '/leapPub.webp';
 
   return {
     title: `${subthemeDetails.title}`,
@@ -30,13 +38,17 @@ export async function generateMetadata({
     openGraph: {
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
+      images: subthemeDetails.background_pub_url
+        ? [subthemeDetails.background_pub_url]
+        : [fallBackImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
+      images: subthemeDetails.background_pub_url
+        ? [subthemeDetails.background_pub_url]
+        : [fallBackImage],
     },
   };
 }
@@ -65,6 +77,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   );
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+  const subthemeLink = getSubThemeLink(name);
 
   return (
     <div className="overflow-hidden">
@@ -75,6 +88,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
         asset={asset || 'error'}
         name={name || 'error'}
         highlightEvent={highlightEventswithEventDetails}
+        subthemeSlug={subthemeLink}
       ></HighlightClientWrapper>
       <div className="absolute -translate-y-10 ">
         <FadeOverlay></FadeOverlay>

@@ -212,9 +212,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 onClick={() => {
                   toast.success(`${event.title} link is ready to be shared`, {
                     style: {
-                      backgroundColor: 'white',
-                      color: 'black',
-                      borderRadius: '8px',
+                      backgroundColor: 'black',
+                      color: 'white',
+                      borderColor: 'white',
                       padding: '16px',
                       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                       fontFamily: public_sans.style.fontFamily,

@@ -57,10 +57,12 @@ export default function HighlightClientWrapper({
   name,
   asset,
   highlightEvent,
+  subthemeSlug,
 }: {
   name: string;
   asset: string;
   highlightEvent: highlightEvent[];
+  subthemeSlug: any;
 }) {
   const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
   return (
@@ -80,6 +82,7 @@ export default function HighlightClientWrapper({
             <ExpandableCarousel
               setBgImg={setBgImg}
               itemsToShow={highlightEvent}
+              subthemeSlug={subthemeSlug}
             ></ExpandableCarousel>
           </div>
         </div>
