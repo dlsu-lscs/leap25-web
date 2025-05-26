@@ -62,7 +62,7 @@ export default function HighlightClientWrapper({
   name: string;
   asset: string;
   highlightEvent: highlightEvent[];
-  subthemeSlug: string;
+  subthemeSlug: any;
 }) {
   const [bgImg, setBgImg] = useState(dummyHighlightData[0].bgImg);
   return (
