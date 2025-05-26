@@ -60,7 +60,11 @@ export default async function Class({ params }: { params: Promise<{ slug: string
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
       </div>
       <div
-        style={{ backgroundImage: `url(${eventMedia.pub_url})` }}
+        style={{
+          backgroundImage: event.pubmat_as_bg
+            ? `url(${eventMedia.pub_url})`
+            : `url(${subtheme.background_pub_url})`,
+        }}
         className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/50 bg-blend-multiply bg-cover`}
       >
         <div>
