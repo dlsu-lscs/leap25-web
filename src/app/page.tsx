@@ -45,6 +45,12 @@ export default function Map() {
     };
   }, []);
 
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      router.push('/login');
+    }
+  }, [status, router]);
+
   return (
     <div className="overflow-hidden h-full relative z-50">
       {onImageLoad && (
