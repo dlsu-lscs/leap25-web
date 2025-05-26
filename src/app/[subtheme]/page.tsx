@@ -14,6 +14,8 @@ import { getAllHighlightEvent } from '@/services/highlightServices';
 
 import type { Metadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({
   params,
 }: {
@@ -23,6 +25,7 @@ export async function generateMetadata({
   const { name } = getSubTheme(subtheme);
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
+  const fallBackImage = '/leapPub.webp';
 
   return {
     title: `${subthemeDetails.title}`,
@@ -30,13 +33,17 @@ export async function generateMetadata({
     openGraph: {
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
+      images: subthemeDetails.background_pub_url
+        ? [subthemeDetails.background_pub_url]
+        : [fallBackImage],
     },
     twitter: {
       card: 'summary_large_image',
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url ? [subthemeDetails.background_pub_url] : [],
+      images: subthemeDetails.background_pub_url
+        ? [subthemeDetails.background_pub_url]
+        : [fallBackImage],
     },
   };
 }

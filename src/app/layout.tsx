@@ -9,21 +9,19 @@ import { BASE_URL } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: {
-    default: 'LEAP 2025',
+    default: 'Lasallian Enrichment Alternative Program 2025',
     template: '%s | LEAP 2025',
   },
-  description:
-    'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices.',
+  description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
   openGraph: {
     title: 'LEAP 2025',
-    description:
-      'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices. ',
+    description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
     url: BASE_URL,
     siteName: 'LEAP 2025',
     type: 'website',
     images: [
       {
-        url: '/landingBG.webp',
+        url: '/leapPub.webp',
         width: 1200,
         height: 630,
         alt: 'LEAP 2025 Logo',
@@ -34,8 +32,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'LEAP 2025',
-    description:
-      'A multi-day, university-wide initiative spearheaded by the Council of Student Organizations (CSO) in collaboration with its 48 accredited organizations and various university offices.',
+    description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
     images: ['/landingBG.webp'],
     site: '@dlsu_leap',
     creator: '@dlsu_lscs',

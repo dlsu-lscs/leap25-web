@@ -1,7 +1,7 @@
 'use client';
 import SubThemeMapPicker from '@/features/MapSubTheme/DesktopMapSubTheme/SubThemeMapPicker';
 import MobileMapClientWrapper from '@/features/MapSubTheme/mapClientWrapper';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Loading from './loading';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
@@ -11,6 +11,7 @@ export default function Map() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [showText, setShowText] = useState(true);
+  const timerRef = useRef<number | null>(null);
 
   const [onImageLoad, setImageLoad] = useState(false);
   useEffect(() => {
@@ -22,18 +23,26 @@ export default function Map() {
   }, []);
 
   useEffect(() => {
-    // Only redirect if session is definitely not available (after loading completed)
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    }
-  }, [status, router]);
-
-  useEffect(() => {
-    const closeText = setTimeout(() => {
+    const handleMouseMove = () => {
       setShowText(false);
-    }, 3000);
 
-    return () => clearTimeout(closeText);
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+
+      timerRef.current = window.setTimeout(() => {
+        setShowText(true);
+      }, 1000);
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, []);
 
   return (
