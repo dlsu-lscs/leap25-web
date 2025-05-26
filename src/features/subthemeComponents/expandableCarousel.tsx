@@ -28,7 +28,7 @@ interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: highlightEvent[];
   className?: string;
-  subthemeSlug: string;
+  subthemeSlug: any;
   setBgImg: React.Dispatch<React.SetStateAction<string>>;
 }
 
