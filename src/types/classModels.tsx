@@ -41,6 +41,7 @@ interface subThemeModel {
   title: string;
   logo_pub_url: string;
   background_pub_url: string;
+  short_desc: string;
 }
 
 interface bookmarkModel {

@@ -34,7 +34,7 @@ export async function generateMetadata({
 
   return {
     title: `${subthemeDetails.title}`,
-    description: `${subthemeDetails.title}`,
+    description: `${subthemeDetails.short_desc}`,
     openGraph: {
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
