@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       {
         url: '/leapPub.webp',
         width: 1200,
-        height: 630,
+        height: 900,
         alt: 'LEAP 2025 Logo',
       },
     ],
