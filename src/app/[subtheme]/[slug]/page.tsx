@@ -53,6 +53,8 @@ export default async function Class({ params }: { params: Promise<{ slug: string
   const orgs: orgModel[] = await getOrgByID(event.org_id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
+  console.log(eventMedia);
+
   return (
     <>
       <div className="fixed top-0 z-20">
@@ -61,7 +63,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
       </div>
       <div
         style={{
-          backgroundImage: event.pubmat_as_bg
+          backgroundImage: eventMedia.pub_as_bg
             ? `url(${eventMedia.pub_url})`
             : `url(${subtheme.background_pub_url})`,
         }}
