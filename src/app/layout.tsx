@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
   description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
   openGraph: {
-    title: 'LEAP 2025',
+    title: 'Lasallian Enrichment Alternative Program 2025',
     description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
     url: BASE_URL,
     siteName: 'LEAP 2025',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       {
         url: '/leapPub.webp',
         width: 1200,
-        height: 630,
+        height: 900,
         alt: 'LEAP 2025 Logo',
       },
     ],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'LEAP 2025',
+    title: 'Lasallian Enrichment Alternative Program 2025',
     description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
     images: ['/landingBG.webp'],
     site: '@dlsu_leap',

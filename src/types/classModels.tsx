@@ -14,6 +14,7 @@ interface classModel {
   max_slots: number;
   slug: string;
   gforms_url: string;
+  pubmat_as_bg: boolean;
 }
 
 interface highlightModel {
@@ -34,6 +35,7 @@ interface classPubModel {
   pub_type: PublicationType;
   pub_url: string;
   contentful_id: string;
+  pub_as_bg: number;
 }
 
 interface subThemeModel {
