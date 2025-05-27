@@ -14,6 +14,7 @@ interface classModel {
   max_slots: number;
   slug: string;
   gforms_url: string;
+  pubmat_as_bg: boolean;
 }
 
 interface highlightModel {
