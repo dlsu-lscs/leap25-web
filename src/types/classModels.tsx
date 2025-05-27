@@ -35,6 +35,7 @@ interface classPubModel {
   pub_type: PublicationType;
   pub_url: string;
   contentful_id: string;
+  pub_as_bg: number;
 }
 
 interface subThemeModel {

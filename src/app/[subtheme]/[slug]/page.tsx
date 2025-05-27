@@ -61,7 +61,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
       </div>
       <div
         style={{
-          backgroundImage: event.pubmat_as_bg
+          backgroundImage: eventMedia.pub_as_bg
             ? `url(${eventMedia.pub_url})`
             : `url(${subtheme.background_pub_url})`,
         }}
