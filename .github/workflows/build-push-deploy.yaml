@@ -113,12 +113,3 @@ jobs:
               "branch": "${{ needs.build-and-push.outputs.branch }}",
               "commit_sha": "${{ github.sha }}"
             }
-
-      - name: Verify dispatch result
-        run: |
-          if [[ "${{ steps.dispatch.outputs.status_code }}" == "204" ]]; then
-            echo "✅ Successfully triggered deployment workflow"
-          else
-            echo "❌ Failed to trigger deployment workflow: ${{ steps.dispatch.outputs.status_code }}"
-            exit 1
-          fi
