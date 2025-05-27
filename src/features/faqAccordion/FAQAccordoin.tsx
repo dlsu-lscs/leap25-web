@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 
-import { FAQ_QUESTIONS } from '@/lib/constants';
+import { FAQ_QUESTIONS } from '@/lib/data';
 
 export default function FAQAccordion() {
   return (
@@ -14,10 +14,12 @@ export default function FAQAccordion() {
         {FAQ_QUESTIONS.map((question, index) => {
           return (
             <AccordionItem key={index} value={`item-${index}`}>
-              <AccordionTrigger className="text-[16px] sm:text-[24px]">
+              <AccordionTrigger className="text-[24px] sm:text-[32px] font-bold">
                 {question.question}
               </AccordionTrigger>
-              <AccordionContent>{question.answer}</AccordionContent>
+              <AccordionContent className="text-[16px] sm:text[24px]">
+                {question.answer}
+              </AccordionContent>
             </AccordionItem>
           );
         })}
