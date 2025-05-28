@@ -7,7 +7,7 @@ import LeapCursor from '@/components/cursor/LeapCursor';
 import { Toaster } from '@/components/ui/sonner';
 import { BASE_URL } from '@/lib/constants';
 
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: {
@@ -66,6 +66,8 @@ export default function RootLayout({
             <Toaster />
           </Providers>
         </div>
+        <GoogleAnalytics gaId="G-SZMRSDQ5ZV" />
+        <GoogleTagManager gtmId="GTM-MM6DTKQN" />
       </body>
     </html>
   );
