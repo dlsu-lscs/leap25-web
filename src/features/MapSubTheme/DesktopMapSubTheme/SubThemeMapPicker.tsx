@@ -180,14 +180,22 @@ export default function ParallaxBackground({ className = '' }: { className?: str
                 width={200}
                 height={200}
                 className={`
-                  transition-opacity duration-300 ease-in-out absolute
-                  ${hoveredButtonIndex === index ? 'opacity-100' : 'opacity-50 pointer-events-none'}
+                  transition-all duration-300 ease-in-out absolute
+                  ${
+                    hoveredButtonIndex === index ? 'opacity-100' : 'opacity-50 pointer-events-none '
+                  }
                   ${hoveredButtonIndex === index ? 'animate-bounce' : ''}
                 `}
+                style={{
+                  filter:
+                    hoveredButtonIndex === index
+                      ? 'none'
+                      : 'drop-shadow(0 0 15px rgba(226,196,93,1)) drop-shadow(0 0 25px rgba(226,196,93,1)) drop-shadow(0 0 40px rgba(226,196,93,0.8))',
+                }}
               />
               <div
                 className={cn(
-                  'absolute top-35 left-5 w-52 h-28 transition-opacity ease-in-out duration-600',
+                  'absolute top-35 -left-3 w-52 h-28 transition-opacity ease-in-out duration-600',
                   hoveredButtonIndex === index ? 'opacity-100' : 'opacity-0'
                 )}
               >
