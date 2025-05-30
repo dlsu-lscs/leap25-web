@@ -6,6 +6,7 @@ import Loading from './loading';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { AnimatePresence, motion } from 'framer-motion';
+import ProfileCard from '@/components/layout/Profile';
 
 export default function Map() {
   const { data: session, status } = useSession();
@@ -69,6 +70,7 @@ export default function Map() {
           )}
         </AnimatePresence>
       )}
+      <ProfileCard className="absolute top-3 right-3 sm:top-5 sm:right-5 z-50" />
       <img
         src="/map/LEAP_MAP.webp"
         alt="image"
