@@ -66,8 +66,8 @@ export default function RootLayout({
             <Toaster />
           </Providers>
         </div>
-        <GoogleAnalytics gaId="G-SZMRSDQ5ZV" />
-        <GoogleTagManager gtmId="GTM-MM6DTKQN" />
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA} />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GT} />
       </body>
     </html>
   );
