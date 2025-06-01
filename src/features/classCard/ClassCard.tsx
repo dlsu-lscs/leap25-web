@@ -180,8 +180,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       deleteBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
-                      console.log(isBookmarked);
-                      console.log(bookmarks);
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
