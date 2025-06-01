@@ -86,7 +86,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
-            <LeapTag className="bg-white">{'₱' + event.fee || 0}</LeapTag>
+            <LeapTag className="bg-white">{'₱' + event.fee || 'Free'}</LeapTag>
           </div>
           <h1
             className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
@@ -152,11 +152,13 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 disabled={event.registered_slots === 0}
                 className={`${event.registered_slots === 0 ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
-                {event.registered_slots > 0 ? `Join Now - ₱${event.fee}` : 'Event is Full!'}
+                {event.max_slots - event.registered_slots < event.max_slots
+                  ? `Join Now `
+                  : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
-                {event.registered_slots > 0
-                  ? `Only ${event.registered_slots || 0} slots left!`
+                {event.max_slots - event.registered_slots < event.max_slots
+                  ? `Only ${event.max_slots - event.registered_slots || 0} slots left!`
                   : null}
               </p>
             </div>
