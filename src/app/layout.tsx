@@ -55,6 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`h-full font-public-sans`}>
       <link rel="icon" href="/leapLogos/Logo_v1.png" />
+      <GoogleTagManager gtmId="GTM-MM6DTKQN" />
       <body className="h-full overflow-x-hidden">
         <div className="h-full relative overflow-x-hidden">
           <div className="left-cloud "></div>
@@ -65,8 +66,8 @@ export default function RootLayout({
             <Toaster />
           </Providers>
         </div>
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA} />
-        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GT} />
+        <GoogleAnalytics gaId={process.env.GA!} />
+        <GoogleTagManager gtmId={process.env.GT!} />
       </body>
     </html>
   );
