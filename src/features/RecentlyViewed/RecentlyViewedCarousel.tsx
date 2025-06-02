@@ -57,8 +57,6 @@ export default function RecentlyViewedCarousel() {
       row2={false}
       itemsToShow={recentItems.map(({ event, media, subtheme }, index) => {
         const subthemeLink = getSubThemeLink(subtheme.title) ?? '';
-        console.log(subtheme);
-        console.log(getSubThemeLink(subtheme.title));
         return (
           <>
             <div key={index}>
