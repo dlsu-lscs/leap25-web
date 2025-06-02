@@ -114,7 +114,7 @@ export default function ExpandableCarousel({
           align: 'start',
           loop: true,
         }}
-        className={`w-full h-full relative duration-1000 ${className ?? ''}`}
+        className={`w-full lg:px-10 h-full relative duration-1000 ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -124,10 +124,10 @@ export default function ExpandableCarousel({
               <CarouselItem
                 key={index}
                 className={cn(
-                  `sm:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 overflow-visible`,
+                  `lg:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 overflow-visible`,
                   item.id === selectedId
-                    ? 'md:basis-2/3 justify-end px-0 sm:pr-8'
-                    : 'md:basis-1/3 flex-start '
+                    ? 'lg:basis-2/3 justify-end px-0 lg:pr-8'
+                    : 'lg:basis-1/3 flex-start '
                 )}
               >
                 <div
@@ -135,24 +135,24 @@ export default function ExpandableCarousel({
                     backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bg_img})`,
                   }}
                   className={cn(
-                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center sm:rounded-lg border-solid sm:border-2 border-white/70',
+                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70',
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
                   {item.id === selectedId ? (
                     <div
                       className={cn(
-                        'relative sm:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
+                        'relative lg:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
                       )}
                     >
-                      <div className="absolute sm:-left-10 left-1/2 sm:translate-0 -translate-x-[49%] sm:-top-22 -top-28 flex items-center justify-center ">
+                      <div className="absolute sm:-left-10 md:left-0 lg:-left-10 left-1/2 sm:translate-0 -translate-x-[49%] sm:-top-22 md:-top-24 -top-28 flex items-center justify-center ">
                         <LeapSeperator
                           direction="left"
                           className="sm:hidden"
                           variant="diamond"
                         ></LeapSeperator>
                         <h1
-                          className={`sm:text-5xl text-3xl font-bold whitespace-nowrap text-center font-playfair`}
+                          className={`sm:text-5xl  text-3xl font-bold whitespace-nowrap text-center font-playfair`}
                         >
                           LEAP's choice
                         </h1>

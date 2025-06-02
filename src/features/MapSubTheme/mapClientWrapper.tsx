@@ -12,7 +12,7 @@ const tempArr = [
     content: 'Wellness & Reflection',
     id: 0,
     img: '/subthemeLogos/CoralLagoon.png',
-    bgPos: 'bg-[3%_100%]',
+    bgPos: 'bg-[3%_90%]',
     route: '/coral-lagoon',
   },
   {
@@ -36,7 +36,7 @@ const tempArr = [
     content: 'Teamwork & Adventure',
     id: 3,
     img: '/subthemeLogos/HollowTreeHideaway.png',
-    bgPos: 'bg-[75%_100%]',
+    bgPos: 'bg-[75%_80%]',
     route: '/hollow-tree-hideaway',
   },
   {
