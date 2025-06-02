@@ -76,10 +76,10 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   return (
     <>
       <div
-        className={`flex justify-center md:flex-row flex-col items-center gap-6  text-white ${public_sans.className}`}
+        className={`flex justify-center lg:flex-row flex-col items-center gap-6  text-white ${public_sans.className}`}
       >
         <img
-          className="aspect-[4/5] w-full max-w-[400px]  bg-[#D9D9D9] border-none outline-none object-cover"
+          className="aspect-[4/5] w-full max-w-[400px] min-w-[324px]  bg-[#D9D9D9] border-none outline-none object-cover"
           src={eventMedia.pub_url}
         />
         <div className="flex flex-col ">
