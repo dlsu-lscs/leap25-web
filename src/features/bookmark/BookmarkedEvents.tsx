@@ -22,6 +22,8 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
   const { eventMedia }: { eventMedia: classPubModel | undefined } = useSetEventMedia(event_id);
   const { subtheme }: { subtheme: subThemeModel | undefined } = useSetSubtheme(event?.subtheme_id);
   const subthemeLink = getSubThemeLink(subtheme?.title);
+
+  const slotsLeft = (event?.max_slots ?? 0) - (event?.registered_slots ?? 0);
   return (
     <>
       <a
@@ -40,7 +42,7 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
           <div className="text-[12px] sm:text-[16px] flex justify-between gap-4">
             <div className="flex items-center gap-1">
               <PersonIcon />
-              <p>{event?.registered_slots} slots left</p>
+              <p>{slotsLeft} slots left</p>
             </div>
             <div className="flex items-center gap-1">
               <CalendarViewIcon />
