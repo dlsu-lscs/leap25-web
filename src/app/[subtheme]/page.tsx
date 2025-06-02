@@ -79,8 +79,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
   const subthemeLink = getSubThemeLink(name);
 
-  console.log(events);
-
+  console.log(eventsWithMedia);
   return (
     <div className="overflow-hidden">
       <div className="fixed top-0 z-20">
