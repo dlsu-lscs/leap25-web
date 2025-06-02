@@ -27,7 +27,7 @@ const getSubThemeLink = (subtheme: any) => {
     return 'fairy-nook';
   } else if (subtheme == 'Coral Lagoon') {
     return 'coral-lagoon';
-  } else if (subtheme == 'Hollowtree Hideaway') {
+  } else if (subtheme == 'Hollowtree Hideway') {
     return 'hollow-tree-hideaway';
   } else if (subtheme == 'Northern Star Stop') {
     return 'northern-star-stop';
