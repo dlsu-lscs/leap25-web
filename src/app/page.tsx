@@ -62,7 +62,7 @@ export default function Map() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 100, opacity: 0 }}
               transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="absolute top-10 hidden sm:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30"
+              className="absolute top-10 hidden lg:block left-1/2 font-bold text-shadow-lg inset-shadow-lg text-shadow-background-black -translate-x-1/2 font-playfair text-center z-30"
             >
               <h3 className="sm:text-3xl text-2xl text-[#98C10E]">LEAP INTO THE</h3>
               <h1 className="sm:text-6xl text-5xl text-[#FBBC05]">ADVENTURE</h1>
@@ -81,10 +81,10 @@ export default function Map() {
       />
       {onImageLoad ? (
         <>
-          <div className="sm:hidden w-full h-full">
+          <div className="lg:hidden w-full h-full">
             <MobileMapClientWrapper></MobileMapClientWrapper>
           </div>
-          <div className="sm:inline hidden">
+          <div className="lg:inline hidden">
             <div className="flex justify-between w-full h-full flex-col bg-[url('/map/LEAP_MAP.webp')] bg-black/40 bg-blend-multiply bg-cover bg-center">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_30%,_rgba(0,10,30,0.45)_100%)]  pointer-events-none z-10"></div>
               <div className="fixed z-20">

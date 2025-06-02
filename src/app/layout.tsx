@@ -57,7 +57,7 @@ export default function RootLayout({
       <link rel="icon" href="/leapLogos/Logo_v1.png" />
       <GoogleTagManager gtmId="GTM-MM6DTKQN" />
       <body className="h-full overflow-x-hidden">
-        <div className="h-full relative overflow-x-hidden">
+        <div className="h-full relative overflow-x-hidden xl:cursor-none">
           <div className="left-cloud "></div>
           <div className="right-cloud "></div>
           <Providers>

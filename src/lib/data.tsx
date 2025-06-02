@@ -39,12 +39,67 @@ export const FAQ_QUESTIONS = [
         </p>
         <a
           className="text-[#FBBC05] font-playfair font-extrabold text-xl hover:scale-110 transition duration-200 ease-in-out text-shadow-lg drop-shadow-lg box-shadow-lg"
-          href="https://dlsucso-leap.com/"
+          href="https://lac-b26.my.canva.site/leap2025"
           target="_blank"
         >
           LEAP <span className="text-[#98C10E]">LAGUNA Website</span>
         </a>
       </>
     ),
+  },
+];
+
+//members
+export const heads = [
+  {
+    name: 'Sean Denzel Robenta',
+    position: 'Project Head',
+    src: '/members/zel.png',
+  },
+];
+
+export const developers = [
+  {
+    name: 'Max Benedict Chavez',
+    position: 'Frontend Engineer',
+    src: '/members/max.png',
+  },
+  {
+    name: 'Ellexandrei Esponilla',
+    position: 'Frontend Engineer',
+    src: '/members/xandrei.png',
+  },
+  {
+    name: 'Rohann Gabriel Dizon',
+    position: 'Backend Engineer',
+    src: '/members/roe.png',
+  },
+  {
+    name: 'Edwin Sadiarin',
+    position: 'Devops Engineer',
+    src: '/members/ej.png',
+  },
+];
+
+export const uiux = [
+  {
+    name: 'Angelo Julius Nuque',
+    position: 'UI/UX Engineer',
+    src: '/members/juls.png',
+  },
+  {
+    name: 'Airon Matthew Bantillo',
+    position: 'UI/UX Engineer',
+    src: '/members/airon.png',
+  },
+  {
+    name: 'Julia Zarate',
+    position: 'UI/UX Engineer',
+    src: '/members/julia.png',
+  },
+  {
+    name: 'Lance Chiu',
+    position: 'UI/UX Engineer',
+    src: '/members/lance.png',
   },
 ];
