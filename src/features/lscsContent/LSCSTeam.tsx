@@ -1,4 +1,5 @@
 import LSCSMember from './LSCSMember';
+import { developers, heads, uiux } from '@/lib/data';
 
 export default function LSCSTeam() {
   return (
@@ -19,9 +20,16 @@ export default function LSCSTeam() {
             HEADS
           </h1>
           <div className="flex flex-col sm:flex-row gap-20 ">
-            <LSCSMember />
-            <LSCSMember />
-            <LSCSMember />
+            {heads.map((head, index) => {
+              return (
+                <LSCSMember
+                  src={head.src}
+                  name={head.name}
+                  position={head.position}
+                  key={index}
+                ></LSCSMember>
+              );
+            })}
           </div>
         </div>
         <div className="flex flex-col items-center justify-center text-center space-y-16">
@@ -29,9 +37,16 @@ export default function LSCSTeam() {
             DEVELOPERS
           </h1>
           <div className="flex flex-col sm:flex-row gap-20 ">
-            <LSCSMember />
-            <LSCSMember />
-            <LSCSMember />
+            {developers.map((head, index) => {
+              return (
+                <LSCSMember
+                  src={head.src}
+                  name={head.name}
+                  position={head.position}
+                  key={index}
+                ></LSCSMember>
+              );
+            })}
           </div>
         </div>
         <div className="flex flex-col items-center justify-center text-center space-y-16">
@@ -39,10 +54,16 @@ export default function LSCSTeam() {
             UI/UX
           </h1>
           <div className="flex flex-col sm:flex-row gap-20 ">
-            <LSCSMember />
-            <LSCSMember />
-            <LSCSMember />
-            <LSCSMember />
+            {uiux.map((head, index) => {
+              return (
+                <LSCSMember
+                  src={head.src}
+                  name={head.name}
+                  position={head.position}
+                  key={index}
+                ></LSCSMember>
+              );
+            })}
           </div>
         </div>
       </div>
