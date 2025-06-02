@@ -65,7 +65,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
             ? `url(${eventMedia.pub_url})`
             : `url(${subtheme.background_pub_url})`,
         }}
-        className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/50 bg-blend-multiply bg-cover`}
+        className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/75 bg-blend-multiply bg-cover`}
       >
         <div>
           {' '}
