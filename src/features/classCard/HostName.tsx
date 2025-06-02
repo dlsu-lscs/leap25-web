@@ -13,18 +13,16 @@ export default function HostName({ children, src, org_url }: HostProps) {
     <>
       {org_url ? (
         <>
-          <a
-            href={org_url}
-            target="_blank"
-            className="flex space-x-3.5 items-center hover:text-white/60"
-          >
+          <a href={org_url} target="_blank" className="flex space-x-2 items-cente">
             <img src={src} className="w-7 h-7 inset-shadow-xs shadow-xl box-shadow-xl" alt="logo" />
-            <p className="font-medium text-shadow-lg">{children}</p>
+            <p className="font-medium text-shadow-lg drop-shadow-amber-300 drop-shadow-xl hover:text-white/60">
+              {children}
+            </p>
           </a>
         </>
       ) : (
         <>
-          <div className="flex space-x-3.5 items-center">
+          <div className="flex space-x-2 items-center">
             <img src={src} className="w-7 h-7 inset-shadow-xs shadow-xl box-shadow-xl" alt="logo" />
             <p className="font-medium text-shadow-lg">{children}</p>
           </div>

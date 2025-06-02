@@ -82,7 +82,17 @@ export default function MobileMapClientWrapper() {
           alt="subtheme logo"
           className="w-12 h-12 absolute z-10 top-1/2 -translate-y-1/2"
         />
-        <div className="bg-black/50 w-32 pl-9 font-bold flex items-center h-10 absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-xs font-playfair">
+        <div
+          style={{
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            lineHeight: '1.2rem',
+            height: '2.4rem',
+          }}
+          className="bg-black/50 w-32 pl-9 font-bold flex items-center h-10 absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-xs font-playfair"
+        >
           {tempArr[selectedId ?? 0].content}
         </div>
       </div>

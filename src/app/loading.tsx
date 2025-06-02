@@ -14,7 +14,7 @@ export default function Loading() {
             alt="loading"
             className="my-6"
           ></Image>
-          <h1 className="text-[42px] font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
+          <h1 className="text-[32px] sm:text-[42px] text-center font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
             <span className="text-[#FBBC05] font-playfair">Off to </span>
             <span className="text-[#98C10E] font-playfair">AdventureLand...</span>
           </h1>
