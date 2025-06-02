@@ -135,6 +135,12 @@
   }
 }
 
+@media (min-width: 1280px) {
+  * {
+    cursor: none;
+  }
+}
+
 .clip-circle-top {
   clip-path: inset(0 0 50px 0);
 }

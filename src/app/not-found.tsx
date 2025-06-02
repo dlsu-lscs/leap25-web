@@ -11,7 +11,7 @@ export default function Custom404() {
     <div className="h-full w-full bg-[url('/landingBG.webp')] bg-cover bg-center bg-black/50 bg-blend-multiply flex items-center justify-center flex-col">
       <Image width={284} height={150} alt="not found" src="/lscsAssets/not_found.png" />
 
-      <h1 className="text-5xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
+      <h1 className="text-3xl sm:text-5xl text-center font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
         <span className="text-[#FBBC05] font-playfair">Lost in </span>
         <span className="text-[#98C10E] font-playfair">AdventureLand...</span>
       </h1>

@@ -16,7 +16,7 @@ export default function ErrorPage() {
         src="/lscsAssets/XXMACKY.png"
         className="my-6"
       />
-      <h1 className="text-4xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg">
+      <h1 className="text-3xl sm:text-4xl font-extrabold tracking-wide text-shadow-lg inset-shadow-lg text-center">
         <span className="text-[#FBBC05] font-playfair">Oops! </span>
         <span className="text-[#98C10E] font-playfair">
           You’ve drifted away from AdventureLand..
