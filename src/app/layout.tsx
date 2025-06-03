@@ -11,12 +11,12 @@ import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Lasallian Enrichment Alternative Program 2025',
+    default: 'LEAP 2025',
     template: '%s | LEAP 2025',
   },
   description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
   openGraph: {
-    title: 'Lasallian Enrichment Alternative Program 2025',
+    title: 'LEAP 2025',
     description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
     url: BASE_URL,
     siteName: 'LEAP 2025',
@@ -33,16 +33,16 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Lasallian Enrichment Alternative Program 2025',
+    title: 'LEAP 2025',
     description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
-    images: ['/landingBG.webp'],
+    images: ['/leapPub.webp'],
     site: '@dlsu_leap',
     creator: '@dlsu_lscs',
   },
   icons: {
-    icon: '/leapLogos/Logo_v1.png',
-    shortcut: '/leapLogos/Logo_v1.png',
-    apple: '/leapLogos/Logo_v1.png',
+    icon: '/leapLogos/verticalLogo.png',
+    shortcut: '/leapLogos/verticalLogo.png',
+    apple: '/leapLogos/verticalLogo.png',
   },
   metadataBase: new URL(BASE_URL),
 };
@@ -54,8 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full font-public-sans`}>
-      <link rel="icon" href="/leapLogos/Logo_v1.png" />
-      <GoogleTagManager gtmId="GTM-MM6DTKQN" />
+      <link rel="icon" href="/leapLogos/verticalLogo.png" />
       <body className="h-full overflow-x-hidden">
         <div className="h-full relative overflow-x-hidden xl:cursor-none">
           <div className="left-cloud "></div>
