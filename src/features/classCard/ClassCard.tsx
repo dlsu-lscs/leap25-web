@@ -7,18 +7,6 @@ import ClassDescription from './ClassDescription';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Info } from 'lucide-react';
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
-
 import { classModel, classPubModel, subThemeModel } from '@/types/classModels';
 import { orgModel } from '@/types/orgModels';
 
@@ -174,60 +162,17 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <div className="flex items-center gap-2 flex-col sm:flex-row">
               <LeapButton
                 onClick={() => {
-                  if (!event.is_bundle) {
-                    registerEvent(
-                      event.gforms_url ||
-                        'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
-                    );
-                  }
+                  registerEvent(
+                    event.gforms_url ||
+                      'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
+                  );
                 }}
                 disabled={!(event.registered_slots < event.max_slots)}
                 className={`${!(event.registered_slots < event.max_slots) ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
-                {event.is_bundle ? (
-                  <>
-                    <AlertDialog>
-                      <AlertDialogTrigger>
-                        {event.registered_slots < event.max_slots
-                          ? `Join Now - ${price}`
-                          : 'Event is Full!'}
-                      </AlertDialogTrigger>
-                      <AlertDialogContent className="bg-black border-white border-2 text-white font-public-sans">
-                        <AlertDialogHeader>
-                          <AlertDialogTitle className="font-bold">
-                            Confirm Member Logins
-                          </AlertDialogTitle>
-                          <AlertDialogDescription className="text-white">
-                            All members in the bundle must log in to this website at least once
-                            before submitting registration.
-                          </AlertDialogDescription>
-                        </AlertDialogHeader>
-                        <AlertDialogFooter>
-                          <AlertDialogCancel className="bg-red-600 border-none">
-                            Cancel
-                          </AlertDialogCancel>
-                          <AlertDialogAction
-                            className="bg-green-600 border-none"
-                            onClick={() => {
-                              registerEvent(
-                                event.gforms_url ||
-                                  'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
-                              );
-                            }}
-                          >
-                            Continue
-                          </AlertDialogAction>
-                        </AlertDialogFooter>
-                      </AlertDialogContent>
-                    </AlertDialog>
-                  </>
-                ) : (
-                  <>
-                    {event.registered_slots < event.max_slots
-                      ? `Join Now - ${price}`
-                      : 'Event is Full!'}
-                  </>
-                )}
+                {event.registered_slots < event.max_slots
+                  ? `Join Now - ${price}`
+                  : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
                 {event.registered_slots < event.max_slots
