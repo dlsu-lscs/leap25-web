@@ -73,6 +73,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
     }
   }, [bookmarks, event]);
 
+  const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
+  const price = event.fee > 0.0 ? '₱' + event.fee : 'Free';
+
   return (
     <>
       <div
@@ -86,12 +89,12 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
-            <LeapTag className="bg-white">{'₱' + event.fee || 'Free'}</LeapTag>
+            <LeapTag className="bg-white">{price}</LeapTag>
           </div>
           <h1
             className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
           >
-            {event.title || 'R&Deploy Your Own Bot Workshop'}
+            {title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
           <div className="flex items-center sm:my-8 my-4">
             <div className="space-x-3 flex flex-wrap gap-y-1.5">
@@ -152,7 +155,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 disabled={!(event.registered_slots < event.max_slots)}
                 className={`${!(event.registered_slots < event.max_slots) ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
-                {event.registered_slots < event.max_slots ? `Join Now ` : 'Event is Full!'}
+                {event.registered_slots < event.max_slots
+                  ? `Join Now - ${price}`
+                  : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
                 {event.registered_slots < event.max_slots
