@@ -75,7 +75,7 @@ export const developers = [
     src: '/members/roe.png',
   },
   {
-    name: 'Edwin Sadiarin',
+    name: 'Edwin Jr. Sadiarin',
     position: 'Senior DevOps Engineer',
     src: '/members/ej.png',
   },
