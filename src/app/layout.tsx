@@ -8,6 +8,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { BASE_URL } from '@/lib/constants';
 
 import { GoogleTagManager, GoogleAnalytics } from '@next/third-parties/google';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 
 export const metadata: Metadata = {
   title: {
@@ -63,6 +64,7 @@ export default function RootLayout({
             {children}
             <LeapCursor />
             <Toaster />
+            <BackgroundMusic />
           </Providers>
         </div>
         <GoogleAnalytics gaId={process.env.GA!} />

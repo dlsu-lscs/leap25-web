@@ -83,7 +83,6 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   console.log(eventsWithMedia);
   return (
     <div className="overflow-hidden">
-      <BackgroundMusic />
       <div className="fixed top-0 z-20">
         <Navbar variant="map" />
       </div>

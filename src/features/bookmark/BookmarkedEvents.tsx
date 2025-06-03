@@ -47,7 +47,15 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
             </div>
             <div className="flex items-center gap-1">
               <CalendarViewIcon />
-              <p>{'September 9, 2025'}</p>
+              <p>
+                {' '}
+                {event?.schedule &&
+                  new Date(event.schedule).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+              </p>
             </div>
           </div>
         </div>
