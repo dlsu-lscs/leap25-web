@@ -89,12 +89,12 @@ export const developers = [
 export const uiux = [
   {
     name: 'Angelo Julius Nuque',
-    position: 'Senior UI/UX Engineer',
+    position: 'Senior UI/UX Designer',
     src: '/members/juls.png',
   },
   {
     name: 'Airon Matthew Bantillo',
-    position: 'Junior UI/UX Engineer',
+    position: 'Junior UI/UX Designer',
     src: '/members/airon.png',
   },
   {
