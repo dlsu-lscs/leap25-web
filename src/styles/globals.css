@@ -151,6 +151,7 @@
 
 html {
   overscroll-behavior-y: none;
+  height: 100dvh;
 }
 
 body {
@@ -158,6 +159,7 @@ body {
   transition-timing-function: ease-in-out;
   transition: 500ms;
   overscroll-behavior-y: none;
+  height: 100%;
 }
 
 .page-transition {
