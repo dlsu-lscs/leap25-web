@@ -10,58 +10,57 @@ export default function LSCSTeam() {
             MEET THE <span className="text-[#98C10E]">TEAM</span>
           </h1>
           <p className="font-public-sans font-light text-[16px] sm:text-[24px] text-white w-1/2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            Meet the developers of the LEAP 2025 website from the Research and Development Committee
+            of the La Salle Computer Society
           </p>
         </div>
-        <div className="flex flex-col items-center justify-center text-center space-y-16">
-          <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px]">
+        <div className="flex flex-col items-center justify-center text-center space-y-8 px-12 ">
+          <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px] text-center">
             HEADS
           </h1>
-          <div className="flex flex-col sm:flex-row gap-20 ">
-            {heads.map((head, index) => {
+          <div className="flex space-x-24 justify-center">
+            {heads.map((member, index) => {
               return (
                 <LSCSMember
-                  src={head.src}
-                  name={head.name}
-                  position={head.position}
                   key={index}
-                ></LSCSMember>
+                  src={member.src}
+                  position={member.position}
+                  name={member.name}
+                />
               );
             })}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center text-center space-y-16">
+        <div className="flex flex-col items-center justify-center text-center space-y-8">
           <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px]">
             DEVELOPERS
           </h1>
-          <div className="flex flex-col sm:flex-row gap-20 ">
-            {developers.map((head, index) => {
+          <div className="flex space-x-24 justify-center">
+            {developers.map((member, index) => {
               return (
                 <LSCSMember
-                  src={head.src}
-                  name={head.name}
-                  position={head.position}
                   key={index}
-                ></LSCSMember>
+                  src={member.src}
+                  position={member.position}
+                  name={member.name}
+                />
               );
             })}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center text-center space-y-16">
+        <div className="flex flex-col items-center justify-center text-center space-y-8 pb-20">
           <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px]">
             UI/UX
           </h1>
-          <div className="flex flex-col sm:flex-row gap-20 ">
-            {uiux.map((head, index) => {
+          <div className="flex space-x-24 justify-center">
+            {uiux.map((member, index) => {
               return (
                 <LSCSMember
-                  src={head.src}
-                  name={head.name}
-                  position={head.position}
                   key={index}
-                ></LSCSMember>
+                  src={member.src}
+                  position={member.position}
+                  name={member.name}
+                />
               );
             })}
           </div>

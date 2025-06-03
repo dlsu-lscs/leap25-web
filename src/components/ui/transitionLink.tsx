@@ -16,11 +16,17 @@ export default function TransitionLink({
 }: TransitionLinkProps): JSX.Element {
   const router = useRouter();
 
+  const playClouds = () => {
+    const audio = new Audio('/sounds/cloud_sounds.mp3');
+    audio.play();
+  };
+
   const handleTransition = async (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     const leftCloud = document.querySelector('.left-cloud');
     const rightCloud = document.querySelector('.right-cloud');
 
+    playClouds();
     leftCloud?.classList.add('left-cloud-inout');
     rightCloud?.classList.add('right-cloud-inout');
     await sleep(800);

@@ -149,10 +149,17 @@
   clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
 }
 
+html {
+  overscroll-behavior-y: none;
+  height: 100dvh;
+}
+
 body {
   transition-property: opacity, background;
   transition-timing-function: ease-in-out;
   transition: 500ms;
+  overscroll-behavior-y: none;
+  height: 100%;
 }
 
 .page-transition {
