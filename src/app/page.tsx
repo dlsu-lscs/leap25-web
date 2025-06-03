@@ -14,13 +14,14 @@ export default function Map() {
   const [showText, setShowText] = useState(true);
   const timerRef = useRef<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isMuted, setMute] = useState(false);
 
   useEffect(() => {
     const audio = new Audio('/sounds/bg_music.mp3');
     audio.loop = true;
     audio.volume = 0.4;
     audio.play();
-
+    setMute(false);
     audioRef.current = audio;
     return () => {
       audio.pause();
@@ -94,14 +95,22 @@ export default function Map() {
             border: '2px solid transparent',
           }}
           onClick={() => {
-            if (audioRef.current!.volume == 0.4) {
+            if (!isMuted) {
               audioRef.current!.volume = 0;
+              setMute(true);
             } else {
               audioRef.current!.volume = 0.4;
+              setMute(false);
             }
           }}
         >
-          <img src="/dropdown/bookmark.svg" alt="Bookmark" width="28" height="28" />
+          {!isMuted ? (
+            <>
+              <img src="/soundsAssets/Sound.png" alt="Bookmark" width="28" height="28" />
+            </>
+          ) : (
+            <img src="/soundsAssets/Mute.png" alt="Bookmark" width="28" height="28" />
+          )}
         </div>
       </div>
       <img
