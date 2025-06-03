@@ -12,6 +12,7 @@ import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCaro
 
 import type { Metadata } from 'next';
 import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
+import { BASE_URL } from '@/lib/constants';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -28,23 +29,31 @@ export async function generateMetadata({
   const eventMedia: classPubModel = await getEventMedia(event.id);
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
-  const fallBackImage = '/leapPub.webp';
+  const fallBackImage = `${BASE_URL}/leapPub.webp`;
+
+  const normalizeImageUrl = (url: string | undefined | null) => {
+    if (!url) return fallBackImage;
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('//')) return `https:${url}`;
+    return `${BASE_URL}${url}`;
+  };
 
   const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
+  const imageUrl = normalizeImageUrl(eventMedia?.pub_url);
 
   return {
     title: `${title}`,
     description: event.description,
     openGraph: {
-      title: `${event.title} | ${subtheme.title}`,
+      title: `${title} | ${subtheme.title}`,
       description: event.description,
-      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [fallBackImage],
+      images: [imageUrl],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${event.title} | ${subtheme.title}`,
+      title: `${title} | ${subtheme.title}`,
       description: event.description,
-      images: eventMedia?.pub_url ? [eventMedia.pub_url] : [fallBackImage],
+      images: [imageUrl],
     },
   };
 }
@@ -60,7 +69,6 @@ export default async function Class({ params }: { params: Promise<{ slug: string
     <>
       <div className="fixed top-0 z-20">
         <RecentlyViewed classID={event.id} />
-        <BackgroundMusic />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
       </div>
       <div
