@@ -53,7 +53,7 @@ export const FAQ_QUESTIONS = [
 export const heads = [
   {
     name: 'Sean Denzel Robenta',
-    position: 'Project Lead',
+    position: 'Lead Engineer',
     src: '/members/zel.png',
   },
 ];
