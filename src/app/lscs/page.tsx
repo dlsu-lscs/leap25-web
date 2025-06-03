@@ -10,7 +10,6 @@ export default function AboutUs() {
     <>
       <div className="sm:bg-black/0 bg-black/20 fixed top-0 z-20">
         <Navbar variant="non-map" />
-        <BackgroundMusic />
       </div>
       <div
         className={`min-h-screen bg-black/60 bg-blend-multiply bg-cover bg-center 
