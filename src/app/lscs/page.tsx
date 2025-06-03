@@ -1,6 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 import FadeOverlay from '@/components/ui/FadeOverlay';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 import AboutLSCS from '@/features/lscsContent/AboutLSCS';
 import LSCSTeam from '@/features/lscsContent/LSCSTeam';
 
@@ -9,6 +10,7 @@ export default function AboutUs() {
     <>
       <div className="sm:bg-black/0 bg-black/20 fixed top-0 z-20">
         <Navbar variant="non-map" />
+        <BackgroundMusic />
       </div>
       <div
         className={`min-h-screen bg-black/60 bg-blend-multiply bg-cover bg-center 
