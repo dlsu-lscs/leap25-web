@@ -18,6 +18,7 @@ import BookmarkedEvents from '@/features/bookmark/Bookmarked';
 import { getAllHighlightEvent } from '@/services/highlightServices';
 
 import type { Metadata } from 'next';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 
 export const revalidate = 60;
 
@@ -82,6 +83,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
   console.log(eventsWithMedia);
   return (
     <div className="overflow-hidden">
+      <BackgroundMusic />
       <div className="fixed top-0 z-20">
         <Navbar variant="map" />
       </div>
