@@ -53,7 +53,7 @@ export const FAQ_QUESTIONS = [
 export const heads = [
   {
     name: 'Sean Denzel Robenta',
-    position: 'Project Head',
+    position: 'Project Lead',
     src: '/members/zel.png',
   },
 ];
@@ -82,29 +82,29 @@ export const developers = [
   {
     name: 'Charles Cordez',
     position: 'Junior DevOps Engineer',
-    src: '/members/charle.png',
+    src: '/members/charles.png',
   },
 ];
 
 export const uiux = [
   {
     name: 'Angelo Julius Nuque',
-    position: 'Senior UI/UX Engineer',
+    position: 'Senior UI/UX Designer',
     src: '/members/juls.png',
   },
   {
     name: 'Airon Matthew Bantillo',
-    position: 'Junior UI/UX Engineer',
+    position: 'Junior UI/UX Designer',
     src: '/members/airon.png',
   },
   {
     name: 'Lance Chiu',
-    position: 'Junior UI/UX Engineer',
+    position: 'Junior UI/UX Designer',
     src: '/members/lance.png',
   },
   {
     name: 'Julia Zarate',
-    position: 'Junior UI/UX Engineer',
+    position: 'Junior UI/UX Designer',
     src: '/members/julia.png',
   },
 ];
