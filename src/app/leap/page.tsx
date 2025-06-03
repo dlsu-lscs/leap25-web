@@ -1,4 +1,5 @@
 import Navbar from '@/components/layout/Navbar';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 import Image from 'next/image';
 
 export default function AboutUs() {
@@ -6,6 +7,7 @@ export default function AboutUs() {
     <>
       <div className="sm:bg-black/0 bg-black/20 fixed top-0 z-20">
         <Navbar />
+        <BackgroundMusic />
       </div>
       <div
         className={`min-h-screen bg-black/60 bg-blend-multiply bg-cover bg-center 
