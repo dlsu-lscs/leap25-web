@@ -18,7 +18,7 @@ export default function LSCSTeam() {
           <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px] text-center">
             HEADS
           </h1>
-          <div className="flex space-x-24 justify-center">
+          <div className="flex flex-col lg:flex-row space-y-6  lg:space-x-24 justify-center items-center">
             {heads.map((member, index) => {
               return (
                 <LSCSMember
@@ -35,7 +35,7 @@ export default function LSCSTeam() {
           <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px]">
             DEVELOPERS
           </h1>
-          <div className="flex space-x-24 justify-center">
+          <div className="flex flex-col lg:flex-row space-y-6  lg:space-x-24 justify-center items-center">
             {developers.map((member, index) => {
               return (
                 <LSCSMember
@@ -52,7 +52,7 @@ export default function LSCSTeam() {
           <h1 className="text-[#98C10E] font-playfair font-bold text-[48px] sm:text-[64px]">
             UI/UX
           </h1>
-          <div className="flex space-x-24 justify-center">
+          <div className="flex flex-col lg:flex-row space-y-6  lg:space-x-24 justify-center items-center">
             {uiux.map((member, index) => {
               return (
                 <LSCSMember
