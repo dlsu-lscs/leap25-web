@@ -85,6 +85,25 @@ export default function Map() {
         </AnimatePresence>
       )}
       <ProfileCard className="absolute top-3 right-3 sm:top-5 sm:right-5 z-50" />
+      <div className="absolute top-3 right-15 sm:top-auto sm:bottom-5 sm:right-5 z-50">
+        <div
+          className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
+          style={{
+            background:
+              'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
+            border: '2px solid transparent',
+          }}
+          onClick={() => {
+            if (audioRef.current!.volume == 0.4) {
+              audioRef.current!.volume = 0;
+            } else {
+              audioRef.current!.volume = 0.4;
+            }
+          }}
+        >
+          <img src="/dropdown/bookmark.svg" alt="Bookmark" width="28" height="28" />
+        </div>
+      </div>
       <img
         src="/map/LEAP_MAP.webp"
         alt="image"
@@ -103,25 +122,6 @@ export default function Map() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_30%,_rgba(0,10,30,0.45)_100%)]  pointer-events-none z-10"></div>
               <div className="fixed z-20">
                 <SubThemeMapPicker></SubThemeMapPicker>
-              </div>
-              <div className="flex justify-end items-end  min-h-screen top-3 right-3 sm:top-5 sm:right-5 pr-5 pb-3 z-50">
-                <div
-                  className="flex items-center justify-center w-10 h-10 rounded-full transition-all duration-500 ease-in-out"
-                  style={{
-                    background:
-                      'linear-gradient(black, black) padding-box, linear-gradient(to right, #A67C00, #B38B18, #FFBF00, #FFCF40, #FFDC73) border-box',
-                    border: '2px solid transparent',
-                  }}
-                  onClick={() => {
-                    if (audioRef.current!.volume == 0.4) {
-                      audioRef.current!.volume = 0;
-                    } else {
-                      audioRef.current!.volume = 0.4;
-                    }
-                  }}
-                >
-                  <img src="/dropdown/bookmark.svg" alt="Bookmark" width="28" height="28" />
-                </div>
               </div>
             </div>
           </div>
