@@ -1,6 +1,7 @@
 import Navbar from '@/components/layout/Navbar';
 
 import { ScrollArea } from '@/components/ui/scroll-area';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 import FAQAccordion from '@/features/faqAccordion/FAQAccordoin';
 
 export default function FAQ() {
@@ -8,6 +9,7 @@ export default function FAQ() {
     <>
       <div className="sm:bg-black/0 bg-black/20 fixed top-0 z-20">
         <Navbar variant="non-map" />
+        <BackgroundMusic />
       </div>
       <div
         className={`min-h-screen bg-black/60 bg-blend-multiply bg-cover bg-center 

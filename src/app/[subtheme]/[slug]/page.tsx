@@ -11,6 +11,7 @@ import RecentlyViewed from '@/context/recentlyViewed';
 import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCarousel';
 
 import type { Metadata } from 'next';
+import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -29,8 +30,10 @@ export async function generateMetadata({
 
   const fallBackImage = '/leapPub.webp';
 
+  const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
+
   return {
-    title: `${event.title}`,
+    title: `${title}`,
     description: event.description,
     openGraph: {
       title: `${event.title} | ${subtheme.title}`,
@@ -57,6 +60,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
     <>
       <div className="fixed top-0 z-20">
         <RecentlyViewed classID={event.id} />
+        <BackgroundMusic />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
       </div>
       <div
