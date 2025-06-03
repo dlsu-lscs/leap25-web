@@ -32,12 +32,32 @@ import { ScrollArea } from '../ui/scroll-area';
 import BookmarkedEvents from '@/features/bookmark/BookmarkedEvents';
 import Bookmarked from '@/features/bookmark/Bookmarked';
 import Link from 'next/link';
+import sleep from '@/lib/sleep';
 
 export default function ProfileCard({ className }: { className?: string }) {
   const [showMobileSearchResults, setShowMobileSearchResults] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const { data: session, status } = useSession();
   const { event: searchedEvents } = useSetSearchEvent(searchValue);
+
+  const playClouds = () => {
+    const audio = new Audio('/sounds/cloud_sounds.mp3');
+    audio.play();
+  };
+
+  const logOut = async () => {
+    const leftCloud = document.querySelector('.left-cloud');
+    const rightCloud = document.querySelector('.right-cloud');
+
+    playClouds();
+    leftCloud?.classList.add('left-cloud-inout');
+    rightCloud?.classList.add('right-cloud-inout');
+    await sleep(800);
+    await sleep(1600);
+    signOut({ callbackUrl: '/login', redirect: true });
+    leftCloud?.classList.remove('left-cloud-inout');
+    rightCloud?.classList.remove('right-cloud-inout');
+  };
   return (
     <div className={className}>
       <Sheet modal={false}>
@@ -218,7 +238,7 @@ export default function ProfileCard({ className }: { className?: string }) {
               role="button"
               className="flex text-lg"
               onClick={() => {
-                signOut({ callbackUrl: '/login', redirect: true });
+                logOut();
               }}
             >
               <Image
@@ -323,7 +343,7 @@ export default function ProfileCard({ className }: { className?: string }) {
                   role="button"
                   className="flex text-lg"
                   onClick={() => {
-                    signOut({ callbackUrl: '/login', redirect: true });
+                    logOut();
                   }}
                 >
                   <Image
