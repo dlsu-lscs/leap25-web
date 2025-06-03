@@ -90,7 +90,6 @@ export const uiux = [
   {
     name: 'Angelo Julius Nuque',
     position: 'Senior UI/UX Designer',
-    src: '/members/juls.png',
   },
   {
     name: 'Airon Matthew Bantillo',
