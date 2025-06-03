@@ -61,45 +61,50 @@ export const heads = [
 export const developers = [
   {
     name: 'Max Benedict Chavez',
-    position: 'Frontend Engineer',
+    position: 'Senior Frontend Engineer',
     src: '/members/max.png',
   },
   {
     name: 'Ellexandrei Esponilla',
-    position: 'Frontend Engineer',
+    position: 'Senior Frontend Engineer',
     src: '/members/xandrei.png',
   },
   {
     name: 'Rohann Gabriel Dizon',
-    position: 'Backend Engineer',
+    position: 'Senior Backend Engineer',
     src: '/members/roe.png',
   },
   {
     name: 'Edwin Sadiarin',
-    position: 'Devops Engineer',
+    position: 'Senior DevOps Engineer',
     src: '/members/ej.png',
+  },
+  {
+    name: 'Charles Cordez',
+    position: 'Junior DevOps Engineer',
+    src: '/members/charle.png',
   },
 ];
 
 export const uiux = [
   {
     name: 'Angelo Julius Nuque',
-    position: 'UI/UX Engineer',
+    position: 'Senior UI/UX Engineer',
     src: '/members/juls.png',
   },
   {
     name: 'Airon Matthew Bantillo',
-    position: 'UI/UX Engineer',
+    position: 'Junior UI/UX Engineer',
     src: '/members/airon.png',
   },
   {
-    name: 'Julia Zarate',
-    position: 'UI/UX Engineer',
-    src: '/members/julia.png',
+    name: 'Lance Chiu',
+    position: 'Junior UI/UX Engineer',
+    src: '/members/lance.png',
   },
   {
-    name: 'Lance Chiu',
-    position: 'UI/UX Engineer',
-    src: '/members/lance.png',
+    name: 'Julia Zarate',
+    position: 'Junior UI/UX Engineer',
+    src: '/members/julia.png',
   },
 ];
