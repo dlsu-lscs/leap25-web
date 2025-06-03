@@ -13,12 +13,18 @@ export default function GoogleLogin() {
   const router = useRouter();
   const [isSigningIn, setIsSigningIn] = useState(false);
 
+  const playClouds = () => {
+    const audio = new Audio('/sounds/cloud_sounds.mp3');
+    audio.play();
+  };
+
   useEffect(() => {
     const handleLoginRedirect = async () => {
       if (status === 'authenticated') {
         const leftCloud = document.querySelector('.left-cloud');
         const rightCloud = document.querySelector('.right-cloud');
 
+        playClouds();
         leftCloud?.classList.add('left-cloud-inout');
         rightCloud?.classList.add('right-cloud-inout');
         await sleep(800);
@@ -40,6 +46,7 @@ export default function GoogleLogin() {
       // If the popup sends the authentication-complete message, refresh the session
       if (event.data === 'authentication-complete') {
         // Refresh the session status to trigger the redirect in the other useEffect
+        playClouds();
         window.location.reload();
       }
     };
