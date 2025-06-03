@@ -30,8 +30,10 @@ export async function generateMetadata({
 
   const fallBackImage = '/leapPub.webp';
 
+  const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
+
   return {
-    title: `${event.title}`,
+    title: `${title}`,
     description: event.description,
     openGraph: {
       title: `${event.title} | ${subtheme.title}`,

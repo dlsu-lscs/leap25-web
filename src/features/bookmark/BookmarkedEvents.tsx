@@ -24,6 +24,9 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
   const subthemeLink = getSubThemeLink(subtheme?.title);
 
   const slotsLeft = (event?.max_slots ?? 0) - (event?.registered_slots ?? 0);
+
+  const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
+
   return (
     <>
       <a
@@ -36,9 +39,7 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
         style={{ backgroundImage: `url(${eventMedia?.pub_url})` }}
       >
         <div className="flex flex-col items-center justify-center text-center gap-2">
-          <div className="font-semibold text-[16px] sm:text-[24px]">
-            {event?.title || 'Event Title'}
-          </div>
+          <div className="font-semibold text-[16px] sm:text-[24px]">{title || 'Event Title'}</div>
           <div className="text-[12px] sm:text-[16px] flex justify-between gap-4">
             <div className="flex items-center gap-1">
               <PersonIcon />
