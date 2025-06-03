@@ -19,6 +19,7 @@ import { getAllHighlightEvent } from '@/services/highlightServices';
 
 import type { Metadata } from 'next';
 import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
+import { BASE_URL } from '@/lib/constants';
 
 export const revalidate = 60;
 
@@ -31,7 +32,16 @@ export async function generateMetadata({
   const { name } = getSubTheme(subtheme);
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
-  const fallBackImage = '/leapPub.webp';
+  const fallBackImage = `${BASE_URL}/leapPub.webp`;
+
+  const normalizeImageUrl = (url: string | undefined | null) => {
+    if (!url) return fallBackImage;
+    if (url.startsWith('http')) return url;
+    if (url.startsWith('//')) return `https:${url}`;
+    return `${BASE_URL}${url}`;
+  };
+
+  const imageUrl = normalizeImageUrl(subthemeDetails.background_pub_url);
 
   return {
     title: `${subthemeDetails.title}`,
@@ -39,17 +49,13 @@ export async function generateMetadata({
     openGraph: {
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url
-        ? [subthemeDetails.background_pub_url]
-        : [fallBackImage],
+      images: [imageUrl],
     },
     twitter: {
       card: 'summary_large_image',
       title: subthemeDetails.title,
       description: `${subthemeDetails.title}`,
-      images: subthemeDetails.background_pub_url
-        ? [subthemeDetails.background_pub_url]
-        : [fallBackImage],
+      images: [imageUrl],
     },
   };
 }
@@ -79,8 +85,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
   const subthemeLink = getSubThemeLink(name);
-
-  console.log(eventsWithMedia);
+  console.log(subthemeDetails);
   return (
     <div className="overflow-hidden">
       <div className="fixed top-0 z-20">

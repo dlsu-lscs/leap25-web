@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/leapPub.webp',
+        url: `${BASE_URL}/leapPub.webp`,
         width: 1200,
         height: 900,
         alt: 'LEAP 2025 Logo',
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'LEAP 2025',
     description: 'STEP INTO AdventureLand - THE ADVENTURE AWAITS',
-    images: ['/leapPub.webp'],
+    images: [`${BASE_URL}/leapPub.webp`],
     site: '@dlsu_leap',
     creator: '@dlsu_lscs',
   },
