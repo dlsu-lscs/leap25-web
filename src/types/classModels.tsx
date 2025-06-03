@@ -15,6 +15,7 @@ interface classModel {
   slug: string;
   gforms_url: string;
   pubmat_as_bg: boolean;
+  is_bundle: boolean;
 }
 
 interface highlightModel {
