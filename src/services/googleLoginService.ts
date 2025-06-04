@@ -1,4 +1,4 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, API_SECRET } from '@/lib/constants';
 import axios from 'axios';
 
 const GetGoogleLogin = async (token: any) => {
@@ -8,6 +8,7 @@ const GetGoogleLogin = async (token: any) => {
       { token: token },
       {
         headers: {
+          Authorization: `Bearer ${API_SECRET}`,
           Accept: 'application/json',
         },
       }
