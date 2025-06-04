@@ -73,22 +73,6 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
     })
   );
 
-  const eventByDay1: classModel[] = await getEventByDay(20, name);
-  const eventsWithMediaDay1 = await Promise.all(
-    eventByDay1.map(async (event) => {
-      const eventMedia = await getEventMedia(event.id);
-      return { ...event, eventMedia };
-    })
-  );
-
-  const eventByDay2: classModel[] = await getEventByDay(21, name);
-  const eventsWithMediaDay2 = await Promise.all(
-    eventByDay2.map(async (event) => {
-      const eventMedia = await getEventMedia(event.id);
-      return { ...event, eventMedia };
-    })
-  );
-
   const highlightEvents: highlightModel[] = await getAllHighlightEvent();
 
   const highlightEventswithEventDetails = await Promise.all(
@@ -145,7 +129,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={eventsWithMediaDay1.map((event, index) => (
+              itemsToShow={eventsWithMedia.map((event, index) => (
                 <div key={index}>
                   <SubThemeClassCard
                     key={index}
@@ -169,7 +153,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={eventsWithMediaDay2.map((event, index) => (
+              itemsToShow={eventsWithMedia.map((event, index) => (
                 <div key={index}>
                   <SubThemeClassCard
                     key={index}

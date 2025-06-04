@@ -3,12 +3,7 @@ import LeapTag from '@/components/ui/LeapTag';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import dynamic from 'next/dynamic';
-const ArrowCircleRightOutlinedIcon = dynamic(
-  () => import('@mui/icons-material/ArrowCircleRightOutlined'),
-  { ssr: false }
-);
-
+import ArrowCircleRightOutlinedIcon from '@mui/icons-material/ArrowCircleRightOutlined';
 import { classPubModel } from '@/types/classModels';
 
 interface SubThemeClassCardProps {
