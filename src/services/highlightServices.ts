@@ -1,8 +1,15 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, API_SECRET } from '@/lib/constants';
+
 const getAllHighlightEvent = async () => {
   try {
     const response = await fetch(`${API_URL}/highlights/`, {
       next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
