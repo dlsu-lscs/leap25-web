@@ -169,7 +169,9 @@ export default function ExpandableCarousel({
                         {item.title_card.length > 0 ? (
                           <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                         ) : (
-                          <h1 className="text-5xl mt-2 mr-12">{item.title_fallback}</h1>
+                          <h1 className="text-5xl mt-2 mr-12 font-bold font-playfair">
+                            {item.title_fallback}
+                          </h1>
                         )}
                       </div>
 
