@@ -28,7 +28,7 @@ export default function SubThemeClassCard({
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
   const trimmedDescription = descripton.substring(0, 80) + '...';
-  const shotTitle = title.replace(/^LEAP 2025:\s*/i, '') ?? '';
+  const shortTitle = title.replace(/^LEAP 2025:\s*/i, '') ?? '';
   return (
     <>
       <a
@@ -68,7 +68,7 @@ export default function SubThemeClassCard({
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex flex-col space-y-1.5">
-                  <h1 className="font-bold text-[16px] text-white">{title}</h1>
+                  <h1 className="font-bold text-[16px] text-white">{shortTitle}</h1>
                   <div className="flex items-center space-x-1.5">
                     <p className="text-white text-[11px] w-[80vh] text-wrap">
                       {trimmedDescription}
