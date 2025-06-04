@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import SubThemeClassCard from '../subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import { getEventByID, getEventMedia } from '@/services/eventService';
 import { getSubThemeByID, getSubThemeLink } from '@/services/subthemeService';
+import { API_URL } from '@/lib/constants';
 
 interface EventWithMediaAndSubtheme {
   event: classModel;
@@ -29,14 +30,11 @@ export default function RecentlyViewedCarousel() {
 
       const results = await Promise.all(
         ids.map(async (id) => {
-          const event = await getEventByID(id, process.env.NEXT_PUBLIC_LEAP_API);
+          const event = await getEventByID(id, API_URL);
           if (!event) return null;
 
-          const media = await getEventMedia(id, process.env.NEXT_PUBLIC_LEAP_API);
-          const subtheme = await getSubThemeByID(
-            event.subtheme_id,
-            process.env.NEXT_PUBLIC_LEAP_API
-          );
+          const media = await getEventMedia(id, API_URL);
+          const subtheme = await getSubThemeByID(event.subtheme_id, API_URL);
 
           return { event, media, subtheme } as EventWithMediaAndSubtheme;
         })
