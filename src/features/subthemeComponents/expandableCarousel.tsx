@@ -142,7 +142,7 @@ export default function ExpandableCarousel({
                   {item.id === selectedId ? (
                     <div
                       className={cn(
-                        'relative lg:w-[400] w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
+                        'relative w-full sm:ml-12 flex h-[484] sm:items-start justify-between items-center flex-col'
                       )}
                     >
                       <div className="absolute sm:-left-10 md:left-0 lg:-left-10 left-1/2 sm:translate-0 -translate-x-[49%] sm:-top-22 md:-top-24 -top-28 flex items-center justify-center ">
@@ -169,13 +169,13 @@ export default function ExpandableCarousel({
                         {item.title_card.length > 0 ? (
                           <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                         ) : (
-                          <h1 className="text-5xl mt-2">{item.title_fallback}</h1>
+                          <h1 className="text-5xl mt-2 mr-12">{item.title_fallback}</h1>
                         )}
                       </div>
 
                       <a
                         href={`/${subthemeSlug}/${item.highlightEvent.slug}`}
-                        className="flex flex-col sm:items-start items-center"
+                        className="flex flex-col sm:items-start items-center w-[400px]"
                       >
                         <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">
                           {item.short_desc}
