@@ -65,16 +65,6 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   const { asset, name } = getSubTheme(subtheme);
 
-  const events: classModel[] = await getEvents(name);
-  const eventsWithMedia = await Promise.all(
-    events.map(async (event) => {
-      const eventMedia = await getEventMedia(event.id);
-      return { ...event, eventMedia };
-    })
-  );
-
-  console.log(name);
-
   //Days
   const eventByDay1: classModel[] = await getEventByDay(20, name);
   const eventsWithMediaDay1 = eventByDay1

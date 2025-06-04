@@ -147,6 +147,15 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
+            <Alert className="bg-red-400/60 text-white font-public-sans border-none w-fit px-4 py-3 flex items-center gap-3 rounded-md">
+              <div className="flex items-center justify-center w-5 h-5">
+                <Info className="w-5 h-5 text-white" />
+              </div>
+              <AlertDescription className="text-white">
+                Make sure that you have logged in the website at least once before pre-registering!
+                Otherwise, pre-registration will be invalid.
+              </AlertDescription>
+            </Alert>
             {event.is_bundle ? (
               <>
                 <Alert className="bg-red-400/60 text-white font-public-sans border-none w-fit px-4 py-3 flex items-center gap-3 rounded-md">

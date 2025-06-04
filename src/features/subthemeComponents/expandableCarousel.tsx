@@ -133,9 +133,10 @@ export default function ExpandableCarousel({
                 <div
                   style={{
                     backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bg_img})`,
+                    ...(item.color ? { backgroundColor: item.color } : {}),
                   }}
                   className={cn(
-                    'bg-[#760181] flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70',
+                    `flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70`,
                     item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
                   )}
                 >
@@ -164,13 +165,13 @@ export default function ExpandableCarousel({
                       </div>
                       <div className="flex flex-col sm:flex-col-reverse gap-2 items-center sm:mt-8">
                         <div className="flex gap-2 sm:justify-start justify-center items-center w-full sm:flex-row flex-col">
-                          <div className="w-24 h-6 bg-yellow-400 rounded-md"></div>
+                          <div className="p-1 font-bold  bg-yellow-400 rounded-md">MAIN EVENT</div>
                         </div>
                         {item.title_card.length > 0 ? (
                           <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                         ) : (
                           <h1 className="text-3xl sm:text-5xl sm:text-left text-center mt-2 mr-3 ml-3 sm:ml-0 sm:mr-12 font-bold font-playfair">
-                            {item.title_fallback}
+                            {item.title_fallback.replace(/^LEAP 2025:\s*/i, '') ?? ''}
                           </h1>
                         )}
                       </div>
