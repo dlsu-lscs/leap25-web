@@ -33,13 +33,15 @@ export default function SubThemeClassCard({
     <>
       <a
         href={`/${subtheme}/${slug}`}
-        style={{ backgroundImage: `url(${eventMedia?.pub_url || undefined})` }}
+        style={{
+          backgroundImage: `url(${eventMedia?.pub_url || 'https://i.imgur.com/Rjo6F4G.png'})`,
+        }}
         className={`w-[140px] sm:w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <AnimatePresence>
-          {onHover ? (
+          {onHover || !eventMedia?.pub_url ? (
             <>
               {max_slots - registered_slots > max_slots * (1 / 4) ? (
                 <div className="mx-5 my-4"></div>
@@ -68,7 +70,7 @@ export default function SubThemeClassCard({
                 transition={{ duration: 0.2 }}
               >
                 <div className="flex flex-col space-y-1.5">
-                  <h1 className="font-bold text-[16px] text-white">{shortTitle}</h1>
+                  <h1 className="font-bold text-[16px] text-white   break-words">{shortTitle}</h1>
                   <div className="flex items-center space-x-1.5">
                     <p className="text-white text-[11px] w-[80vh] text-wrap">
                       {trimmedDescription}
