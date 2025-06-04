@@ -91,6 +91,23 @@ export default function SubThemeClassCard({
               </motion.div>
             </>
           ) : null}
+          {isMobile && !eventMedia?.pub_url ? (
+            <>
+              <div className="flex flex-col justify-end h-full">
+                <motion.div
+                  className="mx-5 my-4 space-y-1.5"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex flex-col space-y-1.5">
+                    <h1 className="font-bold text-xs text-white break-words">{shortTitle}</h1>
+                  </div>
+                </motion.div>
+              </div>
+            </>
+          ) : null}
         </AnimatePresence>
       </a>
     </>
