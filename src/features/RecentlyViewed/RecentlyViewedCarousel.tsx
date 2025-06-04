@@ -34,10 +34,7 @@ export default function RecentlyViewedCarousel() {
           if (!event) return null;
 
           const media = await getEventMedia(id, API_URL);
-          const subtheme = await getSubThemeByID(
-            event.subtheme_id,
-            process.env.NEXT_PUBLIC_LEAP_API
-          );
+          const subtheme = await getSubThemeByID(event.subtheme_id, API_URL);
 
           return { event, media, subtheme } as EventWithMediaAndSubtheme;
         })
