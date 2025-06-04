@@ -37,10 +37,3 @@ export function formatDate(date: any, durationMinutes = 60) {
 
   return `${startStr}/${endStr}`;
 }
-
-const normalizeImageUrl = (url: string | undefined | null) => {
-  if (!url) return fallBackImage;
-  if (url.startsWith('http')) return url;
-  if (url.startsWith('//')) return `https:${url}`;
-  return `${BASE_URL}${url}`; // fallback for relative paths
-};
