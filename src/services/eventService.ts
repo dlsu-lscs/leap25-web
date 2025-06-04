@@ -142,7 +142,6 @@ const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
 
 const getEventByDay = async (day: number, subtheme: any) => {
   const subtheme_name = encodeURIComponent(subtheme).replace(/%20/g, '+');
-  console.log(subtheme_name);
   try {
     const response = await axios.get(`${API_URL}/events?day=${day}&subtheme=${subtheme_name}`, {
       // params: { day, subtheme_name },
