@@ -28,6 +28,7 @@ import { getUserByEmail } from '@/services/userService';
 import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
+import { API_URL } from '@/lib/constants';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -200,7 +201,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                           fontFamily: public_sans.style.fontFamily,
                         },
                       });
-                      deleteBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                      deleteBookmark(user?.id, event.id, API_URL);
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
@@ -222,7 +223,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                           fontFamily: public_sans.style.fontFamily,
                         },
                       });
-                      postBookmark(user?.id, event.id, process.env.NEXT_PUBLIC_LEAP_API);
+                      postBookmark(user?.id, event.id, API_URL);
                     }}
                   >
                     <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
