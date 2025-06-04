@@ -1,10 +1,12 @@
 import { API_URL } from '@/lib/constants';
+import { API_SECRET } from '@/lib/constants';
 
 const getEvents = async (subtheme: any) => {
   try {
     const response = await fetch(`${API_URL}/events/subtheme`, {
       method: 'POST',
       headers: {
+        Authorization: `Bearer ${API_SECRET}`,
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
@@ -33,6 +35,12 @@ const getEventBySearch = async (searchValue: string, API_URL = process.env.LEAP_
   try {
     const response = await fetch(`${API_URL}/events/search?q=${encodeURIComponent(searchValue)}`, {
       next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -54,7 +62,15 @@ const getEventBySearch = async (searchValue: string, API_URL = process.env.LEAP_
 
 const getEventByID = async (eventID: number, API_URL = process.env.LEAP_API) => {
   try {
-    const response = await fetch(`${API_URL}/events/${eventID}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}/events/${eventID}`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -72,7 +88,15 @@ const getEventByID = async (eventID: number, API_URL = process.env.LEAP_API) => 
 
 const getEventBySlug = async (slug: string) => {
   try {
-    const response = await fetch(`${API_URL}/events/slug/${slug}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}/events/slug/${slug}`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get event');
@@ -92,6 +116,12 @@ const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
   try {
     const response = await fetch(`${API_URL}/events/${eventID}/media`, {
       next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -111,7 +141,15 @@ const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
 
 const getEventByDay = async (day: number) => {
   try {
-    const response = await fetch(`${API_URL}/events/day?=${day}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}/events/day?=${day}`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       console.log('no events yet');
