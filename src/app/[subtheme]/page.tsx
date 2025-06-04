@@ -1,6 +1,8 @@
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Info } from 'lucide-react';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -135,6 +137,25 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
       <div className="fixed top-0 z-20">
         <Navbar variant="map" />
       </div>
+
+      {/* Temporary Advisory */}
+      <div className="absolute top-12 z-20 w-full">
+        <div className="flex justify-center">
+          <Alert
+            role="alert"
+            className="bg-red-800/60 text-white font-public-sans border-none w-fit px-4 py-3 flex items-center gap-3 rounded-md"
+          >
+            <div className="flex items-center justify-center w-6 h-6">
+              <Info className="w-6 h-6 text-white" />
+            </div>
+            <AlertDescription className="text-white text-lg text-center">
+              Events are still being gradually uploaded by the LEAP central committee.
+              <br /> If your event is not yet here, it is still bring processed.
+            </AlertDescription>
+          </Alert>
+        </div>
+      </div>
+
       <HighlightClientWrapper
         asset={asset || 'error'}
         name={name || 'error'}
