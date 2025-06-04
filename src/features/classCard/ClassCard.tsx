@@ -29,6 +29,7 @@ import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
 import { API_URL } from '@/lib/constants';
+import { useRouter } from 'next/navigation';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -64,10 +65,11 @@ type ClassCardsProps = {
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
   const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
   const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
+  const router = useRouter();
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks } = useSetBookmark(user?.id);
+  const { bookmarks, refreshBookmarks } = useSetBookmark(user?.id);
   const [isBookmarked, setIsBookmarked] = useState<boolean>();
 
   useEffect(() => {
@@ -190,7 +192,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                   <div
                     role="button"
                     className="hover:opacity-50 duration-100 transition"
-                    onClick={() => {
+                    onClick={async () => {
                       toast.success(`${event.title} is deleted as a bookmark`, {
                         style: {
                           backgroundColor: 'black',
@@ -202,6 +204,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                         },
                       });
                       deleteBookmark(user?.id, event.id, API_URL);
+                      refreshBookmarks();
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />
@@ -212,7 +215,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                   <div
                     role="button"
                     className="hover:opacity-50 duration-100 transition"
-                    onClick={() => {
+                    onClick={async () => {
                       toast.success(`${event.title} is saved as a bookmark`, {
                         style: {
                           backgroundColor: 'black',
@@ -223,7 +226,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                           fontFamily: public_sans.style.fontFamily,
                         },
                       });
-                      postBookmark(user?.id, event.id, API_URL);
+                      await postBookmark(user?.id, event.id, API_URL);
+                      refreshBookmarks();
                     }}
                   >
                     <BookmarkBorderOutlinedIcon sx={{ fontSize: 32, color: 'white' }} />
