@@ -1,3 +1,4 @@
+import { API_URL } from '@/lib/constants';
 import { getBookmarks } from '@/services/bookmarkService';
 import { bookmarkModel } from '@/types/classModels';
 import { fetchData } from 'next-auth/client/_utils';
@@ -11,7 +12,7 @@ const useSetBookmark = (userId: number | undefined) => {
 
     const fetchData = async () => {
       if (userId) {
-        const bookmark = await getBookmarks(userId, process.env.NEXT_PUBLIC_LEAP_API);
+        const bookmark = await getBookmarks(userId, API_URL);
         setBookmarks(bookmark);
       }
     };

@@ -1,3 +1,4 @@
+import { API_URL } from '@/lib/constants';
 import { getEventMedia } from '@/services/eventService';
 import { classPubModel } from '@/types/classModels';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,7 @@ const useSetEventMedia = (event_id: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const eventMedia = await getEventMedia(event_id, process.env.NEXT_PUBLIC_LEAP_API);
+      const eventMedia = await getEventMedia(event_id, API_URL);
       setEventMedia(eventMedia);
     };
     fetchData();
