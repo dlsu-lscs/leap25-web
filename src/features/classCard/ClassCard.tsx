@@ -95,7 +95,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <LeapTag className="bg-white">{price}</LeapTag>
           </div>
           <h1
-            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg max-w-[20ch] md:max-w-[20ch]  ${playfair_display.className}`}
+            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
           >
             {title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
@@ -168,11 +168,11 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                       'https://docs.google.com/forms/d/e/1FAIpQLSf_lcAWFH0GLIeHjwB86jTW8Edc9mQDRBWf0pVBkNNy82iSlA/viewform'
                   );
                 }}
-                disabled={!(event.registered_slots < event.max_slots)}
-                className={`${!(event.registered_slots < event.max_slots) ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
+                // disabled={!(event.registered_slots < event.max_slots)}
+                // className={`${!(event.registered_slots < event.max_slots) ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
                 //temp disabled and make it only look like join button
-                // disabled={true}
-                // className={`${event.registered_slots < event.max_slots ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
+                disabled={true}
+                className={`${event.registered_slots < event.max_slots ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
                 {event.registered_slots < event.max_slots
                   ? `Join Now - ${price}`
