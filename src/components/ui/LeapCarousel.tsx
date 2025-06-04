@@ -59,15 +59,33 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
         </CarouselContent>
 
         <CarouselPrevious
-          className={`absolute left-0 transition-all duration-300 ${
-            isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        />
+          className={`absolute left-0 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 32 32"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-8 h-8 text-white"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8" />
+          </svg>
+        </CarouselPrevious>
         <CarouselNext
-          className={`absolute right-0 transition-all duration-300 ${
-            isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-          }`}
-        />
+          className={`absolute right-0 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 32 32"
+            strokeWidth={2}
+            stroke="currentColor"
+            className="w-8 h-8 text-white"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 8l8 8-8 8" />
+          </svg>
+        </CarouselNext>
       </Carousel>
       {row2 && itemsToShow.length > 6 && (
         <Carousel
@@ -85,18 +103,35 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
                 {item}
               </CarouselItem>
             ))}
-          </CarouselContent>
-
+          </CarouselContent>{' '}
           <CarouselPrevious
-            className={`absolute left-0 transition-all duration-300 ${
-              isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          />
+            className={`absolute left-0 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 32 32"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-8 h-8 text-gray-200"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8" />
+            </svg>
+          </CarouselPrevious>
           <CarouselNext
-            className={`absolute right-0 transition-all duration-300 ${
-              isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-          />
+            className={`absolute right-0 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 32 32"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="w-8 h-8 text-gray-200"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 8l8 8-8 8" />
+            </svg>
+          </CarouselNext>
         </Carousel>
       )}
     </>
