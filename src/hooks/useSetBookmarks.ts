@@ -1,30 +1,30 @@
 import { API_URL } from '@/lib/constants';
 import { getBookmarks } from '@/services/bookmarkService';
 import { bookmarkModel } from '@/types/classModels';
-import { fetchData } from 'next-auth/client/_utils';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useSetBookmark = (userId: number | undefined) => {
   const [bookmarks, setBookmarks] = useState<bookmarkModel[]>([]);
 
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-
-    const fetchData = async () => {
-      if (userId) {
-        const bookmark = await getBookmarks(userId, API_URL);
-        setBookmarks(bookmark);
-      }
-    };
-
-    if (userId) {
-      fetchData();
-      interval = setInterval(fetchData, 500);
+  const fetchData = useCallback(async () => {
+    if (!userId) {
+      setBookmarks([]);
+      return;
     }
 
-    return () => clearInterval(interval);
+    try {
+      const bookmark = await getBookmarks(userId, API_URL);
+      setBookmarks(bookmark);
+    } catch (error) {
+      console.error('Failed to fetch bookmarks:', error);
+    }
   }, [userId]);
-  return { bookmarks };
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  return { bookmarks, refreshBookmarks: fetchData };
 };
 
 export { useSetBookmark };
