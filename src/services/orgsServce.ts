@@ -1,8 +1,16 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, API_SECRET } from '@/lib/constants';
 
 const getOrgs = async () => {
   try {
-    const response = await fetch(`${API_URL}/orgs/`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}/orgs/`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get org');
@@ -20,7 +28,15 @@ const getOrgs = async () => {
 
 const getOrgByID = async (orgID: number) => {
   try {
-    const response = await fetch(`${API_URL}/orgs/${orgID}`, { next: { revalidate: 60 } });
+    const response = await fetch(`${API_URL}/orgs/${orgID}`, {
+      next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get org');

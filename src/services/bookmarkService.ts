@@ -1,4 +1,4 @@
-import { API_URL } from '@/lib/constants';
+import { API_SECRET, API_URL } from '@/lib/constants';
 import axios from 'axios';
 
 const postBookmark = async (user_id: any, event_id: any, API_URL = process.env.LEAP_API) => {
@@ -11,6 +11,7 @@ const postBookmark = async (user_id: any, event_id: any, API_URL = process.env.L
       },
       {
         headers: {
+          Authorization: `Bearer ${API_SECRET}`,
           Accept: 'application/json',
         },
       }
@@ -28,6 +29,10 @@ const deleteBookmark = async (user_id: any, event_id: any, API_URL = process.env
         user_id: user_id,
         event_id: event_id,
       },
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+      },
     });
     return response.data;
   } catch (error: any) {
@@ -40,6 +45,10 @@ const getBookmarks = async (userId: any, API_URL = process.env.LEAP_API) => {
     try {
       const response = await fetch(`${API_URL}/users/${userId}/bookmarks`, {
         cache: 'no-store',
+        headers: {
+          Authorization: `Bearer ${API_SECRET}`,
+          Accept: 'application/json',
+        },
       });
 
       if (!response.ok) {

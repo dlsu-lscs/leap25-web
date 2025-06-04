@@ -1,8 +1,15 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, API_SECRET } from '@/lib/constants';
 
 const getUserByID = async (userID: number) => {
   try {
-    const response = await fetch(`${API_URL}/users/${userID}`);
+    const response = await fetch(`${API_URL}/users/${userID}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
 
     if (!response.ok) {
       throw new Error('Failed to get user');
@@ -21,7 +28,14 @@ const getUserByID = async (userID: number) => {
 const getUserByEmail = async (email: any, API_URL = process.env.LEAP_API) => {
   if (email) {
     try {
-      const response = await fetch(`${API_URL}/users?email=${email}`);
+      const response = await fetch(`${API_URL}/users?email=${email}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${API_SECRET}`,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (!response.ok) {
         throw new Error('Failed to get user');

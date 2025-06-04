@@ -1,4 +1,4 @@
-import { API_URL } from '@/lib/constants';
+import { API_URL, API_SECRET } from '@/lib/constants';
 
 const getSubTheme = (subtheme: string) => {
   let asset, name;
@@ -40,6 +40,11 @@ const getSubThemeByID = async (subthemeID: number, API_URL = process.env.LEAP_AP
   try {
     const response = await fetch(`${API_URL}/subthemes/${subthemeID}`, {
       next: { revalidate: 60 },
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
@@ -60,6 +65,12 @@ const getSubThemeByName = async (subtheme: any) => {
   try {
     const response = await fetch(`${API_URL}/subthemes/?name=${subtheme}`, {
       next: { revalidate: 60 },
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${API_SECRET}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
     });
 
     if (!response.ok) {
