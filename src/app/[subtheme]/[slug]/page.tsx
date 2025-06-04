@@ -68,7 +68,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
   return (
     <>
       <div className="fixed top-0 z-20">
-        <RecentlyViewed classID={event.id} />
+        <RecentlyViewed classID={event.id} maxItems={5} />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
       </div>
       <div
