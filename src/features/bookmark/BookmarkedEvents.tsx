@@ -41,7 +41,9 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
         }}
       >
         <div className="flex flex-col items-center justify-center text-center gap-2">
-          <div className="font-semibold text-[16px] sm:text-[24px]">{title || 'Event Title'}</div>
+          <div className="font-semibold text-[16px] sm:text-[24px] break-all">
+            {title || 'Event Title'}
+          </div>
           <div className="text-[12px] sm:text-[16px] flex justify-between gap-4">
             <div className="flex items-center gap-1">
               <PersonIcon />
