@@ -40,6 +40,7 @@ export default function SubThemeClassCard({
         href={`/${subtheme}/${slug}`}
         style={{
           backgroundImage: `url(${eventMedia?.pub_url || 'https://i.imgur.com/Rjo6F4G.png'})`,
+          opacity: registered_slots >= max_slots ? 0.25 : 1,
         }}
         className={`w-[140px] sm:w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl m-4 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
@@ -61,8 +62,8 @@ export default function SubThemeClassCard({
                   >
                     <LeapTag className="text-[10px]  bg-[#01B634] rounded-2xl px-2 py-1 font-bold text-white">
                       {max_slots - registered_slots < max_slots
-                        ? `${max_slots - registered_slots} Slots Available`
-                        : 'Event Full'}
+                        ? 'Event Full'
+                        : `${max_slots - registered_slots} Slots Available`}
                     </LeapTag>
                   </motion.div>
                 </>

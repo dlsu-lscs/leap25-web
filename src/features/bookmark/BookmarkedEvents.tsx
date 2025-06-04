@@ -45,7 +45,7 @@ export default function BookmarkedEvents({ event_id, variant }: BookmarkedEvents
           <div className="text-[12px] sm:text-[16px] flex justify-between gap-4">
             <div className="flex items-center gap-1">
               <PersonIcon />
-              <p>{slotsLeft} slots left</p>
+              <p>{slotsLeft > 0 ? `${slotsLeft} slots left` : 'Event Full'}</p>
             </div>
             <div className="flex items-center gap-1">
               <CalendarViewIcon />
