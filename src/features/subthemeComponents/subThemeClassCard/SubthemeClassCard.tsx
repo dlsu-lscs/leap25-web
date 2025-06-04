@@ -28,6 +28,7 @@ export default function SubThemeClassCard({
 }: SubThemeClassCardProps) {
   const [onHover, setHover] = useState(false);
   const trimmedDescription = descripton.substring(0, 80) + '...';
+  const shotTitle = title.replace(/^LEAP 2025:\s*/i, '') ?? '';
   return (
     <>
       <a
