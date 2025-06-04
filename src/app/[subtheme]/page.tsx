@@ -85,7 +85,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
   const subthemeLink = getSubThemeLink(name);
-  console.log(subthemeDetails);
+
   return (
     <div className="overflow-hidden">
       <div className="fixed top-0 z-20">
@@ -129,23 +129,21 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={eventsWithMedia.map((event, index) =>
-                event.eventMedia ? (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      max_slots={event.max_slots}
-                      descripton={event.description}
-                      title={event.title}
-                      eventMedia={event.eventMedia}
-                      slug={event.slug}
-                    />
-                  </div>
-                ) : null
-              )}
+              itemsToShow={eventsWithMedia.map((event, index) => (
+                <div key={index}>
+                  <SubThemeClassCard
+                    key={index}
+                    subtheme={subtheme}
+                    id={event.id}
+                    registered_slots={event.registered_slots}
+                    max_slots={event.max_slots}
+                    descripton={event.description}
+                    title={event.title}
+                    eventMedia={event.eventMedia}
+                    slug={event.slug}
+                  />
+                </div>
+              ))}
             ></LeapCarousel>
             <div>
               <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
@@ -155,23 +153,21 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
             <LeapCarousel
               loopItems={false}
               row2={false}
-              itemsToShow={eventsWithMedia.map((event, index) =>
-                event.eventMedia ? (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      max_slots={event.max_slots}
-                      descripton={event.description}
-                      title={event.title}
-                      eventMedia={event.eventMedia}
-                      slug={event.slug}
-                    />
-                  </div>
-                ) : null
-              )}
+              itemsToShow={eventsWithMedia.map((event, index) => (
+                <div key={index}>
+                  <SubThemeClassCard
+                    key={index}
+                    subtheme={subtheme}
+                    id={event.id}
+                    registered_slots={event.registered_slots}
+                    max_slots={event.max_slots}
+                    descripton={event.description}
+                    title={event.title}
+                    eventMedia={event.eventMedia}
+                    slug={event.slug}
+                  />
+                </div>
+              ))}
             ></LeapCarousel>
           </div>
         </div>

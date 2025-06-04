@@ -86,7 +86,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
       >
         <img
           className="aspect-[4/5] w-full max-w-[400px] min-w-[324px]  bg-[#D9D9D9] border-none outline-none object-cover"
-          src={eventMedia.pub_url}
+          src={eventMedia ? eventMedia.pub_url : 'https://i.imgur.com/Rjo6F4G.png'}
         />
         <div className="flex flex-col ">
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
@@ -95,7 +95,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <LeapTag className="bg-white">{price}</LeapTag>
           </div>
           <h1
-            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
+            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg max-w-[20ch] md:max-w-[20ch]  ${playfair_display.className}`}
           >
             {title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
