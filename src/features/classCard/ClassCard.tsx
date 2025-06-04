@@ -95,7 +95,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <LeapTag className="bg-white">{price}</LeapTag>
           </div>
           <h1
-            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
+            className={`md:text-6xl text-5xl break-all text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
           >
             {title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
