@@ -10,6 +10,7 @@ const ArrowCircleRightOutlinedIcon = dynamic(
 );
 
 import { classPubModel } from '@/types/classModels';
+import useMobileScreen from '@/hooks/useMobileScreen';
 
 interface SubThemeClassCardProps {
   subtheme: string;
@@ -34,6 +35,7 @@ export default function SubThemeClassCard({
   const [onHover, setHover] = useState(false);
   const trimmedDescription = descripton.substring(0, 80) + '...';
   const shortTitle = title.replace(/^LEAP 2025:\s*/i, '') ?? '';
+  const { isMobile } = useMobileScreen();
   return (
     <>
       <a
@@ -47,7 +49,7 @@ export default function SubThemeClassCard({
         onMouseLeave={() => setHover(false)}
       >
         <AnimatePresence>
-          {onHover || !eventMedia?.pub_url ? (
+          {!isMobile && (onHover || !eventMedia?.pub_url) ? (
             <>
               {max_slots - registered_slots > max_slots * (1 / 4) ? (
                 <div className="mx-5 my-4"></div>
@@ -87,6 +89,23 @@ export default function SubThemeClassCard({
                   </div>
                 </div>
               </motion.div>
+            </>
+          ) : null}
+          {isMobile && !eventMedia?.pub_url ? (
+            <>
+              <div className="flex flex-col justify-end h-full">
+                <motion.div
+                  className="mx-5 my-4 space-y-1.5"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <div className="flex flex-col space-y-1.5">
+                    <h1 className="font-bold text-xs text-white break-words">{shortTitle}</h1>
+                  </div>
+                </motion.div>
+              </div>
             </>
           ) : null}
         </AnimatePresence>
