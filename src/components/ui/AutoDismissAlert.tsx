@@ -67,7 +67,7 @@ export function AutoDismissAlert({
             {children || (
               <>
                 {/* The LEAP Central Committee have disabled registration for now. */}
-                events are still being gradually uploaded by the LEAP central committee.
+                Events are still being gradually uploaded by the LEAP central committee.
                 <br />
                 If your event is not yet here, it is still bring processed.
                 {/* Please check back in an hour. */}
