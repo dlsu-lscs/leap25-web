@@ -135,8 +135,7 @@ export default function ExpandableCarousel({
               >
                 <div
                   style={{
-                    backgroundImage: `linear-gradient(to top, rgba(118, 1, 129, 1) 0%, rgba(118, 1, 129, 0) 70%), url(${item.bg_img})`,
-                    ...(item.color ? { backgroundColor: item.color } : {}),
+                    backgroundImage: `linear-gradient(to top, ${item.color} 0%, transparent 40%), url(${item.bg_img})`,
                   }}
                   className={cn(
                     `flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70`,
@@ -181,13 +180,13 @@ export default function ExpandableCarousel({
 
                       <a
                         href={`/${subthemeSlug}/${item.highlightEvent.slug}`}
-                        className="flex flex-col sm:items-start items-center w-[400px]"
+                        className="flex flex-col sm:items-start items-center w-[484px]"
                       >
-                        <p className="line-clamp-4 sm:line-clamp-none sm:w-full w-42 sm:text-start text-center mb-18 sm:mb-0">
+                        <p className="md:line-clamp-4 line-clamp-5 md:text-start text-center sm:w-full h-30 sm:h-24 w-76 sm:text-start mb-2 sm:mb-0">
                           {item.short_desc}
                         </p>
                         <Button
-                          className="w-32 sm:mt-8 text-base font-bold px-6 py-4 bg-white text-black"
+                          className="w-32 sm:mt-4 text-base font-bold px-6 py-4 bg-white text-black"
                           variant={'secondary'}
                         >
                           <ArrowCircleRightSharpIcon />
@@ -207,7 +206,7 @@ export default function ExpandableCarousel({
                           {item.title_fallback.replace(/^LEAP 2025:\s*/i, '') ?? ''}
                         </h1>
                       )}
-                      <h3 className="text-lg font-bold mx-4 font-playfair">{trimmedDescription}</h3>
+                      <h3 className="mx-4 font-public-sans">{trimmedDescription}</h3>
                     </a>
                   )}
 

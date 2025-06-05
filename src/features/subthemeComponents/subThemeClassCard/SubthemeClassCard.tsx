@@ -44,7 +44,7 @@ export default function SubThemeClassCard({
           backgroundImage: `url(${eventMedia?.pub_url || 'https://i.imgur.com/Rjo6F4G.png'})`,
           opacity: registered_slots >= max_slots ? 0.25 : 1,
         }}
-        className={`w-[140px] sm:w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl sm:m-4 m-2 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
+        className={`w-[140px] sm:w-[224px] aspect-[4/5]  object-cover bg-cover  rounded-xl sm:m-4 m-1 border-white/50 border-2 flex flex-col justify-between ${onHover ? 'bg-black/40 bg-blend-multiply transition duration-200' : ''}`}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
