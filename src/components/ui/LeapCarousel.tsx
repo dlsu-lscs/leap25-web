@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import {
   Carousel,
@@ -7,6 +7,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from '@/components/ui/carousel';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 
@@ -27,6 +28,50 @@ interface CustomCarouselProps {
  */
 export function LeapCarousel({ row2, itemsToShow, loopItems, className }: CustomCarouselProps) {
   const [isHovering, setIsHovering] = useState(false);
+  const [api, setApi] = useState<CarouselApi>();
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+  const [api2, setApi2] = useState<CarouselApi>();
+  const [canScrollPrev2, setCanScrollPrev2] = useState(false);
+  const [canScrollNext2, setCanScrollNext2] = useState(false);
+
+  // Update scroll state for first carousel
+  useEffect(() => {
+    if (!api) return;
+
+    const updateScrollState = () => {
+      setCanScrollPrev(api.canScrollPrev());
+      setCanScrollNext(api.canScrollNext());
+    };
+
+    api.on('scroll', updateScrollState);
+    api.on('init', updateScrollState);
+    updateScrollState();
+
+    return () => {
+      api.off('scroll', updateScrollState);
+      api.off('init', updateScrollState);
+    };
+  }, [api]);
+
+  // Update scroll state for second carousel
+  useEffect(() => {
+    if (!api2) return;
+
+    const updateScrollState = () => {
+      setCanScrollPrev2(api2.canScrollPrev());
+      setCanScrollNext2(api2.canScrollNext());
+    };
+
+    api2.on('scroll', updateScrollState);
+    api2.on('init', updateScrollState);
+    updateScrollState();
+
+    return () => {
+      api2.off('scroll', updateScrollState);
+      api2.off('init', updateScrollState);
+    };
+  }, [api2]);
   let carouselItems = [];
   let carouselItemsRow2 = [];
   if (itemsToShow.length > 6 && row2) {
@@ -40,7 +85,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
 
   return (
     <>
+      {' '}
       <Carousel
+        setApi={setApi}
         opts={{
           // align: "center",
           loop: loopItems,
@@ -56,10 +103,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
               {item}
             </CarouselItem>
           ))}
-        </CarouselContent>
-
+        </CarouselContent>{' '}
         <CarouselPrevious
-          className={`absolute left-0 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute -left-12 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering && canScrollPrev ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -71,9 +117,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8" />
           </svg>
-        </CarouselPrevious>
+        </CarouselPrevious>{' '}
         <CarouselNext
-          className={`absolute right-0 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          className={`absolute -right-12 transition-all duration-300 w-14 h-14 bg-gray-700 rounded-full flex items-center justify-center shadow ${isHovering && canScrollNext ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -89,6 +135,7 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
       </Carousel>
       {row2 && itemsToShow.length > 6 && (
         <Carousel
+          setApi={setApi2}
           opts={{
             // align: "center",
             loop: true,
@@ -103,9 +150,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
                 {item}
               </CarouselItem>
             ))}
-          </CarouselContent>{' '}
+          </CarouselContent>
           <CarouselPrevious
-            className={`absolute left-0 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute -left-14 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering && canScrollPrev2 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -117,9 +164,9 @@ export function LeapCarousel({ row2, itemsToShow, loopItems, className }: Custom
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8" />
             </svg>
-          </CarouselPrevious>
+          </CarouselPrevious>{' '}
           <CarouselNext
-            className={`absolute right-0 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute -right-14 transition-all duration-300 w-16 h-16 bg-gray-600 rounded-full flex items-center justify-center shadow ${isHovering && canScrollNext2 ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

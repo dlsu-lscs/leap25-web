@@ -13,6 +13,7 @@ import RecentlyViewedCarousel from '@/features/RecentlyViewed/RecentlyViewedCaro
 import type { Metadata } from 'next';
 import BackgroundMusic from '@/features/backgroundMusic/BackgroundMusic';
 import { BASE_URL } from '@/lib/constants';
+import { AutoDismissAlert } from '@/components/ui/AutoDismissAlert';
 
 const public_sans = Public_Sans({ subsets: ['latin'] });
 
@@ -66,7 +67,8 @@ export default async function Class({ params }: { params: Promise<{ slug: string
   const subtheme: subThemeModel = await getSubThemeByID(event.subtheme_id);
 
   return (
-    <>
+    <div>
+      <AutoDismissAlert duration={7000}></AutoDismissAlert>
       <div className="fixed top-0 z-20">
         <RecentlyViewed classID={event.id} maxItems={5} />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
@@ -79,7 +81,7 @@ export default async function Class({ params }: { params: Promise<{ slug: string
               : `url(${subtheme.background_pub_url})`
             : 'url("https://i.imgur.com/Rjo6F4G.png")',
         }}
-        className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/75 bg-blend-multiply bg-cover`}
+        className={`overflow-visible relative flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/75 bg-blend-multiply bg-cover`}
       >
         <div>
           {' '}
@@ -99,6 +101,6 @@ export default async function Class({ params }: { params: Promise<{ slug: string
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

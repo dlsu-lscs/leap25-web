@@ -1,5 +1,6 @@
 'use client';
 import { SessionProvider } from 'next-auth/react';
+import { CookiesProvider } from 'react-cookie';
 
 interface ProvidersProps {
   children?: React.ReactNode;
@@ -7,7 +8,9 @@ interface ProvidersProps {
 export default function Providers({ children }: ProvidersProps) {
   return (
     <>
-      <SessionProvider>{children}</SessionProvider>
+      <CookiesProvider>
+        <SessionProvider>{children}</SessionProvider>
+      </CookiesProvider>
     </>
   );
 }

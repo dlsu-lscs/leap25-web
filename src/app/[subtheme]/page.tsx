@@ -139,7 +139,7 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
       </div>
 
       {/* Temporary Advisory */}
-      <AutoDismissAlert duration={10000} />
+      <AutoDismissAlert duration={7000} />
 
       <HighlightClientWrapper
         asset={asset || 'error'}
