@@ -1,6 +1,8 @@
 import Navbar from '@/components/layout/Navbar';
 import { LeapCarousel } from '@/components/ui/LeapCarousel';
 import LeapSeperator from '@/components/ui/LeapSeperator';
+import { AutoDismissAlert } from '@/components/ui/AutoDismissAlert';
+import { Info } from 'lucide-react';
 import SubThemeClassCard from '@/features/subthemeComponents/subThemeClassCard/SubthemeClassCard';
 import { nameInitials } from '@/lib/helpers';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -65,14 +67,58 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   const { asset, name } = getSubTheme(subtheme);
 
-  const events: classModel[] = await getEvents(name);
-  const eventsWithMedia = await Promise.all(
-    events.map(async (event) => {
-      const eventMedia = await getEventMedia(event.id);
-      return { ...event, eventMedia };
-    })
-  );
+  //Days
+  const eventByDay1: classModel[] = await getEventByDay(20, name);
+  const eventsWithMediaDay1 = eventByDay1
+    ? await Promise.all(
+        eventByDay1.map(async (event) => {
+          const eventMedia = await getEventMedia(event.id);
+          return { ...event, eventMedia };
+        })
+      )
+    : null;
 
+  const eventByDay2: classModel[] = await getEventByDay(21, name);
+  const eventsWithMediaDay2 = eventByDay2
+    ? await Promise.all(
+        eventByDay2.map(async (event) => {
+          const eventMedia = await getEventMedia(event.id);
+          return { ...event, eventMedia };
+        })
+      )
+    : null;
+
+  const eventByDay3: classModel[] = await getEventByDay(23, name);
+  const eventsWithMediaDay3 = eventByDay3
+    ? await Promise.all(
+        eventByDay3.map(async (event) => {
+          const eventMedia = await getEventMedia(event.id);
+          return { ...event, eventMedia };
+        })
+      )
+    : null;
+
+  const eventByDay4: classModel[] = await getEventByDay(25, name);
+  const eventsWithMediaDay4 = eventByDay4
+    ? await Promise.all(
+        eventByDay4.map(async (event) => {
+          const eventMedia = await getEventMedia(event.id);
+          return { ...event, eventMedia };
+        })
+      )
+    : null;
+
+  const eventByDay5: classModel[] = await getEventByDay(26, name);
+  const eventsWithMediaDay5 = eventByDay5
+    ? await Promise.all(
+        eventByDay5.map(async (event) => {
+          const eventMedia = await getEventMedia(event.id);
+          return { ...event, eventMedia };
+        })
+      )
+    : null;
+
+  //Highlight
   const highlightEvents: highlightModel[] = await getAllHighlightEvent();
 
   const highlightEventswithEventDetails = await Promise.all(
@@ -85,12 +131,16 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
 
   const subthemeDetails: subThemeModel = await getSubThemeByName(name);
   const subthemeLink = getSubThemeLink(name);
-  console.log(subthemeDetails);
+
   return (
     <div className="overflow-hidden">
       <div className="fixed top-0 z-20">
-        <Navbar variant="map" />
+        <Navbar variant="map" />{' '}
       </div>
+
+      {/* Temporary Advisory */}
+      <AutoDismissAlert duration={5000} />
+
       <HighlightClientWrapper
         asset={asset || 'error'}
         name={name || 'error'}
@@ -120,59 +170,166 @@ export default async function Subtheme({ params }: { params: Promise<{ subtheme:
                 <LeapSeperator direction="right"></LeapSeperator>
               </div>
             </div>
-
-            <div>
-              <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
-                Day 1
-              </h2>
-            </div>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={eventsWithMedia.map((event, index) =>
-                event.eventMedia ? (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      max_slots={event.max_slots}
-                      descripton={event.description}
-                      title={event.title}
-                      eventMedia={event.eventMedia}
-                      slug={event.slug}
-                    />
-                  </div>
-                ) : null
-              )}
-            ></LeapCarousel>
-            <div>
-              <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
-                Day 2
-              </h2>
-            </div>
-            <LeapCarousel
-              loopItems={false}
-              row2={false}
-              itemsToShow={eventsWithMedia.map((event, index) =>
-                event.eventMedia ? (
-                  <div key={index}>
-                    <SubThemeClassCard
-                      key={index}
-                      subtheme={subtheme}
-                      id={event.id}
-                      registered_slots={event.registered_slots}
-                      max_slots={event.max_slots}
-                      descripton={event.description}
-                      title={event.title}
-                      eventMedia={event.eventMedia}
-                      slug={event.slug}
-                    />
-                  </div>
-                ) : null
-              )}
-            ></LeapCarousel>
+            {eventsWithMediaDay1 ? (
+              <>
+                <div>
+                  <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                    Day 1
+                  </h2>
+                </div>
+                <LeapCarousel
+                  loopItems={false}
+                  row2={false}
+                  itemsToShow={
+                    eventsWithMediaDay1
+                      ? eventsWithMediaDay1.map((event, index) => (
+                          <div key={index}>
+                            <SubThemeClassCard
+                              key={index}
+                              subtheme={subtheme}
+                              id={event.id}
+                              registered_slots={event.registered_slots}
+                              max_slots={event.max_slots}
+                              descripton={event.description}
+                              title={event.title}
+                              eventMedia={event.eventMedia}
+                              slug={event.slug}
+                            />
+                          </div>
+                        ))
+                      : []
+                  }
+                ></LeapCarousel>
+              </>
+            ) : null}
+            {eventsWithMediaDay2 ? (
+              <>
+                <div>
+                  <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                    Day 2
+                  </h2>
+                </div>
+                <LeapCarousel
+                  loopItems={false}
+                  row2={false}
+                  itemsToShow={
+                    eventsWithMediaDay2
+                      ? eventsWithMediaDay2.map((event, index) => (
+                          <div key={index}>
+                            <SubThemeClassCard
+                              key={index}
+                              subtheme={subtheme}
+                              id={event.id}
+                              registered_slots={event.registered_slots}
+                              max_slots={event.max_slots}
+                              descripton={event.description}
+                              title={event.title}
+                              eventMedia={event.eventMedia}
+                              slug={event.slug}
+                            />
+                          </div>
+                        ))
+                      : []
+                  }
+                ></LeapCarousel>
+              </>
+            ) : null}
+            {eventsWithMediaDay3 ? (
+              <>
+                <div>
+                  <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                    Day 3
+                  </h2>
+                </div>
+                <LeapCarousel
+                  loopItems={false}
+                  row2={false}
+                  itemsToShow={
+                    eventsWithMediaDay3
+                      ? eventsWithMediaDay3.map((event, index) => (
+                          <div key={index}>
+                            <SubThemeClassCard
+                              key={index}
+                              subtheme={subtheme}
+                              id={event.id}
+                              registered_slots={event.registered_slots}
+                              max_slots={event.max_slots}
+                              descripton={event.description}
+                              title={event.title}
+                              eventMedia={event.eventMedia}
+                              slug={event.slug}
+                            />
+                          </div>
+                        ))
+                      : []
+                  }
+                ></LeapCarousel>
+              </>
+            ) : null}
+            {eventsWithMediaDay4 ? (
+              <>
+                <div>
+                  <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                    Day 4
+                  </h2>
+                </div>
+                <LeapCarousel
+                  loopItems={false}
+                  row2={false}
+                  itemsToShow={
+                    eventsWithMediaDay4
+                      ? eventsWithMediaDay4.map((event, index) => (
+                          <div key={index}>
+                            <SubThemeClassCard
+                              key={index}
+                              subtheme={subtheme}
+                              id={event.id}
+                              registered_slots={event.registered_slots}
+                              max_slots={event.max_slots}
+                              descripton={event.description}
+                              title={event.title}
+                              eventMedia={event.eventMedia}
+                              slug={event.slug}
+                            />
+                          </div>
+                        ))
+                      : []
+                  }
+                ></LeapCarousel>
+              </>
+            ) : null}
+            {eventsWithMediaDay5 ? (
+              <>
+                <div>
+                  <h2 className={`text-[25px] sm:text-[30px] font-bold sm:ml-0 ml-4 font-playfair`}>
+                    Day 5
+                  </h2>
+                </div>
+                <LeapCarousel
+                  loopItems={false}
+                  row2={false}
+                  itemsToShow={
+                    eventsWithMediaDay5
+                      ? eventsWithMediaDay5.map((event, index) => (
+                          <div key={index}>
+                            <SubThemeClassCard
+                              key={index}
+                              subtheme={subtheme}
+                              id={event.id}
+                              registered_slots={event.registered_slots}
+                              max_slots={event.max_slots}
+                              descripton={event.description}
+                              title={event.title}
+                              eventMedia={event.eventMedia}
+                              slug={event.slug}
+                            />
+                          </div>
+                        ))
+                      : []
+                  }
+                ></LeapCarousel>
+              </>
+            ) : null}
           </div>
         </div>
       </div>

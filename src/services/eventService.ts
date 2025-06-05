@@ -1,5 +1,6 @@
 import { API_URL } from '@/lib/constants';
 import { API_SECRET } from '@/lib/constants';
+import axios from 'axios';
 
 const getEvents = async (subtheme: any) => {
   try {
@@ -139,11 +140,11 @@ const getEventMedia = async (eventID: any, API_URL = process.env.LEAP_API) => {
   }
 };
 
-const getEventByDay = async (day: number) => {
+const getEventByDay = async (day: number, subtheme: any) => {
+  const subtheme_name = encodeURIComponent(subtheme).replace(/%20/g, '+');
   try {
-    const response = await fetch(`${API_URL}/events/day?=${day}`, {
-      next: { revalidate: 60 },
-      method: 'GET',
+    const response = await axios.get(`${API_URL}/events?day=${day}&subtheme=${subtheme_name}`, {
+      // params: { day, subtheme_name },
       headers: {
         Authorization: `Bearer ${API_SECRET}`,
         Accept: 'application/json',
@@ -151,15 +152,12 @@ const getEventByDay = async (day: number) => {
       },
     });
 
-    if (!response.ok) {
-      console.log('no events yet');
-      return undefined;
-    }
-
-    return await response.json();
+    return response.data;
   } catch (error: any) {
-    if (error instanceof TypeError) {
+    if (error.code === 'ERR_NETWORK') {
       console.error('Network error: Unable to fetch data. Please check your connection.');
+    } else if (axios.isAxiosError(error)) {
+      console.error('Unexpected error:', error.response?.data || error.message);
     } else {
       console.error('Unexpected error:', error.message);
     }

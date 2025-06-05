@@ -30,12 +30,16 @@ interface BookmarkProps {
 export default function Bookmarked({ variant }: BookmarkProps) {
   const { data: session, status } = useSession();
   const { user } = useSetUser(session);
-  const { bookmarks } = useSetBookmark(user?.id);
+  const { bookmarks, refreshBookmarks } = useSetBookmark(user?.id);
 
   return (
     <>
       <Drawer>
-        <DrawerTrigger>
+        <DrawerTrigger
+          onClick={() => {
+            refreshBookmarks();
+          }}
+        >
           {variant === 'mobile' ? (
             <>
               <div className="flex text-lg gap-4">
