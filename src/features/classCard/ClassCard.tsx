@@ -29,7 +29,6 @@ import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
 import { API_URL } from '@/lib/constants';
-import { useRouter } from 'next/navigation';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -65,7 +64,6 @@ type ClassCardsProps = {
 export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCardsProps) {
   const { formattedDate: startDate, formattedTime: startTime } = formatSchedule(event.schedule);
   const { formattedDate: endDate, formattedTime: endTime } = formatSchedule(event.schedule_end);
-  const router = useRouter();
 
   const { data: session } = useSession();
   const { user } = useSetUser(session);
@@ -88,7 +86,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
       >
         <img
           className="aspect-[4/5] w-full max-w-[400px] min-w-[324px]  bg-[#D9D9D9] border-none outline-none object-cover"
-          src={eventMedia.pub_url}
+          src={eventMedia ? eventMedia.pub_url : 'https://i.imgur.com/Rjo6F4G.png'}
         />
         <div className="flex flex-col ">
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
@@ -97,7 +95,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
             <LeapTag className="bg-white">{price}</LeapTag>
           </div>
           <h1
-            className={`md:text-6xl text-5xl text-wrap font-bold my-4 text-white text-shadow-lg ${playfair_display.className}`}
+            className={`md:text-6xl text-5xl break-all text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
           >
             {title || 'R&Deploy Your Own Bot Workshop'}
           </h1>
@@ -147,19 +145,6 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               {event.description ||
                 'Whether youre a coding enthusiast or just curious about Discord bot development, this event is the perfect opportunity to explore your creativity, sharpen your technical skills, and build bots that can automate everyday tasks.'}
             </ClassDescription>
-            {event.is_bundle ? (
-              <>
-                <Alert className="bg-red-400/60 text-white font-public-sans border-none w-fit px-4 py-3 flex items-center gap-3 rounded-md">
-                  <div className="flex items-center justify-center w-5 h-5">
-                    <Info className="w-5 h-5 text-white" />
-                  </div>
-                  <AlertDescription className="text-white">
-                    All members in the bundle must log in to this website at least once before
-                    submitting registration.
-                  </AlertDescription>
-                </Alert>
-              </>
-            ) : null}
           </div>
           <div className="my-4 flex justify-between">
             <div className="flex items-center gap-2 flex-col sm:flex-row">
@@ -203,8 +188,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                           fontFamily: public_sans.style.fontFamily,
                         },
                       });
-                      deleteBookmark(user?.id, event.id, API_URL);
-                      refreshBookmarks();
+                      await deleteBookmark(user?.id, event.id, API_URL);
+                      await refreshBookmarks();
                     }}
                   >
                     <BookmarkIcon sx={{ fontSize: 32, color: 'white' }} />

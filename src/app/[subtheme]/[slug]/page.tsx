@@ -68,14 +68,16 @@ export default async function Class({ params }: { params: Promise<{ slug: string
   return (
     <>
       <div className="fixed top-0 z-20">
-        <RecentlyViewed classID={event.id} />
+        <RecentlyViewed classID={event.id} maxItems={5} />
         <Navbar name={subtheme.title} src={subtheme.logo_pub_url} variant="class" />
       </div>
       <div
         style={{
-          backgroundImage: eventMedia.pub_as_bg
-            ? `url(${eventMedia.pub_url})`
-            : `url(${subtheme.background_pub_url})`,
+          backgroundImage: eventMedia
+            ? eventMedia.pub_as_bg
+              ? `url(${eventMedia.pub_url})`
+              : `url(${subtheme.background_pub_url})`
+            : 'url("https://i.imgur.com/Rjo6F4G.png")',
         }}
         className={`overflow-hidden flex flex-col lg:p-40 p-4 py-24 md:py-44 bg-black/75 bg-blend-multiply bg-cover`}
       >

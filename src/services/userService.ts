@@ -34,6 +34,8 @@ const getUserByEmail = async (email: any, API_URL = process.env.LEAP_API) => {
           Authorization: `Bearer ${API_SECRET}`,
           Accept: 'application/json',
           'Content-Type': 'application/json',
+          'User-Agent': 'MyAppClient/1.0',
+          'X-Custom-Header': 'secure-client-check',
         },
       });
 
