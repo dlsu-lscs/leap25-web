@@ -14,20 +14,25 @@ export default function BackgroundMusic() {
     audio.volume = 0.4;
     audioRef.current = audio;
 
-    const allowed = localStorage.getItem('bg-music-allowed') === 'true';
+    const allowed = localStorage.getItem('bg-music-allowed');
 
-    if (!allowed) {
-      // ask once on load
+    if (allowed === null) {
       const allowMusic = window.confirm('Do you want to enable background music?');
       setAsked(true);
       if (allowMusic) {
         audio.play();
         localStorage.setItem('bg-music-allowed', 'true');
         setHasPermission(true);
+      } else {
+        localStorage.setItem('bg-music-allowed', 'false');
+        setHasPermission(false);
       }
-    } else {
+    } else if (allowed === 'true') {
       audio.play();
       setHasPermission(true);
+      setAsked(true);
+    } else {
+      setHasPermission(false);
       setAsked(true);
     }
 
