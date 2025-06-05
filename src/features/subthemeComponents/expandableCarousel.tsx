@@ -120,6 +120,8 @@ export default function ExpandableCarousel({
       >
         <CarouselContent className="!h-full !overflow-visible">
           {itemsToShow.map((item, index) => {
+            const title = item.title_fallback.replace(/^LEAP 2025:\s*/i, '') ?? '';
+            const trimmedDescription = item.short_desc.substring(0, 250) + '...';
             return (
               <CarouselItem
                 key={index}
@@ -195,14 +197,14 @@ export default function ExpandableCarousel({
                   ) : (
                     <a
                       href={`/${subthemeSlug}/${item.highlightEvent.slug}`}
-                      className="h-full w-full flex flex-col justify-around items-center font-playfair p-2 hover:opacity-75 transition duration-200"
+                      className="h-full w-full flex flex-col justify-around items-center font-playfair p- hover:opacity-75 transition duration-200"
                     >
                       {item.title_card.length > 0 ? (
                         <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                       ) : (
-                        <h1 className="text-4xl font-bold mt-4 mx-4">{item.title_fallback}</h1>
+                        <h1 className="text-4xl font-bold mt-4 mx-4">{title}</h1>
                       )}
-                      <h3 className="text-md mx-4">{item.short_desc}</h3>
+                      <h3 className="text-md mx-4">{trimmedDescription}</h3>
                     </a>
                   )}
 
