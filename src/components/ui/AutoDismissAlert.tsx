@@ -66,9 +66,11 @@ export function AutoDismissAlert({
           <AlertDescription className="text-white text-lg text-center">
             {children || (
               <>
-                The LEAP Central Committee have disabled registration for now.
+                {/* The LEAP Central Committee have disabled registration for now. */}
+                events are still being gradually uploaded by the LEAP central committee.
                 <br />
-                Please check back in an hour.
+                If your event is not yet here, it is still bring processed.
+                {/* Please check back in an hour. */}
               </>
             )}
           </AlertDescription>
