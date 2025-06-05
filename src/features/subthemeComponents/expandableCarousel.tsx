@@ -24,6 +24,7 @@ import LeapSeperator from '@/components/ui/LeapSeperator';
 import { registerEvent } from '@/services/registerService';
 import { classModel, subThemeModel } from '@/types/classModels';
 import { getSubTheme, getSubThemeLink } from '@/services/subthemeService';
+
 interface ExpandableCarouselProps {
   // Add more props as needed, for example:
   itemsToShow: highlightEvent[];
@@ -109,12 +110,12 @@ export default function ExpandableCarousel({
     <>
       <Carousel
         setApi={setApi}
-        plugins={[Autoplay({ delay: 8000 })]}
+        // plugins={[Autoplay({ delay: 8000 })]}
         opts={{
           align: 'start',
           loop: true,
         }}
-        className={`w-full lg:px-10 h-full relative duration-1000 ${className ?? ''}`}
+        className={`w-full h-full relative duration-1000 ${className ?? ''}`}
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
@@ -128,8 +129,8 @@ export default function ExpandableCarousel({
                 className={cn(
                   `lg:h-[524px] h-full flex basis-full transition-all ease-in-out duration-700 overflow-visible`,
                   item.id === selectedId
-                    ? 'lg:basis-2/3 justify-end px-0 lg:pr-8'
-                    : 'lg:basis-1/3 flex-start '
+                    ? 'lg:basis-2/3 justify-end px-0 lg:pl-8'
+                    : 'lg:basis-1/3 flex-start md:pr-8'
                 )}
               >
                 <div
@@ -139,7 +140,7 @@ export default function ExpandableCarousel({
                   }}
                   className={cn(
                     `flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70`,
-                    item.id === selectedId ? 'max-w-[900]' : 'max-w-96'
+                    item.id === selectedId ? 'max-w-[1022px] lg:max-w-[900px]' : 'max-w-96'
                   )}
                 >
                   {item.id === selectedId ? (
@@ -172,7 +173,7 @@ export default function ExpandableCarousel({
                         {item.title_card.length > 0 ? (
                           <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                         ) : (
-                          <h1 className="text-3xl sm:text-5xl sm:text-left text-center mt-2 mr-3 ml-3 sm:ml-0 sm:mr-12 font-bold font-playfair">
+                          <h1 className="w-full text-3xl text-wrap sm:text-5xl sm:text-left text-center mt-2 mr-3 my-4 ml-3 sm:ml-0 sm:mr-12 font-bold font-playfair">
                             {item.title_fallback.replace(/^LEAP 2025:\s*/i, '') ?? ''}
                           </h1>
                         )}
@@ -202,9 +203,11 @@ export default function ExpandableCarousel({
                       {item.title_card.length > 0 ? (
                         <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                       ) : (
-                        <h1 className="text-4xl font-bold mt-4 mx-4">{title}</h1>
+                        <h1 className="text-4xl break-words font-bold mt-4 mx-4 font-playfair ">
+                          {item.title_fallback.replace(/^LEAP 2025:\s*/i, '') ?? ''}
+                        </h1>
                       )}
-                      <h3 className="text-md mx-4">{trimmedDescription}</h3>
+                      <h3 className="text-lg font-bold mx-4 font-playfair">{trimmedDescription}</h3>
                     </a>
                   )}
 
