@@ -193,14 +193,17 @@ export default function ExpandableCarousel({
                       </a>
                     </div>
                   ) : (
-                    <div className="h-full w-full flex flex-col justify-around items-center">
+                    <a
+                      href={`/${subthemeSlug}/${item.highlightEvent.slug}`}
+                      className="h-full w-full flex flex-col justify-around items-center font-playfair p-2 hover:opacity-75 transition duration-200"
+                    >
                       {item.title_card.length > 0 ? (
                         <img src={`${item.title_card}`} className="w-64 mt-2" alt="title card" />
                       ) : (
-                        <h1 className="text-5xl mt-2">{item.title_fallback}</h1>
+                        <h1 className="text-4xl font-bold mt-4 mx-4">{item.title_fallback}</h1>
                       )}
-                      <h3>Short desc</h3>
-                    </div>
+                      <h3 className="text-md mx-4">{item.short_desc}</h3>
+                    </a>
                   )}
 
                   {item.id === selectedId && (
