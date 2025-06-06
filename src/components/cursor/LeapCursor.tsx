@@ -47,9 +47,9 @@ export default function LeapCursor() {
   }, [cursorState]);
 
   const cursorImage = {
-    default: '/cursors/Default.png',
-    hover: '/cursors/Hover.png',
-    click: '/cursors/Click.png',
+    default: '/cursors/Default.webp',
+    hover: '/cursors/Hover.webp',
+    click: '/cursors/Click.webp',
   };
 
   if (!isMobile.isMobile) {
