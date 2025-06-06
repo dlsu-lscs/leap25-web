@@ -138,7 +138,7 @@ export default function ExpandableCarousel({
                     backgroundImage: `linear-gradient(to top, ${item.color} 0%, transparent 40%), url(${item.bg_img})`,
                   }}
                   className={cn(
-                    `flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70`,
+                    `flex items-center duration-1000 w-full h-full relative bg-cover bg-center lg:rounded-lg border-solid lg:border-2 border-white/70 bg-black/40 bg-blend-multiply`,
                     item.id === selectedId ? 'max-w-[1022px] lg:max-w-[900px]' : 'max-w-96'
                   )}
                 >
