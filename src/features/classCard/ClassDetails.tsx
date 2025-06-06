@@ -9,7 +9,7 @@ export default function ClassDetails({ children, icon, className }: ClassDetails
   return (
     <>
       <div className={`flex space-x-2 items-center ${className}`}>
-        {icon || <div className="bg-[#ADADAD] w-6 h-6 rounded-xs"></div>}
+        {icon}
         <p className="font-medium text-shadow-xl">{children}</p>
       </div>
     </>
