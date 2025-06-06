@@ -41,6 +41,10 @@ const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessT
   ssr: false,
 });
 
+const LocalActivityIcon = dynamic(() => import('@mui/icons-material/LocalActivity'), {
+  ssr: false,
+});
+
 const LocationOnOutlinedIcon = dynamic(() => import('@mui/icons-material/LocationOnOutlined'), {
   ssr: false,
 });
@@ -92,7 +96,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
-            <LeapTag className="bg-white">{price}</LeapTag>
+            {event.code == 'S1207' ? null : <LeapTag className="bg-white">{price}</LeapTag>}
           </div>
           <h1
             className={`md:text-6xl text-5xl break-all text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
@@ -140,6 +144,21 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               {event.venue || 'venue'}
             </ClassDetails>
           </div>
+          {/*  Specific Only for Manila Symph */}
+          {event.code == 'S1207' ? (
+            <>
+              <div className="my-4 lg:space-y-2 space-y-6">
+                <p className="font-bold">
+                  <LocalActivityIcon sx={{ fontSize: 24, color: 'white' }} className="mr-2" />
+                  Ticket Prices
+                </p>
+                <ClassDetails className="text-white">SVIP - Php 500.00 </ClassDetails>
+                <ClassDetails className="text-white">VIP - Php 450.00 </ClassDetails>
+                <ClassDetails className="text-white">Lower Box - Php 400.00 </ClassDetails>
+                <ClassDetails className="text-white">General Admission - Php 350.00 </ClassDetails>
+              </div>
+            </>
+          ) : null}
           <div className="my-4 lg:space-y-4 space-y-6">
             <ClassDescription className="font-extrabold">
               {event.description ||
