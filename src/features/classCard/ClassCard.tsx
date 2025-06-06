@@ -180,9 +180,11 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 // disabled={true}
                 // className={`${event.registered_slots < event.max_slots ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
-                {event.registered_slots < event.max_slots
-                  ? `Join Now - ${price}`
-                  : 'Event is Full!'}
+                {event.code === 'S1207'
+                  ? 'Join Now'
+                  : event.registered_slots < event.max_slots
+                    ? `Join Now - ${price}`
+                    : 'Event is Full!'}
               </LeapButton>
               <p className="text-shadow-lg font-semibold">
                 {event.registered_slots < event.max_slots
