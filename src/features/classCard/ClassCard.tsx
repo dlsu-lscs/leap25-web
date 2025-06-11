@@ -29,6 +29,7 @@ import { useSetUser } from '@/hooks/useSetUser';
 import { deleteBookmark, postBookmark } from '@/services/bookmarkService';
 import { useSetBookmark } from '@/hooks/useSetBookmarks';
 import { API_URL } from '@/lib/constants';
+import MultipleFees from './MultipleFees';
 
 const CalendarMonthOutlinedIcon = dynamic(
   () => import('@mui/icons-material/CalendarMonthOutlined'),
@@ -38,10 +39,6 @@ const CalendarMonthOutlinedIcon = dynamic(
 const BookmarkIcon = dynamic(() => import('@mui/icons-material/Bookmark'), { ssr: false });
 
 const AccessTimeOutlinedIcon = dynamic(() => import('@mui/icons-material/AccessTimeOutlined'), {
-  ssr: false,
-});
-
-const LocalActivityIcon = dynamic(() => import('@mui/icons-material/LocalActivity'), {
   ssr: false,
 });
 
@@ -83,6 +80,8 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
   const title = event?.title?.replace(/^LEAP 2025:\s*/i, '') ?? '';
   const price = event.fee > 0.0 ? '₱' + event.fee : 'Free';
 
+  const multpleFeesCodes = ['S1207', 'S1128'];
+
   return (
     <>
       <div
@@ -96,7 +95,9 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
           <div className="flex sm:gap-4 gap-2 text-nowrap flex-wrap sm:text-sm text-xs font-medium text-black">
             <LeapTag className="bg-white">{event.venue || 'venue'}</LeapTag>
             <LeapTag className="bg-white">{subtheme.title || 'subtheme'}</LeapTag>
-            {event.code == 'S1207' ? null : <LeapTag className="bg-white">{price}</LeapTag>}
+            {multpleFeesCodes.includes(event.code) ? null : (
+              <LeapTag className="bg-white">{price}</LeapTag>
+            )}
           </div>
           <h1
             className={`md:text-6xl text-5xl break-all text-wrap font-bold my-4 text-white text-shadow-lg  ${playfair_display.className}`}
@@ -144,21 +145,7 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
               {event.venue || 'venue'}
             </ClassDetails>
           </div>
-          {/*  Specific Only for Manila Symph */}
-          {event.code == 'S1207' ? (
-            <>
-              <div className="my-4 lg:space-y-2 space-y-6">
-                <p className="font-bold">
-                  <LocalActivityIcon sx={{ fontSize: 24, color: 'white' }} className="mr-2" />
-                  Ticket Prices
-                </p>
-                <ClassDetails className="text-white">SVIP - Php 500.00 </ClassDetails>
-                <ClassDetails className="text-white">VIP - Php 450.00 </ClassDetails>
-                <ClassDetails className="text-white">Lower Box - Php 400.00 </ClassDetails>
-                <ClassDetails className="text-white">General Admission - Php 350.00 </ClassDetails>
-              </div>
-            </>
-          ) : null}
+          <MultipleFees code={event.code} />
           <div className="my-4 lg:space-y-4 space-y-6">
             <ClassDescription className="font-extrabold">
               {event.description ||
