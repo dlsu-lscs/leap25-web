@@ -7,6 +7,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import TransitionLink from '@/components/ui/transitionLink';
 import { cn } from '@/lib/utils';
+import { useSetEventsBySubtheme } from '@/hooks/useSetEventBySubtheme';
+import { getAvailableEvents } from '@/lib/filter';
+import { getSubTheme } from '@/services/subthemeService';
 
 // Define the type for static images
 const subthemes = [
@@ -22,6 +25,7 @@ const subthemes = [
     positionX: 43,
     positionY: 39,
     src: '/landmarks/PiratesCove.png',
+    name: "Pirate's Cove",
     circleLogo: '/subthemeLogos/PiratesCove.png',
     alt: 'Strategic & Practical Skills',
     route: 'pirates-cove',
@@ -156,6 +160,20 @@ export default function ParallaxBackground({ className = '' }: { className?: str
           finalSubthemeTop = imageRenderedTop + subthemeBaseYOnScaledBg;
         }
 
+        const { name } = getSubTheme(img.route);
+        const { events } = useSetEventsBySubtheme(name);
+        const [availCount, setAvailCount] = useState(0);
+
+        useEffect(() => {
+          if (events) {
+            const available = events.filter(
+              (event) => event.registered_slots < event.max_slots
+            ).length;
+            console.log(`${{ events }} ${available}`);
+            setAvailCount(available);
+          }
+        }, [events]);
+
         return (
           <div
             key={index}
@@ -207,16 +225,30 @@ export default function ParallaxBackground({ className = '' }: { className?: str
                 <div
                   style={{
                     overflow: 'hidden',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: 'vertical',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
                     lineHeight: '1.2rem',
                     height: '2.4rem',
+                    paddingLeft: '3rem',
                   }}
-                  className="bg-black/50 w-44 pl-12 font-bold absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-sm font-playfair"
+                  className="bg-black/50 w-44 font-bold absolute right-0 top-1/2 -translate-y-1/2 text-[#E2C45D] text-sm font-playfair pr-2"
                 >
-                  {img.alt}
+                  <span className="truncate">{img.alt}</span>
                 </div>
+                {availCount > 0 && (
+                  <div
+                    className="absolute top-8 -right-2 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold"
+                    style={{
+                      backgroundColor: '#E2C45D',
+                      color: '#1a1a1a',
+                      boxShadow: '0 0 5px rgba(226,196,93,0.8), 0 0 10px rgba(226,196,93,0.6)',
+                      zIndex: 50,
+                    }}
+                  >
+                    {availCount}
+                  </div>
+                )}
               </div>
             </TransitionLink>
           </div>
