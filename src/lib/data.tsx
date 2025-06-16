@@ -39,7 +39,7 @@ export const FAQ_QUESTIONS = [
         </p>
         <a
           className="text-[#FBBC05] font-playfair font-extrabold text-xl hover:scale-110 transition duration-200 ease-in-out text-shadow-lg drop-shadow-lg box-shadow-lg"
-          href="https://lac-b26.my.canva.site/leap2025"
+          href="https://bit.ly/LEAP-LAGUNA2025"
           target="_blank"
         >
           LEAP <span className="text-[#98C10E]">LAGUNA Website</span>
