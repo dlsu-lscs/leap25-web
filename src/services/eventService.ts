@@ -2,7 +2,7 @@ import { API_URL } from '@/lib/constants';
 import { API_SECRET } from '@/lib/constants';
 import axios from 'axios';
 
-const getEvents = async (subtheme: any, API_URL = process.env.LEAP_API) => {
+const getEvents = async (subtheme: any) => {
   try {
     const response = await fetch(`${API_URL}/events/subtheme`, {
       method: 'POST',
