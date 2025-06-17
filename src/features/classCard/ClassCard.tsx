@@ -167,8 +167,10 @@ export default function ClassCard({ event, orgs, subtheme, eventMedia }: ClassCa
                 // disabled={true}
                 // className={`${event.registered_slots < event.max_slots ? 'bg-white/65' : 'bg-white/100'}  px-4 py-2 font-medium text-black hover:bg-white/80 transition duration-100`}
               >
-                {event.code === 'S1207'
-                  ? 'Join Now'
+                {multpleFeesCodes.includes(event.code)
+                  ? event.registered_slots >= event.max_slots
+                    ? 'Event is Full!'
+                    : 'Join Now'
                   : event.registered_slots < event.max_slots
                     ? `Join Now - ${price}`
                     : 'Event is Full!'}
